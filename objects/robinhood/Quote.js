@@ -55,6 +55,11 @@ class Quote extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns an array of quotes for the symbols in the given array.
+	 * @param {Array} array
+	 * @returns {Promise}
+	 */
 	static getBySymbolArray(array) {
 		return new Promise((resolve, reject) => {
 			if (!array instanceof Array) reject(new Error("Parameter 'array' must be an array."));
@@ -65,6 +70,19 @@ class Quote extends Robinhood {
 					let array = [];
 					res.forEach(q => array.push(new Quote(q)));
 					resolve(array);
+				}, reject);
+			})
+		})
+	}
+
+	static getByURL(url) {
+		return new Promise((resolve, reject) => {
+			if (!url instanceof String) reject(new Error("Parameter 'url' must be a string."));
+			else request({
+				uri: url
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, null, res => {
+					resolve(new Quote(res));
 				}, reject);
 			})
 		})

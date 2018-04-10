@@ -1,4 +1,6 @@
-const Robinhood = require('./Robinhood.js');
+const Robinhood = require('./Robinhood');
+const Fundamentals = require('./Fundamentals');
+const Market = require('./Market');
 const Quote = require('./Quote');
 const request = require('request');
 
@@ -88,6 +90,7 @@ class Instrument extends Robinhood {
 	 */
 	static getByURL(instrumentURL) {
 		return new Promise((resolve, reject) => {
+			if (!instrumentURL instanceof String) reject(new Error("Parameter 'instrumentURL' must be a string."));
 			request({
 				uri: instrumentURL
 			}, (error, response, body) => {
@@ -101,33 +104,26 @@ class Instrument extends Robinhood {
 	// GET from API
 
 	/**
+	 * Fills the instrument object with market, fundamental, quote, and split data.
+	 */
+	populate() {
+
+	}
+
+	/**
 	 * Returns an object with information on the market that this instrument trades on.
 	 * @returns {Promise}
 	 */
 	getMarket() {
-		const _this = this;
-		return new Promise((resolve, reject) => {
-			request({
-				uri: _this.urls.market
-			}, (error, response, body) => {
-				return Robinhood.handleResponse(error, response, body, null, resolve, reject);
-			})
-		})
+		return Market.getByURL(this.urls.market);
 	}
 
 	/**
-	 * Returns an object with fundamental information such as open, high, low, close, volume, market cap, and more, on this instrument.
+	 * Returns a new Fundamentals object with information such as open, high, low, close, volume, market cap, and more, on this instrument.
 	 * @returns {Promise}
 	 */
 	getFundamentals() {
-		const _this = this;
-		return new Promise((resolve, reject) => {
-			request({
-				uri: _this.urls.fundamentals
-			}, (error, response, body) => {
-				return Robinhood.handleResponse(error, response, body, null, resolve, reject);
-			})
-		})
+		return Fundamentals.getByURL(this.urls.fundamentals);
 	}
 
 	/**
@@ -135,15 +131,21 @@ class Instrument extends Robinhood {
 	 * @returns {Promise}
 	 */
 	getQuote() {
+		return Quote.getByURL(this.urls.quote);
+	}
+
+	/**
+	 * Returns an object containing details on past stock splits.
+	 * @returns {Promise}
+	 */
+	getSplits() {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			request({
-				uri: _this.urls.quote
-			}, (error, response, body) => {
-				return Robinhood.handleResponse(error, response, body, null, res => {
-					resolve(new Quote(res));
-				}, reject);
-			})
+				uri: _this.urls.splits
+			}, (error, response, body) =>
+				Robinhood.handleResponse(error, response, body, null, resolve, reject)
+			);
 		})
 	}
 

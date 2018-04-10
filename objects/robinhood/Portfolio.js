@@ -42,6 +42,18 @@ class Portfolio extends Robinhood {
 	// GET
 
 	/**
+	 * Returns an array of all instruments in the user's portfolio.
+	 * @returns {Array}
+	 */
+	getInstrumentArray() {
+		let array = [];
+		this.array.forEach(p => {
+			array.push(p.InstrumentObject);
+		});
+		return array;
+	}
+
+	/**
 	 * Returns an array of all symbols in the user's portfolio.
 	 * @returns {Array}
 	 */
