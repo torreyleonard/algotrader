@@ -15,7 +15,7 @@ class Order extends Robinhood {
 	 * @param {String} type - 'limit' / 'market'
 	 * @param {String} timeInForce - 'GFD' / 'GTC' / 'IOC' / 'OPG
 	 * @param {String} trigger - 'immediate' / 'stop'
-	 * @param {Number|Null} stopPrice
+	 * @param {Number|Null} stopPrice - If side is 'stop,' this must be specified. If not, this should be null.
 	 * @param {int} quantity
 	 * @param {String} side - 'buy' / 'sell'
 	 * @param {Boolean} extendedHours - Whether the order should be allowed to execute when exchanges are closed.
@@ -62,6 +62,11 @@ class Order extends Robinhood {
 		}
 	}
 
+	/**
+	 * @private
+	 * @param object
+	 * @returns {{executions: Array, timeInForce: string, fees: number, id: string, quantity: number, averagePrice: number, cumulativeQuantity: number, stopPrice: number, rejectReason: string, state: string, trigger: string, type: string, overrideDayTradeCheck: boolean, price: number, clientID: string, extendedHours: boolean, side: string, dates: {created: Date, lastTransaction: Date, updated: Date}, urls: {cancel: string, instrument: string, account: string, order: string, position: string}}}
+	 */
 	parse(object) {
 		return {
 			executions: new Array(object.executions),
@@ -98,7 +103,7 @@ class Order extends Robinhood {
 
 	/**
 	 * Submits an order to Robinhood to be executed by the exchange.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	submit() {
 		const _this = this;
@@ -133,6 +138,12 @@ class Order extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns a new order object for the specified order ID, if found.
+	 * @param {User} user
+	 * @param {String} orderID
+	 * @returns {Promise<Order>}
+	 */
 	static getByOrderID(user, orderID) {
 		return new Promise((resolve, reject) => {
 			request({
@@ -148,6 +159,11 @@ class Order extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns an array of recent orders for the given user object.
+	 * @param {User} user
+	 * @returns {Promise<Array>}
+	 */
 	static getRecentOrders(user) {
 		return new Promise((resolve, reject) => {
 			request({

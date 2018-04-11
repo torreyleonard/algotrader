@@ -28,7 +28,7 @@ class Fundamentals extends Robinhood {
 	/**
 	 * Returns a fundamentals object for the given symbol.
 	 * @param {String} symbol
-	 * @returns {Promise}
+	 * @returns {Promise<Fundamentals>}
 	 */
 	static getBySymbol(symbol) {
 		return new Promise((resolve, reject) => {
@@ -46,7 +46,7 @@ class Fundamentals extends Robinhood {
 	/**
 	 * Returns an array of fundamentals objects for the symbols in the given array.
 	 * @param {Array} array
-	 * @returns {Promise}
+	 * @returns {Promise<Array>}
 	 */
 	static getBySymbolArray(array) {
 		return new Promise((resolve, reject) => {
@@ -66,7 +66,7 @@ class Fundamentals extends Robinhood {
 	/**
 	 * Returns a fundamentals object for the given URL.
 	 * @param {String} url
-	 * @returns {Promise}
+	 * @returns {Promise<Fundamentals>}
 	 */
 	static getByURL(url) {
 		return new Promise((resolve, reject) => {

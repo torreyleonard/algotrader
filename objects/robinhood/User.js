@@ -80,7 +80,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns information like username, first / last name, creation date, id, and more.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getUserInfo() {
 		const _this = this;
@@ -98,7 +98,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns information like address, citizenship, SSN, date of birth, and more.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getTaxInfo() {
 		const _this = this;
@@ -116,7 +116,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns information on the user pertaining to SEC rule 405.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getDisclosureInfo() {
 		const _this = this;
@@ -134,7 +134,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns information on the user's employment.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getEmployerInfo() {
 		const _this = this;
@@ -152,7 +152,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns the user's answers to basic questions regarding investment experiences.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getInvestmentProfile() {
 		const _this = this;
@@ -170,7 +170,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns arrays of recent option and equity day trades.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getRecentDayTrades() {
 		const _this = this;
@@ -188,7 +188,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns a Portfolio object containing all open positions in a user's portfolio.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getPortfolio() {
 		const _this = this;
@@ -222,7 +222,7 @@ class User extends Robinhood {
 
 	/**
 	 * Returns an object representing the user's linked bank account. If the user has linked multiple, this returns an array.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getLinkedBanks() {
 		const _this = this;
@@ -243,7 +243,7 @@ class User extends Robinhood {
 	 * @param {String} bankID - This ID can be found from getLinkedBanks().
 	 * @param {String} amount - How much money should be deposited, represented as a string.
 	 * @param {String} frequency - Empty string if one-time deposit, otherwise: 'weekly,' 'biweekly,' 'monthly,' or 'quarterly.'
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	addDeposit(bankID, amount, frequency) {
 		const _this = this;
@@ -272,7 +272,5 @@ class User extends Robinhood {
 	}
 
 }
-
-
 
 module.exports = User;

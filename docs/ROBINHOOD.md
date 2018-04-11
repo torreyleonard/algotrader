@@ -37,9 +37,9 @@
         * [.getPERatio()](#Fundamentals+getPERatio) ⇒ <code>Number</code>
         * [.getDescription()](#Fundamentals+getDescription) ⇒ <code>String</code>
     * _static_
-        * [.getBySymbol(symbol)](#Fundamentals.getBySymbol) ⇒ <code>Promise</code>
-        * [.getBySymbolArray(array)](#Fundamentals.getBySymbolArray) ⇒ <code>Promise</code>
-        * [.getByURL(url)](#Fundamentals.getByURL) ⇒ <code>Promise</code>
+        * [.getBySymbol(symbol)](#Fundamentals.getBySymbol) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
+        * [.getBySymbolArray(array)](#Fundamentals.getBySymbolArray) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getByURL(url)](#Fundamentals.getByURL) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
 
 <a name="new_Fundamentals_new"></a>
 
@@ -97,7 +97,7 @@ Creates a new Fundamentals object.
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
 <a name="Fundamentals.getBySymbol"></a>
 
-### Fundamentals.getBySymbol(symbol) ⇒ <code>Promise</code>
+### Fundamentals.getBySymbol(symbol) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
 Returns a fundamentals object for the given symbol.
 
 **Kind**: static method of [<code>Fundamentals</code>](#Fundamentals)  
@@ -108,7 +108,7 @@ Returns a fundamentals object for the given symbol.
 
 <a name="Fundamentals.getBySymbolArray"></a>
 
-### Fundamentals.getBySymbolArray(array) ⇒ <code>Promise</code>
+### Fundamentals.getBySymbolArray(array) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of fundamentals objects for the symbols in the given array.
 
 **Kind**: static method of [<code>Fundamentals</code>](#Fundamentals)  
@@ -119,7 +119,7 @@ Returns an array of fundamentals objects for the symbols in the given array.
 
 <a name="Fundamentals.getByURL"></a>
 
-### Fundamentals.getByURL(url) ⇒ <code>Promise</code>
+### Fundamentals.getByURL(url) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
 Returns a fundamentals object for the given URL.
 
 **Kind**: static method of [<code>Fundamentals</code>](#Fundamentals)  
@@ -136,11 +136,11 @@ Returns a fundamentals object for the given URL.
 * [Instrument](#Instrument)
     * [new Instrument(object)](#new_Instrument_new)
     * _instance_
-        * [.populate()](#Instrument+populate)
-        * [.getMarket()](#Instrument+getMarket) ⇒ <code>Promise</code>
-        * [.getFundamentals()](#Instrument+getFundamentals) ⇒ <code>Promise</code>
-        * [.getQuote()](#Instrument+getQuote) ⇒ <code>Promise</code>
-        * [.getSplits()](#Instrument+getSplits) ⇒ <code>Promise</code>
+        * [.populate()](#Instrument+populate) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getMarket()](#Instrument+getMarket) ⇒ [<code>Promise.&lt;Market&gt;</code>](#Market)
+        * [.getFundamentals()](#Instrument+getFundamentals) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
+        * [.getQuote()](#Instrument+getQuote) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
+        * [.getSplits()](#Instrument+getSplits) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getName()](#Instrument+getName) ⇒ <code>String</code>
         * [.getSimpleName()](#Instrument+getSimpleName) ⇒ <code>String</code>
         * [.getSymbol()](#Instrument+getSymbol) ⇒ <code>String</code>
@@ -154,13 +154,13 @@ Returns a fundamentals object for the given URL.
         * [.getDayTradeRatio()](#Instrument+getDayTradeRatio) ⇒ <code>Number</code>
         * [.getMaintenanceRatio()](#Instrument+getMaintenanceRatio) ⇒ <code>Number</code>
         * [.isTradeable()](#Instrument+isTradeable) ⇒ <code>Boolean</code>
-        * [.isStock()](#Instrument+isStock) ⇒ <code>boolean</code>
-        * [.isETP()](#Instrument+isETP) ⇒ <code>boolean</code>
-        * [.isADR()](#Instrument+isADR) ⇒ <code>boolean</code>
+        * [.isStock()](#Instrument+isStock) ⇒ <code>Boolean</code>
+        * [.isETP()](#Instrument+isETP) ⇒ <code>Boolean</code>
+        * [.isADR()](#Instrument+isADR) ⇒ <code>Boolean</code>
     * _static_
-        * [.getAll()](#Instrument.getAll) ⇒ <code>Promise</code>
-        * [.getBySymbol(symbol)](#Instrument.getBySymbol) ⇒ <code>Promise</code>
-        * [.getByURL(instrumentURL)](#Instrument.getByURL) ⇒ <code>Promise</code>
+        * [.getAll()](#Instrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getBySymbol(symbol)](#Instrument.getBySymbol) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+        * [.getByURL(instrumentURL)](#Instrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
 
 <a name="new_Instrument_new"></a>
 
@@ -174,31 +174,31 @@ Creates a new Instrument object.
 
 <a name="Instrument+populate"></a>
 
-### instrument.populate()
-Fills the instrument object with market, fundamental, quote, and split data.
+### instrument.populate() ⇒ <code>Promise.&lt;Array&gt;</code>
+Fills the instrument object with market, fundamental, quote, and split data. Returns an array of Market, Fundamentals, Quote, and Splits objects.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getMarket"></a>
 
-### instrument.getMarket() ⇒ <code>Promise</code>
+### instrument.getMarket() ⇒ [<code>Promise.&lt;Market&gt;</code>](#Market)
 Returns an object with information on the market that this instrument trades on.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getFundamentals"></a>
 
-### instrument.getFundamentals() ⇒ <code>Promise</code>
+### instrument.getFundamentals() ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
 Returns a new Fundamentals object with information such as open, high, low, close, volume, market cap, and more, on this instrument.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getQuote"></a>
 
-### instrument.getQuote() ⇒ <code>Promise</code>
+### instrument.getQuote() ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
 Returns an object with a real-time quote on this instrument.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getSplits"></a>
 
-### instrument.getSplits() ⇒ <code>Promise</code>
+### instrument.getSplits() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object containing details on past stock splits.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
@@ -258,33 +258,33 @@ Checks if the instrument is able to be traded.
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+isStock"></a>
 
-### instrument.isStock() ⇒ <code>boolean</code>
+### instrument.isStock() ⇒ <code>Boolean</code>
 Checks if the instrument is a stock.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+isETP"></a>
 
-### instrument.isETP() ⇒ <code>boolean</code>
+### instrument.isETP() ⇒ <code>Boolean</code>
 Checks if the instrument is an exchange traded product.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+isADR"></a>
 
-### instrument.isADR() ⇒ <code>boolean</code>
+### instrument.isADR() ⇒ <code>Boolean</code>
 Checks if the instrument is an American Depositary Receipt. Typically applies to foreign companies.
 https://www.investopedia.com/terms/a/adr.asp
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument.getAll"></a>
 
-### Instrument.getAll() ⇒ <code>Promise</code>
+### Instrument.getAll() ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of all available instruments.
 WARNING: this will take a while!
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument.getBySymbol"></a>
 
-### Instrument.getBySymbol(symbol) ⇒ <code>Promise</code>
+### Instrument.getBySymbol(symbol) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
 Returns an instrument object for the specified symbol.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
@@ -295,7 +295,7 @@ Returns an instrument object for the specified symbol.
 
 <a name="Instrument.getByURL"></a>
 
-### Instrument.getByURL(instrumentURL) ⇒ <code>Promise</code>
+### Instrument.getByURL(instrumentURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
 Returns an instrument object for the specified instrument URL.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
@@ -312,9 +312,9 @@ Returns an instrument object for the specified instrument URL.
 * [Market](#Market)
     * [new Market(object)](#new_Market_new)
     * _instance_
-        * [.getNextTradingHours()](#Market+getNextTradingHours) ⇒ <code>Promise</code>
-        * [.getPreviousTradingHours()](#Market+getPreviousTradingHours) ⇒ <code>Promise</code>
-        * [.getHoursOn(date)](#Market+getHoursOn) ⇒ <code>Promise</code>
+        * [.getNextTradingHours()](#Market+getNextTradingHours) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getPreviousTradingHours()](#Market+getPreviousTradingHours) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getHoursOn(date)](#Market+getHoursOn) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getWebsite()](#Market+getWebsite) ⇒ <code>String</code>
         * [.getCity()](#Market+getCity) ⇒ <code>String</code>
         * [.getName()](#Market+getName) ⇒ <code>String</code>
@@ -343,19 +343,19 @@ Creates a new Market object.
 
 <a name="Market+getNextTradingHours"></a>
 
-### market.getNextTradingHours() ⇒ <code>Promise</code>
+### market.getNextTradingHours() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object with hours on the next trading period.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
 <a name="Market+getPreviousTradingHours"></a>
 
-### market.getPreviousTradingHours() ⇒ <code>Promise</code>
+### market.getPreviousTradingHours() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object with hours on the previous trading period.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
 <a name="Market+getHoursOn"></a>
 
-### market.getHoursOn(date) ⇒ <code>Promise</code>
+### market.getHoursOn(date) ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object with hours for the given date.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
@@ -441,8 +441,12 @@ Returns a Market object for the given market URL.
 
 * [Order](#Order)
     * [new Order(object, user, instrument, quote, type, timeInForce, trigger, stopPrice, quantity, side, extendedHours, overrideDayTradeCheck)](#new_Order_new)
-    * [.submit()](#Order+submit) ⇒ <code>Promise</code>
-    * [.getResponse()](#Order+getResponse) ⇒ <code>Object</code> \| <code>Null</code>
+    * _instance_
+        * [.submit()](#Order+submit) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getResponse()](#Order+getResponse) ⇒ <code>Object</code> \| <code>Null</code>
+    * _static_
+        * [.getByOrderID(user, orderID)](#Order.getByOrderID) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
+        * [.getRecentOrders(user)](#Order.getRecentOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="new_Order_new"></a>
 
@@ -459,7 +463,7 @@ Creates a new Order object.
 | type | <code>String</code> | 'limit' / 'market' |
 | timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG |
 | trigger | <code>String</code> | 'immediate' / 'stop' |
-| stopPrice | <code>Number</code> \| <code>Null</code> |  |
+| stopPrice | <code>Number</code> \| <code>Null</code> | If side is 'stop,' this must be specified. If not, this should be null. |
 | quantity | <code>int</code> |  |
 | side | <code>String</code> | 'buy' / 'sell' |
 | extendedHours | <code>Boolean</code> | Whether the order should be allowed to execute when exchanges are closed. |
@@ -467,7 +471,7 @@ Creates a new Order object.
 
 <a name="Order+submit"></a>
 
-### order.submit() ⇒ <code>Promise</code>
+### order.submit() ⇒ <code>Promise.&lt;Object&gt;</code>
 Submits an order to Robinhood to be executed by the exchange.
 
 **Kind**: instance method of [<code>Order</code>](#Order)  
@@ -477,6 +481,29 @@ Submits an order to Robinhood to be executed by the exchange.
 If an order has been executed, this will return the response object.
 
 **Kind**: instance method of [<code>Order</code>](#Order)  
+<a name="Order.getByOrderID"></a>
+
+### Order.getByOrderID(user, orderID) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
+Returns a new order object for the specified order ID, if found.
+
+**Kind**: static method of [<code>Order</code>](#Order)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| orderID | <code>String</code> | 
+
+<a name="Order.getRecentOrders"></a>
+
+### Order.getRecentOrders(user) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of recent orders for the given user object.
+
+**Kind**: static method of [<code>Order</code>](#Order)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+
 <a name="Portfolio"></a>
 
 ## Portfolio
@@ -725,8 +752,9 @@ Returns an array of all positions with an average buy price equal to the given a
         * [.isHalted()](#Quote+isHalted) ⇒ <code>Boolean</code>
         * [.hasTraded()](#Quote+hasTraded) ⇒ <code>Boolean</code>
     * _static_
-        * [.getBySymbol(symbol)](#Quote.getBySymbol) ⇒ <code>Promise</code>
-        * [.getBySymbolArray(array)](#Quote.getBySymbolArray) ⇒ <code>Promise</code>
+        * [.getBySymbol(symbol)](#Quote.getBySymbol) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
+        * [.getBySymbolArray(array)](#Quote.getBySymbolArray) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getByURL(url)](#Quote.getByURL) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
 
 <a name="new_Quote_new"></a>
 
@@ -800,7 +828,7 @@ Creates a new Quote object.
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
 <a name="Quote.getBySymbol"></a>
 
-### Quote.getBySymbol(symbol) ⇒ <code>Promise</code>
+### Quote.getBySymbol(symbol) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
 Returns a quote object for the given symbol.
 
 **Kind**: static method of [<code>Quote</code>](#Quote)  
@@ -811,7 +839,7 @@ Returns a quote object for the given symbol.
 
 <a name="Quote.getBySymbolArray"></a>
 
-### Quote.getBySymbolArray(array) ⇒ <code>Promise</code>
+### Quote.getBySymbolArray(array) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of quotes for the symbols in the given array.
 
 **Kind**: static method of [<code>Quote</code>](#Quote)  
@@ -819,6 +847,17 @@ Returns an array of quotes for the symbols in the given array.
 | Param | Type |
 | --- | --- |
 | array | <code>Array</code> | 
+
+<a name="Quote.getByURL"></a>
+
+### Quote.getByURL(url) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
+Returns a quote object for the given quote API url.
+
+**Kind**: static method of [<code>Quote</code>](#Quote)  
+
+| Param |
+| --- |
+| url | 
 
 <a name="User"></a>
 
@@ -829,15 +868,15 @@ Returns an array of quotes for the symbols in the given array.
     * [new User(username, password)](#new_User_new)
     * [.authenticate()](#User+authenticate) ⇒ <code>Promise</code>
     * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
-    * [.getUserInfo()](#User+getUserInfo) ⇒ <code>Promise</code>
-    * [.getTaxInfo()](#User+getTaxInfo) ⇒ <code>Promise</code>
-    * [.getDisclosureInfo()](#User+getDisclosureInfo) ⇒ <code>Promise</code>
-    * [.getEmployerInfo()](#User+getEmployerInfo) ⇒ <code>Promise</code>
-    * [.getInvestmentProfile()](#User+getInvestmentProfile) ⇒ <code>Promise</code>
-    * [.getRecentDayTrades()](#User+getRecentDayTrades) ⇒ <code>Promise</code>
-    * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise</code>
-    * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise</code>
-    * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise</code>
+    * [.getUserInfo()](#User+getUserInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getTaxInfo()](#User+getTaxInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getDisclosureInfo()](#User+getDisclosureInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getEmployerInfo()](#User+getEmployerInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getInvestmentProfile()](#User+getInvestmentProfile) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getRecentDayTrades()](#User+getRecentDayTrades) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="new_User_new"></a>
 
@@ -864,55 +903,55 @@ Returns vital information about balances and enabled features.
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getUserInfo"></a>
 
-### user.getUserInfo() ⇒ <code>Promise</code>
+### user.getUserInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information like username, first / last name, creation date, id, and more.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getTaxInfo"></a>
 
-### user.getTaxInfo() ⇒ <code>Promise</code>
+### user.getTaxInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information like address, citizenship, SSN, date of birth, and more.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getDisclosureInfo"></a>
 
-### user.getDisclosureInfo() ⇒ <code>Promise</code>
+### user.getDisclosureInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information on the user pertaining to SEC rule 405.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getEmployerInfo"></a>
 
-### user.getEmployerInfo() ⇒ <code>Promise</code>
+### user.getEmployerInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information on the user's employment.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getInvestmentProfile"></a>
 
-### user.getInvestmentProfile() ⇒ <code>Promise</code>
+### user.getInvestmentProfile() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns the user's answers to basic questions regarding investment experiences.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getRecentDayTrades"></a>
 
-### user.getRecentDayTrades() ⇒ <code>Promise</code>
+### user.getRecentDayTrades() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns arrays of recent option and equity day trades.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getPortfolio"></a>
 
-### user.getPortfolio() ⇒ <code>Promise</code>
+### user.getPortfolio() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns a Portfolio object containing all open positions in a user's portfolio.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getLinkedBanks"></a>
 
-### user.getLinkedBanks() ⇒ <code>Promise</code>
+### user.getLinkedBanks() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object representing the user's linked bank account. If the user has linked multiple, this returns an array.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+addDeposit"></a>
 
-### user.addDeposit(bankID, amount, frequency) ⇒ <code>Promise</code>
+### user.addDeposit(bankID, amount, frequency) ⇒ <code>Promise.&lt;Object&gt;</code>
 Deposits money into the user's account. If frequency is not empty, this becomes an automatic deposit.
 
 **Kind**: instance method of [<code>User</code>](#User)  

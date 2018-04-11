@@ -87,7 +87,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns an object with hours on the next trading period.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getNextTradingHours() {
 		const _this = this;
@@ -104,7 +104,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns an object with hours on the previous trading period.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getPreviousTradingHours() {
 		const _this = this;
@@ -122,7 +122,7 @@ class Market extends Robinhood {
 	/**
 	 * Returns an object with hours for the given date.
 	 * @param date
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getHoursOn(date) {
 		const _this = this;

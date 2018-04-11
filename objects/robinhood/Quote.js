@@ -40,7 +40,7 @@ class Quote extends Robinhood {
 	/**
 	 * Returns a quote object for the given symbol.
 	 * @param {String} symbol
-	 * @returns {Promise}
+	 * @returns {Promise<Quote>}
 	 */
 	static getBySymbol(symbol) {
 		return new Promise((resolve, reject) => {
@@ -58,7 +58,7 @@ class Quote extends Robinhood {
 	/**
 	 * Returns an array of quotes for the symbols in the given array.
 	 * @param {Array} array
-	 * @returns {Promise}
+	 * @returns {Promise<Array>}
 	 */
 	static getBySymbolArray(array) {
 		return new Promise((resolve, reject) => {
@@ -75,6 +75,11 @@ class Quote extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns a quote object for the given quote API url.
+	 * @param url
+	 * @returns {Promise<Quote>}
+	 */
 	static getByURL(url) {
 		return new Promise((resolve, reject) => {
 			if (!url instanceof String) reject(new Error("Parameter 'url' must be a string."));

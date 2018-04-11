@@ -44,7 +44,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns an array of all available instruments.
 	 * WARNING: this will take a while!
-	 * @returns {Promise}
+	 * @returns {Promise<Array>}
 	 */
 	static getAll() {
 		return new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns an instrument object for the specified symbol.
 	 * @param {String} symbol
-	 * @returns {Promise}
+	 * @returns {Promise<Instrument>}
 	 */
 	static getBySymbol(symbol) {
 		return new Promise((resolve, reject) => {
@@ -86,7 +86,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns an instrument object for the specified instrument URL.
 	 * @param {String} instrumentURL
-	 * @returns {Promise}
+	 * @returns {Promise<Instrument>}
 	 */
 	static getByURL(instrumentURL) {
 		return new Promise((resolve, reject) => {
@@ -104,15 +104,30 @@ class Instrument extends Robinhood {
 	// GET from API
 
 	/**
-	 * Fills the instrument object with market, fundamental, quote, and split data.
+	 * Fills the instrument object with market, fundamental, quote, and split data. Returns an array of Market, Fundamentals, Quote, and Splits objects.
+	 * @returns {Promise<Array>}
 	 */
 	populate() {
-
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			Promise.all([
+				_this.getMarket(),
+				_this.getFundamentals(),
+				_this.getQuote(),
+				_this.getSplits()
+			]).then(q => {
+				_this.MarketObject = q[0];
+				_this.FundamentalsObject = q[1];
+				_this.QuoteObject = q[2];
+				_this.splits = q[3];
+				resolve(q);
+			}).catch(error => reject(error));
+		});
 	}
 
 	/**
 	 * Returns an object with information on the market that this instrument trades on.
-	 * @returns {Promise}
+	 * @returns {Promise<Market>}
 	 */
 	getMarket() {
 		return Market.getByURL(this.urls.market);
@@ -120,7 +135,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns a new Fundamentals object with information such as open, high, low, close, volume, market cap, and more, on this instrument.
-	 * @returns {Promise}
+	 * @returns {Promise<Fundamentals>}
 	 */
 	getFundamentals() {
 		return Fundamentals.getByURL(this.urls.fundamentals);
@@ -128,7 +143,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an object with a real-time quote on this instrument.
-	 * @returns {Promise}
+	 * @returns {Promise<Quote>}
 	 */
 	getQuote() {
 		return Quote.getByURL(this.urls.quote);
@@ -136,7 +151,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an object containing details on past stock splits.
-	 * @returns {Promise}
+	 * @returns {Promise<Object>}
 	 */
 	getSplits() {
 		const _this = this;
@@ -252,7 +267,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Checks if the instrument is a stock.
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	isStock() {
 		return this.type === "stock";
@@ -260,7 +275,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Checks if the instrument is an exchange traded product.
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	isETP() {
 		return this.type === "etp";
@@ -269,7 +284,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Checks if the instrument is an American Depositary Receipt. Typically applies to foreign companies.
 	 * https://www.investopedia.com/terms/a/adr.asp
-	 * @returns {boolean}
+	 * @returns {Boolean}
 	 */
 	isADR() {
 		return this.type === "adr";
