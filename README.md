@@ -46,7 +46,7 @@
 
 - [Getting Started](#getting-started)
 - Broker Library
-	- [Robinhood](rRobinhood)
+	- [Robinhood](#robinhood)
 - Data Library
 	- [Quote](#quote)
 	- [OptionsChain](#optionsChain)
