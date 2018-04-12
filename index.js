@@ -9,6 +9,9 @@ module.exports = {
 		Portfolio: require('./objects/robinhood/Portfolio')
 	},
 	Data: {
-		OptionsChain: require('./objects/data/OptionsChain')
+		OptionsChain: require('./objects/data/OptionsChain'),
+		Quote: require('./objects/data/Quote'),
+		Stream: require('./objects/data/Stream'),
+		Query: require('./objects/data/Query')
 	}
 };

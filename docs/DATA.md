@@ -5,6 +5,8 @@
 <dd></dd>
 <dt><a href="#Quote">Quote</a></dt>
 <dd></dd>
+<dt><a href="#Stream">Stream</a></dt>
+<dd></dd>
 </dl>
 
 <a name="OptionsChain"></a>
@@ -237,3 +239,38 @@ Returns a new Quote object with data from Yahoo Finance.
 | interval | <code>String</code> | 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo |
 | extended | <code>Boolean</code> | Whether to include extended hours or not. |
 
+<a name="Stream"></a>
+
+## Stream
+**Kind**: global class  
+
+* [Stream](#Stream)
+    * [new Stream(symbols)](#new_Stream_new)
+    * [.start()](#Stream+start)
+    * [.stop()](#Stream+stop)
+
+<a name="new_Stream_new"></a>
+
+### new Stream(symbols)
+Creates a new Stream class.
+
+
+| Param | Type |
+| --- | --- |
+| symbols | <code>Array</code> | 
+
+<a name="Stream+start"></a>
+
+### stream.start()
+Start the streaming class.
+
+The event will emit three events: error (Error object), response (JSON from request module), and data (JSON object).
+Access via .on('data', function), etc.
+
+**Kind**: instance method of [<code>Stream</code>](#Stream)  
+<a name="Stream+stop"></a>
+
+### stream.stop()
+Stop the streaming class.
+
+**Kind**: instance method of [<code>Stream</code>](#Stream)  
