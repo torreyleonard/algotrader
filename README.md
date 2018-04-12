@@ -85,8 +85,7 @@ myAccount.authenticate()
 		// User was authenticated
 	})
 	.catch(error => {
-		// Either the request failed, or Robinhood responded with an error.
-        // (Ex: you don't have interet access or your user credentials were incorrect)
+		// Either the request failed, or Robinhood responded with an error. (Ex: you don't have internet access or your user credentials were incorrect)
 	})
 ```
 Personally, I either store user data as an array in a .json file, then require it into the class, (insecure) or ask for the user's credentials in the console. You should handle this sensitive data in a way that you're comfortable with.
@@ -95,7 +94,7 @@ Personally, I either store user data as an array in a .json file, then require i
 There are a good amount of query functions that you can run on the user's portfolio. Using your ```User``` instance, you can grab the portfolio using ``` User.getPortfolio()``` which returns a new ```Portfolio``` object.
 ```js
 myAccount.getPortfolio()
-	.then(myPortfolio => { // Algotrader retrieved the user's portfolio
+	.then(myPortfolio => {
     	// You can find information on specific symbols
         let myTeslaShares = myPortfolio.getQuantity("TSLA"); // Returns the quantity of shares you own in the given symbol: 10
         let bestDayEver = myPortfolio.getPurchaseDate("SHLD"); // Returns the date (Date object) you purchased the given symbol: 2007-04-17
@@ -105,8 +104,7 @@ myAccount.getPortfolio()
         // Along with much more. See the link below to visit the Robinhood portfolio documentation.
 	})
 	.catch(error => {
-		// Either the request failed, or Robinhood responded with an error.
-        // (Ex: you don't have interet access or your user credentials were incorrect)
+		// Either the request failed, or Robinhood responded with an error. (Ex: you don't have interet access or your user credentials were incorrect)
 	})
 ```
 For documentation on all portfolio functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio)
