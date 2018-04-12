@@ -108,3 +108,5 @@ myAccount.getPortfolio()
 	})
 ```
 For documentation on all portfolio functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio)
+
+In progress...
