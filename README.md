@@ -95,13 +95,13 @@ There are a good amount of query functions that you can run on the user's portfo
 ```js
 myAccount.getPortfolio()
 	.then(myPortfolio => {
-    	// You can find information on specific symbols
-        let myTeslaShares = myPortfolio.getQuantity("TSLA"); // Returns the quantity of shares you own in the given symbol: 10
-        let bestDayEver = myPortfolio.getPurchaseDate("SHLD"); // Returns the date (Date object) you purchased the given symbol: 2007-04-17
-        // You can find information on the entire portfolio
-        let mySymbols = myPortfolio.getSymbols(); // Returns an array of all symbols in the user's portfolio: ['FB', 'AMZN', 'NFLX', 'GOOG']
-        let myMoneyMakers = myPortfolio.getQuantityGreaterThan(50); // Returns an array of all positions greater than the given amount: [Object]
-        // Along with much more. See the link below to visit the Robinhood portfolio documentation.
+		// You can find information on specific symbols
+		let myTeslaShares = myPortfolio.getQuantity("TSLA"); // Returns the quantity of shares you own in the given symbol: 10
+		let bestDayEver = myPortfolio.getPurchaseDate("SHLD"); // Returns the date (Date object) you purchased the given symbol: 2007-04-17
+		// You can find information on the entire portfolio
+		let mySymbols = myPortfolio.getSymbols(); // Returns an array of all symbols in the user's portfolio: ['FB', 'AMZN', 'NFLX', 'GOOG']
+		let myMoneyMakers = myPortfolio.getQuantityGreaterThan(50); // Returns an array of all positions greater than the given amount: [Object]
+		// Along with much more. See the link below to visit the Robinhood portfolio documentation.
 	})
 	.catch(error => {
 		// Either the request failed, or Robinhood responded with an error. (Ex: you don't have interet access or your user credentials were incorrect)
