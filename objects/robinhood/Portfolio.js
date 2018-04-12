@@ -80,7 +80,9 @@ class Portfolio extends Robinhood {
 	 * @returns {Number}
 	 */
 	getQuantity(symbol) {
-		return this.getBySymbol(symbol).quantity;
+		const shares = this.getBySymbol(symbol).quantity;
+		if (shares) return shares;
+		else return 0;
 	}
 
 	/**
@@ -125,7 +127,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of objects containing the user's positions in the given symbols.
 	 * @param {Array} array
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getBySymbols(array) {
 		return this.array.filter(p => array.indexOf(p.symbol) !== -1);
@@ -134,7 +136,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions greater than the given amount.
 	 * @param {Number} size
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getQuantityGreaterThan(size) {
 		return this.array.filter(p => p.quantity > size);
@@ -143,7 +145,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions less than the given amount.
 	 * @param {Number} size
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getQuantityLessThan(size) {
 		return this.array.filter(p => p.quantity < size);
@@ -152,7 +154,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions equal to than the given amount.
 	 * @param {Number} size
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getQuantityEqualTo(size) {
 		return this.array.filter(p => p.quantity === size);
@@ -161,7 +163,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions opened after the given date (UTC).
 	 * @param {Date} date - Compared with UTC time.
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getPurchasedAfter(date) {
 		return this.array.filter(p => p.dates["originalPurchase"].getTime() - date.getTime() > 0);
@@ -170,7 +172,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions opened before the given date (UTC).
 	 * @param {Date} date - Compared with UTC time.
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getPurchasedBefore(date) {
 		return this.array.filter(p => p.dates["originalPurchase"].getTime() - date.getTime() < 0);
@@ -179,7 +181,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions opened on the given date (UTC).
 	 * @param {Date} date - Compared with UTC time.
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getPurchasedOn(date) {
 		return this.array.filter(p =>
@@ -192,7 +194,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions with an average buy price greater than the given amount.
 	 * @param {Number} amount
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getPriceGreaterThan(amount) {
 		return this.array.filter(p => p.averageBuy.price > amount);
@@ -201,7 +203,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions with an average buy price less than the given amount.
 	 * @param {Number} amount
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getPriceLessThan(amount) {
 		return this.array.filter(p => p.averageBuy.price < amount);
@@ -210,7 +212,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Returns an array of all positions with an average buy price equal to the given amount.
 	 * @param {Number} amount
-	 * @returns {Array}
+	 * @returns {Array<Object>}
 	 */
 	getPriceEqualTo(amount) {
 		return this.array.filter(p => p.averageBuy.price === amount);
