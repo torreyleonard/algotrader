@@ -181,13 +181,13 @@ myStream.start();
 myStream
 	.on('data', data => {
 		// { ETSY:
-        //  { lastSalePrice: '30.54',
-        //  change: '+0.34',
-        //  percentChange: '+1.13',
-        //  volume2: '1,337,781',
-        //  askSize: '500',
-        //  bidSize: '600',
-        //  lastSaleTime: '1523548866' } }
+		//  { lastSalePrice: '30.54',
+		//  change: '+0.34',
+		//  percentChange: '+1.13',
+		//  volume2: '1,337,781',
+		//  askSize: '500',
+		//  bidSize: '600',
+		//  lastSaleTime: '1523548866' } }
 	})
 	.on('response', res => {
 		// Returns a response object from the request module. Useful for debugging.
