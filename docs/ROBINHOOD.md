@@ -461,9 +461,9 @@ Creates a new Order object.
 | instrument | [<code>Instrument</code>](#Instrument) |  |
 | quote | [<code>Quote</code>](#Quote) |  |
 | type | <code>String</code> | 'limit' / 'market' |
-| timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG |
+| timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG' |
 | trigger | <code>String</code> | 'immediate' / 'stop' |
-| stopPrice | <code>Number</code> \| <code>Null</code> | If side is 'stop,' this must be specified. If not, this should be null. |
+| stopPrice | <code>Number</code> \| <code>Null</code> | If trigger is 'stop,' this must be specified. If not, this should be null. |
 | quantity | <code>int</code> |  |
 | side | <code>String</code> | 'buy' / 'sell' |
 | extendedHours | <code>Boolean</code> | Whether the order should be allowed to execute when exchanges are closed. |
@@ -519,16 +519,16 @@ Returns an array of recent orders for the given user object.
     * [.getPurchaseDate(symbol)](#Portfolio+getPurchaseDate) ⇒ <code>Date</code>
     * [.getLastTradeDate(symbol)](#Portfolio+getLastTradeDate) ⇒ <code>Date</code>
     * [.getBySymbol(symbol)](#Portfolio+getBySymbol) ⇒ <code>Object</code>
-    * [.getBySymbols(array)](#Portfolio+getBySymbols) ⇒ <code>Array</code>
-    * [.getQuantityGreaterThan(size)](#Portfolio+getQuantityGreaterThan) ⇒ <code>Array</code>
-    * [.getQuantityLessThan(size)](#Portfolio+getQuantityLessThan) ⇒ <code>Array</code>
-    * [.getQuantityEqualTo(size)](#Portfolio+getQuantityEqualTo) ⇒ <code>Array</code>
-    * [.getPurchasedAfter(date)](#Portfolio+getPurchasedAfter) ⇒ <code>Array</code>
-    * [.getPurchasedBefore(date)](#Portfolio+getPurchasedBefore) ⇒ <code>Array</code>
-    * [.getPurchasedOn(date)](#Portfolio+getPurchasedOn) ⇒ <code>Array</code>
-    * [.getPriceGreaterThan(amount)](#Portfolio+getPriceGreaterThan) ⇒ <code>Array</code>
-    * [.getPriceLessThan(amount)](#Portfolio+getPriceLessThan) ⇒ <code>Array</code>
-    * [.getPriceEqualTo(amount)](#Portfolio+getPriceEqualTo) ⇒ <code>Array</code>
+    * [.getBySymbols(array)](#Portfolio+getBySymbols) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getQuantityGreaterThan(size)](#Portfolio+getQuantityGreaterThan) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getQuantityLessThan(size)](#Portfolio+getQuantityLessThan) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getQuantityEqualTo(size)](#Portfolio+getQuantityEqualTo) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getPurchasedAfter(date)](#Portfolio+getPurchasedAfter) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getPurchasedBefore(date)](#Portfolio+getPurchasedBefore) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getPurchasedOn(date)](#Portfolio+getPurchasedOn) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getPriceGreaterThan(amount)](#Portfolio+getPriceGreaterThan) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getPriceLessThan(amount)](#Portfolio+getPriceLessThan) ⇒ <code>Array.&lt;Object&gt;</code>
+    * [.getPriceEqualTo(amount)](#Portfolio+getPriceEqualTo) ⇒ <code>Array.&lt;Object&gt;</code>
 
 <a name="new_Portfolio_new"></a>
 
@@ -620,7 +620,7 @@ Returns an object containing the user's position in the given symbol.
 
 <a name="Portfolio+getBySymbols"></a>
 
-### portfolio.getBySymbols(array) ⇒ <code>Array</code>
+### portfolio.getBySymbols(array) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of objects containing the user's positions in the given symbols.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -631,7 +631,7 @@ Returns an array of objects containing the user's positions in the given symbols
 
 <a name="Portfolio+getQuantityGreaterThan"></a>
 
-### portfolio.getQuantityGreaterThan(size) ⇒ <code>Array</code>
+### portfolio.getQuantityGreaterThan(size) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions greater than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -642,7 +642,7 @@ Returns an array of all positions greater than the given amount.
 
 <a name="Portfolio+getQuantityLessThan"></a>
 
-### portfolio.getQuantityLessThan(size) ⇒ <code>Array</code>
+### portfolio.getQuantityLessThan(size) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions less than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -653,7 +653,7 @@ Returns an array of all positions less than the given amount.
 
 <a name="Portfolio+getQuantityEqualTo"></a>
 
-### portfolio.getQuantityEqualTo(size) ⇒ <code>Array</code>
+### portfolio.getQuantityEqualTo(size) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions equal to than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -664,7 +664,7 @@ Returns an array of all positions equal to than the given amount.
 
 <a name="Portfolio+getPurchasedAfter"></a>
 
-### portfolio.getPurchasedAfter(date) ⇒ <code>Array</code>
+### portfolio.getPurchasedAfter(date) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions opened after the given date (UTC).
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -675,7 +675,7 @@ Returns an array of all positions opened after the given date (UTC).
 
 <a name="Portfolio+getPurchasedBefore"></a>
 
-### portfolio.getPurchasedBefore(date) ⇒ <code>Array</code>
+### portfolio.getPurchasedBefore(date) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions opened before the given date (UTC).
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -686,7 +686,7 @@ Returns an array of all positions opened before the given date (UTC).
 
 <a name="Portfolio+getPurchasedOn"></a>
 
-### portfolio.getPurchasedOn(date) ⇒ <code>Array</code>
+### portfolio.getPurchasedOn(date) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions opened on the given date (UTC).
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -697,7 +697,7 @@ Returns an array of all positions opened on the given date (UTC).
 
 <a name="Portfolio+getPriceGreaterThan"></a>
 
-### portfolio.getPriceGreaterThan(amount) ⇒ <code>Array</code>
+### portfolio.getPriceGreaterThan(amount) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions with an average buy price greater than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -708,7 +708,7 @@ Returns an array of all positions with an average buy price greater than the giv
 
 <a name="Portfolio+getPriceLessThan"></a>
 
-### portfolio.getPriceLessThan(amount) ⇒ <code>Array</code>
+### portfolio.getPriceLessThan(amount) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions with an average buy price less than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
@@ -719,7 +719,7 @@ Returns an array of all positions with an average buy price less than the given 
 
 <a name="Portfolio+getPriceEqualTo"></a>
 
-### portfolio.getPriceEqualTo(amount) ⇒ <code>Array</code>
+### portfolio.getPriceEqualTo(amount) ⇒ <code>Array.&lt;Object&gt;</code>
 Returns an array of all positions with an average buy price equal to the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  

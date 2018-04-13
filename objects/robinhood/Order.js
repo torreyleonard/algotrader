@@ -13,9 +13,9 @@ class Order extends Robinhood {
 	 * @param {Instrument} instrument
 	 * @param {Quote} quote
 	 * @param {String} type - 'limit' / 'market'
-	 * @param {String} timeInForce - 'GFD' / 'GTC' / 'IOC' / 'OPG
+	 * @param {String} timeInForce - 'GFD' / 'GTC' / 'IOC' / 'OPG'
 	 * @param {String} trigger - 'immediate' / 'stop'
-	 * @param {Number|Null} stopPrice - If side is 'stop,' this must be specified. If not, this should be null.
+	 * @param {Number|Null} stopPrice - If trigger is 'stop,' this must be specified. If not, this should be null.
 	 * @param {int} quantity
 	 * @param {String} side - 'buy' / 'sell'
 	 * @param {Boolean} extendedHours - Whether the order should be allowed to execute when exchanges are closed.

@@ -1,0 +1,6 @@
+.pre_commit.js
+test.js
+algotrader.iml
+node_modules/
+.idea/
+.gitignore
