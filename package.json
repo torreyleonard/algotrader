@@ -1,14 +1,14 @@
 {
   "name": "algotrader",
-  "version": "1.0.0",
-  "description": "Algorithmically trade stocks and options using Robinhood and Yahoo! Finance.",
+  "version": "1.0.4",
+  "description": "Algorithmically trade stocks and options using Robinhood, Yahoo Finance, and more.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Ladinn/algotrader.git"
+    "url": "https://github.com/Ladinn/algotrader"
   },
   "keywords": [
     "api",
@@ -18,7 +18,10 @@
     "finance",
     "algorithm",
     "market",
-    "options"
+    "options",
+    "streaming",
+    "robinhood",
+    "yahoo finance"
   ],
   "author": "Ladinn",
   "license": "ISC",
@@ -28,7 +31,6 @@
   "homepage": "https://github.com/Ladinn/algotrader#readme",
   "dependencies": {
     "async": "^2.6.0",
-    "jsdoc-to-markdown": "^4.0.1",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "node-schedule": "^1.3.0",
