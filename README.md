@@ -21,7 +21,7 @@
 		- TDAmeritrade (in progress)
 		- If you'd like to have another broker supported, submit an issue or a pull request
 - **Data library**
-	- Realtime quote data streaming for cryptocurrency, forex, equities
+	- Real time quote data streaming for cryptocurrency, forex, equities
 		- Get data on bids, asks, last price, and more from the Yahoo Finance API
 	- Up-to-date options data
 	- Easily find stocks for various queries
@@ -31,7 +31,7 @@
 		- Get options contracts by highest open interest
 		- And more
 	- Get up to the minute news on specified stocks
-		- In progress: stream news in realtime
+		- In progress: stream news in real time
 	- Get technical indicators from AlphaVantage (in progress)
 		- SMA, EMA, RSI, etc.
 	- Get fundamentals and balance sheet data (in progress)
@@ -39,6 +39,7 @@
 - **Algorithm library** (in progress)
 	- Create algorithms that will automatically place trades based on your criteria
 	- Backtest algorithms on past market data
+	- Paper (simulated) trade your algorithm to see how it performs in real time
 
 ---
 
@@ -165,11 +166,11 @@ The data library allows you to retrieve a ton of data on the market as a whole a
 
 I'll only add a few examples here, but for the full documentation visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md)
 
-#### Realtime streaming
+#### Real time streaming
 
 To stream live quotes from Yahoo Finance, you'll need an array of symbols that you want to monitor. If you only need data on one, just fill the array with that single symbol. The [```Stream```](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#Stream) class is an extension of the Node EventEmitter, so  you can either use ```.on()``` or ```.pipe()``` like other events.
 
-Once the stream starts, a data object for each symbol is immediately received. You will then begin to get realtime updates. Note that the data objects streamed by Yahoo aren't always of the same format, so make sure to have a check for ```undefined``` each time you access a key in the object.
+Once the stream starts, a data object for each symbol is immediately received. You will then begin to get real time updates. Note that the data objects streamed by Yahoo aren't always of the same format, so make sure to have a check for ```undefined``` each time you access a key in the object.
 
 ```js
 const Stream = algotrader.Data.Stream;
@@ -179,14 +180,14 @@ myStream.start();
 
 myStream
 	.on('data', data => {
-        // { ETSY:
-        //   { lastSalePrice: '30.54',
-        //   change: '+0.34',
-        //   percentChange: '+1.13',
-        //   volume2: '1,337,781',
-        //   askSize: '500',
-        //   bidSize: '600',
-        //   lastSaleTime: '1523548866' } }
+		// { ETSY:
+        //  { lastSalePrice: '30.54',
+        //  change: '+0.34',
+        //  percentChange: '+1.13',
+        //  volume2: '1,337,781',
+        //  askSize: '500',
+        //  bidSize: '600',
+        //  lastSaleTime: '1523548866' } }
 	})
 	.on('response', res => {
 		// Returns a response object from the request module. Useful for debugging.
