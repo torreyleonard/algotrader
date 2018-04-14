@@ -33,7 +33,7 @@ class Order extends Robinhood {
 			else if ((trigger === "stop" && !stopPrice instanceof Number) || (trigger === "immediate" && stopPrice !== null))
 				new Error("Parameter 'stopPrice' must be a string if trigger = stop, otherwise it should be null.");
 			else if (!type instanceof String) new Error("Parameter 'type' must be a string.");
-			else if (!Number.isInteger(quantity)) new Error("Parameter 'type' must be a string.");
+			else if (!Number.isInteger(quantity)) new Error("Parameter 'quantity' must be an integer.");
 			else if (!side instanceof String) new Error("Parameter 'side' must be a string.");
 			else if (!extendedHours instanceof Boolean) new Error("Parameter 'extendedHours' must be a boolean.");
 			else if (!overrideDayTradeCheck instanceof Boolean) new Error("Parameter 'overrideDayTradeCheck' must be a boolean.");
@@ -58,7 +58,7 @@ class Order extends Robinhood {
 			}
 		} else {
 			this.executed = true;
-			this.response = this.parse(object);
+			this.response = this._parse(object);
 		}
 	}
 
@@ -67,7 +67,7 @@ class Order extends Robinhood {
 	 * @param object
 	 * @returns {{executions: Array, timeInForce: string, fees: number, id: string, quantity: number, averagePrice: number, cumulativeQuantity: number, stopPrice: number, rejectReason: string, state: string, trigger: string, type: string, overrideDayTradeCheck: boolean, price: number, clientID: string, extendedHours: boolean, side: string, dates: {created: Date, lastTransaction: Date, updated: Date}, urls: {cancel: string, instrument: string, account: string, order: string, position: string}}}
 	 */
-	parse(object) {
+	_parse(object) {
 		return {
 			executions: new Array(object.executions),
 			timeInForce: String(object.time_in_force),
@@ -131,7 +131,7 @@ class Order extends Robinhood {
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.User.getAuthToken(), res => {
 					_this.executed = true;
-					_this.response = this.parse(res);
+					_this.response = this._parse(res);
 					resolve(res);
 				}, reject);
 			})
@@ -153,7 +153,7 @@ class Order extends Robinhood {
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
-					resolve(new Order(res));
+					resolve(new Order(res, user));
 				}, reject);
 			})
 		})
@@ -175,7 +175,7 @@ class Order extends Robinhood {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					let array = [];
 					res.forEach(o => {
-						array.push(new Order(o));
+						array.push(new Order(o, user));
 					});
 					resolve(array);
 				}, reject);
