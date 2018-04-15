@@ -43,6 +43,7 @@
 - **Support for many third-party APIs**
 	- [Robinhood](http://robinhood.com/)
 	- [Alpha Vantage](https://www.alphavantage.co/)
+	- [Yahoo! Finance](htthttps://finance.yahoo.com)
 	- [News API](https://newsapi.org/)
 
 ---
@@ -313,7 +314,7 @@ For Yahoo Finance, simply do the following:
 ```js
 News.getFromYahoo("AAPL").then(array => {
 	// Returns an array of news articles for the given symbol
-    // [
+	// [
 	// 	    News {
 	// 		    title: 'Amazon and Walmart Battle for Control of Flipkart',
 	// 		    description: 'The world&apos;s largest retailer and its online counterpart compete on many fronts, but the fight for India&apos;s largest online retailer may be one of the most important.',
@@ -360,24 +361,24 @@ Here is an example query for U.S. articles relating to using ```getHeadlines(api
 ```js
 News.getHeadlines("myApiKey", {
     country: "us",
-    category: "business
+    category: "business"
 }).then(array => {
 	// Returns an array of News objects related to U.S. business.
 	// [
-	// 		News {
-	// 			title: 'Two black men were arrested waiting at a Starbucks. Now the company, police are on the defensive.',
-	// 				description: 'The backlash is a dramatic turn from efforts to craft the company as a progressive 	corporate leader that values “diversity and inclusion.”',
-	// 				date: 2018-04-15T15:22:22.000Z,
-	// 				source: 'The Washington Post',
-	// 				author: null,
-	// 				url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
-	// 		News {
-	// 				title: 'Zillow surprises investors by buying up homes',
-	// 				description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
-	// 				date: 2018-04-15T00:27:56.000Z,
-	// 				source: 'TechCrunch',
-	// 				author: 'Katie Roof',
-	// 				url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
+	// 	    News {
+	//              title: 'Two black men were arrested waiting at a Starbucks. Now the company, police are on the defensive.',
+	//              description: 'The backlash is a dramatic turn from efforts to craft the company as a progressive 	corporate leader that values “diversity and inclusion.”',
+	//              date: 2018-04-15T15:22:22.000Z,
+	//              source: 'The Washington Post',
+	//              author: null,
+	//              url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
+	//      News {
+	//              title: 'Zillow surprises investors by buying up homes',
+	//              description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
+	//              date: 2018-04-15T00:27:56.000Z,
+	//              source: 'TechCrunch',
+	//              author: 'Katie Roof',
+	//              url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
 	// ... and more
 });
 ```
