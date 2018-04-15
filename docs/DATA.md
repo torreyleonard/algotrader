@@ -4,6 +4,9 @@
 <dt><a href="#AlphaVantage">AlphaVantage</a></dt>
 <dd><p>Further documentation can be found here: <a href="https://www.alphavantage.co/documentation/">https://www.alphavantage.co/documentation/</a></p>
 </dd>
+<dt><a href="#News">News</a></dt>
+<dd><p>Represents an individual news article. Static functions retrieve News objects.</p>
+</dd>
 <dt><a href="#OptionsChain">OptionsChain</a></dt>
 <dd></dd>
 <dt><a href="#Query">Query</a></dt>
@@ -366,6 +369,130 @@ http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 | fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
 
+<a name="News"></a>
+
+## News
+Represents an individual news article. Static functions retrieve News objects.
+
+**Kind**: global class  
+
+* [News](#News)
+    * [new News(object)](#new_News_new)
+    * _instance_
+        * [.getArticle()](#News+getArticle) ⇒ <code>Promise.&lt;String&gt;</code>
+        * [.getTitle()](#News+getTitle) ⇒ <code>String</code>
+        * [.getDescription()](#News+getDescription) ⇒ <code>String</code>
+        * [.getDate()](#News+getDate) ⇒ <code>Date</code>
+        * [.getSource()](#News+getSource) ⇒ <code>String</code>
+        * [.getAuthor()](#News+getAuthor) ⇒ <code>String</code>
+        * [.getURL()](#News+getURL) ⇒ <code>String</code>
+    * _static_
+        * [.getFromYahoo(symbol)](#News.getFromYahoo) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getAll(apiKey, object)](#News.getAll)
+        * [.getHeadlines(apiKey, object)](#News.getHeadlines)
+
+<a name="new_News_new"></a>
+
+### new News(object)
+Creates a new News instance.
+
+
+| Param |
+| --- |
+| object | 
+
+<a name="News+getArticle"></a>
+
+### news.getArticle() ⇒ <code>Promise.&lt;String&gt;</code>
+Using the URL provided for the news article, this will return the contents of that page.
+
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News+getTitle"></a>
+
+### news.getTitle() ⇒ <code>String</code>
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News+getDescription"></a>
+
+### news.getDescription() ⇒ <code>String</code>
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News+getDate"></a>
+
+### news.getDate() ⇒ <code>Date</code>
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News+getSource"></a>
+
+### news.getSource() ⇒ <code>String</code>
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News+getAuthor"></a>
+
+### news.getAuthor() ⇒ <code>String</code>
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News+getURL"></a>
+
+### news.getURL() ⇒ <code>String</code>
+**Kind**: instance method of [<code>News</code>](#News)  
+<a name="News.getFromYahoo"></a>
+
+### News.getFromYahoo(symbol) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of News objects for the given symbol.
+
+**Kind**: static method of [<code>News</code>](#News)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="News.getAll"></a>
+
+### News.getAll(apiKey, object)
+Search through millions of articles from over 30,000 large and small news sources and blogs. This includes breaking news as well as lesser articles.
+Returns an array of News objects for the given symbol from News API.
+
+**Kind**: static method of [<code>News</code>](#News)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| apiKey | <code>String</code> | Your News API key, found for free here: https://newsapi.org/register |
+| object | <code>Object</code> | Further documentation can be found here: https://newsapi.org/docs/endpoints/everything |
+
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| q | <code>String</code> | Keywords or phrases to search for. |
+| sources | <code>String</code> | A comma-separated string of identifiers (maximum 20) for the news sources or blogs you want headlines from. |
+| domains | <code>String</code> | A comma-separated string of domains (eg bbc.co.uk, techcrunch.com, engadget.com) to restrict the search to. |
+| from | <code>Date</code> | A date and optional time for the oldest article allowed. |
+| to | <code>Date</code> | A date and optional time for the newest article allowed. |
+| language | <code>String</code> | Possible options: 'ar,' 'de,' 'en,' 'es,' 'fr,' 'he,' 'it,' 'nl,' 'no,' 'pt,' 'ru,' 'se,' 'ud,' 'zh' |
+| sortBy | <code>String</code> | Possible options: 'relevancy,' 'popularity,' 'publishedAt' |
+| pageSize | <code>Number</code> | The number of results to return per page. 20 is the default, 100 is the maximum. |
+| page | <code>Number</code> | Use this to page through the results. |
+
+<a name="News.getHeadlines"></a>
+
+### News.getHeadlines(apiKey, object)
+This endpoint provides live top and breaking headlines for a country, specific category in a country, single source, or multiple sources. You can also search with keywords. Articles are sorted by the earliest date published first.
+Returns an array of News objects for the given symbol from News API.
+
+**Kind**: static method of [<code>News</code>](#News)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| apiKey | <code>String</code> | Your News API key, found for free here: https://newsapi.org/register |
+| object | <code>Object</code> | Further documentation can be found here: https://newsapi.org/docs/endpoints/top-headlines |
+
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| q | <code>String</code> | Keywords or phrases to search for. |
+| category | <code>String</code> | Possible options: 'business,' 'entertainment,' 'general,' 'health,' 'science,' 'sports,' 'technology' (Cannot be mixed with sources parameter) |
+| country | <code>String</code> | The 2-letter ISO 3166-1 code of the country you want to get headlines for. (Cannot be mixed with sources parameter) |
+| sources | <code>String</code> | A comma-separated string of identifiers (maximum 20) for the news sources or blogs you want headlines from. (Cannot be mixed with country parameter) |
+| pageSize | <code>Number</code> | The number of results to return per page. 20 is the default, 100 is the maximum. |
+| page | <code>Number</code> | Use this to page through the results. |
+
 <a name="OptionsChain"></a>
 
 ## OptionsChain
@@ -673,21 +800,30 @@ Returns an array of 'x' amount of trending symbols on Yahoo Finance.
 
 ## Stream
 **Kind**: global class  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| news | <code>Boolean</code> | Whether to include news headlines in the stream. |
+| allHeadlines | <code>Boolean</code> | If true, all U.S. business headlines will be sent in the stream. If false, only news pertaining to the given symbols will be outputted. |
+| newsApiKey | <code>String</code> | If 'includeNews' is yes, this should be your API key from https://newsapi.org/register. |
+
 
 * [Stream](#Stream)
-    * [new Stream(symbols)](#new_Stream_new)
+    * [new Stream(symbols, options)](#new_Stream_new)
     * [.start()](#Stream+start)
     * [.stop()](#Stream+stop)
 
 <a name="new_Stream_new"></a>
 
-### new Stream(symbols)
+### new Stream(symbols, options)
 Creates a new Stream class.
 
 
 | Param | Type |
 | --- | --- |
 | symbols | <code>Array</code> | 
+| options | <code>Object</code> \| <code>Null</code> | 
 
 <a name="Stream+start"></a>
 

@@ -40,6 +40,10 @@
 	- Create algorithms that will automatically place trades based on your criteria
 	- Backtest algorithms on past market data
 	- Paper (simulated) trade your algorithm to see how it performs in real time
+- **Support for many third-party APIs**
+	- [Robinhood](http://robinhood.com/)
+	- [Alpha Vantage](https://www.alphavantage.co/)
+	- [News API](https://newsapi.org/)
 
 ---
 
@@ -52,7 +56,7 @@
 	- [OptionsChain](#optionsChain) (todo)
 	- [Query](#query)
 	- [Stream](#stream)
-	- [News](#news) (todo)
+	- [News](#news)
 	- [Alpha Vantage](#alpha-vantage)
 - Algorithm (todo)
 
@@ -192,7 +196,7 @@ myStream.start();
 
 myStream
 	.on('quote', quote => {
-		// Returns an array of Quote objects. See the link below for documentation on Quotes.
+		// Returns a single Quote object. See the link below for documentation on Quotes.
 	})
 	.on('response', res => {
 		// Returns a response object from the request module. Useful for debugging.
@@ -202,6 +206,32 @@ myStream
 	});
 ```
 For documentation on Quotes, visit the [Global Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote)
+
+Not only can you stream quotes, but you can include news articles using the built-in [News Library.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) This is useful for reacting to breaking headlines with pre-determined trades (for example, earnings reports or FOMC results). To do this, just add a second parameter (an object) to ```new Stream()``` as shown below.
+
+```js
+const myStreamWithNews = new Stream(["JPM", "COST", "FDX"], {
+	news: true, // Tells the streamer to also include news
+    allHeadlines: true, // If true, all U.S. headlines will be sent in the stream. If false, only news pertaining to the given symbols will be outputted.
+    newsApiKey: "newsApiKeyGoesHere" // Your API key from NewsAPI.org. See the link below for documentation on News.
+});
+myStreamWithNews.start();
+
+myStreamWithNews
+	.on('quote', quote => {
+		// Returns a single Quote object. See the link below for documentation on Quotes.
+	})
+    .on('news', news => {
+    	// Returns a single News object. See the link below for documentation on News.
+    });
+	.on('response', res => {
+		// Returns a response object from the request module. Useful for debugging.
+	})
+	.on('error', error => {
+		// Returns an error if the stream failed to start.
+	});
+```
+For documentation on News, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news)
 
 #### Alpha Vantage
 
@@ -232,7 +262,7 @@ av.rsi("AAPL", "daily", 14, "close").then(array => {
     });
 });
 ```
-For documentation on all AlphaVantage functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#AlphaVantage)
+For documentation on all Alpha Vantage functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#AlphaVantage)
 
 #### Query
 
@@ -270,3 +300,91 @@ Query.getHighestVolume(5).then(array => {
 });
 ```
 For documentation on all functions of the Query class, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#query)
+
+#### News
+
+Thanks to both [News API](https://newsapi.org/) and Yahoo Finance, you can get breaking news headlines and various articles on either specific companies or the market or world as a whole.
+
+First you'll want to create a reference to the News class: ```const News = algotrader.Data.News;```
+
+You can then use either Yahoo Finance or News API to retrieve news articles, but it's easier to find exactly what you're looking for with the latter.
+
+For Yahoo Finance, simply do the following:
+```js
+News.getFromYahoo("AAPL").then(array => {
+	// Returns an array of news articles for the given symbol
+    // [
+	// 	    News {
+	// 		    title: 'Amazon and Walmart Battle for Control of Flipkart',
+	// 		    description: 'The world&apos;s largest retailer and its online counterpart compete on many fronts, but the fight for India&apos;s largest online retailer may be one of the most important.',
+	// 		    date: 2018-04-15T15:45:00.000Z,
+	// 		    source: undefined,
+	// 		    author: undefined,
+	// 		    url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss' },
+	// 	    News {
+	// 		    title: 'President Trump is considering rejoining the Trans Pacific Partnership trade deal',
+	// 		    	description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
+	// 		    	date: 2018-04-13T14:40:56.000Z,
+	// 		    	source: undefined,
+	// 		    	author: undefined,
+	// 		    	url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss' },
+    // ... and more
+});
+```
+You'll notice that Yahoo Finance does not provide the author or the source and only links back to their website.
+
+With News API, you'll get many more options on what articles to return. However, you'll need a free API key in order to use their service. [Register for one here.](https://newsapi.org/register) You can then get either breaking/recent headlines or search for all articles matching your query.
+
+Each News API query must contain an object with at least one query option. Possible parameters for the two functions are:
+
+- **```getHeadlines(apiKey, object)```**
+  - ```q``` - Keywords or phrases to search for.
+  - ```category``` - Possible options: business, entertainment, general, health, science, sports, technology (Cannot be mixed with sources parameter)
+  - ```country```- The 2-letter ISO 3166-1 code of the country you want to get headlines for. (Cannot be mixed with sources parameter)
+  - ```sources``` - A comma-separated string of identifiers (maximum 20) for the news sources or blogs you want headlines from. (Cannot be mixed with country parameter)
+  - ```pageSize``` - The number of results to return per page. 20 is the default, 100 is the maximum.
+  - ```page``` - Use this to page through the results.
+- **```getAll(apiKey, object)```**
+  - ```q``` - Keywords or phrases to search for.
+  - ```sources``` - A comma-separated string of identifiers (maximum 20) for the news sources or blogs you want headlines from.
+  - ```domains``` - A comma-separated string of domains (eg bbc.co.uk, techcrunch.com, engadget.com) to restrict the search to.
+  - ```from``` - A date object for the oldest allowed article.
+  - ```to``` - A date object for the newest allowed article.
+  - ```language``` - Possible options: ar, de, en, es, fr, he, it, nl, no, pt, ru, se, ud, zh
+  - ```sortBy``` - Possible options: relevancy, popularity, publishedAt (newest)
+  - ```pageSize``` - The number of results to return per page. 20 is the default, 100 is the maximum.
+  - ```page``` - Use this to page through the results.
+
+Here is an example query for U.S. articles relating to using ```getHeadlines(apiKey, object)```:
+
+```js
+News.getHeadlines("myApiKey", {
+    country: "us",
+    category: "business
+}).then(array => {
+	// Returns an array of News objects related to U.S. business.
+	// [
+	// 		News {
+	// 			title: 'Two black men were arrested waiting at a Starbucks. Now the company, police are on the defensive.',
+	// 				description: 'The backlash is a dramatic turn from efforts to craft the company as a progressive 	corporate leader that values “diversity and inclusion.”',
+	// 				date: 2018-04-15T15:22:22.000Z,
+	// 				source: 'The Washington Post',
+	// 				author: null,
+	// 				url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
+	// 		News {
+	// 				title: 'Zillow surprises investors by buying up homes',
+	// 				description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
+	// 				date: 2018-04-15T00:27:56.000Z,
+	// 				source: 'TechCrunch',
+	// 				author: 'Katie Roof',
+	// 				url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
+	// ... and more
+});
+```
+The [News Class](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) provides a few functions that you can run to easily retrieve information you need, such as ```news.getTitle()```, ```news.getDate()```, and ```news.getDescription().``` You can also download the full article from the source:
+```js
+news.getArticle().then(html => {
+	// This will return raw HTML from the source. You'll have to parse it yourself if you want to read the entire article, but typically the description - news.getDescription() - is sufficient.
+});
+```
+For documentation on all News functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#News)

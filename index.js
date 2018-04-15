@@ -13,6 +13,7 @@ module.exports = {
 		OptionsChain: require('./objects/data/OptionsChain'),
 		Stream: require('./objects/data/Stream'),
 		Query: require('./objects/data/Query'),
-		AlphaVantage: require('./objects/data/AlphaVantage')
+		AlphaVantage: require('./objects/data/AlphaVantage'),
+		News: require('./objects/data/News')
 	}
 };

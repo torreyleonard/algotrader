@@ -1,3 +1,4 @@
+const News = require('./News');
 const EventEmitter = require('events');
 const Quote = require('../globals/Quote');
 const request = require('request');
@@ -7,10 +8,20 @@ class Stream extends EventEmitter {
 	/**
 	 * Creates a new Stream class.
 	 * @param {Array} symbols
+	 * @param {Object|Null} options
+	 * @property {Boolean} news - Whether to include news headlines in the stream.
+	 * @property {Boolean} allHeadlines - If true, all U.S. business headlines will be sent in the stream. If false, only news pertaining to the given symbols will be outputted.
+	 * @property {String} newsApiKey - If 'includeNews' is yes, this should be your API key from https://newsapi.org/register.
 	 */
-	constructor(symbols) {
+	constructor(symbols, options) {
 		super();
 		this.symbols = symbols;
+		if (options) {
+			this.news = Boolean(options.news) || false;
+			this.allHeadlines = Boolean(options.allHeadlines) || false;
+			this.newsApiKey = String(options.newsApiKey) || false;
+			this.newsArray = [];
+		}
 	}
 
 	/**
@@ -51,6 +62,22 @@ class Stream extends EventEmitter {
 				input.forEach(i => {
 					const quote = _this._createQuote(i);
 					_this.emit('quote', quote);
+					if (_this.news) {
+						let options = {
+							country: "us",
+							pageSize: 100,
+						};
+						if (!_this.allHeadlines) options.q = quote.getSymbol();
+						else options.category = "business";
+						News.getHeadlines(_this.newsApiKey, options).then(array => {
+							array.forEach(news => {
+								if (_this.newsArray.indexOf(news) === -1) {
+									_this.emit('news', news);
+									_this.newsArray.push(news);
+								}
+							})
+						})
+					}
 				});
 			} catch (error) {
 				_this.emit('error', error);
