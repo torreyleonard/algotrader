@@ -280,7 +280,9 @@ class AlphaVantage {
 	 * https://www.investopedia.com/articles/technical/052201.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
+	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -293,7 +295,7 @@ class AlphaVantage {
 	 * https://www.investopedia.com/terms/e/ema.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -306,7 +308,7 @@ class AlphaVantage {
 	 * https://www.investopedia.com/articles/technical/060401.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -319,7 +321,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -332,7 +334,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -345,7 +347,7 @@ class AlphaVantage {
 	 * https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -358,7 +360,7 @@ class AlphaVantage {
 	 * http://www.fmlabs.com/reference/default.htm?url=TriangularMA.htm
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -371,7 +373,7 @@ class AlphaVantage {
 	 * http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -384,7 +386,7 @@ class AlphaVantage {
 	 * http://www.binarytribune.com/forex-trading-indicators/ehlers-mesa-adaptive-moving-average
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {Number} fastLimit
 	 * @param {Number} slowLimit
@@ -408,7 +410,7 @@ class AlphaVantage {
 	 * http://www.fmlabs.com/reference/default.htm?url=T3.htm
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -421,7 +423,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/articles/forex/05/macddiverge.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {Number|Null} fastPeriod
 	 * @param {Number|Null} slowPeriod
@@ -450,7 +452,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/articles/forex/05/macddiverge.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {Number|Null} fastPeriod
 	 * @param {Number|Null} slowPeriod
@@ -494,7 +496,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {Number|Null} fastKPeriod
 	 * @param {Number|Null} slowKPeriod
@@ -533,7 +535,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {Number|Null} fastKPeriod
 	 * @param {Number|Null} fastDPeriod
@@ -562,7 +564,7 @@ class AlphaVantage {
 	 * http://www.investopedia.com/articles/technical/071601.asp
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @returns {Promise<Array>}
 	 */
@@ -575,7 +577,7 @@ class AlphaVantage {
 	 * http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
-	 * @param {String} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
 	 * @param {String} seriesType - What to base the SMA on: open, high, low, close
 	 * @param {Number|Null} fastKPeriod
 	 * @param {Number|Null} fastDPeriod
