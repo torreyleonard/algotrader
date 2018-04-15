@@ -1,7 +1,7 @@
 const Robinhood = require('./Robinhood');
 const Fundamentals = require('./Fundamentals');
 const Market = require('./Market');
-const Quote = require('./Quote');
+const Quote = require('../globals/Quote');
 const request = require('request');
 
 class Instrument extends Robinhood {
@@ -146,7 +146,40 @@ class Instrument extends Robinhood {
 	 * @returns {Promise<Quote>}
 	 */
 	getQuote() {
-		return Quote.getByURL(this.urls.quote);
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.urls.quote
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, null, res => {
+					resolve(new Quote(
+						{
+							symbol: res.symbol,
+							date: new Date(res.updated_at),
+							source: "Robinhood/" + res.last_trade_price_source,
+							price: {
+								last: Number(res.last_trade_price) || Number(res.last_extended_hours_trade_price)
+							},
+							dom: {
+								bid: {
+									price: Number(res.bid_price),
+									size: Number(res.bidSize)
+								},
+								ask: {
+									price: Number(res.ask_price),
+									size: Number(res.ask_size)
+								}
+							},
+							meta: {
+								isHalted: Boolean(res.trading_halted),
+								hasTraded: Boolean(res.has_traded)
+							},
+							original: JSON.stringify(res)
+						}
+					));
+				}, reject);
+			})
+		})
 	}
 
 	/**

@@ -7,11 +7,11 @@
 <dd></dd>
 <dt><a href="#Market">Market</a></dt>
 <dd></dd>
+<dt><a href="#OptionOrder">OptionOrder</a></dt>
+<dd></dd>
 <dt><a href="#Order">Order</a></dt>
 <dd></dd>
 <dt><a href="#Portfolio">Portfolio</a></dt>
-<dd></dd>
-<dt><a href="#Quote">Quote</a></dt>
 <dd></dd>
 <dt><a href="#User">User</a></dt>
 <dd></dd>
@@ -139,7 +139,7 @@ Returns a fundamentals object for the given URL.
         * [.populate()](#Instrument+populate) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getMarket()](#Instrument+getMarket) ⇒ [<code>Promise.&lt;Market&gt;</code>](#Market)
         * [.getFundamentals()](#Instrument+getFundamentals) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
-        * [.getQuote()](#Instrument+getQuote) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
+        * [.getQuote()](#Instrument+getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
         * [.getSplits()](#Instrument+getSplits) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getName()](#Instrument+getName) ⇒ <code>String</code>
         * [.getSimpleName()](#Instrument+getSimpleName) ⇒ <code>String</code>
@@ -192,7 +192,7 @@ Returns a new Fundamentals object with information such as open, high, low, clos
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getQuote"></a>
 
-### instrument.getQuote() ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
+### instrument.getQuote() ⇒ <code>Promise.&lt;Quote&gt;</code>
 Returns an object with a real-time quote on this instrument.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
@@ -434,13 +434,143 @@ Returns a Market object for the given market URL.
 | --- | --- |
 | url | <code>String</code> | 
 
+<a name="OptionOrder"></a>
+
+## OptionOrder
+**Kind**: global class  
+
+* [OptionOrder](#OptionOrder)
+    * [new OptionOrder(object, user, optionInstrument, direction, timeInForce, side, type, quantity)](#new_OptionOrder_new)
+    * [.getLegs()](#OptionOrder+getLegs) ⇒ <code>Array</code>
+    * [.getDirection()](#OptionOrder+getDirection) ⇒ <code>String</code>
+    * [.getPremium()](#OptionOrder+getPremium) ⇒ <code>Number</code>
+    * [.getProcessedPremium()](#OptionOrder+getProcessedPremium) ⇒ <code>Number</code>
+    * [.getTimeInForce()](#OptionOrder+getTimeInForce) ⇒ <code>String</code>
+    * [.getReferenceID()](#OptionOrder+getReferenceID) ⇒ <code>String</code>
+    * [.getPrice()](#OptionOrder+getPrice) ⇒ <code>Number</code>
+    * [.getTrigger()](#OptionOrder+getTrigger) ⇒ <code>String</code>
+    * [.getType()](#OptionOrder+getType) ⇒ <code>String</code>
+    * [.getQuantity()](#OptionOrder+getQuantity) ⇒ <code>Number</code>
+    * [.getQuantityPending()](#OptionOrder+getQuantityPending) ⇒ <code>Number</code>
+    * [.getQuantityCanceled()](#OptionOrder+getQuantityCanceled) ⇒ <code>Number</code>
+    * [.getChainID()](#OptionOrder+getChainID) ⇒ <code>String</code>
+    * [.getSymbol()](#OptionOrder+getSymbol) ⇒ <code>String</code>
+    * [.getDateCreated()](#OptionOrder+getDateCreated) ⇒ <code>Date</code>
+    * [.isExecuted()](#OptionOrder+isExecuted) ⇒ <code>Boolean</code>
+    * [.isCredit()](#OptionOrder+isCredit) ⇒ <code>Boolean</code>
+    * [.isDebit()](#OptionOrder+isDebit) ⇒ <code>Boolean</code>
+
+<a name="new_OptionOrder_new"></a>
+
+### new OptionOrder(object, user, optionInstrument, direction, timeInForce, side, type, quantity)
+Creates a new OptionOrder class.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| object | <code>Object</code> \| <code>Null</code> | Object for previously created order. If this is a new order, this should be null. |
+| user | [<code>User</code>](#User) |  |
+| optionInstrument | <code>OptionInstrument</code> |  |
+| direction | <code>String</code> | debit, credit |
+| timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG' |
+| side | <code>String</code> | 'buy' / 'sell' |
+| type | <code>String</code> | 'limit' / 'market' |
+| quantity | <code>Number</code> |  |
+
+<a name="OptionOrder+getLegs"></a>
+
+### optionOrder.getLegs() ⇒ <code>Array</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getDirection"></a>
+
+### optionOrder.getDirection() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getPremium"></a>
+
+### optionOrder.getPremium() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getProcessedPremium"></a>
+
+### optionOrder.getProcessedPremium() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getTimeInForce"></a>
+
+### optionOrder.getTimeInForce() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getReferenceID"></a>
+
+### optionOrder.getReferenceID() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getPrice"></a>
+
+### optionOrder.getPrice() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getTrigger"></a>
+
+### optionOrder.getTrigger() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getType"></a>
+
+### optionOrder.getType() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getQuantity"></a>
+
+### optionOrder.getQuantity() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getQuantityPending"></a>
+
+### optionOrder.getQuantityPending() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getQuantityCanceled"></a>
+
+### optionOrder.getQuantityCanceled() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getChainID"></a>
+
+### optionOrder.getChainID() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getSymbol"></a>
+
+### optionOrder.getSymbol() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+getDateCreated"></a>
+
+### optionOrder.getDateCreated() ⇒ <code>Date</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+isExecuted"></a>
+
+### optionOrder.isExecuted() ⇒ <code>Boolean</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+isCredit"></a>
+
+### optionOrder.isCredit() ⇒ <code>Boolean</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder+isDebit"></a>
+
+### optionOrder.isDebit() ⇒ <code>Boolean</code>
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
 <a name="Order"></a>
 
 ## Order
 **Kind**: global class  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| instrument | [<code>Instrument</code>](#Instrument) |  |
+| quote | <code>Quote</code> |  |
+| type | <code>String</code> | 'limit' | 'market |
+| timeInForce | <code>String</code> | 'gfd' | 'gtc' | 'ioc' | 'opg' |
+| trigger | <code>String</code> | 'immediate' | 'stop' |
+| stopPrice | <code>Number</code> \| <code>Null</code> | If trigger is 'stop,' this must be specified. If not, this should be null. |
+| quantity | <code>Number</code> |  |
+| side | <code>String</code> | 'buy' | 'sell' |
+| extendedHours | <code>Boolean</code> | Whether the order should be allowed to execute when exchanges are closed (9-9:30 AM, 4-6 PM) |
+| overrideDayTradeCheck | <code>Boolean</code> | Whether to override Pattern Day Trader protection. |
+
 
 * [Order](#Order)
-    * [new Order(object, user, instrument, quote, type, timeInForce, trigger, stopPrice, quantity, side, extendedHours, overrideDayTradeCheck)](#new_Order_new)
+    * [new Order(user, object)](#new_Order_new)
     * _instance_
         * [.submit()](#Order+submit) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getResponse()](#Order+getResponse) ⇒ <code>Object</code> \| <code>Null</code>
@@ -450,24 +580,14 @@ Returns a Market object for the given market URL.
 
 <a name="new_Order_new"></a>
 
-### new Order(object, user, instrument, quote, type, timeInForce, trigger, stopPrice, quantity, side, extendedHours, overrideDayTradeCheck)
+### new Order(user, object)
 Creates a new Order object.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| object | <code>Object</code> \| <code>Null</code> | Object for previously created order. If this is a new order, this should be null. |
-| user | [<code>User</code>](#User) |  |
-| instrument | [<code>Instrument</code>](#Instrument) |  |
-| quote | [<code>Quote</code>](#Quote) |  |
-| type | <code>String</code> | 'limit' / 'market' |
-| timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG' |
-| trigger | <code>String</code> | 'immediate' / 'stop' |
-| stopPrice | <code>Number</code> \| <code>Null</code> | If trigger is 'stop,' this must be specified. If not, this should be null. |
-| quantity | <code>int</code> |  |
-| side | <code>String</code> | 'buy' / 'sell' |
-| extendedHours | <code>Boolean</code> | Whether the order should be allowed to execute when exchanges are closed. |
-| overrideDayTradeCheck | <code>Boolean</code> | Whether to override Pattern Day Trader protection. |
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| object | <code>Object</code> | 
 
 <a name="Order+submit"></a>
 
@@ -727,137 +847,6 @@ Returns an array of all positions with an average buy price equal to the given a
 | Param | Type |
 | --- | --- |
 | amount | <code>Number</code> | 
-
-<a name="Quote"></a>
-
-## Quote
-**Kind**: global class  
-
-* [Quote](#Quote)
-    * [new Quote(object)](#new_Quote_new)
-    * _instance_
-        * [.getAskPrice()](#Quote+getAskPrice) ⇒ <code>Number</code>
-        * [.getAskSize()](#Quote+getAskSize) ⇒ <code>Number</code>
-        * [.getBidPrice()](#Quote+getBidPrice) ⇒ <code>Number</code>
-        * [.getBidSize()](#Quote+getBidSize) ⇒ <code>Number</code>
-        * [.getLast()](#Quote+getLast) ⇒ <code>Number</code>
-        * [.getLastExtendedHours()](#Quote+getLastExtendedHours) ⇒ <code>Number</code>
-        * [.getLastSource()](#Quote+getLastSource) ⇒ <code>String</code>
-        * [.getPreviousClose()](#Quote+getPreviousClose) ⇒ <code>Number</code>
-        * [.getPreviousCloseAdjusted()](#Quote+getPreviousCloseAdjusted) ⇒ <code>Number</code>
-        * [.getPreviousCloseDate()](#Quote+getPreviousCloseDate) ⇒ <code>Date</code>
-        * [.getSymbol()](#Quote+getSymbol) ⇒ <code>String</code>
-        * [.getUpdatedDate()](#Quote+getUpdatedDate) ⇒ <code>Date</code>
-        * [.getInstrumentURL()](#Quote+getInstrumentURL) ⇒ <code>String</code>
-        * [.isHalted()](#Quote+isHalted) ⇒ <code>Boolean</code>
-        * [.hasTraded()](#Quote+hasTraded) ⇒ <code>Boolean</code>
-    * _static_
-        * [.getBySymbol(symbol)](#Quote.getBySymbol) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
-        * [.getBySymbolArray(array)](#Quote.getBySymbolArray) ⇒ <code>Promise.&lt;Array&gt;</code>
-        * [.getByURL(url)](#Quote.getByURL) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
-
-<a name="new_Quote_new"></a>
-
-### new Quote(object)
-Creates a new Quote object.
-
-
-| Param | Type |
-| --- | --- |
-| object | <code>Object</code> | 
-
-<a name="Quote+getAskPrice"></a>
-
-### quote.getAskPrice() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getAskSize"></a>
-
-### quote.getAskSize() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getBidPrice"></a>
-
-### quote.getBidPrice() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getBidSize"></a>
-
-### quote.getBidSize() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getLast"></a>
-
-### quote.getLast() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getLastExtendedHours"></a>
-
-### quote.getLastExtendedHours() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getLastSource"></a>
-
-### quote.getLastSource() ⇒ <code>String</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getPreviousClose"></a>
-
-### quote.getPreviousClose() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getPreviousCloseAdjusted"></a>
-
-### quote.getPreviousCloseAdjusted() ⇒ <code>Number</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getPreviousCloseDate"></a>
-
-### quote.getPreviousCloseDate() ⇒ <code>Date</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getSymbol"></a>
-
-### quote.getSymbol() ⇒ <code>String</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getUpdatedDate"></a>
-
-### quote.getUpdatedDate() ⇒ <code>Date</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+getInstrumentURL"></a>
-
-### quote.getInstrumentURL() ⇒ <code>String</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+isHalted"></a>
-
-### quote.isHalted() ⇒ <code>Boolean</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote+hasTraded"></a>
-
-### quote.hasTraded() ⇒ <code>Boolean</code>
-**Kind**: instance method of [<code>Quote</code>](#Quote)  
-<a name="Quote.getBySymbol"></a>
-
-### Quote.getBySymbol(symbol) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
-Returns a quote object for the given symbol.
-
-**Kind**: static method of [<code>Quote</code>](#Quote)  
-
-| Param | Type |
-| --- | --- |
-| symbol | <code>String</code> | 
-
-<a name="Quote.getBySymbolArray"></a>
-
-### Quote.getBySymbolArray(array) ⇒ <code>Promise.&lt;Array&gt;</code>
-Returns an array of quotes for the symbols in the given array.
-
-**Kind**: static method of [<code>Quote</code>](#Quote)  
-
-| Param | Type |
-| --- | --- |
-| array | <code>Array</code> | 
-
-<a name="Quote.getByURL"></a>
-
-### Quote.getByURL(url) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
-Returns a quote object for the given quote API url.
-
-**Kind**: static method of [<code>Quote</code>](#Quote)  
-
-| Param |
-| --- |
-| url | 
 
 <a name="User"></a>
 

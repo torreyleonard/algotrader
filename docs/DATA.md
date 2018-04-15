@@ -1,13 +1,365 @@
 ## Classes
 
 <dl>
+<dt><a href="#AlphaVantage">AlphaVantage</a></dt>
+<dd><p>Further documentation can be found here: <a href="https://www.alphavantage.co/documentation/">https://www.alphavantage.co/documentation/</a></p>
+</dd>
 <dt><a href="#OptionsChain">OptionsChain</a></dt>
-<dd></dd>
-<dt><a href="#Quote">Quote</a></dt>
 <dd></dd>
 <dt><a href="#Stream">Stream</a></dt>
 <dd></dd>
 </dl>
+
+<a name="AlphaVantage"></a>
+
+## AlphaVantage
+Further documentation can be found here: https://www.alphavantage.co/documentation/
+
+**Kind**: global class  
+
+* [AlphaVantage](#AlphaVantage)
+    * [new AlphaVantage(apiKey)](#new_AlphaVantage_new)
+    * [.timeSeriesIntraday(symbol, interval)](#AlphaVantage+timeSeriesIntraday) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.timeSeriesDaily(symbol, compact, adjusted)](#AlphaVantage+timeSeriesDaily) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.timeSeriesWeekly(symbol, adjusted)](#AlphaVantage+timeSeriesWeekly) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.timeSeriesMonthly(symbol, adjusted)](#AlphaVantage+timeSeriesMonthly) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.sma(symbol, interval, timePeriod, seriesType)](#AlphaVantage+sma) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.ema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+ema) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.wma(symbol, interval, timePeriod, seriesType)](#AlphaVantage+wma) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.dema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+dema) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.dema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+dema) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.tema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+tema) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.trima(symbol, interval, timePeriod, seriesType)](#AlphaVantage+trima) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.kama(symbol, interval, timePeriod, seriesType)](#AlphaVantage+kama) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.mama(symbol, interval, timePeriod, seriesType, fastLimit, slowLimit)](#AlphaVantage+mama) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.t3(symbol, interval, timePeriod, seriesType)](#AlphaVantage+t3) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.macd(symbol, interval, timePeriod, seriesType, fastPeriod, slowPeriod, signalPeriod)](#AlphaVantage+macd) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.macd(symbol, interval, timePeriod, seriesType, fastPeriod, slowPeriod, signalPeriod, fastMaType, slowMaType, signalMaType)](#AlphaVantage+macd) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.stoch(symbol, interval, timePeriod, seriesType, fastKPeriod, slowKPeriod, slowDPeriod, slowKmaType, slowDmaType)](#AlphaVantage+stoch) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.stochf(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType)](#AlphaVantage+stochf) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.rsi(symbol, interval, timePeriod, seriesType)](#AlphaVantage+rsi) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.stochRSI(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType)](#AlphaVantage+stochRSI) ⇒ <code>Promise.&lt;Array&gt;</code>
+
+<a name="new_AlphaVantage_new"></a>
+
+### new AlphaVantage(apiKey)
+Creates a new AlphaVantage instance.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| apiKey | <code>String</code> | The free API key retrieved from |
+
+<a name="AlphaVantage+timeSeriesIntraday"></a>
+
+### alphaVantage.timeSeriesIntraday(symbol, interval) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the equity specified, updated in real time.
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | How long each quote should represent: 1min, 5min, 15min, 30min, 60min |
+
+<a name="AlphaVantage+timeSeriesDaily"></a>
+
+### alphaVantage.timeSeriesDaily(symbol, compact, adjusted) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| compact | <code>Boolean</code> | If true, this will return the last 100 data points. If false, it will return up to 20 years of historical data. |
+| adjusted | <code>Boolean</code> | If true, prices will be adjusted for split/dividend events. |
+
+<a name="AlphaVantage+timeSeriesWeekly"></a>
+
+### alphaVantage.timeSeriesWeekly(symbol, adjusted) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| adjusted | <code>Boolean</code> | If true, prices will be adjusted for split/dividend events. |
+
+<a name="AlphaVantage+timeSeriesMonthly"></a>
+
+### alphaVantage.timeSeriesMonthly(symbol, adjusted) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| adjusted | <code>Boolean</code> | If true, prices will be adjusted for split/dividend events. |
+
+<a name="AlphaVantage+sma"></a>
+
+### alphaVantage.sma(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of simple moving averages for the equity specified.
+https://www.investopedia.com/articles/technical/052201.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+ema"></a>
+
+### alphaVantage.ema(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of exponential moving averages for the equity specified.
+https://www.investopedia.com/terms/e/ema.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+wma"></a>
+
+### alphaVantage.wma(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of weighted moving averages for the equity specified.
+https://www.investopedia.com/articles/technical/060401.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+dema"></a>
+
+### alphaVantage.dema(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of double exponential moving averages for the equity specified.
+http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+dema"></a>
+
+### alphaVantage.dema(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of double exponential moving averages for the equity specified.
+http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+tema"></a>
+
+### alphaVantage.tema(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of triple exponential moving averages for the equity specified.
+https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+trima"></a>
+
+### alphaVantage.trima(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of triangular moving averages for the equity specified.
+http://www.fmlabs.com/reference/default.htm?url=TriangularMA.htm
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+kama"></a>
+
+### alphaVantage.kama(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of Kaufman adaptive moving averages for the equity specified.
+http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+mama"></a>
+
+### alphaVantage.mama(symbol, interval, timePeriod, seriesType, fastLimit, slowLimit) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of MESA adaptive moving averages for the equity specified.
+http://www.binarytribune.com/forex-trading-indicators/ehlers-mesa-adaptive-moving-average
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| fastLimit | <code>Number</code> |  |
+| slowLimit | <code>Number</code> |  |
+
+<a name="AlphaVantage+t3"></a>
+
+### alphaVantage.t3(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of T3 values for the equity specified.
+http://www.fmlabs.com/reference/default.htm?url=T3.htm
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+macd"></a>
+
+### alphaVantage.macd(symbol, interval, timePeriod, seriesType, fastPeriod, slowPeriod, signalPeriod) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of moving average convergence / divergence values for the equity specified.
+http://www.investopedia.com/articles/forex/05/macddiverge.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| fastPeriod | <code>Number</code> \| <code>Null</code> |  |
+| slowPeriod | <code>Number</code> \| <code>Null</code> |  |
+| signalPeriod | <code>Number</code> \| <code>Null</code> |  |
+
+<a name="AlphaVantage+macd"></a>
+
+### alphaVantage.macd(symbol, interval, timePeriod, seriesType, fastPeriod, slowPeriod, signalPeriod, fastMaType, slowMaType, signalMaType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of moving average convergence / divergence values with controllable moving average type for the equity specified.
+http://www.investopedia.com/articles/forex/05/macddiverge.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| fastPeriod | <code>Number</code> \| <code>Null</code> |  |
+| slowPeriod | <code>Number</code> \| <code>Null</code> |  |
+| signalPeriod | <code>Number</code> \| <code>Null</code> |  |
+| fastMaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+| slowMaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+| signalMaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+
+<a name="AlphaVantage+stoch"></a>
+
+### alphaVantage.stoch(symbol, interval, timePeriod, seriesType, fastKPeriod, slowKPeriod, slowDPeriod, slowKmaType, slowDmaType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of stochastic oscillators for the equity specified.
+http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
+| slowKPeriod | <code>Number</code> \| <code>Null</code> |  |
+| slowDPeriod | <code>Number</code> \| <code>Null</code> |  |
+| slowKmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+| slowDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+
+<a name="AlphaVantage+stochf"></a>
+
+### alphaVantage.stochf(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of stochastic fast oscillators for the equity specified.
+http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
+| fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
+| fastDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+
+<a name="AlphaVantage+rsi"></a>
+
+### alphaVantage.rsi(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of relative strength index values for the equity specified.
+http://www.investopedia.com/articles/technical/071601.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+
+<a name="AlphaVantage+stochRSI"></a>
+
+### alphaVantage.stochRSI(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of stochastic relative strength index values for the equity specified.
+http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
+| fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
+| fastDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
 
 <a name="OptionsChain"></a>
 
@@ -207,38 +559,6 @@ Returns a new OptionsChain object with data from Yahoo Finance.
 | --- | --- |
 | symbol | <code>String</code> | 
 
-<a name="Quote"></a>
-
-## Quote
-**Kind**: global class  
-
-* [Quote](#Quote)
-    * [new Quote(array)](#new_Quote_new)
-    * [.getFromYahoo(range, interval, extended)](#Quote.getFromYahoo) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
-
-<a name="new_Quote_new"></a>
-
-### new Quote(array)
-Creates a new Quote object.
-
-
-| Param | Type |
-| --- | --- |
-| array | <code>Array</code> | 
-
-<a name="Quote.getFromYahoo"></a>
-
-### Quote.getFromYahoo(range, interval, extended) ⇒ [<code>Promise.&lt;Quote&gt;</code>](#Quote)
-Returns a new Quote object with data from Yahoo Finance.
-
-**Kind**: static method of [<code>Quote</code>](#Quote)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| range | <code>String</code> | 1d, 5d, 1mo, 3mo, 6mo, 1y, 2y, 5y, 10y, ytd, max |
-| interval | <code>String</code> | 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h, 1d, 5d, 1wk, 1mo, 3mo |
-| extended | <code>Boolean</code> | Whether to include extended hours or not. |
-
 <a name="Stream"></a>
 
 ## Stream
@@ -264,7 +584,7 @@ Creates a new Stream class.
 ### stream.start()
 Start the streaming class.
 
-The event will emit three events: error (Error object), response (JSON from request module), and data (JSON object).
+The event will emit three events: error (Error object), response (JSON from request module), and quote (Quote object).
 Access via .on('data', function), etc.
 
 **Kind**: instance method of [<code>Stream</code>](#Stream)  

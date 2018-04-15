@@ -1,8 +1,8 @@
-const Quote = require('./Quote');
+const Quote = require('../globals/Quote');
 const request = require('request');
 
 /**
- * Documentation can be found here: https://www.alphavantage.co/documentation/
+ * Further documentation can be found here: https://www.alphavantage.co/documentation/
  */
 class AlphaVantage {
 
@@ -15,6 +15,9 @@ class AlphaVantage {
 		this.url = "https://www.alphavantage.co/query"
 	}
 
+	/**
+	 * @private
+	 */
 	_requester(qs) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
@@ -51,7 +54,19 @@ class AlphaVantage {
 			for (const key in res) {
 				if (res.hasOwnProperty(key)) {
 					const o = res[key];
-					array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["5. volume"]));
+					array.push(new Quote({
+						symbol: symbol,
+						date: new Date(key),
+						source: "Alpha Vantage",
+						price: {
+							open: Number(o["1. open"]),
+							high: Number(o["2. high"]),
+							low: Number(o["3. low"]),
+							close: Number(o["4. close"]),
+							volume: Number(o["5. volume"])
+						},
+						original: JSON.stringify(o)
+					}))
 				}
 			}
 			return array;
@@ -75,8 +90,41 @@ class AlphaVantage {
 			for (const key in res) {
 				if (res.hasOwnProperty(key)) {
 					const o = res[key];
-					if (adjusted) array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["6. volume"], o["5. adjusted close"], o["8. split coefficient"], o["7. dividend amount"]));
-					else array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["5. volume"]));
+					if (adjusted) array.push(new Quote(
+						{
+							symbol: symbol,
+							date: new Date(key),
+							source: "Alpha Vantage",
+							price: {
+								open: Number(o["1. open"]),
+								high: Number(o["2. high"]),
+								low: Number(o["3. low"]),
+								close: Number(o["4. close"]),
+								volume: Number(o["6. volume"]),
+								adjustedClose: Number(o["5. adjusted close"])
+							},
+							meta: {
+								dividendAmount: o["7. dividend amount"],
+								splitCoefficient: o["8. split coefficient"]
+							},
+							original: JSON.stringify(o)
+						}
+					));
+					else array.push(new Quote(
+						{
+							symbol: symbol,
+							date: new Date(key),
+							source: "Alpha Vantage",
+							price: {
+								open: Number(o["1. open"]),
+								high: Number(o["2. high"]),
+								low: Number(o["3. low"]),
+								close: Number(o["4. close"]),
+								volume: Number(o["5. volume"])
+							},
+							original: JSON.stringify(o)
+						}
+					))
 				}
 			}
 			return array;
@@ -98,8 +146,41 @@ class AlphaVantage {
 			for (const key in res) {
 				if (res.hasOwnProperty(key)) {
 					const o = res[key];
-					if (adjusted) array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["6. volume"], o["5. adjusted close"], o["8. split coefficient"], o["7. dividend amount"]));
-					else array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["5. volume"]));
+					if (adjusted) array.push(new Quote(
+						{
+							symbol: symbol,
+							date: new Date(key),
+							source: "Alpha Vantage",
+							price: {
+								open: Number(o["1. open"]),
+								high: Number(o["2. high"]),
+								low: Number(o["3. low"]),
+								close: Number(o["4. close"]),
+								volume: Number(o["6. volume"]),
+								adjustedClose: Number(o["5. adjusted close"])
+							},
+							meta: {
+								dividendAmount: o["7. dividend amount"],
+								splitCoefficient: o["8. split coefficient"]
+							},
+							original: o
+						}
+					));
+					else array.push(new Quote(
+						{
+							symbol: symbol,
+							date: new Date(key),
+							source: "Alpha Vantage",
+							price: {
+								open: Number(o["1. open"]),
+								high: Number(o["2. high"]),
+								low: Number(o["3. low"]),
+								close: Number(o["4. close"]),
+								volume: Number(o["5. volume"])
+							},
+							original: o
+						}
+					))
 				}
 			}
 			return array;
@@ -121,8 +202,41 @@ class AlphaVantage {
 			for (const key in res) {
 				if (res.hasOwnProperty(key)) {
 					const o = res[key];
-					if (adjusted) array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["6. volume"], o["5. adjusted close"], o["8. split coefficient"], o["7. dividend amount"]));
-					else array.push(new Quote(symbol, key, o["1. open"], o["2. high"], o["3. low"], o["4. close"], o["5. volume"]));
+					if (adjusted) array.push(new Quote(
+						{
+							symbol: symbol,
+							date: new Date(key),
+							source: "Alpha Vantage",
+							price: {
+								open: Number(o["1. open"]),
+								high: Number(o["2. high"]),
+								low: Number(o["3. low"]),
+								close: Number(o["4. close"]),
+								volume: Number(o["6. volume"]),
+								adjustedClose: Number(o["5. adjusted close"])
+							},
+							meta: {
+								dividendAmount: o["7. dividend amount"],
+								splitCoefficient: o["8. split coefficient"]
+							},
+							original: o
+						}
+					));
+					else array.push(new Quote(
+						{
+							symbol: symbol,
+							date: new Date(key),
+							source: "Alpha Vantage",
+							price: {
+								open: Number(o["1. open"]),
+								high: Number(o["2. high"]),
+								low: Number(o["3. low"]),
+								close: Number(o["4. close"]),
+								volume: Number(o["5. volume"])
+							},
+							original: o
+						}
+					))
 				}
 			}
 			return array;
@@ -131,6 +245,9 @@ class AlphaVantage {
 
 	// TECHNICALS
 
+	/**
+	 * @private
+	 */
 	_technical(type, symbol, interval, timePeriod, seriesType, qs) {
 		let query = {
 			function: type,

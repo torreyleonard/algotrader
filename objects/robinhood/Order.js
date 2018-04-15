@@ -1,71 +1,35 @@
 const Robinhood = require('./Robinhood');
-const User = require('./User');
-const Instrument = require('./Instrument');
-const Quote = require('./Quote');
 const request = require('request');
 
 class Order extends Robinhood {
 
 	/**
 	 * Creates a new Order object.
-	 * @param {Object|Null} object - Object for previously created order. If this is a new order, this should be null.
 	 * @param {User} user
-	 * @param {Instrument} instrument
-	 * @param {Quote} quote
-	 * @param {String} type - 'limit' / 'market'
-	 * @param {String} timeInForce - 'GFD' / 'GTC' / 'IOC' / 'OPG'
-	 * @param {String} trigger - 'immediate' / 'stop'
-	 * @param {Number|Null} stopPrice - If trigger is 'stop,' this must be specified. If not, this should be null.
-	 * @param {int} quantity
-	 * @param {String} side - 'buy' / 'sell'
-	 * @param {Boolean} extendedHours - Whether the order should be allowed to execute when exchanges are closed.
-	 * @param {Boolean} overrideDayTradeCheck - Whether to override Pattern Day Trader protection.
+	 * @param {Object} object
+	 * @property {Instrument} instrument
+	 * @property {Quote} quote
+	 * @property {String} type - 'limit' | 'market
+	 * @property {String} timeInForce - 'gfd' | 'gtc' | 'ioc' | 'opg'
+	 * @property {String} trigger - 'immediate' | 'stop'
+	 * @property {Number|Null} stopPrice - If trigger is 'stop,' this must be specified. If not, this should be null.
+	 * @property {Number} quantity
+	 * @property {String} side - 'buy' | 'sell'
+	 * @property {Boolean} extendedHours - Whether the order should be allowed to execute when exchanges are closed (9-9:30 AM, 4-6 PM)
+	 * @property {Boolean} overrideDayTradeCheck - Whether to override Pattern Day Trader protection.
 	 */
-	constructor(object, user, instrument, quote, type, timeInForce, trigger, stopPrice, quantity, side, extendedHours, overrideDayTradeCheck) {
+	constructor(user, object) {
 		super();
-		if (object === null) {
-			if (!user instanceof User) new Error("Parameter 'user' must be a User object.");
-			else if (!quote instanceof Quote) new Error("Parameter 'quote' must be a Quote object.");
-			else if (!instrument instanceof Instrument) new Error("Parameter 'user' must be an Instrument object.");
-			else if (!type instanceof String) new Error("Parameter 'type' must be a string.");
-			else if (!timeInForce instanceof String) new Error("Parameter 'timeInForce' must be a string.");
-			else if (!trigger instanceof String) new Error("Parameter 'trigger' must be a string.");
-			else if ((trigger === "stop" && !stopPrice instanceof Number) || (trigger === "immediate" && stopPrice !== null))
-				new Error("Parameter 'stopPrice' must be a string if trigger = stop, otherwise it should be null.");
-			else if (!type instanceof String) new Error("Parameter 'type' must be a string.");
-			else if (!Number.isInteger(quantity)) new Error("Parameter 'quantity' must be an integer.");
-			else if (!side instanceof String) new Error("Parameter 'side' must be a string.");
-			else if (!extendedHours instanceof Boolean) new Error("Parameter 'extendedHours' must be a boolean.");
-			else if (!overrideDayTradeCheck instanceof Boolean) new Error("Parameter 'overrideDayTradeCheck' must be a boolean.");
-			else if (["limit", "market"].indexOf(type) === -1) new Error("Parameter 'type' must be either 'limit' or 'market.'");
-			else if (["GFD", "GTC", "IOC", "OPG"].indexOf(timeInForce) === -1) new Error("Parameter 'timeInForce' must be 'GFD,' 'GTC,' 'IOC,' or 'OPG.'");
-			else if (["immediate", "stop"].indexOf(trigger) === -1) new Error("Parameter 'trigger' must be either 'immediate' or 'stop.'");
-			else if (["buy", "sell"].indexOf(side) === -1) new Error("Parameter 'side' must be either 'buy' or 'sell.'");
-			else {
-				this.User = user;
-				this.Instrument = instrument;
-				this.Quote = quote;
-				this.type = type;
-				this.timeInForce = timeInForce;
-				this.trigger = trigger;
-				this.stopPrice = stopPrice;
-				this.quantity = quantity;
-				this.side = side;
-				this.extendedHours = extendedHours;
-				this.overrideDayTradeCheck = overrideDayTradeCheck;
-				this.executed = false;
-				this.response = null;
-			}
-		} else {
-			this.executed = true;
+		this.user = user;
+		if (!object.created_at) {
 			this.response = this._parse(object);
-		}
+			this.executed = true;
+		} else this.order = object;
 	}
 
 	/**
+	 * Parse an executed order.
 	 * @private
-	 * @param object
-	 * @returns {{executions: Array, timeInForce: string, fees: number, id: string, quantity: number, averagePrice: number, cumulativeQuantity: number, stopPrice: number, rejectReason: string, state: string, trigger: string, type: string, overrideDayTradeCheck: boolean, price: number, clientID: string, extendedHours: boolean, side: string, dates: {created: Date, lastTransaction: Date, updated: Date}, urls: {cancel: string, instrument: string, account: string, order: string, position: string}}}
 	 */
 	_parse(object) {
 		return {
@@ -108,25 +72,26 @@ class Order extends Robinhood {
 	submit() {
 		const _this = this;
 		return new Promise((resolve, reject) => {
-			request.post({
+			if (_this.executed) reject(new Error("Order has already been executed."));
+			else request.post({
 				uri: _this.url + "/orders/",
 				headers: {
 					'Authorization': 'Token ' + _this.User.getAuthToken()
 				},
 				form: {
-					account: _this.url + "/accounts/" + _this.User.getAccountNumber() + "/",
-					instrument: _this.Instrument.urls.instrument,
-					symbol: _this.Instrument.getSymbol(),
-					type: _this.type,
-					time_in_force: _this.timeInForce,
-					trigger: _this.trigger,
-					price: _this.Quote.getLast(),
-					stop_price: _this.stopPrice,
-					quantity: _this.quantity,
-					side: _this.side,
-					extendedHours: _this.extendedHours,
-					override_day_trade_checks: _this.overrideDayTradeCheck,
-					override_dtbp_checks: _this.overrideDayTradeCheck
+					account: _this.url + "/accounts/" + _this.user.getAccountNumber() + "/",
+					instrument: _this.order.instrument.urls.instrument,
+					symbol: _this.order.instrument.getSymbol(),
+					type: _this.order.type,
+					time_in_force: _this.order.timeInForce,
+					trigger: _this.order.trigger,
+					price: _this.quote.getLast(),
+					stop_price: _this.order.stopPrice,
+					quantity: _this.order.quantity,
+					side: _this.order.side,
+					extendedHours: _this.order.extendedHours,
+					override_day_trade_checks: _this.order.overrideDayTradeCheck,
+					override_dtbp_checks: _this.order.overrideDayTradeCheck
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.User.getAuthToken(), res => {
@@ -153,7 +118,7 @@ class Order extends Robinhood {
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
-					resolve(new Order(res, user));
+					resolve(new Order(user, res));
 				}, reject);
 			})
 		})
@@ -175,7 +140,7 @@ class Order extends Robinhood {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					let array = [];
 					res.forEach(o => {
-						array.push(new Order(o, user));
+						array.push(new Order(user, o));
 					});
 					resolve(array);
 				}, reject);

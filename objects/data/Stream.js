@@ -1,4 +1,5 @@
 const EventEmitter = require('events');
+const Quote = require('../globals/Quote');
 const request = require('request');
 
 class Stream extends EventEmitter {
@@ -15,7 +16,7 @@ class Stream extends EventEmitter {
 	/**
 	 * Start the streaming class.
 	 *
-	 * The event will emit three events: error (Error object), response (JSON from request module), and data (JSON object).
+	 * The event will emit three events: error (Error object), response (JSON from request module), and quote (Quote object).
 	 * Access via .on('data', function), etc.
 	 */
 	start() {
@@ -40,15 +41,16 @@ class Stream extends EventEmitter {
 		}).on('error', error => {
 			_this.emit('error', error)
 		}).on('response', response => {
-			if (response.statusCode !== 200) _this.emit('error', new Error("Yahoo Finance streamer responded with status code: " + response.statusCode));
+			if (response.statusCode === 404) _this.emit('error', new Error("Yahoo Finance streamer responded with status code: 404.\nThis is typically a result of an invalid equity symbol in the query."));
+			else if (response.statusCode !== 200) _this.emit('error', new Error("Yahoo Finance streamer responded with status code: " + response.statusCode));
 			else _this.emit('response', response);
 		}).on('data', data => {
 			try {
 				let input = data.toString().split('yfs_u1f(');
 				input.shift();
 				input.forEach(i => {
-					const parsed = _this._parseStream(i);
-					_this.emit('data', parsed);
+					const quote = _this._createQuote(i);
+					_this.emit('quote', quote);
 				});
 			} catch (error) {
 				_this.emit('error', error);
@@ -63,25 +65,25 @@ class Stream extends EventEmitter {
 		this.request.abort();
 	}
 
-	_parseStream(input) {
+	_createQuote(input) {
 		const yahooKeys = {
 			a00: 'ask',
 			a50: 'askSize',
 			b00: 'bid',
 			b60: 'bidSize',
 			c10: 'change',
-			c63: 'changeRealtime',
-			c64: 'disputedChangeRealtimeAfterHours',
-			c85: 'changeRealtimeAfterHours',
-			c86: 'percentChangeRealtimeAfterHours',
+			c63: 'changeRealTime',
+			c64: 'disputedChangeRealTimeAfterHours',
+			c85: 'changeRealTimeAfterHours',
+			c86: 'percentChangeRealTimeAfterHours',
 			g53: 'dayLow',
 			h53: 'dayHigh',
 			j10: 'marketCap',
-			l84: 'priceRealtime',
-			l86: 'priceRealtimeAfterHours',
+			l84: 'priceRealTime',
+			l86: 'priceRealTimeAfterHours',
 			p20: 'percentChange',
-			p43: 'percentChangeRealtime',
-			p44: 'percentChangeRealtimeAfterHours',
+			p43: 'percentChangeRealTime',
+			p44: 'percentChangeRealTimeAfterHours',
 			t53: 'disputedTimestampForCommodities',
 			t54: 'disputedTimestampForStocks',
 			v53: 'volume',
@@ -93,8 +95,39 @@ class Stream extends EventEmitter {
 		for (const key in yahooKeys) {
 			input = input.replace(key, '"' + yahooKeys[key] + '"');
 		}
-		input = input.split(');')[0];
-		return JSON.parse(input);
+		const json = JSON.parse(input.split(');')[0]);
+
+		const symbol = Object.keys(json)[0];
+		const object = json[symbol];
+
+		return new Quote({
+			symbol: symbol,
+			date: new Date(),
+			source: "Yahoo Finance",
+			price: {
+				last: Number(object.priceRealTimeAfterHours) || Number(object.priceRealTime) || Number(object.lastSalePrice),
+				volume: Number(object.volume.replace(/,/g, '')) || Number(object.volume2.replace(/,/g, '')),
+				high: Number(object.dayHigh),
+				low: Number(object.dayLow)
+			},
+			dom: {
+				bid: {
+					price: Number(object.bid),
+					size: Number(object.bidSize)
+				},
+				ask: {
+					price: Number(object.ask),
+					size: Number(object.askSize)
+				}
+			},
+			meta: {
+				change: object.change || object.changeRealTime,
+				percentChange: object.percentChange || object.percentChangeRealTime,
+				marketCap: object.marketCap
+			},
+			original: JSON.stringify(json)
+		})
+
 	}
 
 	_getYahooKeys() {
@@ -104,17 +137,17 @@ class Stream extends EventEmitter {
 			Bid: 'b00',
 			BidSize: 'b60',
 			Change: 'c10',
-			ChangeRealtime: 'c63',
-			DisputedChangeRealtimeAfterHours: 'c64',
-			ChangeRealtimeAfterHours: 'c85',
-			PercentChangeRealtimeAfterHours: 'p44',
+			ChangeRealTime: 'c63',
+			DisputedChangeRealTimeAfterHours: 'c64',
+			ChangeRealTimeAfterHours: 'c85',
+			PercentChangeRealTimeAfterHours: 'p44',
 			DayLow: 'g53',
 			DayHigh: 'h53',
 			MarketCap: 'j10',
-			PriceRealtime: 'l84',
-			PriceRealtimeAfterHours: 'l86',
+			PriceRealTime: 'l84',
+			PriceRealTimeAfterHours: 'l86',
 			PercentChange: 'p20',
-			PercentChangeRealtime: 'p43',
+			PercentChangeRealTime: 'p43',
 			DisputedTimestampForCommodities: 't53',
 			DisputedTimestampForStocks: 't54',
 			Volume: 'v53',
@@ -131,8 +164,8 @@ class Stream extends EventEmitter {
 		// 	keys.Change,
 		// 	keys.Volume,
 		// 	keys.Volume2,
-		// 	keys.PriceRealtime,
-		// 	keys.PriceRealtimeAfterHours,
+		// 	keys.PriceRealTime,
+		// 	keys.PriceRealTimeAfterHours,
 		// 	keys.LastSalePrice,
 		// 	keys.EcnQuoteLastValue,
 		// 	keys.LastSaleTime,
