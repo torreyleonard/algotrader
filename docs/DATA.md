@@ -6,6 +6,9 @@
 </dd>
 <dt><a href="#OptionsChain">OptionsChain</a></dt>
 <dd></dd>
+<dt><a href="#Query">Query</a></dt>
+<dd><p>Find and filter securities based on certain criteria.</p>
+</dd>
 <dt><a href="#Stream">Stream</a></dt>
 <dd></dd>
 </dl>
@@ -23,7 +26,7 @@ Further documentation can be found here: https://www.alphavantage.co/documentati
     * [.timeSeriesDaily(symbol, compact, adjusted)](#AlphaVantage+timeSeriesDaily) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.timeSeriesWeekly(symbol, adjusted)](#AlphaVantage+timeSeriesWeekly) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.timeSeriesMonthly(symbol, adjusted)](#AlphaVantage+timeSeriesMonthly) ⇒ <code>Promise.&lt;Array&gt;</code>
-    * [.sma(symbol, interval, timePeriod, seriesType)](#AlphaVantage+sma) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.sma(symbol, interval, timePeriod, seriesType, seriesType, seriesType)](#AlphaVantage+sma) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.ema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+ema) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.wma(symbol, interval, timePeriod, seriesType)](#AlphaVantage+wma) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.dema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+dema) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -101,7 +104,7 @@ Returns an array of quotes for the equity specified, covering up to 20 years of 
 
 <a name="AlphaVantage+sma"></a>
 
-### alphaVantage.sma(symbol, interval, timePeriod, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
+### alphaVantage.sma(symbol, interval, timePeriod, seriesType, seriesType, seriesType) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of simple moving averages for the equity specified.
 https://www.investopedia.com/articles/technical/052201.asp
 
@@ -111,7 +114,9 @@ https://www.investopedia.com/articles/technical/052201.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
+| seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+ema"></a>
@@ -126,7 +131,7 @@ https://www.investopedia.com/terms/e/ema.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+wma"></a>
@@ -141,7 +146,7 @@ https://www.investopedia.com/articles/technical/060401.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+dema"></a>
@@ -156,7 +161,7 @@ http://www.investopedia.com/articles/trading/10/double-exponential-moving-averag
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+dema"></a>
@@ -171,7 +176,7 @@ http://www.investopedia.com/articles/trading/10/double-exponential-moving-averag
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+tema"></a>
@@ -186,7 +191,7 @@ https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+trima"></a>
@@ -201,7 +206,7 @@ http://www.fmlabs.com/reference/default.htm?url=TriangularMA.htm
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+kama"></a>
@@ -216,7 +221,7 @@ http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kauf
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+mama"></a>
@@ -231,7 +236,7 @@ http://www.binarytribune.com/forex-trading-indicators/ehlers-mesa-adaptive-movin
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | fastLimit | <code>Number</code> |  |
 | slowLimit | <code>Number</code> |  |
@@ -248,7 +253,7 @@ http://www.fmlabs.com/reference/default.htm?url=T3.htm
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+macd"></a>
@@ -263,7 +268,7 @@ http://www.investopedia.com/articles/forex/05/macddiverge.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | fastPeriod | <code>Number</code> \| <code>Null</code> |  |
 | slowPeriod | <code>Number</code> \| <code>Null</code> |  |
@@ -281,7 +286,7 @@ http://www.investopedia.com/articles/forex/05/macddiverge.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | fastPeriod | <code>Number</code> \| <code>Null</code> |  |
 | slowPeriod | <code>Number</code> \| <code>Null</code> |  |
@@ -302,7 +307,7 @@ http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
 | slowKPeriod | <code>Number</code> \| <code>Null</code> |  |
@@ -322,7 +327,7 @@ http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
@@ -340,7 +345,7 @@ http://www.investopedia.com/articles/technical/071601.asp
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 
 <a name="AlphaVantage+stochRSI"></a>
@@ -355,7 +360,7 @@ http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
-| timePeriod | <code>String</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
 | seriesType | <code>String</code> | What to base the SMA on: open, high, low, close |
 | fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
@@ -558,6 +563,111 @@ Returns a new OptionsChain object with data from Yahoo Finance.
 | Param | Type |
 | --- | --- |
 | symbol | <code>String</code> | 
+
+<a name="Query"></a>
+
+## Query
+Find and filter securities based on certain criteria.
+
+**Kind**: global class  
+
+* [Query](#Query)
+    * [.search(string)](#Query.search) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getTopGainers(count)](#Query.getTopGainers) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getTopLosers(count)](#Query.getTopLosers) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getHighestVolume(count)](#Query.getHighestVolume) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getHighestOpenInterest(count)](#Query.getHighestOpenInterest) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getTopETFs(count)](#Query.getTopETFs) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getSimilar(symbol)](#Query.getSimilar) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getTrendingSymbols(count)](#Query.getTrendingSymbols) ⇒ <code>Promise.&lt;Array&gt;</code>
+
+<a name="Query.search"></a>
+
+### Query.search(string) ⇒ <code>Promise.&lt;Array&gt;</code>
+Searches for a given symbol based on the given string.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| string | <code>String</code> | Search query. |
+
+<a name="Query.getTopGainers"></a>
+
+### Query.getTopGainers(count) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the best performing 'x' amount of stocks.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| count | <code>Number</code> | 
+
+<a name="Query.getTopLosers"></a>
+
+### Query.getTopLosers(count) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the worst performing 'x' amount of stocks.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| count | <code>Number</code> | 
+
+<a name="Query.getHighestVolume"></a>
+
+### Query.getHighestVolume(count) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for 'x' amount of stocks with the highest volume today.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| count | <code>Number</code> | 
+
+<a name="Query.getHighestOpenInterest"></a>
+
+### Query.getHighestOpenInterest(count) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for options with the highest open interest.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| count | <code>Number</code> | 
+
+<a name="Query.getTopETFs"></a>
+
+### Query.getTopETFs(count) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of quotes for the most actively traded ETFs.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| count | <code>Number</code> | 
+
+<a name="Query.getSimilar"></a>
+
+### Query.getSimilar(symbol) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of equities similar to the one given.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="Query.getTrendingSymbols"></a>
+
+### Query.getTrendingSymbols(count) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of 'x' amount of trending symbols on Yahoo Finance.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| count | <code>Number</code> | 
 
 <a name="Stream"></a>
 

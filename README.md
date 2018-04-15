@@ -50,9 +50,10 @@
 	- [Robinhood](#robinhood)
 - Data Library
 	- [OptionsChain](#optionsChain) (todo)
-	- [Query](#query) (todo)
+	- [Query](#query)
 	- [Stream](#stream)
-	- [Alpha Vantage](#alpha-vantage) (todo)
+	- [News](#news) (todo)
+	- [Alpha Vantage](#alpha-vantage)
 - Algorithm (todo)
 
 ---
@@ -209,6 +210,7 @@ Providing free access to real time and historical market data along with advance
 To use Algotrader's built-in Alpha Vantage library, you'll first need to grab a free API key [here.](https://www.alphavantage.co/support/#api-key) After the key is displayed on the page, you can copy it to your program and instantiate a new AlphaVantage object like so:
 
 ```js
+const AlphaVantage = algotrader.Data.AlphaVantage;
 const av = new AlphaVantage("myApiKey");
 ```
 After, you can access any of the information provided in their [documentation](https://www.alphavantage.co/documentation/) easily.
@@ -231,3 +233,40 @@ av.rsi("AAPL", "daily", 14, "close").then(array => {
 });
 ```
 For documentation on all AlphaVantage functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#AlphaVantage)
+
+#### Query
+
+Using the Yahoo Finance API, you can easily find stocks based on certain criteria.
+
+Here are a few examples:
+```js
+const Query = algotrader.Data.Query;
+
+Query.search("Nordstrom").then(array => {
+	// Returns an array of matching stocks, options, ETF's, and others.
+	// [
+	// 	{ symbol: 'JWN',
+	// 		name: 'Nordstrom, Inc.',
+	// 		exch: 'NYQ',
+	// 		type: 'S',
+	// 		exchDisp: 'NYSE',
+	// 		typeDisp: 'Equity' },
+	// 	{ symbol: 'JWN180420C00045000',
+	// 		name: 'JWN Apr 2018 call 45.000',
+	// 		exch: 'OPR',
+	// 		type: 'O',
+	// 		exchDisp: 'OPR',
+	// 		typeDisp: 'Option' },
+	//  ... and more
+});
+
+Query.getTopGainers(5).then(array => {
+	// Returns an array of objects each containing information on the five best performing stocks.
+    // You can also use .getTopLosers(count)
+});
+
+Query.getHighestVolume(5).then(array => {
+	// Returns an array of objects each containing information on five of today's stocks with the highest volume.
+});
+```
+For documentation on all functions of the Query class, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#query)
