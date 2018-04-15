@@ -2,6 +2,9 @@ const Robinhood = require('./Robinhood');
 const User = require('./User');
 const request = require('request');
 
+/**
+ * BETA: Represents and executes an order for the given option contract.
+ */
 class OptionOrder extends Robinhood {
 
 	/**

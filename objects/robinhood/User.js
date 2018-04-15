@@ -4,6 +4,9 @@ const Portfolio = require('./Portfolio');
 const request = require('request');
 const async = require('async');
 
+/**
+ * Represents the user that is logged in while accessing the Robinhood API.
+ */
 class User extends Robinhood {
 
 	/**

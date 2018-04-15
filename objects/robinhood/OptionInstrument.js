@@ -3,6 +3,9 @@ const request = require('request');
 
 let allInstrumentsArray = [];
 
+/**
+ * BETA: Represents an option traded on Robinhood.
+ */
 class OptionInstrument extends Robinhood {
 
 	constructor(object) {

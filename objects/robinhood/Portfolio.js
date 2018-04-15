@@ -1,5 +1,8 @@
 const Robinhood = require('./Robinhood');
 
+/**
+ * Represents all of the user's holdings on Robinhood and allows for various queries.
+ */
 class Portfolio extends Robinhood {
 
 	/**

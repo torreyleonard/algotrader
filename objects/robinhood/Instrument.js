@@ -4,6 +4,9 @@ const Market = require('./Market');
 const Quote = require('../globals/Quote');
 const request = require('request');
 
+/**
+ * Represents a security traded on Robinhood.
+ */
 class Instrument extends Robinhood {
 
 	/**

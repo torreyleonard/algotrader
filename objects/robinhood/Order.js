@@ -1,6 +1,9 @@
 const Robinhood = require('./Robinhood');
 const request = require('request');
 
+/**
+ * Represents and executes an order for the given instrument.
+ */
 class Order extends Robinhood {
 
 	/**

@@ -1,6 +1,9 @@
 const Robinhood = require('./Robinhood');
 const request = require('request');
 
+/**
+ * Market data for the given equity, such as market cap, dividend yield, P/E ratio, description, and more.
+ */
 class Fundamentals extends Robinhood {
 
 	/**

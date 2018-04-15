@@ -2,6 +2,9 @@ const Robinhood = require('./Robinhood');
 const request = require('request');
 const moment = require('moment');
 
+/**
+ * Represents an exchange on which securities are traded.
+ */
 class Market extends Robinhood {
 
 	/**

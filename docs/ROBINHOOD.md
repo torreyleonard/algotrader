@@ -2,24 +2,36 @@
 
 <dl>
 <dt><a href="#Fundamentals">Fundamentals</a></dt>
-<dd></dd>
+<dd><p>Market data for the given equity, such as market cap, dividend yield, P/E ratio, description, and more.</p>
+</dd>
 <dt><a href="#Instrument">Instrument</a></dt>
-<dd></dd>
+<dd><p>Represents a security traded on Robinhood.</p>
+</dd>
 <dt><a href="#Market">Market</a></dt>
-<dd></dd>
+<dd><p>Represents an exchange on which securities are traded.</p>
+</dd>
+<dt><a href="#OptionInstrument">OptionInstrument</a></dt>
+<dd><p>BETA: Represents an option traded on Robinhood.</p>
+</dd>
 <dt><a href="#OptionOrder">OptionOrder</a></dt>
-<dd></dd>
+<dd><p>BETA: Represents and executes an order for the given option contract.</p>
+</dd>
 <dt><a href="#Order">Order</a></dt>
-<dd></dd>
+<dd><p>Represents and executes an order for the given instrument.</p>
+</dd>
 <dt><a href="#Portfolio">Portfolio</a></dt>
-<dd></dd>
+<dd><p>Represents all of the user&#39;s holdings on Robinhood and allows for various queries.</p>
+</dd>
 <dt><a href="#User">User</a></dt>
-<dd></dd>
+<dd><p>Represents the user that is logged in while accessing the Robinhood API.</p>
+</dd>
 </dl>
 
 <a name="Fundamentals"></a>
 
 ## Fundamentals
+Market data for the given equity, such as market cap, dividend yield, P/E ratio, description, and more.
+
 **Kind**: global class  
 
 * [Fundamentals](#Fundamentals)
@@ -131,6 +143,8 @@ Returns a fundamentals object for the given URL.
 <a name="Instrument"></a>
 
 ## Instrument
+Represents a security traded on Robinhood.
+
 **Kind**: global class  
 
 * [Instrument](#Instrument)
@@ -307,6 +321,8 @@ Returns an instrument object for the specified instrument URL.
 <a name="Market"></a>
 
 ## Market
+Represents an exchange on which securities are traded.
+
 **Kind**: global class  
 
 * [Market](#Market)
@@ -434,9 +450,95 @@ Returns a Market object for the given market URL.
 | --- | --- |
 | url | <code>String</code> | 
 
+<a name="OptionInstrument"></a>
+
+## OptionInstrument
+BETA: Represents an option traded on Robinhood.
+
+**Kind**: global class  
+
+* [OptionInstrument](#OptionInstrument)
+    * _instance_
+        * [.getTradability()](#OptionInstrument+getTradability) ⇒ <code>String</code>
+        * [.getStrikePrice()](#OptionInstrument+getStrikePrice) ⇒ <code>Number</code>
+        * [.getState()](#OptionInstrument+getState) ⇒ <code>String</code>
+        * [.getType()](#OptionInstrument+getType) ⇒ <code>String</code>
+        * [.getSymbol()](#OptionInstrument+getSymbol) ⇒ <code>String</code>
+        * [.getMiniumumTicks()](#OptionInstrument+getMiniumumTicks) ⇒ <code>Object</code>
+        * [.getChainID()](#OptionInstrument+getChainID) ⇒ <code>String</code>
+        * [.getOptionID()](#OptionInstrument+getOptionID) ⇒ <code>String</code>
+        * [.getExpiration()](#OptionInstrument+getExpiration) ⇒ <code>Date</code>
+    * _static_
+        * [.getBySymbol(user, symbol, cache)](#OptionInstrument.getBySymbol) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getByURL(user, url)](#OptionInstrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+
+<a name="OptionInstrument+getTradability"></a>
+
+### optionInstrument.getTradability() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getStrikePrice"></a>
+
+### optionInstrument.getStrikePrice() ⇒ <code>Number</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getState"></a>
+
+### optionInstrument.getState() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getType"></a>
+
+### optionInstrument.getType() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getSymbol"></a>
+
+### optionInstrument.getSymbol() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getMiniumumTicks"></a>
+
+### optionInstrument.getMiniumumTicks() ⇒ <code>Object</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getChainID"></a>
+
+### optionInstrument.getChainID() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getOptionID"></a>
+
+### optionInstrument.getOptionID() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getExpiration"></a>
+
+### optionInstrument.getExpiration() ⇒ <code>Date</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument.getBySymbol"></a>
+
+### OptionInstrument.getBySymbol(user, symbol, cache) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of options instruments for the specified symbol.
+WARNING: As there is no apparent way to query Robinhood options by symbol, all instruments will be downloaded and filtered. This will take a while on first run. After, set 'cache' to true.
+
+**Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| symbol | <code>String</code> | 
+| cache | <code>Boolean</code> | 
+
+<a name="OptionInstrument.getByURL"></a>
+
+### OptionInstrument.getByURL(user, url) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+Returns an options instrument object for the specified instrument URL.
+
+**Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| url | <code>String</code> | 
+
 <a name="OptionOrder"></a>
 
 ## OptionOrder
+BETA: Represents and executes an order for the given option contract.
+
 **Kind**: global class  
 
 * [OptionOrder](#OptionOrder)
@@ -470,7 +572,7 @@ Creates a new OptionOrder class.
 | --- | --- | --- |
 | object | <code>Object</code> \| <code>Null</code> | Object for previously created order. If this is a new order, this should be null. |
 | user | [<code>User</code>](#User) |  |
-| optionInstrument | <code>OptionInstrument</code> |  |
+| optionInstrument | [<code>OptionInstrument</code>](#OptionInstrument) |  |
 | direction | <code>String</code> | debit, credit |
 | timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG' |
 | side | <code>String</code> | 'buy' / 'sell' |
@@ -552,22 +654,9 @@ Creates a new OptionOrder class.
 <a name="Order"></a>
 
 ## Order
+Represents and executes an order for the given instrument.
+
 **Kind**: global class  
-**Properties**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| instrument | [<code>Instrument</code>](#Instrument) |  |
-| quote | <code>Quote</code> |  |
-| type | <code>String</code> | 'limit' | 'market |
-| timeInForce | <code>String</code> | 'gfd' | 'gtc' | 'ioc' | 'opg' |
-| trigger | <code>String</code> | 'immediate' | 'stop' |
-| stopPrice | <code>Number</code> \| <code>Null</code> | If trigger is 'stop,' this must be specified. If not, this should be null. |
-| quantity | <code>Number</code> |  |
-| side | <code>String</code> | 'buy' | 'sell' |
-| extendedHours | <code>Boolean</code> | Whether the order should be allowed to execute when exchanges are closed (9-9:30 AM, 4-6 PM) |
-| overrideDayTradeCheck | <code>Boolean</code> | Whether to override Pattern Day Trader protection. |
-
 
 * [Order](#Order)
     * [new Order(user, object)](#new_Order_new)
@@ -627,6 +716,8 @@ Returns an array of recent orders for the given user object.
 <a name="Portfolio"></a>
 
 ## Portfolio
+Represents all of the user's holdings on Robinhood and allows for various queries.
+
 **Kind**: global class  
 
 * [Portfolio](#Portfolio)
@@ -851,6 +942,8 @@ Returns an array of all positions with an average buy price equal to the given a
 <a name="User"></a>
 
 ## User
+Represents the user that is logged in while accessing the Robinhood API.
+
 **Kind**: global class  
 
 * [User](#User)

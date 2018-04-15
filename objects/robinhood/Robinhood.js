@@ -1,6 +1,10 @@
 const async = require('async');
 const request = require('request');
 
+/**
+ * Robinhood superclass.
+ * @private
+ */
 class Robinhood {
 
 	constructor() {
