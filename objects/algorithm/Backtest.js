@@ -1,7 +1,15 @@
 class Backtest {
 
-	constructor() {
+	constructor(f) {
 
+	}
+
+	run() {
+		return new Promise((resolve, reject) => {
+
+
+
+		})
 	}
 
 }

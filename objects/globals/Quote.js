@@ -1,5 +1,3 @@
-const request = require('request');
-
 class Quote {
 
 	/**
@@ -32,6 +30,22 @@ class Quote {
 		this.dom = object.dom;
 		this.meta = object.meta;
 		this.original = object.original;
+	}
+
+	/**
+	 * Returns the volume weighted average price (VWAP) for the given quote array.
+	 * https://www.investopedia.com/terms/v/vwap.asp
+	 * @param {Array} quoteArray
+	 * @returns {Number}
+	 */
+	static getVWAP(quoteArray) {
+		let wPrice = 0;
+		let volume = 0;
+		quoteArray.forEach(quote => {
+			wPrice += ((quote.getHigh() + quote.getLow() + quote.getClose()) / 3) * quote.getVolume();
+			volume += quote.getVolume();
+		});
+		return wPrice / volume;
 	}
 
 	// GET
@@ -90,6 +104,10 @@ class Quote {
 	 */
 	getClose() {
 		return this.price.close;
+	}
+
+	getOHLC4() {
+		return (this.price.open + this.price.high + this.price.low + this.price.close) / 4;
 	}
 
 	/**

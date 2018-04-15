@@ -1,8 +1,11 @@
 const News = require('./News');
-const EventEmitter = require('events');
 const Quote = require('../globals/Quote');
+const EventEmitter = require('events');
 const request = require('request');
 
+/**
+ * An extension of the Node.js EventEmitter that sends Quote and News objects as they arrive.
+ */
 class Stream extends EventEmitter {
 
 	/**

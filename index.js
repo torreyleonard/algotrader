@@ -10,10 +10,14 @@ module.exports = {
 		OptionInstrument: require('./objects/robinhood/OptionInstrument')
 	},
 	Data: {
-		OptionsChain: require('./objects/data/OptionsChain'),
 		Stream: require('./objects/data/Stream'),
 		Query: require('./objects/data/Query'),
 		AlphaVantage: require('./objects/data/AlphaVantage'),
-		News: require('./objects/data/News')
+		News: require('./objects/data/News'),
+		Yahoo: require('./objects/data/Yahoo')
+	},
+	Globals: {
+		Quote: require('./objects/globals/Quote'),
+		OptionChain: require('./objects/globals/OptionsChain')
 	}
 };
