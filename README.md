@@ -365,7 +365,7 @@ News.getHeadlines("myApiKey", {
 }).then(array => {
 	// Returns an array of News objects related to U.S. business.
 	// [
-	// 	    News {
+	//      News {
 	//              title: 'Two black men were arrested waiting at a Starbucks. Now the company, police are on the defensive.',
 	//              description: 'The backlash is a dramatic turn from efforts to craft the company as a progressive 	corporate leader that values “diversity and inclusion.”',
 	//              date: 2018-04-15T15:22:22.000Z,
