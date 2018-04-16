@@ -23,6 +23,7 @@
 - **Data library**
 	- Real time quote data streaming for cryptocurrency, forex, equities
 		- Get data on bids, asks, last price, and more from the Yahoo Finance API
+		- Stream news headlines along with quotes
 	- Up-to-date options data
 	- Easily find stocks for various queries
 		- Retrieve the day's top gainers
@@ -30,9 +31,8 @@
 		- Get stocks by highest (abnormal) volume
 		- Get options contracts by highest open interest
 		- And more
-	- Get up to the minute news on specified stocks
-		- In progress: stream news in real time
-	- Get technical indicators from AlphaVantage (in progress)
+	- Get up to the minute breaking headlines
+	- Get technical indicators from AlphaVantage
 		- SMA, EMA, RSI, etc.
 	- Get fundamentals and balance sheet data (in progress)
 		- Assets, debt, liabilities, revenue, earnings, etc.
@@ -93,7 +93,7 @@ myUser.authenticate()
 	})
 	.catch(error => {
 		// Either the request failed, or Robinhood responded with an error.
-        	// (Ex: you don't have internet access or your user credentials were incorrect)
+		// (Ex: you don't have internet access or your user credentials were incorrect)
 	})
 ```
 Personally, I either store user data as an array in a .json file, then require it into the class, (insecure) or ask for the user's credentials in the console. You should handle this sensitive data in a way that you're comfortable with.
@@ -171,7 +171,6 @@ Instrument.getBySymbol("TWTR").then(async twtrInstrument => {
 		// Either the request failed, or Robinhood responded with an error.
 		// (Ex: you don't have internet access or your balance was insufficient)
 	});
-});
 });
 ```
 For documentation on all order functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order)
