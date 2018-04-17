@@ -1,8 +1,11 @@
 const Robinhood = require('./Robinhood');
 const Instrument = require('./Instrument');
 const Portfolio = require('./Portfolio');
+
 const request = require('request');
+const fs = require('fs');
 const async = require('async');
+const path = require('path');
 
 /**
  * Represents the user that is logged in while accessing the Robinhood API.
@@ -271,6 +274,75 @@ class User extends Robinhood {
 					return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
 				})
 			}
+		})
+	}
+
+	// DOCUMENTS
+
+	/**
+	 * Returns an array of account documents (taxes, statements, etc). Use 'downloadDocuments()' to view them.
+	 * @returns {Promise<Array>}
+	 */
+	getDocuments() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + /documents/,
+				headers: {
+					'Authorization': 'Token ' + _this.token
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
+			})
+		});
+	};
+
+	/**
+	 * Downloads all account documents to the given folder path.
+	 * Note that, because of Robinhood's connection throttling, this will take a while for accounts with high activity.
+	 * Downloads will be attempted every second and will wait for any connection throttling to end before continuing.
+	 * @param {String} folder
+	 * @returns {Promise}
+	 */
+	downloadDocuments(folder) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (!fs.existsSync(folder)) fs.mkdirSync(folder);
+			_this.getDocuments().then(array => {
+				async.eachSeries(array, (document, eachCallback) => {
+					const dir = path.join(folder, document.type);
+					const file = path.join(dir, document.id + ".pdf");
+					if (!fs.existsSync(dir)) fs.mkdirSync(dir);
+					let downloaded = false;
+					async.whilst(() => { return !downloaded; }, whilstCallback => {
+						let seconds = 0;
+						const req = request({
+							uri: document.download_url,
+							headers: {
+								'Authorization': 'Token ' + _this.token
+							}
+						}, (error, response, body) => {
+							if (error) reject(error);
+							else if (response.statusCode !== 200) {
+								seconds = Number(body.split("available in ")[1].split(" seconds")[0]);
+							} else downloaded = true;
+						});
+						req.on('end', () => {
+							setTimeout(() => {
+								if (seconds === 0) whilstCallback();
+								else setTimeout(() => {
+									whilstCallback();
+								}, seconds * 1000);
+							}, 1000);
+						});
+						req.pipe(fs.createWriteStream(file))
+					}, () => {
+						eachCallback();
+					})
+				}, () => {
+					resolve();
+				})
+			})
 		})
 	}
 

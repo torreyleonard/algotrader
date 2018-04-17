@@ -155,6 +155,7 @@ Represents a security traded on Robinhood.
         * [.getFundamentals()](#Instrument+getFundamentals) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
         * [.getQuote()](#Instrument+getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
         * [.getSplits()](#Instrument+getSplits) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getEarnings()](#Instrument+getEarnings) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getName()](#Instrument+getName) ⇒ <code>String</code>
         * [.getSimpleName()](#Instrument+getSimpleName) ⇒ <code>String</code>
         * [.getSymbol()](#Instrument+getSymbol) ⇒ <code>String</code>
@@ -175,6 +176,7 @@ Represents a security traded on Robinhood.
         * [.getAll()](#Instrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getBySymbol(symbol)](#Instrument.getBySymbol) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getByURL(instrumentURL)](#Instrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+        * [.getTopMoving(direction)](#Instrument.getTopMoving) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
 
 <a name="new_Instrument_new"></a>
 
@@ -214,6 +216,12 @@ Returns an object with a real-time quote on this instrument.
 
 ### instrument.getSplits() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object containing details on past stock splits.
+
+**Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+<a name="Instrument+getEarnings"></a>
+
+### instrument.getEarnings() ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing this company's past and future earnings data.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getName"></a>
@@ -318,6 +326,17 @@ Returns an instrument object for the specified instrument URL.
 | --- | --- |
 | instrumentURL | <code>String</code> | 
 
+<a name="Instrument.getTopMoving"></a>
+
+### Instrument.getTopMoving(direction) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+Returns an array of Instruments for 10 of the top moving S&P 500 equities.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| direction | <code>String</code> | Possible options: [up, down] |
+
 <a name="Market"></a>
 
 ## Market
@@ -331,6 +350,9 @@ Represents an exchange on which securities are traded.
         * [.getNextTradingHours()](#Market+getNextTradingHours) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getPreviousTradingHours()](#Market+getPreviousTradingHours) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getHoursOn(date)](#Market+getHoursOn) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.isOpenOn(date)](#Market+isOpenOn) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [.getNextOpen()](#Market+getNextOpen) ⇒ <code>Promise.&lt;Date&gt;</code>
+        * [.getNextClose()](#Market+getNextClose) ⇒ <code>Promise.&lt;Date&gt;</code>
         * [.getWebsite()](#Market+getWebsite) ⇒ <code>String</code>
         * [.getCity()](#Market+getCity) ⇒ <code>String</code>
         * [.getName()](#Market+getName) ⇒ <code>String</code>
@@ -342,7 +364,9 @@ Represents an exchange on which securities are traded.
         * [.getOpen()](#Market+getOpen) ⇒ <code>Date</code>
         * [.getExtendedClose()](#Market+getExtendedClose) ⇒ <code>Date</code>
         * [.getExtendedOpen()](#Market+getExtendedOpen) ⇒ <code>Date</code>
-        * [.isOpen()](#Market+isOpen) ⇒ <code>Boolean</code>
+        * [.isOpenToday()](#Market+isOpenToday) ⇒ <code>Boolean</code>
+        * [.isOpenNow()](#Market+isOpenNow) ⇒ <code>Boolean</code>
+        * [.isExtendedOpenNow()](#Market+isExtendedOpenNow) ⇒ <code>Boolean</code>
     * _static_
         * [.getByMIC(code)](#Market.getByMIC)
         * [.getByURL(url)](#Market.getByURL)
@@ -376,10 +400,33 @@ Returns an object with hours for the given date.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
 
-| Param |
-| --- |
-| date | 
+| Param | Type |
+| --- | --- |
+| date | <code>Date</code> | 
 
+<a name="Market+isOpenOn"></a>
+
+### market.isOpenOn(date) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+Checks whether the market is open on the given date.
+
+**Kind**: instance method of [<code>Market</code>](#Market)  
+
+| Param | Type |
+| --- | --- |
+| date | <code>Date</code> | 
+
+<a name="Market+getNextOpen"></a>
+
+### market.getNextOpen() ⇒ <code>Promise.&lt;Date&gt;</code>
+Returns the next date and time that the market will be open.
+
+**Kind**: instance method of [<code>Market</code>](#Market)  
+<a name="Market+getNextClose"></a>
+
+### market.getNextClose() ⇒ <code>Promise.&lt;Date&gt;</code>
+Returns the next date and time that the market will close.
+
+**Kind**: instance method of [<code>Market</code>](#Market)  
 <a name="Market+getWebsite"></a>
 
 ### market.getWebsite() ⇒ <code>String</code>
@@ -424,9 +471,17 @@ Returns an object with hours for the given date.
 
 ### market.getExtendedOpen() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
-<a name="Market+isOpen"></a>
+<a name="Market+isOpenToday"></a>
 
-### market.isOpen() ⇒ <code>Boolean</code>
+### market.isOpenToday() ⇒ <code>Boolean</code>
+**Kind**: instance method of [<code>Market</code>](#Market)  
+<a name="Market+isOpenNow"></a>
+
+### market.isOpenNow() ⇒ <code>Boolean</code>
+**Kind**: instance method of [<code>Market</code>](#Market)  
+<a name="Market+isExtendedOpenNow"></a>
+
+### market.isExtendedOpenNow() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
 <a name="Market.getByMIC"></a>
 
@@ -959,6 +1014,8 @@ Represents the user that is logged in while accessing the Robinhood API.
     * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getDocuments()](#User+getDocuments) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.downloadDocuments(folder)](#User+downloadDocuments) ⇒ <code>Promise</code>
 
 <a name="new_User_new"></a>
 
@@ -1043,4 +1100,23 @@ Deposits money into the user's account. If frequency is not empty, this becomes 
 | bankID | <code>String</code> | This ID can be found from getLinkedBanks(). |
 | amount | <code>String</code> | How much money should be deposited, represented as a string. |
 | frequency | <code>String</code> | Empty string if one-time deposit, otherwise: 'weekly,' 'biweekly,' 'monthly,' or 'quarterly.' |
+
+<a name="User+getDocuments"></a>
+
+### user.getDocuments() ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of account documents (taxes, statements, etc). Use 'downloadDocuments()' to view them.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+downloadDocuments"></a>
+
+### user.downloadDocuments(folder) ⇒ <code>Promise</code>
+Downloads all account documents to the given folder path.
+Note that, because of Robinhood's connection throttling, this will take a while for accounts with high activity.
+Downloads will be attempted every second and will wait for any connection throttling to end before continuing.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+
+| Param | Type |
+| --- | --- |
+| folder | <code>String</code> | 
 

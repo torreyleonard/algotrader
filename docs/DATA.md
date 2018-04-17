@@ -511,6 +511,8 @@ Find and filter securities based on certain criteria.
     * [.getTopETFs(count)](#Query.getTopETFs) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.getSimilar(symbol)](#Query.getSimilar) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.getTrendingSymbols(count)](#Query.getTrendingSymbols) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getEarnings(days)](#Query.getEarnings) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getEarningsBySymbol(symbol)](#Query.getEarningsBySymbol) ⇒ <code>Promise.&lt;Object&gt;</code>
 
 <a name="Query.search"></a>
 
@@ -599,6 +601,28 @@ Returns an array of 'x' amount of trending symbols on Yahoo Finance.
 | Param | Type |
 | --- | --- |
 | count | <code>Number</code> | 
+
+<a name="Query.getEarnings"></a>
+
+### Query.getEarnings(days) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of objects with information on companies that are reporting earnings within 'x' number of days, along with estimates and call URLs.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| days | <code>Number</code> | 
+
+<a name="Query.getEarningsBySymbol"></a>
+
+### Query.getEarningsBySymbol(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing this company's past and future earnings data.
+
+**Kind**: static method of [<code>Query</code>](#Query)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
 
 <a name="Stream"></a>
 

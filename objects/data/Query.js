@@ -1,3 +1,4 @@
+const Robinhood = require('../robinhood/Robinhood');
 const request = require('request');
 
 /**
@@ -188,6 +189,42 @@ class Query {
 				} catch (error) {
 					reject(error);
 				}
+			})
+		})
+	}
+
+	/**
+	 * Returns an array of objects with information on companies that are reporting earnings within 'x' number of days, along with estimates and call URLs.
+	 * @param {Number} days
+	 * @returns {Promise<Array>}
+	 */
+	static getEarnings(days) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/marketdata/earnings/",
+				qs: {
+					range: days + "day"
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, null, resolve, reject);
+			})
+		})
+	};
+
+	/**
+	 * Returns an object containing this company's past and future earnings data.
+	 * @param {String} symbol
+	 * @returns {Promise<Object>}
+	 */
+	static getEarningsBySymbol(symbol) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/marketdata/earnings/",
+				qs: {
+					symbol: symbol
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, resolve, reject);
 			})
 		})
 	}

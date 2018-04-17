@@ -16,6 +16,9 @@ module.exports = {
 		News: require('./objects/data/News'),
 		Yahoo: require('./objects/data/Yahoo')
 	},
+	Algorithm: {
+		Scheduler: require('./objects/algorithm/Scheduler')
+	},
 	Globals: {
 		Quote: require('./objects/globals/Quote'),
 		OptionChain: require('./objects/globals/OptionsChain')

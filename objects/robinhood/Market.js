@@ -1,6 +1,7 @@
 const Robinhood = require('./Robinhood');
 const request = require('request');
 const moment = require('moment');
+const async = require('async');
 
 /**
  * Represents an exchange on which securities are traded.
@@ -26,7 +27,7 @@ class Market extends Robinhood {
 					nextTradingDay: String(object.next_open_hours),
 					previousTradingDay: String(object.previous_open_hours)
 				}
-			}
+			};
 			this.website = String(object.website);
 			this.city = String(object.city);
 			this.name = String(object.name);
@@ -124,20 +125,81 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns an object with hours for the given date.
-	 * @param date
+	 * @param {Date} date
 	 * @returns {Promise<Object>}
 	 */
 	getHoursOn(date) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
-			date = moment(date).format("YYYY-MM-DD");
+			const dateString = moment(date).format("YYYY-MM-DD");
 			request({
-				uri: _this.url + "/markets/" + _this.mic + "/hours/" + date + "/"
+				uri: _this.url + "/markets/" + _this.mic + "/hours/" + dateString + "/"
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, null, res => {
 					resolve(_this.parseHours(res));
 				}, reject);
 			})
+		})
+	}
+
+	/**
+	 * Checks whether the market is open on the given date.
+	 * @param {Date} date
+	 * @returns {Promise.<Boolean>}
+	 */
+	isOpenOn(date) {
+		return this.getHoursOn(date).then(hours => {
+			return Boolean(hours.isOpen);
+		});
+	};
+
+	/**
+	 * Returns the next date and time that the market will be open.
+	 * @returns {Promise.<Date>}
+	 */
+	getNextOpen() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			let next = null;
+			let days = _this.isOpenToday() ? 1 : 0;
+			async.whilst(
+				() => { return next === null; },
+				callback => {
+					let newDate = moment().add(days, 'days');
+					_this.getHoursOn(newDate.toDate()).then(hours => {
+						if (hours.isOpen) next = hours.open;
+						callback();
+					})
+				},
+				error => {
+					if (error) reject(error);
+					else resolve(next);
+				})
+		})
+	}
+
+	/**
+	 * Returns the next date and time that the market will close.
+	 * @returns {Promise<Date>}
+	 */
+	getNextClose() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			let next = null;
+			let days = moment().isAfter(_this.getClose()) ? 1 : 0;
+			async.whilst(
+				() => { return next === null; },
+				callback => {
+					let newDate = moment().add(days, 'days');
+					_this.getHoursOn(newDate.toDate()).then(hours => {
+						if (hours.isOpen) next = hours.close;
+						callback();
+					})
+				},
+				error => {
+					if (error) reject(error);
+					else resolve(next);
+				})
 		})
 	}
 
@@ -225,8 +287,22 @@ class Market extends Robinhood {
 	/**
 	 * @returns {Boolean}
 	 */
-	isOpen() {
+	isOpenToday() {
 		return this.hours.isOpen;
+	}
+
+	/**
+	 * @returns {Boolean}
+	 */
+	isOpenNow() {
+		return moment().isAfter(this.getOpen()) && moment.isBefore(this.getClose());
+	}
+
+	/**
+	 * @returns {Boolean}
+	 */
+	isExtendedOpenNow() {
+		return moment().isAfter(this.getExtendedOpen()) && moment.isBefore(this.getExtendedClose())
 	}
 
 }

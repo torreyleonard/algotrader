@@ -223,7 +223,7 @@ myStreamWithNews
 	})
     .on('news', news => {
     	// Returns a single News object. See the link below for documentation on News.
-    });
+    })
 	.on('response', res => {
 		// Returns a response object from the request module. Useful for debugging.
 	})
@@ -320,14 +320,16 @@ News.getFromYahoo("AAPL").then(array => {
 	// 		    date: 2018-04-15T15:45:00.000Z,
 	// 		    source: undefined,
 	// 		    author: undefined,
-	// 		    url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss' },
+	// 		    url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss'
+	//      },
 	// 	    News {
 	// 		    title: 'President Trump is considering rejoining the Trans Pacific Partnership trade deal',
-	// 		    	description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
-	// 		    	date: 2018-04-13T14:40:56.000Z,
-	// 		    	source: undefined,
-	// 		    	author: undefined,
-	// 		    	url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss' },
+	// 		    description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
+	// 		    date: 2018-04-13T14:40:56.000Z,
+	// 		    source: undefined,
+	// 		    author: undefined,
+	// 		    url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss'
+	//      },
     // ... and more
 });
 ```
@@ -370,14 +372,16 @@ News.getHeadlines("myApiKey", {
 	//              date: 2018-04-15T15:22:22.000Z,
 	//              source: 'The Washington Post',
 	//              author: null,
-	//              url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
+	//              url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/'
+	//      },
 	//      News {
 	//              title: 'Zillow surprises investors by buying up homes',
 	//              description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
 	//              date: 2018-04-15T00:27:56.000Z,
 	//              source: 'TechCrunch',
 	//              author: 'Katie Roof',
-	//              url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
+	//              url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/'
+	//      },
 	// ... and more
 });
 ```

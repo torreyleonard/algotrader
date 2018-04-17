@@ -2,7 +2,9 @@ const Robinhood = require('./Robinhood');
 const Fundamentals = require('./Fundamentals');
 const Market = require('./Market');
 const Quote = require('../globals/Quote');
+
 const request = require('request');
+const async = require('async');
 
 /**
  * Represents a security traded on Robinhood.
@@ -104,6 +106,35 @@ class Instrument extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns an array of Instruments for 10 of the top moving S&P 500 equities.
+	 * @param {String} direction - Possible options: [up, down]
+	 * @returns {Promise<Instrument>}
+	 */
+	static getTopMoving(direction) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/midlands/movers/sp500/",
+				qs: {
+					direction: direction.toLowerCase()
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, res => {
+					let array = [];
+					async.forEachOf(res, (value, key, callback) => {
+						Instrument.getByURL(value.instrument_url).then(ins => {
+							array.push(ins);
+							callback();
+						})
+					}, error => {
+						if (error) reject(error);
+						else resolve(array);
+					})
+				}, reject);
+			});
+		})
+	}
+
 	// GET from API
 
 	/**
@@ -197,6 +228,24 @@ class Instrument extends Robinhood {
 			}, (error, response, body) =>
 				Robinhood.handleResponse(error, response, body, null, resolve, reject)
 			);
+		})
+	}
+
+	/**
+	 * Returns an object containing this company's past and future earnings data.
+	 * @returns {Promise<Object>}
+	 */
+	getEarnings() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + "/marketdata/earnings/",
+				qs: {
+					symbol: _this.symbol
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, resolve, reject);
+			})
 		})
 	}
 
