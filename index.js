@@ -1,13 +1,13 @@
 module.exports = {
 	Robinhood: {
-		User: require('./objects/robinhood/User'),
-		Instrument: require('./objects/robinhood/Instrument'),
-		Fundamentals: require('./objects/robinhood/Fundamentals'),
-		Market: require('./objects/robinhood/Market'),
-		Order: require('./objects/robinhood/Order'),
-		Portfolio: require('./objects/robinhood/Portfolio'),
-		OptionOrder: require('./objects/robinhood/OptionOrder'),
-		OptionInstrument: require('./objects/robinhood/OptionInstrument')
+		User: require('./objects/broker/robinhood/User'),
+		Instrument: require('./objects/broker/robinhood/Instrument'),
+		Fundamentals: require('./objects/broker/robinhood/Fundamentals'),
+		Market: require('./objects/broker/robinhood/Market'),
+		Order: require('./objects/broker/robinhood/Order'),
+		Portfolio: require('./objects/broker/robinhood/Portfolio'),
+		OptionOrder: require('./objects/broker/robinhood/OptionOrder'),
+		OptionInstrument: require('./objects/broker/robinhood/OptionInstrument')
 	},
 	Data: {
 		Stream: require('./objects/data/Stream'),

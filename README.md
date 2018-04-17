@@ -19,6 +19,7 @@
 	- Supported brokers:
 		- Robinhood
 		- TDAmeritrade (in progress)
+		- Oanda (in progress)
 		- If you'd like to have another broker supported, submit an issue or a pull request
 - **Data library**
 	- Real time quote data streaming for cryptocurrency, forex, equities
