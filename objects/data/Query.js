@@ -1,4 +1,4 @@
-const Robinhood = require('../robinhood/Robinhood');
+const Robinhood = require('../broker/robinhood/Robinhood');
 const request = require('request');
 
 /**

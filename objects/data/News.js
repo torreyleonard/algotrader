@@ -1,4 +1,3 @@
-const EventEmitter = require('events');
 const request = require('request');
 const xmlJS = require('xml-js');
 

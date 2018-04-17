@@ -1,7 +1,7 @@
 const Robinhood = require('./Robinhood');
 const Fundamentals = require('./Fundamentals');
 const Market = require('./Market');
-const Quote = require('../globals/Quote');
+const Quote = require('../../globals/Quote');
 
 const request = require('request');
 const async = require('async');

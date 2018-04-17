@@ -44,7 +44,7 @@
 - **Support for many third-party APIs**
 	- [Robinhood](http://robinhood.com/)
 	- [Alpha Vantage](https://www.alphavantage.co/)
-	- [Yahoo! Finance](htthttps://finance.yahoo.com)
+	- [Yahoo! Finance](https://finance.yahoo.com)
 	- [News API](https://newsapi.org/)
 
 ---
