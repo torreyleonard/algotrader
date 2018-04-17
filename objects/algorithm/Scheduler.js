@@ -1,4 +1,4 @@
-const Market = require('../robinhood/Market');
+const Market = require('../broker/robinhood/Market');
 const schedule = require('node-schedule');
 
 /**
