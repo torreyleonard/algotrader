@@ -156,6 +156,9 @@ Represents a security traded on Robinhood.
         * [.getQuote()](#Instrument+getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
         * [.getSplits()](#Instrument+getSplits) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getEarnings()](#Instrument+getEarnings) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getPricesPaid()](#Instrument+getPricesPaid) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getPopularity()](#Instrument+getPopularity) ⇒ <code>Promise.&lt;Number&gt;</code>
+        * [.getRatings()](#Instrument+getRatings) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getName()](#Instrument+getName) ⇒ <code>String</code>
         * [.getSimpleName()](#Instrument+getSimpleName) ⇒ <code>String</code>
         * [.getSymbol()](#Instrument+getSymbol) ⇒ <code>String</code>
@@ -177,6 +180,7 @@ Represents a security traded on Robinhood.
         * [.getBySymbol(symbol)](#Instrument.getBySymbol) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getByURL(instrumentURL)](#Instrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getTopMoving(direction)](#Instrument.getTopMoving) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+        * [.getByCategory(category)](#Instrument.getByCategory) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="new_Instrument_new"></a>
 
@@ -224,6 +228,30 @@ Returns an object containing details on past stock splits.
 Returns an object containing this company's past and future earnings data.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+<a name="Instrument+getPricesPaid"></a>
+
+### instrument.getPricesPaid() ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns the high, low, and average prices paid for the instrument by other Robinhood users.
+
+**Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Ladinn  
+**Author**: rclai (Discovered API endpoint)  
+<a name="Instrument+getPopularity"></a>
+
+### instrument.getPopularity() ⇒ <code>Promise.&lt;Number&gt;</code>
+Returns the total amount of open positions on this instrument among all Robinhood users.
+
+**Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Ladinn  
+**Author**: rclai (Discovered API endpoint)  
+<a name="Instrument+getRatings"></a>
+
+### instrument.getRatings() ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing buy hold, and sell ratings from major financial institutions, along with text describing the rating.
+
+**Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Ladinn  
+**Author**: rclai (Discovered API endpoint)  
 <a name="Instrument+getName"></a>
 
 ### instrument.getName() ⇒ <code>String</code>
@@ -336,6 +364,19 @@ Returns an array of Instruments for 10 of the top moving S&P 500 equities.
 | Param | Type | Description |
 | --- | --- | --- |
 | direction | <code>String</code> | Possible options: [up, down] |
+
+<a name="Instrument.getByCategory"></a>
+
+### Instrument.getByCategory(category) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of Instruments related to the given category.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Ladinn  
+**Author**: rclai (Discovered API endpoint)  
+
+| Param | Type |
+| --- | --- |
+| category | <code>String</code> | 
 
 <a name="Market"></a>
 
