@@ -181,6 +181,7 @@ Represents a security traded on Robinhood.
         * [.getByURL(instrumentURL)](#Instrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getTopMoving(direction)](#Instrument.getTopMoving) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getByCategory(category)](#Instrument.getByCategory) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getMostPopular()](#Instrument.getMostPopular) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="new_Instrument_new"></a>
 
@@ -371,13 +372,17 @@ Returns an array of Instruments for 10 of the top moving S&P 500 equities.
 Returns an array of Instruments related to the given category.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
-**Author**: Ladinn  
-**Author**: rclai (Discovered API endpoint)  
 
-| Param | Type |
-| --- | --- |
-| category | <code>String</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| category | <code>String</code> | Possible options: [ technology, 100-most-popular, ... ] |
 
+<a name="Instrument.getMostPopular"></a>
+
+### Instrument.getMostPopular() ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of Instruments for the top 100 most popular equities on Robinhood.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
 <a name="Market"></a>
 
 ## Market

@@ -224,6 +224,22 @@ class User extends Robinhood {
 		})
 	}
 
+	// Invalid token?
+	//
+	// getNotifications() {
+	// 	const _this = this;
+	// 	return new Promise((resolve, reject) => {
+	// 		request({
+	// 			uri: _this.url + "/midlands/notifications/stack/",
+	// 			headers: {
+	// 				'Authorization': 'Token ' + _this.token
+	// 			}
+	// 		}, (error, response, body) => {
+	// 			return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
+	// 		})
+	// 	})
+	// }
+
 	// BANKING
 
 	/**

@@ -53,13 +53,14 @@
 - [Getting Started](#getting-started)
 - Broker Library
 	- [Robinhood](#robinhood)
+- Algorithm Library
+	- [Scheduler](#scheduler)
 - Data Library
 	- [OptionsChain](#optionsChain) (todo)
 	- [Query](#query)
 	- [Stream](#stream)
 	- [News](#news)
 	- [Alpha Vantage](#alpha-vantage)
-- Algorithm (todo)
 
 ---
 
@@ -93,7 +94,7 @@ myUser.authenticate()
 	})
 	.catch(error => {
 		// Either the request failed, or Robinhood responded with an error.
-		// (Ex: you don't have internet access or your user credentials were incorrect)
+        // (Ex: you don't have internet access or your user credentials were incorrect)
 	})
 ```
 Personally, I either store user data as an array in a .json file, then require it into the class, (insecure) or ask for the user's credentials in the console. You should handle this sensitive data in a way that you're comfortable with.
@@ -174,6 +175,40 @@ Instrument.getBySymbol("TWTR").then(async twtrInstrument => {
 });
 ```
 For documentation on all order functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order)
+
+---
+
+### Algorithm Library
+
+For scheduling tasks, running backtests, and paper-trading, the algorithm library should be more than useful.
+
+#### Scheduler
+
+Using the [```Scheduler```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler) class, you'll be able to define exactly when you want a function to run using the following methods:
+
+- ```Scheduler.onMarketOpen(offset, f)```
+	- Runs every morning when the NYSE opens. (Typically 9:30 AM EST)
+	- Offset is in milliseconds and can be positive (after) or negative (before).
+- ```Scheduler.onMarketClose(offset, f)```
+	- Runs every afternoon when the NYSE closes. (Typically 4:00 PM EST)
+	- Offset is in milliseconds and can be positive (after) or negative (before).
+- ```Scheduler.every(minutes, extended, f)```
+	- Runs every ```x``` minutes during market hours or during typical extended trading hours. (9 AM EST - 6 PM EST)
+
+Here's an easy example that runs a function 5 minutes before the market opens and another one every 30 minutes during regular trading hours:
+
+```js
+const Scheduler = algotrader.Algorithm.Scheduler;
+
+Scheduler.onMarketOpen(-5 * 60000, () => {
+	// Function to run five minutes before the market opens
+});
+
+Scheduler.every(30, false, () => {
+	// Function to run every 1/2 hour
+});
+```
+For documentation on all Scheduler functions, visit the [```Algorithm Library Docs.```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler)
 
 ---
 
@@ -266,11 +301,29 @@ For documentation on all Alpha Vantage functions, visit the [Data Library Docs.]
 
 #### Query
 
-Using the Yahoo Finance API, you can easily find stocks based on certain criteria.
+Using the Yahoo Finance and Robinhood APIs, you can easily find stocks based on certain criteria.
 
 Here are a few examples:
 ```js
 const Query = algotrader.Data.Query;
+
+Query.getEarnings(1).then(array => {
+	// Returns an array of companies that are reporting their earnings within the next '1' day.
+	// [
+	//     { 
+	//      symbol: 'NFLX',
+	// 	    instrument: 'https://api.robinhood.com/instruments/81733743-965a-4d93-b87a-6973cb9efd34/',
+	//      year: 2018,
+	//      quarter: 1,
+	//      eps: { estimate: '0.6400', actual: null },
+	//      report: { date: '2018-04-16', timing: 'pm', verified: true },
+	//      call:
+	//          { datetime: '2018-04-16T22:00:00Z',
+	//            broadcast_url: 'http://mmm.wallstreethorizon.com/u.asp?u=152320',
+	//            replay_url: null }
+	//     },
+	// ... and more
+});
 
 Query.search("Nordstrom").then(array => {
 	// Returns an array of matching stocks, options, ETF's, and others.
@@ -320,16 +373,14 @@ News.getFromYahoo("AAPL").then(array => {
 	// 		    date: 2018-04-15T15:45:00.000Z,
 	// 		    source: undefined,
 	// 		    author: undefined,
-	// 		    url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss'
-	//      },
+	// 		    url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss' },
 	// 	    News {
 	// 		    title: 'President Trump is considering rejoining the Trans Pacific Partnership trade deal',
-	// 		    description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
-	// 		    date: 2018-04-13T14:40:56.000Z,
-	// 		    source: undefined,
-	// 		    author: undefined,
-	// 		    url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss'
-	//      },
+	// 		    	description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
+	// 		    	date: 2018-04-13T14:40:56.000Z,
+	// 		    	source: undefined,
+	// 		    	author: undefined,
+	// 		    	url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss' },
     // ... and more
 });
 ```
@@ -372,20 +423,18 @@ News.getHeadlines("myApiKey", {
 	//              date: 2018-04-15T15:22:22.000Z,
 	//              source: 'The Washington Post',
 	//              author: null,
-	//              url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/'
-	//      },
+	//              url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
 	//      News {
 	//              title: 'Zillow surprises investors by buying up homes',
 	//              description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
 	//              date: 2018-04-15T00:27:56.000Z,
 	//              source: 'TechCrunch',
 	//              author: 'Katie Roof',
-	//              url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/'
-	//      },
+	//              url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
 	// ... and more
 });
 ```
-The [News Class](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) provides a few functions that you can run to easily retrieve information you need, such as ```news.getTitle()```, ```news.getDate()```, and ```news.getDescription().``` You can also download the full article directly from the source:
+The [News Class](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) provides a few functions that you can run to easily retrieve information you need, such as ```news.getTitle()```, ```news.getDate()```, and ```news.getDescription().``` You can also download the full article from the source:
 ```js
 news.getArticle().then(html => {
 	// This will return raw HTML from the source. You'll have to parse it yourself if you want to read the entire article, but typically the description - news.getDescription() - is sufficient.

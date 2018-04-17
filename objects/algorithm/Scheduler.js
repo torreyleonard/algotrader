@@ -1,6 +1,9 @@
 const Market = require('../robinhood/Market');
 const schedule = require('node-schedule');
 
+/**
+ * Used to run functions at specified intervals or times of day.
+ */
 class Scheduler {
 
 	/**

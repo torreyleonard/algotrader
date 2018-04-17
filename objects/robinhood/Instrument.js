@@ -137,11 +137,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of Instruments related to the given category.
-	 *
-	 * @author Ladinn
-	 * @author rclai (Discovered API endpoint)
-	 *
-	 * @param {String} category
+	 * @param {String} category - Possible options: [ technology, 100-most-popular, ... ]
 	 * @returns {Promise<Array>}
 	 */
 	static getByCategory(category) {
@@ -163,6 +159,14 @@ class Instrument extends Robinhood {
 				}, reject);
 			});
 		})
+	}
+
+	/**
+	 * Returns an array of Instruments for the top 100 most popular equities on Robinhood.
+	 * @returns {Promise<Array>}
+	 */
+	static getMostPopular() {
+		return Instrument.getByCategory("100-most-popular");
 	}
 
 	// GET from API
