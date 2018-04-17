@@ -135,6 +135,36 @@ class Instrument extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns an array of Instruments related to the given category.
+	 *
+	 * @author Ladinn
+	 * @author rclai (Discovered API endpoint)
+	 *
+	 * @param {String} category
+	 * @returns {Promise<Array>}
+	 */
+	static getByCategory(category) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/midlands/tags/tag/" + category + "/"
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, res => {
+					let array = [];
+					async.forEachOf(res.instruments, (value, key, callback) => {
+						Instrument.getByURL(value).then(ins => {
+							array.push(ins);
+							callback();
+						})
+					}, error => {
+						if (error) reject(error);
+						else resolve(array);
+					})
+				}, reject);
+			});
+		})
+	}
+
 	// GET from API
 
 	/**
@@ -242,6 +272,78 @@ class Instrument extends Robinhood {
 				uri: _this.url + "/marketdata/earnings/",
 				qs: {
 					symbol: _this.symbol
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, resolve, reject);
+			})
+		})
+	}
+
+	/**
+	 * Returns the high, low, and average prices paid for the instrument by other Robinhood users.
+	 *
+	 * @author Ladinn
+	 * @author rclai (Discovered API endpoint)
+	 *
+	 * @returns {Promise<Object>}
+	 */
+	getPricesPaid() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://analytics.robinhood.com/instruments/price_distribution/" + _this.id
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, res => {
+					resolve({
+						high: res.high,
+						low: res.low,
+						average: res.average_price,
+						bins: res.bins
+					})
+				}, reject);
+			})
+		})
+	}
+
+	/**
+	 * Returns the total amount of open positions on this instrument among all Robinhood users.
+	 *
+	 * @author Ladinn
+	 * @author rclai (Discovered API endpoint)
+	 *
+	 * @returns {Promise<Number>}
+	 */
+	getPopularity() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + "/instruments/popularity/",
+				qs: {
+					ids: _this.id
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, res => {
+					resolve(Number(res.num_open_positions));
+				}, reject);
+			})
+		})
+	}
+
+	/**
+	 * Returns an object containing buy hold, and sell ratings from major financial institutions, along with text describing the rating.
+	 *
+	 * @author Ladinn
+	 * @author rclai (Discovered API endpoint)
+	 *
+	 * @returns {Promise<Object>}
+	 */
+	getRatings() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + "/midlands/ratings/",
+				qs: {
+					ids: _this.id
 				}
 			}, (error, response, body) => {
 				Robinhood.handleResponse(error, response, body, null, resolve, reject);
