@@ -31,7 +31,7 @@ class Stream extends EventEmitter {
 	 * Start the streaming class.
 	 *
 	 * The event will emit three events: error (Error object), response (JSON from request module), and quote (Quote object).
-	 * Access via .on('data', function), etc.
+	 * Access via .on('quote', function), etc.
 	 */
 	start() {
 		const _this = this;
@@ -130,13 +130,12 @@ class Stream extends EventEmitter {
 		const symbol = Object.keys(json)[0];
 		const object = json[symbol];
 
-		return new Quote({
+		let quote = {
 			symbol: symbol,
 			date: new Date(),
 			source: "Yahoo Finance",
 			price: {
 				last: Number(object.priceRealTimeAfterHours) || Number(object.priceRealTime) || Number(object.lastSalePrice),
-				volume: Number(object.volume.replace(/,/g, '')) || Number(object.volume2.replace(/,/g, '')),
 				high: Number(object.dayHigh),
 				low: Number(object.dayLow)
 			},
@@ -155,8 +154,13 @@ class Stream extends EventEmitter {
 				percentChange: object.percentChange || object.percentChangeRealTime,
 				marketCap: object.marketCap
 			},
-			original: JSON.stringify(json)
-		})
+			original: json
+		};
+
+		if (object.volume) quote.price.volume = Number(object.volume.replace(/,/g, ''));
+		if (object.volume2) quote.price.volume = Number(object.volume2.replace(/,/g, ''));
+
+		return new Quote(quote);
 
 	}
 

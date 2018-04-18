@@ -27,7 +27,7 @@ class User extends Robinhood {
 
 	/**
 	 * Authenticates a user using the inputted username and password.
-	 * @returns {Promise}
+	 * @returns {Promise<Boolean>}
 	 */
 	authenticate() {
 		const _this = this;
@@ -48,6 +48,26 @@ class User extends Robinhood {
 						resolve(true);
 					}).catch(error => reject(error));
 				}
+			})
+		})
+	}
+
+	/**
+	 * Logout the user by expiring the authentication token.
+	 * @returns {Promise<Boolean>}
+	 */
+	logout() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request.post({
+				uri: _this.url + "/api-token-logout/",
+				headers: {
+					'Authorization': 'Token ' + _this.token
+				}
+			}, (error, response, body) => {
+				if (error) reject(error);
+				else if (response.statusCode !== 200) reject(new Error(body));
+				else resolve(true);
 			})
 		})
 	}
