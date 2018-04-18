@@ -1,4 +1,6 @@
 const Robinhood = require('./Robinhood');
+const Order = require('./Order');
+const async = require('async');
 
 /**
  * Represents all of the user's holdings on Robinhood and allows for various queries.
@@ -7,12 +9,14 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Creates a new Portfolio object.
-	 * @param array
+	 * @param {User} user
+	 * @param {Array} array
 	 */
-	constructor(array) {
+	constructor(user, array) {
 		if (!array instanceof Array) throw new Error("Parameter 'array' must be an array.");
 		else {
 			super();
+			this.user = user;
 			this.array = [];
 			const _this = this;
 			array.forEach(p => {
@@ -42,7 +46,56 @@ class Portfolio extends Robinhood {
 		}
 	}
 
+	/**
+	 * Sells all positions in the user's portfolio at the market price.
+	 * @returns {Promise<Boolean|Error>}
+	 */
+	sellAll() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			async.forEachOf(_this.array, (position, key, callback) => {
+				position.InstrumentObject.getQuote().then(quote => {
+					const order = new Order(_this.user, {
+						instrument: position.InstrumentObject,
+						quote: quote,
+						type: "market",
+						timeInForce: "gfd",
+						trigger: "immediate",
+						quantity: position.quantity,
+						side: "sell"
+					});
+					order.submit().then(res => {
+						callback();
+					}).catch(error => callback(error));
+				}).catch(error => callback(error));
+			}, error => {
+				resolve(error !== null ? true : error);
+			})
+		})
+	}
+
 	// GET
+
+
+	/**
+	 * Returns the total market value of all stocks held by the user.
+	 * @returns {Promise<Number>}
+	 */
+	getStockValue() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			let value = 0;
+			async.forEachOf(_this.array, (position, key, callback) => {
+				position.InstrumentObject.getQuote().then(quote => {
+					value += quote.getLast() * position.quantity;
+					callback();
+				}).catch(error => callback(error));
+			}, error => {
+				if (error) reject(error);
+				resolve(value);
+			})
+		})
+	}
 
 	/**
 	 * Returns an array of all instruments in the user's portfolio.

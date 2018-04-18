@@ -105,6 +105,55 @@ class User extends Robinhood {
 	}
 
 	/**
+	 * Returns an object containing details on the user's cash and marginbalance.
+	 * @returns {Promise<Object>}
+	 */
+	getBalances() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			_this.getAccount().then(res => {
+				resolve({
+					unsettledFunds: res.unsettled_funds,
+					unsettledDebit: res.unsettled_debit,
+					unclearedDeposits: res.uncleared_deposits,
+					smaHeldForOrders: res.sma_held_for_orders,
+					cash: res.cash,
+					cashHeldForOrders: res.cash_held_for_orders,
+					cashAvailableForWithdraw: res.cash_available_for_withdraw,
+					buyingPower: res.buying_power,
+					sma: res.sma,
+					accountType: res.type,
+					margin: {
+						goldEquityRequirement: res.margin_balances.gold_equity_requirement,
+						outstandingInterest: res.margin_balances.outstanding_interest,
+						cashHeldForOptionsCollateral: res.margin_balances.cash_held_for_options_collateral,
+						dayTradeBuyingPower: res.margin_balances.day_trade_buying_power,
+						unallocatedMarginCash: res.margin_balances.unallocated_margin_cash,
+						startOfDayOvernightBuyingPower: res.margin_balances.start_of_day_overnight_buying_power,
+						marginLimit: res.margin_balances.margin_limit,
+						overnightBuyingPower: res.margin_balances.overnight_buying_power,
+						startOfDayDtbp: res.margin_balances.start_of_day_dtbp,
+						dayTradeBuyingPowerHeldForOrders: res.margin_balances.day_trade_buying_power_held_for_orders
+					}
+				});
+			}).catch(error => reject(error));
+		})
+	}
+
+	/**
+	 * Returns the amount of money available to be spent.
+	 * @returns {Promise}
+	 */
+	getBuyingPower() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			_this.getAccount().then(res => {
+				resolve(Number(res.buying_power));
+			}).catch(error => reject(error));
+		})
+	}
+
+	/**
 	 * Returns information like username, first / last name, creation date, id, and more.
 	 * @returns {Promise<Object>}
 	 */
@@ -237,7 +286,7 @@ class User extends Robinhood {
 							});
 						} else callback();
 					}, () => {
-						resolve(new Portfolio(array));
+						resolve(new Portfolio(_this, array));
 					} );
 				}, reject);
 			})
