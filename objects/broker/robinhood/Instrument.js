@@ -89,6 +89,24 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * Returns an instrument object for the specified Robinhood instrument ID.
+	 * @param {String} id
+	 * @returns {Promise<Instrument>}
+	 */
+	static getByID(id) {
+		return new Promise((resolve, reject) => {
+			if (!id instanceof String) reject(new Error("Parameter 'id' must be a string."));
+			else request({
+				uri: "https://api.robinhood.com/instruments/" + id + "/"
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, null, res => {
+					resolve(new Instrument(res));
+				}, reject);
+			})
+		})
+	}
+
+	/**
 	 * Returns an instrument object for the specified instrument URL.
 	 * @param {String} instrumentURL
 	 * @returns {Promise<Instrument>}
@@ -136,8 +154,60 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * Returns an array of instrument objects for the specified array of IDs.
+	 *
+	 * Note: large arrays will take longer to process and are capped at 50 per request, so multiple
+	 * requests will be sent as the function iterates through the array.
+	 *
+	 * @param {Array} ids
+	 * @returns {Promise<Array>}
+	 */
+	static getByIdArray(ids) {
+		return new Promise((resolve, reject) => {
+			if (!ids instanceof Array) reject(new Error("Parameter 'ids' must be an array."));
+			else {
+				let array = [];
+				let maxAtOnce = 50;
+				async.whilst(() => { return ids.length !== 0 }, callback => {
+					let newIds = ids.slice(0, maxAtOnce);
+					ids = ids.length >= maxAtOnce ? ids.slice(maxAtOnce, ids.length) : [];
+					request({
+						uri: "https://api.robinhood.com/instruments/",
+						qs: {
+							ids: newIds.join(',')
+						}
+					}, (error, response, body) => {
+						return Robinhood.handleResponse(error, response, body, null, res => {
+							res.forEach(o => {
+								if (o !== null) array.push(new Instrument(o));
+							});
+							callback();
+						}, reject);
+					})
+				}, () => {
+					resolve(array);
+				});
+			}
+		})
+	}
+
+	/**
+	 * Returns an array of known categories that can be used with getByCategory(). This list is non-exhaustive.
+	 * @returns {Array<String>}
+	 */
+	static getCategories() {
+		return [
+			"technology", "finance", "etf", "mutual-fund", "entertainment", "female-ceo", "fossil-fuel", "oil-and-gas", "100-most-popular", "large-cap", "investment-trust-or-fund", "consumer-product",
+			"social-media", "internet", "aerospace", "software-service", "automotive", "upcoming-earnings", "2015-ipo", "2016-ipo", "2017-ipo", "health", "real-estate", "top-movers",
+			"air-transportation", "semiconductor", "building-material", "material", "retail", "credit-card", "business-service", "advertising-and-marketing", "payment", "video-game", "electronics",
+			"manufacturing", "conglomerate", "energy", "electric-utilities", "north-america", "us", "engineering", "rental-and-lease", "restaurant", "hospitality", "telecommunications",
+			"wireless", "internet", "pharmaceutical", "medical", "healthcare", "cap-weighted", "mid-cap", "small-cap", "packaging"
+		]
+	}
+
+	/**
 	 * Returns an array of Instruments related to the given category.
-	 * @param {String} category - Possible options: [ technology, 100-most-popular, ... ]
+	 * @param {String} category - For possible options see getCategories().
 	 * @returns {Promise<Array>}
 	 */
 	static getByCategory(category) {
@@ -146,16 +216,11 @@ class Instrument extends Robinhood {
 				uri: "https://api.robinhood.com/midlands/tags/tag/" + category + "/"
 			}, (error, response, body) => {
 				Robinhood.handleResponse(error, response, body, null, res => {
-					let array = [];
-					async.forEachOf(res.instruments, (value, key, callback) => {
-						Instrument.getByURL(value).then(ins => {
-							array.push(ins);
-							callback();
-						})
-					}, error => {
-						if (error) reject(error);
-						else resolve(array);
-					})
+					let ids = [];
+					res.instruments.forEach(o => {
+						ids.push(o.split('instruments/')[1].split('/')[0]);
+					});
+					Instrument.getByIdArray(ids).then(res => resolve(res)).catch(error => reject(error));
 				}, reject);
 			});
 		})
@@ -167,6 +232,47 @@ class Instrument extends Robinhood {
 	 */
 	static getMostPopular() {
 		return Instrument.getByCategory("100-most-popular");
+	}
+
+	/**
+	 * Returns an array of Instruments that have upcoming earnings.
+	 * @returns {Promise.<Array>}
+	 */
+	static getUpcomingEarnings() {
+		return Instrument.getByCategory("upcoming-earnings");
+	}
+
+	/**
+	 * Returns an array of instruments for stocks from Robinhood's recommendations for the given user.
+	 * @param {User} user
+	 * @returns {Promise.<Array>}
+	 */
+	static getRecommendations(user) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://analytics.robinhood.com/instruments/tag/for-you/",
+				headers: {
+					'Authorization': 'Token ' + user.getAuthToken()
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, null, res => {
+					let array = [];
+					console.log(res);
+					async.forEachOf(res.instruments, (value, key, callback) => {
+						Instrument.getByID(value.id).then(ins => {
+							array.push({
+								reason: value.reason,
+								InstrumentObject: ins
+							});
+							callback();
+						})
+					}, error => {
+						if (error) reject(error);
+						else resolve(array);
+					})
+				}, reject);
+			});
+		})
 	}
 
 	// GET from API
@@ -479,6 +585,15 @@ class Instrument extends Robinhood {
 	 */
 	isADR() {
 		return this.type === "adr";
+	}
+
+	/**
+	 * Check whether another instance of Instrument equals this instance.
+	 * @param {Instrument} otherInstrument
+	 * @returns {Boolean}
+	 */
+	equals(otherInstrument) {
+		return otherInstrument.getSymbol() === this.symbol;
 	}
 
 }

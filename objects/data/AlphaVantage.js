@@ -1,5 +1,6 @@
 const Quote = require('../globals/Quote');
 const request = require('request');
+const ora = require('ora');
 
 /**
  * Further documentation can be found here: https://www.alphavantage.co/documentation/
@@ -20,6 +21,7 @@ class AlphaVantage {
 	 */
 	_requester(qs) {
 		const _this = this;
+		const loading = ora("Downloading from AlphaVantage...").start();
 		return new Promise((resolve, reject) => {
 			qs.apikey = _this.apiKey;
 			qs.datatype = "json";
@@ -32,6 +34,7 @@ class AlphaVantage {
 				else {
 					const json = JSON.parse(body);
 					const objectKey = Object.keys(json)[1];
+					loading.succeed("Download complete.");
 					resolve(json[objectKey]);
 				}
 			})

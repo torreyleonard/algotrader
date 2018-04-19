@@ -1,5 +1,4 @@
 /**
- * Goal
  *  - Five minutes after market open:
  *      - Retrieve options contracts with the highest open interest from Yahoo! Finance, filter by calls
  *      - Retrieve the Robinhood user's portfolio and get their cash balance

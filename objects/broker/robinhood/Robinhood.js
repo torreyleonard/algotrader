@@ -1,5 +1,6 @@
 const async = require('async');
 const request = require('request');
+const ora = require('ora');
 
 /**
  * Robinhood superclass.
@@ -17,6 +18,7 @@ class Robinhood {
 		else try {
 				const json = JSON.parse(body);
 				if (json.next) {
+					let loading = ora("Downloading from Robinhood").start();
 					let array = json.results;
 					let next = json.next;
 					async.whilst(() => { return next !== null; }, callback => {
@@ -33,10 +35,12 @@ class Robinhood {
 								const nextJson = JSON.parse(body);
 								next = nextJson.next;
 								array.push(nextJson.results);
+								loading.text += '.';
 								callback();
 							}
 						})
 					}, () => {
+						loading.succeed("Download complete.");
 						resolve(array);
 					});
 				} else if (json.results) resolve(json.results.length === 1 ? json.results[0] : json.results);

@@ -1,6 +1,7 @@
 const Robinhood = require('./Robinhood');
 const Instrument = require('./Instrument');
 const Portfolio = require('./Portfolio');
+const Order = require('./Order');
 
 const request = require('request');
 const fs = require('fs');
@@ -172,6 +173,26 @@ class User extends Robinhood {
 	}
 
 	/**
+	 * Returns the user's unique ID.
+	 * @returns {Promise<String>}
+	 */
+	getUID() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + "/user/id/",
+				headers: {
+					'Authorization': 'Token ' + _this.token
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, _this.token, res => {
+					resolve(res.id);
+				}, reject);
+			})
+		})
+	}
+
+	/**
 	 * Returns information like address, citizenship, SSN, date of birth, and more.
 	 * @returns {Promise<Object>}
 	 */
@@ -259,6 +280,14 @@ class User extends Robinhood {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
 			})
 		})
+	}
+
+	/**
+	 * Returns an array of recent orders.
+	 * @returns {Promise<Array>}
+	 */
+	getRecentOrders() {
+		return Order.getRecentOrders(this);
 	}
 
 	/**
