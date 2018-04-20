@@ -77,25 +77,23 @@ class Portfolio extends Robinhood {
 	/**
 	 * Executes a new order to reduce or increase the user's position in the given symbol by the given amount.
 	 * @param {String} symbol
-	 * @param {Number} quantity
+	 * @param {Number} targetQuantity
 	 * @returns {Promise<Order>}
 	 */
-	setQuantity(symbol, quantity) {
+	setQuantity(symbol, targetQuantity) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			const position = _this.getBySymbol(symbol);
-			const orderQuantity = position.quantity - (position.quantity + quantity);
-			if (orderQuantity < 0) reject(new Error("New quantity would be less than zero."));
-			else if (quantity === 0) reject(new Error("Quantity cannot be zero."));
-			else position.InstrumentObject.getQuote().then(quote => {
+			const orderQuantity = targetQuantity - position.quantity;
+			position.InstrumentObject.getQuote().then(quote => {
 				const order = new Order(_this.user, {
 					instrument: position.InstrumentObject,
 					quote: quote,
 					type: "market",
 					timeInForce: "gfd",
 					trigger: "immediate",
-					quantity: orderQuantity,
-					side: quantity > 0 ? "buy" : "sell"
+					quantity: Math.abs(orderQuantity),
+					side: orderQuantity > 0 ? "buy" : "sell"
 				});
 				order.submit().then(res => {
 					resolve(res);

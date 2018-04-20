@@ -24,7 +24,7 @@ class Order extends Robinhood {
 	constructor(user, object) {
 		super();
 		this.user = user;
-		if (!object.created_at) {
+		if (object.created_at) {
 			this.response = this._parse(object);
 			this.executed = true;
 		} else this.order = object;
@@ -79,7 +79,7 @@ class Order extends Robinhood {
 			else request.post({
 				uri: _this.url + "/orders/",
 				headers: {
-					'Authorization': 'Token ' + _this.User.getAuthToken()
+					'Authorization': 'Token ' + _this.user.getAuthToken()
 				},
 				form: {
 					account: _this.url + "/accounts/" + _this.user.getAccountNumber() + "/",
@@ -88,7 +88,7 @@ class Order extends Robinhood {
 					type: _this.order.type,
 					time_in_force: _this.order.timeInForce,
 					trigger: _this.order.trigger,
-					price: _this.quote.getLast(),
+					price: (_this.order.quote.getLast()).toFixed(2),
 					stop_price: _this.order.stopPrice,
 					quantity: _this.order.quantity,
 					side: _this.order.side,
@@ -97,7 +97,7 @@ class Order extends Robinhood {
 					override_dtbp_checks: _this.order.overrideDayTradeCheck
 				}
 			}, (error, response, body) => {
-				return Robinhood.handleResponse(error, response, body, _this.User.getAuthToken(), res => {
+				return Robinhood.handleResponse(error, response, body, _this.user.getAuthToken(), res => {
 					_this.executed = true;
 					_this.response = this._parse(res);
 					resolve(res);
