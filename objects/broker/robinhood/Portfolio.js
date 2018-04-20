@@ -1,5 +1,6 @@
 const Robinhood = require('./Robinhood');
 const Order = require('./Order');
+const Instrument = require('./Instrument');
 const async = require('async');
 
 /**
@@ -82,12 +83,14 @@ class Portfolio extends Robinhood {
 	 */
 	setQuantity(symbol, targetQuantity) {
 		const _this = this;
-		return new Promise((resolve, reject) => {
+		return new Promise(async (resolve, reject) => {
 			const position = _this.getBySymbol(symbol);
-			const orderQuantity = targetQuantity - position.quantity;
-			position.InstrumentObject.getQuote().then(quote => {
+			let instrument = position !== undefined ? position.InstrumentObject : await Instrument.getBySymbol(symbol);
+			let currentQuantity = position !== undefined ? position.quantity : 0;
+			const orderQuantity = targetQuantity - currentQuantity;
+			instrument.getQuote().then(quote => {
 				const order = new Order(_this.user, {
-					instrument: position.InstrumentObject,
+					instrument: instrument,
 					quote: quote,
 					type: "market",
 					timeInForce: "gfd",
