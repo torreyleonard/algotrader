@@ -98,9 +98,12 @@ class Order extends Robinhood {
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.user.getAuthToken(), res => {
-					_this.executed = true;
-					_this.response = this._parse(res);
-					resolve(res);
+					if (res.detail !== undefined || res.reject_reason !== null) reject(res);
+					else {
+						_this.executed = true;
+						_this.response = this._parse(res);
+						resolve(res);
+					}
 				}, reject);
 			})
 		})

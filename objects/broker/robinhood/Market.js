@@ -295,14 +295,14 @@ class Market extends Robinhood {
 	 * @returns {Boolean}
 	 */
 	isOpenNow() {
-		return moment().isAfter(this.getOpen()) && moment.isBefore(this.getClose());
+		return moment().isAfter(this.getOpen()) && moment().isBefore(this.getClose());
 	}
 
 	/**
 	 * @returns {Boolean}
 	 */
 	isExtendedOpenNow() {
-		return moment().isAfter(this.getExtendedOpen()) && moment.isBefore(this.getExtendedClose())
+		return moment().isAfter(this.getExtendedOpen()) && moment().isBefore(this.getExtendedClose())
 	}
 
 }
