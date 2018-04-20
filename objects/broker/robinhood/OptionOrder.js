@@ -1,6 +1,7 @@
 const Robinhood = require('./Robinhood');
 const User = require('./User');
 const request = require('request');
+const _ = require('lodash');
 
 /**
  * BETA: Represents and executes an order for the given option contract.
@@ -39,7 +40,7 @@ class OptionOrder extends Robinhood {
 					position_effect: side === "buy" ? "open" : "close",
 					side: side,
 					ratio_quantity: 1,
-					option: optionInstrument.instrumentURL
+					option: optionInstrument.instrumentURL,
 				};
 				this.type = type;
 				this.quantity = quantity;
@@ -94,13 +95,11 @@ class OptionOrder extends Robinhood {
 					quantity: _this.quantity
 				}
 			}, (error, response, body) => {
-				console.log(response.statusCode);
-				console.log(JSON.parse(body));
-				// return Robinhood.handleResponse(error, response, body, _this.User.getAuthToken(), res => {
-				// 	_this.executed = true;
-				// 	_this.response = this._parse(res);
-				// 	resolve(res);
-				// }, reject);
+				return Robinhood.handleResponse(error, response, body, _this.User.getAuthToken(), res => {
+					_this.executed = true;
+					_this.response = this._parse(res);
+					resolve(res);
+				}, reject);
 			})
 		})
 	}
@@ -118,7 +117,7 @@ class OptionOrder extends Robinhood {
 					res.forEach(o => {
 						array.push(new OptionOrder(o, user));
 					});
-					resolve(array);
+					resolve(_.sortBy(array, 'response.dates.created'));
 				}, reject);
 			})
 		})

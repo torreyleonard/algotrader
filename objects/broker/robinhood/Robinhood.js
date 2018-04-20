@@ -14,7 +14,7 @@ class Robinhood {
 
 	static handleResponse(error, response, body, token, resolve, reject) {
 		if (error) reject(error);
-		else if (response.statusCode !== 200) reject(new Error(body));
+		else if (response.statusCode !== 200) reject(new Error("Robinhood responded with code: " + response.statusCode + ".\n\t" + body));
 		else try {
 				const json = JSON.parse(body);
 				if (json.next) {

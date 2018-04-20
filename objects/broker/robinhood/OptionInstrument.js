@@ -74,7 +74,6 @@ class OptionInstrument extends Robinhood {
 					'Authorization': 'Token ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
-				console.log(JSON.parse(body));
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					resolve(new OptionInstrument(res));
 				}, reject);

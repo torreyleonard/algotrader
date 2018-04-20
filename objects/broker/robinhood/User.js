@@ -2,6 +2,7 @@ const Robinhood = require('./Robinhood');
 const Instrument = require('./Instrument');
 const Portfolio = require('./Portfolio');
 const Order = require('./Order');
+const OptionOrder = require('./OptionOrder');
 
 const request = require('request');
 const fs = require('fs');
@@ -288,6 +289,14 @@ class User extends Robinhood {
 	 */
 	getRecentOrders() {
 		return Order.getRecentOrders(this);
+	}
+
+	/**
+	 * Returns an array of recent option orders.
+	 * @returns {Promise<Array>}
+	 */
+	getRecentOptionOrders() {
+		return OptionOrder.getRecentOrders(this);
 	}
 
 	/**

@@ -74,8 +74,37 @@ class Portfolio extends Robinhood {
 		})
 	}
 
-	// GET
+	/**
+	 * Executes a new order to reduce or increase the user's position in the given symbol by the given amount.
+	 * @param {String} symbol
+	 * @param {Number} quantity
+	 * @returns {Promise<Order>}
+	 */
+	setQuantity(symbol, quantity) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			const position = _this.getBySymbol(symbol);
+			const orderQuantity = position.quantity - (position.quantity + quantity);
+			if (orderQuantity < 0) reject(new Error("New quantity would be less than zero."));
+			else if (quantity === 0) reject(new Error("Quantity cannot be zero."));
+			else position.InstrumentObject.getQuote().then(quote => {
+				const order = new Order(_this.user, {
+					instrument: position.InstrumentObject,
+					quote: quote,
+					type: "market",
+					timeInForce: "gfd",
+					trigger: "immediate",
+					quantity: orderQuantity,
+					side: quantity > 0 ? "buy" : "sell"
+				});
+				order.submit().then(res => {
+					resolve(res);
+				}).catch(error => reject(error));
+			}).catch(error => reject(error));
+		})
+	}
 
+	// GET
 
 	/**
 	 * Returns the total market value of all stocks held by the user.
@@ -136,8 +165,8 @@ class Portfolio extends Robinhood {
 	 * @returns {Number}
 	 */
 	getQuantity(symbol) {
-		const shares = this.getBySymbol(symbol).quantity;
-		if (shares) return shares;
+		const shares = this.getBySymbol(symbol);
+		if (shares !== undefined) return shares.quantity;
 		else return 0;
 	}
 
