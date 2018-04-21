@@ -48,6 +48,26 @@ class Quote {
 		return wPrice / volume;
 	}
 
+	/**
+	 * Retrieves the highest high and lowest low for the provided period of time.
+	 * @param {Array} quoteArray
+	 * @param {int} period
+	 * @returns {Object}
+	 */
+	static priceChannel(quoteArray, period) {
+		const array = quoteArray.slice(quoteArray.length - period, quoteArray.length);
+		let high = { price: { high: 0 } };
+		let low = { price: { low: Number.MAX_VALUE } };
+		array.forEach(val => {
+			if (val.price.high > high.price.high) high = val;
+			if (val.price.low < low.price.low && val.price.low > 0) low = val;
+		});
+		return {
+			high: high,
+			low: low
+		}
+	}
+
 	// GET
 
 	/**

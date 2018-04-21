@@ -1,3 +1,4 @@
+const LibraryError = require('../../globals/LibraryError');
 const Robinhood = require('./Robinhood');
 const request = require('request');
 
@@ -98,7 +99,7 @@ class Order extends Robinhood {
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.user.getAuthToken(), res => {
-					if (res.detail !== undefined || res.reject_reason !== null) reject(res);
+					if (res.detail !== undefined || res.reject_reason !== null) reject(new LibraryError(res));
 					else {
 						_this.executed = true;
 						_this.response = this._parse(res);
@@ -106,6 +107,28 @@ class Order extends Robinhood {
 					}
 				}, reject);
 			})
+		})
+	}
+
+	/**
+	 * Attempts to cancel an order.
+	 * @returns {Promise<Object>}
+	 */
+	cancel() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (!_this.executed) reject(new Error("Order has not yet been executed."));
+			else if (_this.cancel === null) reject(new Error("Order has been executed and cannot be cancelled."));
+			else {
+				request.post({
+					uri: _this.cancel,
+					headers: {
+						'Authorization': 'Token ' + _this.user.getAuthToken()
+					}
+				}, (error, response, body) => {
+					return Robinhood.handleResponse(error, response, body, _this.user.getAuthToken(), resolve, reject);
+				})
+			}
 		})
 	}
 

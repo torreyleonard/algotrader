@@ -62,6 +62,7 @@
 	- [Stream](#stream)
 	- [News](#news)
 	- [Alpha Vantage](#alpha-vantage)
+- [Further Notes](#notes)
 
 ---
 
@@ -442,3 +443,28 @@ news.getArticle().then(html => {
 });
 ```
 For documentation on all News functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#News)
+
+---
+### Notes
+
+#### Dealing with errors
+
+You should ensure that all promises are provided a ```catch``` function in case they are rejected. In order to help with debugging, the ```Error.toString()``` method is modified in Algotrader's library. If you don't choose to use this you can continue to simply print the error.
+
+For example:
+```js
+myOrder.submit().then(res => {
+	// Order was successful
+}).catch(error => { console.error(error.toString()) });
+```
+This would print something similar to the image below, providing the response code and error message(s) from Robinhood. This is a larger error, so keep in mind that most of these would be on one line.
+
+![Algotrader Error toString](https://i.gyazo.com/b30d408b59ae6304894a10c2880862c3.png)
+
+However, if you don't like this and want to keep your errors uniform, you can simply use ```console.error(error)``` without ```toString().```
+
+![Algotrader Error](https://i.gyazo.com/87b61b01b3089d836fd3ec3024ba7d3a.png)
+
+As you can probably see from the images, it's much appreciated if you report unexpected errors as a new Issue on GitHub. Not only can you get help resolving the error if it's an isolated incident, but it also helps fix bugs in future updates.
+
+You can report errors [here.](https://github.com/Ladinn/algotrader/issues)

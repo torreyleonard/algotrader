@@ -1,4 +1,5 @@
 const Robinhood = require('./Robinhood');
+const LibraryError = require('../../globals/LibraryError');
 const request = require('request');
 const moment = require('moment');
 const async = require('async');
@@ -194,11 +195,9 @@ class Market extends Robinhood {
 					_this.getHoursOn(newDate.toDate()).then(hours => {
 						if (hours.isOpen) next = hours.close;
 						callback();
-					})
-				},
-				error => {
-					if (error) reject(error);
-					else resolve(next);
+					}).catch(error => reject(new LibraryError(error)));
+				}, () => {
+					resolve(next);
 				})
 		})
 	}

@@ -1,6 +1,8 @@
+const LibraryError = require('../globals/LibraryError');
 const Quote = require('../globals/Quote');
 const request = require('request');
 const ora = require('ora');
+const _ = require('lodash');
 
 /**
  * Further documentation can be found here: https://www.alphavantage.co/documentation/
@@ -21,7 +23,7 @@ class AlphaVantage {
 	 */
 	_requester(qs) {
 		const _this = this;
-		const loading = ora("Downloading from AlphaVantage...").start();
+		const loading = ora("Downloading '" + qs.function + "' from AlphaVantage...").start();
 		return new Promise((resolve, reject) => {
 			qs.apikey = _this.apiKey;
 			qs.datatype = "json";
@@ -30,6 +32,7 @@ class AlphaVantage {
 				qs: qs
 			}, (error, response, body ) => {
 				if (error) reject(error);
+				else if (body.indexOf("application-error.html") !== -1) reject(new LibraryError("The Alpha Vantage servers are overloaded. Please try again."));
 				else if (response.statusCode !== 200) reject(body);
 				else {
 					const json = JSON.parse(body);
@@ -72,7 +75,7 @@ class AlphaVantage {
 					}))
 				}
 			}
-			return array;
+			return _.sortBy(array, 'date');
 		})
 	}
 
@@ -130,7 +133,7 @@ class AlphaVantage {
 					))
 				}
 			}
-			return array;
+			return _.sortBy(array, 'date');;
 		})
 	}
 
@@ -186,7 +189,7 @@ class AlphaVantage {
 					))
 				}
 			}
-			return array;
+			return _.sortBy(array, 'date');;
 		})
 	}
 
@@ -242,7 +245,7 @@ class AlphaVantage {
 					))
 				}
 			}
-			return array;
+			return _.sortBy(array, 'date');;
 		})
 	}
 
@@ -274,7 +277,7 @@ class AlphaVantage {
 					array.push(newObject);
 				}
 			}
-			return array;
+			return _.sortBy(array, 'date');
 		})
 	}
 

@@ -2,6 +2,7 @@ const Robinhood = require('./Robinhood');
 const Fundamentals = require('./Fundamentals');
 const Market = require('./Market');
 const Quote = require('../../globals/Quote');
+const LibraryError = require('../../globals/LibraryError');
 
 const request = require('request');
 const async = require('async');
@@ -82,7 +83,8 @@ class Instrument extends Robinhood {
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, null, res => {
-					resolve(new Instrument(res));
+					if (res.length !== undefined) reject(new LibraryError("Invalid instrument symbol."));
+					else resolve(new Instrument(res));
 				}, reject);
 			})
 		})
@@ -143,10 +145,9 @@ class Instrument extends Robinhood {
 						Instrument.getByURL(value.instrument_url).then(ins => {
 							array.push(ins);
 							callback();
-						})
-					}, error => {
-						if (error) reject(error);
-						else resolve(array);
+						}).catch(error => reject(new RequestError(error)));
+					}, () => {
+						resolve(array);
 					})
 				}, reject);
 			});
@@ -220,7 +221,7 @@ class Instrument extends Robinhood {
 					res.instruments.forEach(o => {
 						ids.push(o.split('instruments/')[1].split('/')[0]);
 					});
-					Instrument.getByIdArray(ids).then(res => resolve(res)).catch(error => reject(error));
+					return Instrument.getByIdArray(ids).then(res => resolve(res)).catch(error => reject(error));
 				}, reject);
 			});
 		})
@@ -337,7 +338,7 @@ class Instrument extends Robinhood {
 							dom: {
 								bid: {
 									price: Number(res.bid_price),
-									size: Number(res.bidSize)
+									size: Number(res.bid_size)
 								},
 								ask: {
 									price: Number(res.ask_price),

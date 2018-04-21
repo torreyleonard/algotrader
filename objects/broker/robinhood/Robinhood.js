@@ -1,3 +1,4 @@
+const LibraryError = require('../../globals/LibraryError');
 const async = require('async');
 const request = require('request');
 const ora = require('ora');
@@ -14,11 +15,21 @@ class Robinhood {
 
 	static handleResponse(error, response, body, token, resolve, reject) {
 		if (error) reject(error);
-		else if (response.statusCode > 299 && response.statusCode < 200) reject(new Error("Robinhood responded with code: " + response.statusCode + ".\n\t" + body));
-		else try {
+		// else if (response.statusCode > 299 || response.statusCode < 200) reject(new LibraryError("Robinhood responded with code: " + response.statusCode + ".\n\t" + body));
+		else if (response.statusCode > 299 || response.statusCode < 200) {
+			if (body.indexOf("{") === 0) {
+
+				let json = JSON.parse(body);
+				let keys = Object.keys(json);
+				if (keys.length === 1) body = " | " + json[keys[0]];
+				else body = ".\n\n" + JSON.stringify(json, null, 2);
+
+			} else body = " | " + body;
+			reject(new LibraryError("Robinhood responded with code " + response.statusCode + body));
+		} else try {
 				const json = JSON.parse(body);
 				if (json.next) {
-					let loading = ora("Downloading from Robinhood").start();
+					let loading = ora("Downloading from Robinhood...").start();
 					let array = json.results;
 					let next = json.next;
 					async.whilst(() => { return next !== null; }, callback => {
@@ -30,7 +41,7 @@ class Robinhood {
 						};
 						request(options, (error, response, body) => {
 							if (error) reject(error);
-							else if (response.statusCode !== 200) reject(new Error(body));
+							else if (response.statusCode !== 200) reject(new LibraryError(body));
 							else {
 								const nextJson = JSON.parse(body);
 								next = nextJson.next;

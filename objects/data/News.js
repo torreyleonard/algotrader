@@ -1,3 +1,4 @@
+const LibraryError = require('../globals/LibraryError');
 const request = require('request');
 const xmlJS = require('xml-js');
 
@@ -36,7 +37,7 @@ class News {
 				uri: 'http://feeds.finance.yahoo.com/rss/2.0/headline?s=' + symbol + '&region=US&lang=en-US'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
 					const result = JSON.parse(xmlJS.xml2json(body, {compact: true, spaces: 0})).rss.channel.item;
 					let array = [];
@@ -79,7 +80,7 @@ class News {
 					qs: object
 				}, (error, response, body) => {
 					if (error) reject(error);
-					else if (response.statusCode !== 200) reject(new Error(body));
+					else if (response.statusCode !== 200) reject(new LibraryError(body));
 					else {
 						const json = JSON.parse(body).articles;
 						let array = [];
@@ -122,7 +123,7 @@ class News {
 					qs: object
 				}, (error, response, body) => {
 					if (error) reject(error);
-					else if (response.statusCode !== 200) reject(new Error(body));
+					else if (response.statusCode !== 200) reject(new LibraryError(body));
 					else {
 						const json = JSON.parse(body).articles;
 						let array = [];
@@ -156,7 +157,7 @@ class News {
 				uri: _this.url
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
 					_this.article = body;
 					resolve(body);

@@ -1,3 +1,4 @@
+const LibraryError = require('../../globals/LibraryError');
 const Robinhood = require('./Robinhood');
 const Instrument = require('./Instrument');
 const Portfolio = require('./Portfolio');
@@ -42,7 +43,7 @@ class User extends Robinhood {
 				}
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
 					_this.token = JSON.parse(body).token;
 					_this.getAccount().then(account => {
@@ -68,7 +69,7 @@ class User extends Robinhood {
 				}
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else resolve(true);
 			})
 		})

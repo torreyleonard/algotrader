@@ -1,3 +1,4 @@
+const LibraryError = require('../../globals/LibraryError');
 const Robinhood = require('./Robinhood');
 const Order = require('./Order');
 const Instrument = require('./Instrument');

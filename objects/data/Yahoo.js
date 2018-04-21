@@ -1,7 +1,9 @@
+const LibraryError = require('../globals/LibraryError');
 const Quote = require('../globals/Quote');
 const OptionsChain = require('../globals/OptionsChain');
 const request = require('request');
 const async = require('async');
+const ora = require('ora');
 
 /**
  * Used to interact with the Yahoo Finance API.
@@ -22,7 +24,7 @@ class Yahoo {
 				uri: "https://query2.finance.yahoo.com/v7/finance/chart/" + symbol + "?range=" + range + "&interval=" + interval + "&indicators=quote&includeTimestamps=true&includePrePost=" + extended + "&events=div%7Csplit%7Cearn"
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
 
 					let json = JSON.parse(body).chart.result[0];
@@ -63,9 +65,10 @@ class Yahoo {
 	 */
 	static getOptionsChain(symbol) {
 		return new Promise((resolve, reject) => {
+			const loading = ora("Downloading from Yahoo! Finance...").start();
 			request('https://query2.finance.yahoo.com/v7/finance/options/' + symbol, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 						let json = JSON.parse(body);
 						let data = json.optionChain.result[0];
@@ -74,7 +77,7 @@ class Yahoo {
 						async.forEachOf(timestamps, (value, key, callback) => {
 							request('https://query2.finance.yahoo.com/v7/finance/options/' + symbol + '?date=' + value, (error, response, body) => {
 								if (error) reject(error);
-								else if (response.statusCode !== 200) reject(new Error(body));
+								else if (response.statusCode !== 200) reject(new LibraryError(body));
 								else try {
 
 										json = JSON.parse(body);
@@ -142,13 +145,17 @@ class Yahoo {
 											});
 										}
 
+										loading.text += '.';
 										callback();
 
 									} catch (error) {
 										reject(error);
 									}
 							});
-						}, () => resolve(new OptionsChain(array)) );
+						}, () => {
+							loading.succeed("Download complete.");
+							resolve(new OptionsChain(array))
+						} );
 					} catch (error) {
 						reject(error);
 					}

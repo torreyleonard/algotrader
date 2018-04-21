@@ -1,3 +1,4 @@
+const LibraryError = require('../globals/LibraryError');
 const News = require('./News');
 const Quote = require('../globals/Quote');
 const EventEmitter = require('events');
@@ -55,8 +56,8 @@ class Stream extends EventEmitter {
 		}).on('error', error => {
 			_this.emit('error', error)
 		}).on('response', response => {
-			if (response.statusCode === 404) _this.emit('error', new Error("Yahoo Finance streamer responded with status code: 404.\nThis is typically a result of an invalid equity symbol in the query."));
-			else if (response.statusCode !== 200) _this.emit('error', new Error("Yahoo Finance streamer responded with status code: " + response.statusCode));
+			if (response.statusCode === 404) _this.emit('error', new LibraryError("Yahoo Finance streamer responded with status code: 404.\n\tThis is typically a result of an invalid equity symbol in the query."));
+			else if (response.statusCode !== 200) _this.emit('error', new LibraryError("Yahoo Finance streamer responded with status code: " + response.statusCode));
 			else _this.emit('response', response);
 		}).on('data', data => {
 			try {
@@ -79,7 +80,7 @@ class Stream extends EventEmitter {
 									_this.newsArray.push(news);
 								}
 							})
-						})
+						}).catch(error => _this.emit('error', new LibraryError(error)));
 					}
 				});
 			} catch (error) {

@@ -1,3 +1,4 @@
+const LibraryError = require('../globals/LibraryError');
 const Robinhood = require('../broker/robinhood/Robinhood');
 const request = require('request');
 
@@ -17,11 +18,11 @@ class Query {
 				uri: 'https://autoc.finance.yahoo.com/autoc?query=' + string + '&region=1&lang=en'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 					let result = JSON.parse(body).ResultSet.Result;
 					if (result instanceof Array) resolve(result);
-					else reject(new Error(body));
+					else reject(new LibraryError(body));
 				} catch (error) {
 					reject(error);
 				}
@@ -40,11 +41,11 @@ class Query {
 				uri: 'https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved?formatted=false&lang=en-US&region=US&scrIds=day_gainers&count=' + count + '&corsDomain=finance.yahoo.com'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 					let result = JSON.parse(body).finance.result[0].quotes;
 					if (result instanceof Array) resolve(result);
-					else reject(new Error(body));
+					else reject(new LibraryError(body));
 				} catch (error) {
 					reject(error);
 				}
@@ -63,11 +64,11 @@ class Query {
 				uri: 'https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved?formatted=false&lang=en-US&region=US&scrIds=day_losers&count=' + count + '&corsDomain=finance.yahoo.com'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 						let result = JSON.parse(body).finance.result[0].quotes;
 						if (result instanceof Array) resolve(result);
-						else reject(new Error(body));
+						else reject(new LibraryError(body));
 					} catch (error) {
 						reject(error);
 					}
@@ -86,11 +87,11 @@ class Query {
 				uri: 'https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved?formatted=false&lang=en-US&region=US&scrIds=most_actives&count=' + count + '&corsDomain=finance.yahoo.com'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 						let result = JSON.parse(body).finance.result[0].quotes;
 						if (result instanceof Array) resolve(result);
-						else reject(new Error(body));
+						else reject(new LibraryError(body));
 					} catch (error) {
 						reject(error);
 					}
@@ -109,11 +110,11 @@ class Query {
 				uri: 'https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved?formatted=false&lang=en-US&region=US&scrIds=65f51cea-8dc8-4e56-9f99-6ef7720eb69c&count=' + count + '&corsDomain=finance.yahoo.com'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 						let result = JSON.parse(body).finance.result[0].quotes;
 						if (result instanceof Array) resolve(result);
-						else reject(new Error(body));
+						else reject(new LibraryError(body));
 					} catch (error) {
 						reject(error);
 					}
@@ -132,11 +133,11 @@ class Query {
 				uri: 'https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved?formatted=false&lang=en-US&region=US&scrIds=top_etfs_us&count=' + count + '&corsDomain=finance.yahoo.com'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 						let result = JSON.parse(body).finance.result[0].quotes;
 						if (result instanceof Array) resolve(result);
-						else reject(new Error(body));
+						else reject(new LibraryError(body));
 					} catch (error) {
 						reject(error);
 					}
@@ -155,11 +156,11 @@ class Query {
 				uri: 'https://query1.finance.yahoo.com/v6/finance/recommendationsbysymbol/' + symbol
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 					let result = JSON.parse(body).finance.result[0].recommendedSymbols;
 					if (result instanceof Array) resolve(result);
-					else reject(new Error(body));
+					else reject(new LibraryError(body));
 				} catch (error) {
 					reject(error);
 				}
@@ -178,7 +179,7 @@ class Query {
 				uri: 'https://query1.finance.yahoo.com/v1/finance/trending/US?lang=en-US&region=US&count=' + count + '&corsDomain=finance.yahoo.com'
 			}, (error, response, body) => {
 				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new Error(body));
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else try {
 					const json = JSON.parse(body).finance.result[0].quotes;
 					let array = [];
