@@ -463,7 +463,7 @@ This would print something similar to the image below, providing the response co
 
 However, if you don't like this and want to keep your errors uniform, you can simply use ```console.error(error)``` without ```toString().```
 
-![Algotrader Error](https://i.gyazo.com/87b61b01b3089d836fd3ec3024ba7d3a.png)
+![Algotrader Error](https://i.gyazo.com/40c9f81be2c815a520ee9ec9f128f197.png)
 
 As you can probably see from the images, it's much appreciated if you report unexpected errors as a new Issue on GitHub. Not only can you get help resolving the error if it's an isolated incident, but it also helps fix bugs in future updates.
 
