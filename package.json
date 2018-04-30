@@ -31,6 +31,9 @@
   "homepage": "https://github.com/Ladinn/algotrader#readme",
   "dependencies": {
     "async": "^2.6.0",
+    "fast-csv": "^2.4.1",
+    "ftp": "^0.3.10",
+    "jsdoc-to-markdown": "^4.0.1",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "node-schedule": "^1.3.0",

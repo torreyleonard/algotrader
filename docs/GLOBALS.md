@@ -240,6 +240,7 @@ Returns the nearest expiration date to the given date.
         * [.getOriginal()](#Quote+getOriginal) ⇒ <code>String</code>
     * _static_
         * [.getVWAP(quoteArray)](#Quote.getVWAP) ⇒ <code>Number</code>
+        * [.priceChannel(quoteArray, period)](#Quote.priceChannel) ⇒ <code>Object</code>
 
 <a name="new_Quote_new"></a>
 
@@ -326,4 +327,16 @@ https://www.investopedia.com/terms/v/vwap.asp
 | Param | Type |
 | --- | --- |
 | quoteArray | <code>Array</code> | 
+
+<a name="Quote.priceChannel"></a>
+
+### Quote.priceChannel(quoteArray, period) ⇒ <code>Object</code>
+Retrieves the highest high and lowest low for the provided period of time.
+
+**Kind**: static method of [<code>Quote</code>](#Quote)  
+
+| Param | Type |
+| --- | --- |
+| quoteArray | <code>Array</code> | 
+| period | <code>int</code> | 
 

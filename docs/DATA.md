@@ -4,6 +4,9 @@
 <dt><a href="#AlphaVantage">AlphaVantage</a></dt>
 <dd><p>Further documentation can be found here: <a href="https://www.alphavantage.co/documentation/">https://www.alphavantage.co/documentation/</a></p>
 </dd>
+<dt><a href="#Nasdaq">Nasdaq</a></dt>
+<dd><p>For use with the Nasdaq&#39;s public data repository.</p>
+</dd>
 <dt><a href="#News">News</a></dt>
 <dd><p>Represents an individual news article. Static functions retrieve News objects.</p>
 </dd>
@@ -371,6 +374,43 @@ http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 | fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
 
+<a name="Nasdaq"></a>
+
+## Nasdaq
+For use with the Nasdaq's public data repository.
+
+**Kind**: global class  
+
+* [Nasdaq](#Nasdaq)
+    * [.getListings()](#Nasdaq.getListings) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.getTraded()](#Nasdaq.getTraded) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.getOtherListings()](#Nasdaq.getOtherListings) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.getOTCListings()](#Nasdaq.getOTCListings) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+
+<a name="Nasdaq.getListings"></a>
+
+### Nasdaq.getListings() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+Returns an array of objects with details on Nasdaq listed equities.
+
+**Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+<a name="Nasdaq.getTraded"></a>
+
+### Nasdaq.getTraded() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+Returns an array of objects with details on Nasdaq traded equities.
+
+**Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+<a name="Nasdaq.getOtherListings"></a>
+
+### Nasdaq.getOtherListings() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+Returns an array of objects with details on other equities.
+
+**Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+<a name="Nasdaq.getOTCListings"></a>
+
+### Nasdaq.getOTCListings() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+Returns an array of objects with details on OTC traded equities.
+
+**Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
 <a name="News"></a>
 
 ## News
@@ -653,7 +693,7 @@ Creates a new Stream class.
 Start the streaming class.
 
 The event will emit three events: error (Error object), response (JSON from request module), and quote (Quote object).
-Access via .on('data', function), etc.
+Access via .on('quote', function), etc.
 
 **Kind**: instance method of [<code>Stream</code>](#Stream)  
 <a name="Stream+stop"></a>
@@ -670,12 +710,12 @@ Used to interact with the Yahoo Finance API.
 **Kind**: global class  
 
 * [Yahoo](#Yahoo)
-    * [.getQuotes(symbol, range, interval, extended)](#Yahoo.getQuotes) ⇒ <code>Promise</code>
+    * [.getQuotes(symbol, range, interval, extended)](#Yahoo.getQuotes) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.getOptionsChain(symbol)](#Yahoo.getOptionsChain) ⇒ <code>Promise.&lt;OptionsChain&gt;</code>
 
 <a name="Yahoo.getQuotes"></a>
 
-### Yahoo.getQuotes(symbol, range, interval, extended) ⇒ <code>Promise</code>
+### Yahoo.getQuotes(symbol, range, interval, extended) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of Quote objects from Yahoo Finance.
 
 **Kind**: static method of [<code>Yahoo</code>](#Yahoo)  

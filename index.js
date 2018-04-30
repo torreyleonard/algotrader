@@ -14,7 +14,8 @@ module.exports = {
 		Query: require('./objects/data/Query'),
 		AlphaVantage: require('./objects/data/AlphaVantage'),
 		News: require('./objects/data/News'),
-		Yahoo: require('./objects/data/Yahoo')
+		Yahoo: require('./objects/data/Yahoo'),
+		Nasdaq: require('./objects/data/Nasdaq')
 	},
 	Algorithm: {
 		Scheduler: require('./objects/algorithm/Scheduler')
