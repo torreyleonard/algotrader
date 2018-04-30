@@ -1,5 +1,6 @@
 const ftp = require('ftp');
 const csv = require('fast-csv');
+const _ = require('lodash');
 
 /**
  * For use with the Nasdaq's public data repository.
@@ -43,7 +44,7 @@ class Nasdaq {
 	 * @returns {Promise<Object[]>}
 	 */
 	static getTraded() {
-		return Nasdaq._request("SymbolDirectory/nasdaqtraded.txt")
+		return Nasdaq._request("SymbolDirectory/nasdaqtraded.txt");
 	}
 
 	/**
@@ -51,7 +52,7 @@ class Nasdaq {
 	 * @returns {Promise<Object[]>}
 	 */
 	static getOtherListings() {
-		return Nasdaq._request("SymbolDirectory/otherlisted.txt")
+		return Nasdaq._request("SymbolDirectory/otherlisted.txt");
 	}
 
 	/**
@@ -59,7 +60,29 @@ class Nasdaq {
 	 * @returns {Promise<Object[]>}
 	 */
 	static getOTCListings() {
-		return Nasdaq._request("SymbolDirectory/otclist.txt")
+		return Nasdaq._request("SymbolDirectory/otclist.txt");
+	}
+
+	/**
+	 * Returns an array of objects with details on equities whose name matchs the given filter.
+	 * @param {String} string
+	 * @returns {Promise<Object[]>}
+	 */
+	static getByName(string) {
+		return Nasdaq.getTraded().then(array => {
+			return (_.filter(array, o => { return o["Security Name"].indexOf(string) !== -1; }))
+		})
+	}
+
+	/**
+	 * Returns an array of symbols that represent exchange traded funds.
+	 * @returns {Promise<String[]>}
+	 */
+	static getETFs() {
+		return Nasdaq.getTraded().then(array => {
+			array = _.filter(array, o => { return o["ETF"] === "Y"; });
+			return (_.map(array, 'Symbol'));
+		})
 	}
 
 }
