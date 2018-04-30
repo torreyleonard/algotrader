@@ -158,6 +158,16 @@ test('data | yahoo > get options chain', t => {
 	}).catch(error => t.fail(error));
 });
 
+// Nasdaq
+
+const Nasdaq = algotrader.Data.Nasdaq;
+
+test('data | nasdaq > get listings', t => {
+	return Nasdaq.getTraded().then(res => {
+		t.true(res.length > 0);
+	}).catch(error => t.fail(error));
+});
+
 /**
  * Algorithm Library
  */
