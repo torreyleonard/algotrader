@@ -1,6 +1,7 @@
 const LibraryError = require('../globals/LibraryError');
 const Robinhood = require('../broker/robinhood/Robinhood');
 const request = require('request');
+const cheerio = require('cheerio');
 
 /**
  * Find and filter securities based on certain criteria.
@@ -220,15 +221,43 @@ class Query {
 	static getEarningsBySymbol(symbol) {
 		return new Promise((resolve, reject) => {
 			request({
-				uri: "https://api.robinhood.com/marketdata/earnings/",
+				uri: "http://finance.yahoo.com/q/ks?s=",
 				qs: {
 					symbol: symbol
 				}
 			}, (error, response, body) => {
-				Robinhood.handleResponse(error, response, body, null, resolve, reject);
+				return Robinhood.handleResponse(error, response, body, null, resolve, reject);
 			})
 		})
 	}
+
+	// static getFinancials(symbol) {
+	// 	return new Promise((resolve, reject) => {
+	// 		request({
+	// 			uri: "http://finance.yahoo.com/q/ks",
+	// 			qs: {
+	// 				s: symbol
+	// 			}
+	// 		}, (error, response, body) => {
+	// 			if (error) reject(error);
+	// 			else if (response.statusCode !== 200) reject(new LibraryError(body));
+	// 			else {
+	// 				let keys = [];
+	// 				let data = [];
+	// 				const $ = cheerio.load(body);
+	// 				const td = $('.table-qsp-stats');
+	// 				$(td).each((j, val) => {
+	// 					console.log(val);
+	// 					keys[j] = $(val).text();
+	// 				});
+	// 				$(td).each(function(j, val) {
+	// 					data[j] = $(val).text();
+	// 				});
+	// 				resolve(null);
+	// 			}
+	// 		})
+	// 	})
+	// }
 
 }
 
