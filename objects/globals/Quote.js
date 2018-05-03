@@ -49,7 +49,7 @@ class Quote {
 	}
 
 	/**
-	 * Retrieves the highest high and lowest low for the provided period of time.
+	 * Calculates the highest high and lowest low for the provided period of time.
 	 * @param {Array} quoteArray
 	 * @param {int} period
 	 * @returns {Object}

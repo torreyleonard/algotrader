@@ -48,7 +48,8 @@ class User extends Robinhood {
 					_this.token = JSON.parse(body).token;
 					_this.getAccount().then(account => {
 						_this.account = account.account_number;
-						resolve(true);
+						_this.password = "*".repeat(_this.password.length);
+						resolve(_this);
 					}).catch(error => reject(error));
 				}
 			})

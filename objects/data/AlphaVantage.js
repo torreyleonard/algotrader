@@ -44,6 +44,10 @@ class AlphaVantage {
 		});
 	}
 
+	/**
+	 * Returns an array of objects showing historical and real time S&P sector performance.
+	 * @returns {Promise}
+	 */
 	sectorPerformance() {
 		const _this = this;
 		return new Promise((resolve, reject) => {
