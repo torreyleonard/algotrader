@@ -30,6 +30,7 @@ Further documentation can be found here: https://www.alphavantage.co/documentati
 
 * [AlphaVantage](#AlphaVantage)
     * [new AlphaVantage(apiKey)](#new_AlphaVantage_new)
+    * [.sectorPerformance()](#AlphaVantage+sectorPerformance) ⇒ <code>Promise</code>
     * [.timeSeriesIntraday(symbol, interval)](#AlphaVantage+timeSeriesIntraday) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.timeSeriesDaily(symbol, compact, adjusted)](#AlphaVantage+timeSeriesDaily) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.timeSeriesWeekly(symbol, adjusted)](#AlphaVantage+timeSeriesWeekly) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -61,6 +62,12 @@ Creates a new AlphaVantage instance.
 | --- | --- | --- |
 | apiKey | <code>String</code> | The free API key retrieved from |
 
+<a name="AlphaVantage+sectorPerformance"></a>
+
+### alphaVantage.sectorPerformance() ⇒ <code>Promise</code>
+Returns an array of objects showing historical and real time S&P sector performance.
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
 <a name="AlphaVantage+timeSeriesIntraday"></a>
 
 ### alphaVantage.timeSeriesIntraday(symbol, interval) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -386,6 +393,8 @@ For use with the Nasdaq's public data repository.
     * [.getTraded()](#Nasdaq.getTraded) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
     * [.getOtherListings()](#Nasdaq.getOtherListings) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
     * [.getOTCListings()](#Nasdaq.getOTCListings) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.getByName(string)](#Nasdaq.getByName) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+    * [.getETFs()](#Nasdaq.getETFs) ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
 
 <a name="Nasdaq.getListings"></a>
 
@@ -409,6 +418,23 @@ Returns an array of objects with details on other equities.
 
 ### Nasdaq.getOTCListings() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Returns an array of objects with details on OTC traded equities.
+
+**Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+<a name="Nasdaq.getByName"></a>
+
+### Nasdaq.getByName(string) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+Returns an array of objects with details on equities whose name matchs the given filter.
+
+**Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+
+| Param | Type |
+| --- | --- |
+| string | <code>String</code> | 
+
+<a name="Nasdaq.getETFs"></a>
+
+### Nasdaq.getETFs() ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
+Returns an array of symbols that represent exchange traded funds.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
 <a name="News"></a>

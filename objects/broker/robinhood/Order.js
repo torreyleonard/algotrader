@@ -1,6 +1,7 @@
 const LibraryError = require('../../globals/LibraryError');
 const Robinhood = require('./Robinhood');
 const request = require('request');
+const async = require('async');
 
 /**
  * Represents and executes an order for the given instrument.
@@ -118,10 +119,10 @@ class Order extends Robinhood {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			if (!_this.executed) reject(new Error("Order has not yet been executed."));
-			else if (_this.cancel === null) reject(new Error("Order has been executed and cannot be cancelled."));
+			else if (_this.response.urls.cancel === null) reject(new Error("Order has been executed and cannot be cancelled."));
 			else {
 				request.post({
-					uri: _this.cancel,
+					uri: _this.response.urls.cancel,
 					headers: {
 						'Authorization': 'Token ' + _this.user.getAuthToken()
 					}
@@ -169,11 +170,30 @@ class Order extends Robinhood {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					let array = [];
 					res.forEach(o => {
-						array.push(new Order(user, o));
+						if (!Array.isArray(o)) array.push(new Order(user, o));
+						else o.forEach(o2 => {
+							array.push(new Order(user, o2));
+						})
 					});
 					resolve(array);
 				}, reject);
 			})
+		})
+	}
+
+	static cancelOpenOrders(user) {
+		return new Promise((resolve, reject) => {
+			Order.getRecentOrders(user).then(array => {
+				async.forEachOf(array, (order, key, callback) => {
+					if (order.response.urls.cancel !== 'null') {
+						order.cancel().then(() => {
+							callback();
+						}).catch(error => { reject(error) });
+					} else callback();
+				}, () => {
+					resolve();
+				})
+			}).catch(error => reject(error));
 		})
 	}
 

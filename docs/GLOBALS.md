@@ -331,7 +331,7 @@ https://www.investopedia.com/terms/v/vwap.asp
 <a name="Quote.priceChannel"></a>
 
 ### Quote.priceChannel(quoteArray, period) ⇒ <code>Object</code>
-Retrieves the highest high and lowest low for the provided period of time.
+Calculates the highest high and lowest low for the provided period of time.
 
 **Kind**: static method of [<code>Quote</code>](#Quote)  
 

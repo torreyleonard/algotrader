@@ -287,10 +287,18 @@ class User extends Robinhood {
 
 	/**
 	 * Returns an array of recent orders.
-	 * @returns {Promise<Array>}
+	 * @returns {Promise<Order[]>}
 	 */
 	getRecentOrders() {
 		return Order.getRecentOrders(this);
+	}
+
+	/**
+	 * Cancels all open orders.
+	 * @returns {Promise}
+	 */
+	cancelOpenOrders() {
+		return Order.cancelOpenOrders(this);
 	}
 
 	/**
