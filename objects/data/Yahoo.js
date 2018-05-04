@@ -34,24 +34,29 @@ class Yahoo {
 					const timestamps = json.timestamp;
 					const quotes = json.indicators.quote[0];
 
-					Object.keys(timestamps).forEach(key => {
-						if (quotes[key] !== null) array.push(
-							new Quote({
-								symbol: symbol,
-								source: "Yahoo/" + json.meta.exchangeName,
-								date: new Date(timestamps[key] * 1000),
-								price: {
-									open: Number(quotes.open[key]),
-									high: Number(quotes.high[key]),
-									low: Number(quotes.low[key]),
-									close: Number(quotes.close[key]),
-									volume: Number(quotes.volume[key])
-								}
-							})
-						)
-					});
+					if (timestamps === undefined) reject(new LibraryError("Invalid range given. Yahoo suggests using: " + json.meta.validRanges + " (Is this stock too young?)"));
+					else {
 
-					resolve(array);
+						Object.keys(timestamps).forEach(key => {
+							if (quotes[key] !== null) array.push(
+								new Quote({
+									symbol: symbol,
+									source: "Yahoo/" + json.meta.exchangeName,
+									date: new Date(timestamps[key] * 1000),
+									price: {
+										open: Number(quotes.open[key]),
+										high: Number(quotes.high[key]),
+										low: Number(quotes.low[key]),
+										close: Number(quotes.close[key]),
+										volume: Number(quotes.volume[key])
+									}
+								})
+							)
+						});
+
+						resolve(array);
+
+					}
 
 				}
 			})
