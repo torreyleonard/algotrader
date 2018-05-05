@@ -378,7 +378,7 @@ IEX.getStats("HD").then(stats => {
 You can even grab a company's logo with:
 
 ```js
-IEX.getLogo("AMAT").then(logoURL => {
+IEX.getLogo("MMM").then(logoURL => {
 	// https://storage.googleapis.com/iex/api/logos/MMM.png
 });
 ```
