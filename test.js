@@ -168,6 +168,19 @@ test('data | nasdaq > get listings', t => {
 	}).catch(error => t.fail(error));
 });
 
+// IEX
+
+const IEX = algotrader.Data.IEX;
+
+Object.getOwnPropertyNames(IEX).forEach(f => {
+	if (['length', 'prototype', '_request', 'getBatchQuotes', 'name'].indexOf(f) === -1)
+		test('data | IEX > ' + f, t => {
+			return IEX[f]("AAPL").then(res => {
+				t.true(res !== undefined)
+			}).catch(error => t.fail(error));
+		});
+});
+
 /**
  * Algorithm Library
  */

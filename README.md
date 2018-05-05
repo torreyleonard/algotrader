@@ -46,6 +46,8 @@
 	- [Alpha Vantage](https://www.alphavantage.co/)
 	- [Yahoo! Finance](https://finance.yahoo.com)
 	- [News API](https://newsapi.org/)
+	- [IEX](https://iextrading.com/)
+	- [Nasdaq](https://www.nasdaq.com/)
 
 ---
 
@@ -62,6 +64,8 @@
 	- [Stream](#stream)
 	- [News](#news)
 	- [Alpha Vantage](#alpha-vantage)
+	- [IEX](#iex)
+	- [Nasdaq](#nasdaq)
 - [Further Notes](#notes)
 
 ---
@@ -270,6 +274,20 @@ myStreamWithNews
 ```
 For documentation on News, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news)
 
+You can also instruct the stream class to fire events from IEX. You'll first want to find the streaming endpoint that contains the data you want to query. For the most part, you'll want to use ```tops,``` ```deep,``` and ```last.``` Find them all [here.](https://iextrading.com/developer/docs/#iex-market-data)
+
+```js
+const streamWithIEX = new Stream(["PG", "DIN", "ULTA"], {
+    iex: true,
+    iexType: "tops"
+});
+streamWithIEX.on('iex', iex => {
+    // Returns an object described here: https://iextrading.com/developer/docs/#iex-market-data
+});
+```
+
+For documentation on IEX, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#iex)
+
 #### Alpha Vantage
 
 Providing free access to real time and historical market data along with advanced technical analysis, Alpha Vantage has proven to be very helpful when it comes to analyzing stock activity. The only caveat is that, during market hours, their servers can occasionally take a while to respond. But aside from that, you won't find a more well equipped API for free.
@@ -300,6 +318,110 @@ av.rsi("AAPL", "daily", 14, "close").then(array => {
 });
 ```
 For documentation on all Alpha Vantage functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#AlphaVantage)
+
+#### IEX
+
+IEX is a stock exchange founded in 2012 with the goal of creating "fairer markets." True to this goal, they've created a public API for use by everyone, not just institutions that can afford a massive monthly  payment for data. Thanks to many factors, such as trading arbitrage, their quotes are the same (if not off by a fraction of a basis point) as the NYSE's and Nasdaq's nearly 100% of the time, even with their low volume comparatively. With that being said, below are a few examples of ways you can access their quote data and corporate financial information. For a full list of IEX queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#iex)
+
+```js
+const IEX = algotrader.Data.IEX;
+
+// Returns a quote object
+IEX.getQuote("CSX").then(quote => {
+	// Quote {
+	// 	symbol: 'CSX',
+	// 		date: 2018-05-04T20:00:00.251Z,
+	// 		source: 'IEX',
+	// 		price:
+	// 	{ last: 59.97,
+	// 		open: 58.69,
+	// 		high: 60.41,
+	// 		low: 58.575,
+	// 		close: 59.97,
+	// 		volume: 4186069 },
+	// 	dom: { bids: [], asks: [] }, - This was written while the market was closed. While the market is open, DOM elements are supported in the Quote object.
+	// 	meta: undefined,
+	// 		original: undefined }
+});
+
+// Returns an array of fiscal reports dating back 5 years
+IEX.getFinancials("AVGO").then(financials => {
+	// [ { reportDate: '2018-01-31',
+	// 	grossProfit: 2643000000,
+	// 	costOfRevenue: 2684000000,
+	// 	operatingRevenue: 5327000000,
+	// 	totalRevenue: 5327000000,
+	// 	operatingIncome: 1088000000,
+	// 	netIncome: 6230000000,
+	// 	researchAndDevelopment: 925000000,
+	// 	operatingExpense: 1555000000,
+	// 	currentAssets: 11220000000,
+	// 	totalAssets: 54544000000,
+	// 	totalLiabilities: 28643000000,
+	// 	currentCash: 7076000000,
+	// 	currentDebt: 117000000,
+	// 	totalCash: 7076000000,
+	// 	totalDebt: 17592000000,
+	// 	shareholderEquity: 25901000000,
+	// 	cashChange: -4128000000,
+	// 	cashFlow: 1685000000,
+	// 	operatingGainsLosses: null },
+});
+
+// Returns company name, EPS, divided, short interest, 52-week high/low, percent change, EBITDA, and more.
+IEX.getStats("HD").then(stats => {
+	// For full output see https://iextrading.com/developer/docs/#key-stats
+});
+
+```
+
+You can even grab a company's logo with:
+
+```js
+IEX.getLogo("AMAT").then(logoURL => {
+	// https://storage.googleapis.com/iex/api/logos/MMM.png
+});
+```
+Output:
+
+![3M](https://storage.googleapis.com/iex/api/logos/MMM.png)
+
+For documentation on IEX queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#iex)
+
+#### Nasdaq
+
+By market cap, the Nasdaq is the second largest global stock exchange behind only the NYSE. They offer a paid subscription for real time streaming, but Algotrader makes use of their public data repository via FTP. Below is an example of how to retrieve an array of all securities listed on their exchange. For a full list of Nasdaq queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#nasdaq)
+
+```js
+const Nasdaq = algotrader.Data.Nasdaq;
+
+Nasdaq.getListings().then(array => {
+	// [
+	// 	{
+	// 		Symbol: 'AABA',
+	// 		'Security Name': 'Altaba Inc. - Common Stock',
+	// 		'Market Category': 'Q',
+	// 		'Test Issue': 'N',
+	// 		'Financial Status': 'N',
+	// 		'Round Lot Size': '100',
+	// 		ETF: 'N',
+	// 		NextShares: 'N'
+	// 	},
+	// 	{
+	// 		Symbol: 'AAL',
+	// 		'Security Name': 'American Airlines Group, Inc. - Common Stock',
+	// 		'Market Category': 'Q',
+	// 		'Test Issue': 'N',
+	// 		'Financial Status': 'N',
+	// 		'Round Lot Size': '100',
+	// 		ETF: 'N',
+	// 		NextShares: 'N'
+	// 	},
+	// ... and thousands more
+});
+```
+
+For documentation on Nasdaq queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#nasdaq)
 
 #### Query
 

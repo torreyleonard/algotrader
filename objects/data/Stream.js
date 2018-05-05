@@ -3,9 +3,16 @@ const News = require('./News');
 const Quote = require('../globals/Quote');
 const EventEmitter = require('events');
 const request = require('request');
+const socket = require('socket.io-client');
 
 /**
  * An extension of the Node.js EventEmitter that sends Quote and News objects as they arrive.
+ * @event Stream#quote
+ * @type {Quote}
+ * @event Stream#news
+ * @type {News}
+ * @event Stream#iex
+ * @type {Object}
  */
 class Stream extends EventEmitter {
 
@@ -13,6 +20,8 @@ class Stream extends EventEmitter {
 	 * Creates a new Stream class.
 	 * @param {Array} symbols
 	 * @param {Object|Null} options
+	 * @property {Boolean} iex - Whether to include real time IEX data in stream
+	 * @property {String} iexType - Which endpoint to use for IEX stream (tops, last, hist, deep, book, etc. See: https://iextrading.com/developer/docs/#iex-market-data)
 	 * @property {Boolean} news - Whether to include news headlines in the stream.
 	 * @property {Boolean} allHeadlines - If true, all U.S. business headlines will be sent in the stream. If false, only news pertaining to the given symbols will be outputted.
 	 * @property {String} newsApiKey - If 'includeNews' is yes, this should be your API key from https://newsapi.org/register.
@@ -21,6 +30,8 @@ class Stream extends EventEmitter {
 		super();
 		this.symbols = symbols;
 		if (options) {
+			this.iex = Boolean(options.iex) || false;
+			this.iexType = String(options.iexType) || "tops";
 			this.news = Boolean(options.news) || false;
 			this.allHeadlines = Boolean(options.allHeadlines) || false;
 			this.newsApiKey = String(options.newsApiKey) || false;
@@ -30,9 +41,6 @@ class Stream extends EventEmitter {
 
 	/**
 	 * Start the streaming class.
-	 *
-	 * The event will emit three events: error (Error object), response (JSON from request module), and quote (Quote object).
-	 * Access via .on('quote', function), etc.
 	 */
 	start() {
 		const _this = this;
@@ -86,7 +94,16 @@ class Stream extends EventEmitter {
 			} catch (error) {
 				_this.emit('error', error);
 			}
-		})
+		});
+		if (_this.iex) {
+			_this.socket = socket("https://ws-api.iextrading.com/1.0/" + _this.iexType);
+			_this.socket.on('connect', () => {
+				_this.socket.emit('subscribe', _this.symbols.join(','));
+			});
+			_this.socket.on('message', data => {
+				_this.emit('iex', data);
+			});
+		}
 	}
 
 	/**
@@ -94,6 +111,7 @@ class Stream extends EventEmitter {
 	 */
 	stop() {
 		this.request.abort();
+		this.socket.disconnect();
 	}
 
 	_createQuote(input) {

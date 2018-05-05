@@ -4,6 +4,9 @@
 <dt><a href="#AlphaVantage">AlphaVantage</a></dt>
 <dd><p>Further documentation can be found here: <a href="https://www.alphavantage.co/documentation/">https://www.alphavantage.co/documentation/</a></p>
 </dd>
+<dt><a href="#IEX">IEX</a></dt>
+<dd><p>Used to interact with the IEX api. See the official documentation for more: <a href="https://iextrading.com/developer/docs/#last">https://iextrading.com/developer/docs/#last</a></p>
+</dd>
 <dt><a href="#Nasdaq">Nasdaq</a></dt>
 <dd><p>For use with the Nasdaq&#39;s public data repository.</p>
 </dd>
@@ -14,8 +17,7 @@
 <dd><p>Find and filter securities based on certain criteria.</p>
 </dd>
 <dt><a href="#Stream">Stream</a></dt>
-<dd><p>An extension of the Node.js EventEmitter that sends Quote and News objects as they arrive.</p>
-</dd>
+<dd></dd>
 <dt><a href="#Yahoo">Yahoo</a></dt>
 <dd><p>Used to interact with the Yahoo Finance API.</p>
 </dd>
@@ -381,6 +383,178 @@ http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 | fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
 
+<a name="IEX"></a>
+
+## IEX
+Used to interact with the IEX api. See the official documentation for more: https://iextrading.com/developer/docs/#last
+
+**Kind**: global class  
+
+* [IEX](#IEX)
+    * [.getQuote(symbol)](#IEX.getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
+    * [.getBatchQuotes(symbolArray)](#IEX.getBatchQuotes) ⇒ <code>Promise.&lt;Array.&lt;Quote&gt;&gt;</code>
+    * [.getCompanyDetails(symbol)](#IEX.getCompanyDetails) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getDividends(symbol)](#IEX.getDividends) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getEarnings(symbol)](#IEX.getEarnings) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getFinancials(symbol)](#IEX.getFinancials) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getStats(symbol)](#IEX.getStats) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getLogo(symbol)](#IEX.getLogo) ⇒ <code>Promise.&lt;String&gt;</code>
+    * [.getNews(symbol)](#IEX.getNews) ⇒ <code>Promise.&lt;Array.&lt;News&gt;&gt;</code>
+    * [.getPeers(symbol)](#IEX.getPeers) ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
+    * [.getSplits(symbol)](#IEX.getSplits) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getVolumeByVenue(symbol)](#IEX.getVolumeByVenue) ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
+    * [.getAllSymbols()](#IEX.getAllSymbols) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+
+<a name="IEX.getQuote"></a>
+
+### IEX.getQuote(symbol) ⇒ <code>Promise.&lt;Quote&gt;</code>
+Returns a quote object for the given symbol.
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getBatchQuotes"></a>
+
+### IEX.getBatchQuotes(symbolArray) ⇒ <code>Promise.&lt;Array.&lt;Quote&gt;&gt;</code>
+Returns an array of quote objects for the given symbols.
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbolArray | <code>Array.&lt;String&gt;</code> | An array of symbols to query |
+
+<a name="IEX.getCompanyDetails"></a>
+
+### IEX.getCompanyDetails(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing data on the given company.
+https://iextrading.com/developer/docs/#company
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getDividends"></a>
+
+### IEX.getDividends(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing data on dividends issued by the given company.
+https://iextrading.com/developer/docs/#dividends
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getEarnings"></a>
+
+### IEX.getEarnings(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing data on the four most recent earnings reports by the given company.
+https://iextrading.com/developer/docs/#earnings
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getFinancials"></a>
+
+### IEX.getFinancials(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing data on the given company's income statement, balance sheet, and cash flow from the four most recent reported quarters.
+https://iextrading.com/developer/docs/#financials
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getStats"></a>
+
+### IEX.getStats(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing data on the given company's market cap, beta, 52-week high & low, change, short intereste, dividend rate, float, EBITDA, cash, and more.
+https://iextrading.com/developer/docs/#key-stats
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getLogo"></a>
+
+### IEX.getLogo(symbol) ⇒ <code>Promise.&lt;String&gt;</code>
+Returns a string containing a URL endpoint with the given company's logo.
+https://iextrading.com/developer/docs/#logo
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getNews"></a>
+
+### IEX.getNews(symbol) ⇒ <code>Promise.&lt;Array.&lt;News&gt;&gt;</code>
+Returns an array of news objects for the given symbol.
+https://iextrading.com/developer/docs/#logo
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getPeers"></a>
+
+### IEX.getPeers(symbol) ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
+Returns an array of peer tickers as defined by IEX.
+https://iextrading.com/developer/docs/#peers
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getSplits"></a>
+
+### IEX.getSplits(symbol) ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing data on stock splits issued by the given company.
+https://iextrading.com/developer/docs/#dividends
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getVolumeByVenue"></a>
+
+### IEX.getVolumeByVenue(symbol) ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
+This returns 15 minute delayed and 30 day average consolidated volume percentage of a stock, by market.
+This call will always return 13 values, and will be sorted in ascending order by current day trading volume percentage.
+https://iextrading.com/developer/docs/#volume-by-venue
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+
+<a name="IEX.getAllSymbols"></a>
+
+### IEX.getAllSymbols() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
+Returns an array of symbols IEX supports for trading.
+https://iextrading.com/developer/docs/#symbols
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
 <a name="Nasdaq"></a>
 
 ## Nasdaq
@@ -693,14 +867,23 @@ Returns an object containing this company's past and future earnings data.
 <a name="Stream"></a>
 
 ## Stream
-An extension of the Node.js EventEmitter that sends Quote and News objects as they arrive.
-
 **Kind**: global class  
+**Properties**
+
+| Name | Type | Description |
+| --- | --- | --- |
+| iex | <code>Boolean</code> | Whether to include real time IEX data in stream |
+| iexType | <code>String</code> | Which endpoint to use for IEX stream (tops, last, hist, deep, book, etc. See: https://iextrading.com/developer/docs/#iex-market-data) |
+| news | <code>Boolean</code> | Whether to include news headlines in the stream. |
+| allHeadlines | <code>Boolean</code> | If true, all U.S. business headlines will be sent in the stream. If false, only news pertaining to the given symbols will be outputted. |
+| newsApiKey | <code>String</code> | If 'includeNews' is yes, this should be your API key from https://newsapi.org/register. |
+
 
 * [Stream](#Stream)
     * [new Stream(symbols, options)](#new_Stream_new)
     * [.start()](#Stream+start)
     * [.stop()](#Stream+stop)
+    * ["iex"](#Stream+event_iex)
 
 <a name="new_Stream_new"></a>
 
@@ -718,9 +901,6 @@ Creates a new Stream class.
 ### stream.start()
 Start the streaming class.
 
-The event will emit three events: error (Error object), response (JSON from request module), and quote (Quote object).
-Access via .on('quote', function), etc.
-
 **Kind**: instance method of [<code>Stream</code>](#Stream)  
 <a name="Stream+stop"></a>
 
@@ -728,6 +908,12 @@ Access via .on('quote', function), etc.
 Stop the streaming class.
 
 **Kind**: instance method of [<code>Stream</code>](#Stream)  
+<a name="Stream+event_iex"></a>
+
+### "iex"
+An extension of the Node.js EventEmitter that sends Quote and News objects as they arrive.
+
+**Kind**: event emitted by [<code>Stream</code>](#Stream)  
 <a name="Yahoo"></a>
 
 ## Yahoo

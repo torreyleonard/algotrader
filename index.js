@@ -15,7 +15,8 @@ module.exports = {
 		AlphaVantage: require('./objects/data/AlphaVantage'),
 		News: require('./objects/data/News'),
 		Yahoo: require('./objects/data/Yahoo'),
-		Nasdaq: require('./objects/data/Nasdaq')
+		Nasdaq: require('./objects/data/Nasdaq'),
+		IEX: require('./objects/data/IEX')
 	},
 	Algorithm: {
 		Scheduler: require('./objects/algorithm/Scheduler')
