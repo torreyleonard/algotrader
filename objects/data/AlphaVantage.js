@@ -629,6 +629,35 @@ class AlphaVantage {
 		]);
 	}
 
+	/**
+	 * Returns an array of bollinger bands for the equity specified.
+	 * https://www.investopedia.com/articles/technical/04/030304.asp
+	 * @param {String} symbol
+	 * @param {String} interval - Time interval between two consecutive data points in the time series. The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+	 * @param {Number} timePeriod - Number of data points used to calculate each BBANDS value. Positive integers are accepted (e.g., time_period=60, time_period=200)
+	 * @param {String} seriesType - The desired price type in the time series. Four types are supported: close, open, high, low
+	 * @param {Number|Null} nbdevup - The standard deviation multiplier of the upper band. Positive integers are accepted. By default, nbdevup=2.
+	 * @param {Number|Null} nbdevdn - The standard deviation multiplier of the lower band. Positive integers are accepted. By default, nbdevdn=2.
+	 * @param {Number|Null} matype - Moving average type of the time series. By default, matype=0. Integers 0 - 8 are accepted with the following mappings. 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA).
+	 * @returns {Promise<Array>}
+	 */
+	bbands(symbol, interval, timePeriod, seriesType, nbdevup, nbdevdn, matype) {
+		return this._technical("BBANDS", symbol, interval, timePeriod, seriesType, [
+			{
+				key: "nbdevup",
+				val: nbdevup !== null ? nbdevup : 2
+			},
+			{
+				key: "nbdevdn",
+				val: nbdevdn !== null ? nbdevdn : 2
+			},
+			{
+				key: "matype",
+				val: matype !== null ? matype : 0
+			}
+		]);
+	}
+
 }
 
 module.exports = AlphaVantage;
