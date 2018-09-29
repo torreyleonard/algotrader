@@ -84,7 +84,7 @@ class OptionOrder extends Robinhood {
 			request.post({
 				uri: _this.url + "/options/orders/",
 				headers: {
-					'Authorization': 'Token ' + _this.User.getAuthToken()
+					'Authorization': 'Bearer ' + _this.User.getAuthToken()
 				},
 				form: {
 					account: _this.url + "/accounts/" + _this.User.getAccountNumber() + "/",
@@ -109,7 +109,7 @@ class OptionOrder extends Robinhood {
 			request({
 				uri: "https://api.robinhood.com/options/orders/",
 				headers: {
-					'Authorization': 'Token ' + user.getAuthToken()
+					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
