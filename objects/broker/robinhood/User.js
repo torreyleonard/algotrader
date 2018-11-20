@@ -39,16 +39,17 @@ class User extends Robinhood {
 				uri: _this.url + "/api-token-auth/",
 				form: {
 					username: _this.username,
-					password: _this.password
+					password: _this.password,
+					scope: "internal"
+					grant_type: "password",
 				}
 			}, (error, response, body) => {
 				if (error) reject(error);
 				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
-					_this.token = JSON.parse(body).token;
+					_this.token = JSON.parse(body).access_token;
 					_this.getAccount().then(account => {
 						_this.account = account.account_number;
-						_this.password = "*".repeat(_this.password.length);
 						resolve(_this);
 					}).catch(error => reject(error));
 				}
@@ -66,7 +67,7 @@ class User extends Robinhood {
 			request.post({
 				uri: _this.url + "/api-token-logout/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				if (error) reject(error);
@@ -100,7 +101,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/accounts/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -167,7 +168,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/user/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -185,7 +186,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/user/id/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, res => {
@@ -205,7 +206,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/user/basic_info/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -223,7 +224,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/user/additional_info/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -241,7 +242,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/user/employment/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -259,7 +260,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/user/investment_profile/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -277,7 +278,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/accounts/" + _this.account + "/recent_day_trades/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -319,7 +320,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/accounts/" + _this.account + "/positions/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				Robinhood.handleResponse(error, response, body, _this.token, res => {
@@ -349,7 +350,7 @@ class User extends Robinhood {
 	// 		request({
 	// 			uri: _this.url + "/midlands/notifications/stack/",
 	// 			headers: {
-	// 				'Authorization': 'Token ' + _this.token
+	// 				'Authorization': 'Bearer ' + _this.token
 	// 			}
 	// 		}, (error, response, body) => {
 	// 			return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -369,7 +370,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + "/ach/relationships/",
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -396,7 +397,7 @@ class User extends Robinhood {
 				request({
 					uri: _this.url + "/ach/deposit_schedules/",
 					headers: {
-						'Authorization': 'Token ' + _this.token
+						'Authorization': 'Bearer ' + _this.token
 					},
 					qs: {
 						achRelationship: _this.url + "/ach/relationships/" + bankID + "/",
@@ -422,7 +423,7 @@ class User extends Robinhood {
 			request({
 				uri: _this.url + /documents/,
 				headers: {
-					'Authorization': 'Token ' + _this.token
+					'Authorization': 'Bearer ' + _this.token
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, _this.token, resolve, reject);
@@ -452,7 +453,7 @@ class User extends Robinhood {
 						const req = request({
 							uri: document.download_url,
 							headers: {
-								'Authorization': 'Token ' + _this.token
+								'Authorization': 'Bearer ' + _this.token
 							}
 						}, (error, response, body) => {
 							if (error) reject(error);

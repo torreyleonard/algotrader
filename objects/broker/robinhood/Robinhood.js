@@ -37,7 +37,7 @@ class Robinhood {
 						uri: next
 					};
 					if (token !== null) options.headers = {
-						'Authorization': 'Token ' + token
+						'Authorization': 'Bearer ' + token
 					};
 					request(options, (error, response, body) => {
 						if (error) reject(error);

@@ -253,7 +253,7 @@ class Instrument extends Robinhood {
 			request({
 				uri: "https://analytics.robinhood.com/instruments/tag/for-you/",
 				headers: {
-					'Authorization': 'Token ' + user.getAuthToken()
+					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				Robinhood.handleResponse(error, response, body, null, res => {
