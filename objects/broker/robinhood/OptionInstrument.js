@@ -47,7 +47,7 @@ class OptionInstrument extends Robinhood {
 			else request({
 				uri: "https://api.robinhood.com/options/instruments/",
 				headers: {
-					'Authorization': 'Token ' + user.getAuthToken()
+					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
@@ -71,7 +71,7 @@ class OptionInstrument extends Robinhood {
 			request({
 				uri: url,
 				headers: {
-					'Authorization': 'Token ' + user.getAuthToken()
+					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {

@@ -175,13 +175,19 @@ Represents a security traded on Robinhood.
         * [.isStock()](#Instrument+isStock) ⇒ <code>Boolean</code>
         * [.isETP()](#Instrument+isETP) ⇒ <code>Boolean</code>
         * [.isADR()](#Instrument+isADR) ⇒ <code>Boolean</code>
+        * [.equals(otherInstrument)](#Instrument+equals) ⇒ <code>Boolean</code>
     * _static_
         * [.getAll()](#Instrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getBySymbol(symbol)](#Instrument.getBySymbol) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+        * [.getByID(id)](#Instrument.getByID) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getByURL(instrumentURL)](#Instrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getTopMoving(direction)](#Instrument.getTopMoving) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+        * [.getByIdArray(ids)](#Instrument.getByIdArray) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getCategories()](#Instrument.getCategories) ⇒ <code>Array.&lt;String&gt;</code>
         * [.getByCategory(category)](#Instrument.getByCategory) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getMostPopular()](#Instrument.getMostPopular) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getUpcomingEarnings()](#Instrument.getUpcomingEarnings) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getRecommendations(user)](#Instrument.getRecommendations) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="new_Instrument_new"></a>
 
@@ -326,6 +332,17 @@ Checks if the instrument is an American Depositary Receipt. Typically applies to
 https://www.investopedia.com/terms/a/adr.asp
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+<a name="Instrument+equals"></a>
+
+### instrument.equals(otherInstrument) ⇒ <code>Boolean</code>
+Check whether another instance of Instrument equals this instance.
+
+**Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+
+| Param | Type |
+| --- | --- |
+| otherInstrument | [<code>Instrument</code>](#Instrument) | 
+
 <a name="Instrument.getAll"></a>
 
 ### Instrument.getAll() ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -343,6 +360,17 @@ Returns an instrument object for the specified symbol.
 | Param | Type |
 | --- | --- |
 | symbol | <code>String</code> | 
+
+<a name="Instrument.getByID"></a>
+
+### Instrument.getByID(id) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+Returns an instrument object for the specified Robinhood instrument ID.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
+
+| Param | Type |
+| --- | --- |
+| id | <code>String</code> | 
 
 <a name="Instrument.getByURL"></a>
 
@@ -366,6 +394,26 @@ Returns an array of Instruments for 10 of the top moving S&P 500 equities.
 | --- | --- | --- |
 | direction | <code>String</code> | Possible options: [up, down] |
 
+<a name="Instrument.getByIdArray"></a>
+
+### Instrument.getByIdArray(ids) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of instrument objects for the specified array of IDs.
+
+Note: large arrays will take longer to process and are capped at 50 per request, so multiple
+requests will be sent as the function iterates through the array.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
+
+| Param | Type |
+| --- | --- |
+| ids | <code>Array</code> | 
+
+<a name="Instrument.getCategories"></a>
+
+### Instrument.getCategories() ⇒ <code>Array.&lt;String&gt;</code>
+Returns an array of known categories that can be used with getByCategory(). This list is non-exhaustive.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument.getByCategory"></a>
 
 ### Instrument.getByCategory(category) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -375,7 +423,7 @@ Returns an array of Instruments related to the given category.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| category | <code>String</code> | Possible options: [ technology, 100-most-popular, ... ] |
+| category | <code>String</code> | For possible options see getCategories(). |
 
 <a name="Instrument.getMostPopular"></a>
 
@@ -383,6 +431,23 @@ Returns an array of Instruments related to the given category.
 Returns an array of Instruments for the top 100 most popular equities on Robinhood.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+<a name="Instrument.getUpcomingEarnings"></a>
+
+### Instrument.getUpcomingEarnings() ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of Instruments that have upcoming earnings.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
+<a name="Instrument.getRecommendations"></a>
+
+### Instrument.getRecommendations(user) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of instruments for stocks from Robinhood's recommendations for the given user.
+
+**Kind**: static method of [<code>Instrument</code>](#Instrument)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+
 <a name="Market"></a>
 
 ## Market
@@ -763,6 +828,7 @@ Represents and executes an order for the given instrument.
     * [new Order(user, object)](#new_Order_new)
     * _instance_
         * [.submit()](#Order+submit) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.cancel()](#Order+cancel) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getResponse()](#Order+getResponse) ⇒ <code>Object</code> \| <code>Null</code>
     * _static_
         * [.getByOrderID(user, orderID)](#Order.getByOrderID) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
@@ -783,6 +849,12 @@ Creates a new Order object.
 
 ### order.submit() ⇒ <code>Promise.&lt;Object&gt;</code>
 Submits an order to Robinhood to be executed by the exchange.
+
+**Kind**: instance method of [<code>Order</code>](#Order)  
+<a name="Order+cancel"></a>
+
+### order.cancel() ⇒ <code>Promise.&lt;Object&gt;</code>
+Attempts to cancel an order.
 
 **Kind**: instance method of [<code>Order</code>](#Order)  
 <a name="Order+getResponse"></a>
@@ -822,7 +894,10 @@ Represents all of the user's holdings on Robinhood and allows for various querie
 **Kind**: global class  
 
 * [Portfolio](#Portfolio)
-    * [new Portfolio(array)](#new_Portfolio_new)
+    * [new Portfolio(user, array)](#new_Portfolio_new)
+    * [.sellAll()](#Portfolio+sellAll) ⇒ <code>Promise.&lt;(Boolean\|Error)&gt;</code>
+    * [.setQuantity(symbol, targetQuantity)](#Portfolio+setQuantity) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
+    * [.getStockValue()](#Portfolio+getStockValue) ⇒ <code>Promise.&lt;Number&gt;</code>
     * [.getInstrumentArray()](#Portfolio+getInstrumentArray) ⇒ <code>Array</code>
     * [.getSymbols()](#Portfolio+getSymbols) ⇒ <code>Array</code>
     * [.getBuyPrice(symbol)](#Portfolio+getBuyPrice) ⇒ <code>Number</code>
@@ -844,14 +919,39 @@ Represents all of the user's holdings on Robinhood and allows for various querie
 
 <a name="new_Portfolio_new"></a>
 
-### new Portfolio(array)
+### new Portfolio(user, array)
 Creates a new Portfolio object.
 
 
-| Param |
-| --- |
-| array | 
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| array | <code>Array</code> | 
 
+<a name="Portfolio+sellAll"></a>
+
+### portfolio.sellAll() ⇒ <code>Promise.&lt;(Boolean\|Error)&gt;</code>
+Sells all positions in the user's portfolio at the market price.
+
+**Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+<a name="Portfolio+setQuantity"></a>
+
+### portfolio.setQuantity(symbol, targetQuantity) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
+Executes a new order to reduce or increase the user's position in the given symbol by the given amount.
+
+**Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+
+| Param | Type |
+| --- | --- |
+| symbol | <code>String</code> | 
+| targetQuantity | <code>Number</code> | 
+
+<a name="Portfolio+getStockValue"></a>
+
+### portfolio.getStockValue() ⇒ <code>Promise.&lt;Number&gt;</code>
+Returns the total market value of all stocks held by the user.
+
+**Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
 <a name="Portfolio+getInstrumentArray"></a>
 
 ### portfolio.getInstrumentArray() ⇒ <code>Array</code>
@@ -1049,14 +1149,21 @@ Represents the user that is logged in while accessing the Robinhood API.
 
 * [User](#User)
     * [new User(username, password)](#new_User_new)
-    * [.authenticate()](#User+authenticate) ⇒ <code>Promise</code>
+    * [.authenticate()](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.logout()](#User+logout) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
+    * [.getBalances()](#User+getBalances) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getBuyingPower()](#User+getBuyingPower) ⇒ <code>Promise</code>
     * [.getUserInfo()](#User+getUserInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getUID()](#User+getUID) ⇒ <code>Promise.&lt;String&gt;</code>
     * [.getTaxInfo()](#User+getTaxInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getDisclosureInfo()](#User+getDisclosureInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getEmployerInfo()](#User+getEmployerInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getInvestmentProfile()](#User+getInvestmentProfile) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getRecentDayTrades()](#User+getRecentDayTrades) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getRecentOrders()](#User+getRecentOrders) ⇒ <code>Promise.&lt;Array.&lt;Order&gt;&gt;</code>
+    * [.cancelOpenOrders()](#User+cancelOpenOrders) ⇒ <code>Promise</code>
+    * [.getRecentOptionOrders()](#User+getRecentOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1069,15 +1176,21 @@ Represents the user that is logged in while accessing the Robinhood API.
 Creates a new User object.
 
 
-| Param | Type |
-| --- | --- |
-| username | <code>String</code> | 
-| password | <code>String</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| username | <code>String</code> |  |
+| password | <code>String</code> | Optional. If not provided the user will be prompted via CLI. |
 
 <a name="User+authenticate"></a>
 
-### user.authenticate() ⇒ <code>Promise</code>
+### user.authenticate() ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Authenticates a user using the inputted username and password.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+logout"></a>
+
+### user.logout() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+Logout the user by expiring the authentication token.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getAccount"></a>
@@ -1086,10 +1199,28 @@ Authenticates a user using the inputted username and password.
 Returns vital information about balances and enabled features.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+getBalances"></a>
+
+### user.getBalances() ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object containing details on the user's cash and marginbalance.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+getBuyingPower"></a>
+
+### user.getBuyingPower() ⇒ <code>Promise</code>
+Returns the amount of money available to be spent.
+
+**Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getUserInfo"></a>
 
 ### user.getUserInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information like username, first / last name, creation date, id, and more.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+getUID"></a>
+
+### user.getUID() ⇒ <code>Promise.&lt;String&gt;</code>
+Returns the user's unique ID.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getTaxInfo"></a>
@@ -1120,6 +1251,24 @@ Returns the user's answers to basic questions regarding investment experiences.
 
 ### user.getRecentDayTrades() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns arrays of recent option and equity day trades.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+getRecentOrders"></a>
+
+### user.getRecentOrders() ⇒ <code>Promise.&lt;Array.&lt;Order&gt;&gt;</code>
+Returns an array of recent orders.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+cancelOpenOrders"></a>
+
+### user.cancelOpenOrders() ⇒ <code>Promise</code>
+Cancels all open orders.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+getRecentOptionOrders"></a>
+
+### user.getRecentOptionOrders() ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of recent option orders.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getPortfolio"></a>

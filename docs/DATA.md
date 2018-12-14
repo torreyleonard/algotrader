@@ -53,6 +53,7 @@ Further documentation can be found here: https://www.alphavantage.co/documentati
     * [.stochf(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType)](#AlphaVantage+stochf) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.rsi(symbol, interval, timePeriod, seriesType)](#AlphaVantage+rsi) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.stochRSI(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType)](#AlphaVantage+stochRSI) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.bbands(symbol, interval, timePeriod, seriesType, nbdevup, nbdevdn, matype)](#AlphaVantage+bbands) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="new_AlphaVantage_new"></a>
 
@@ -382,6 +383,24 @@ http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 | fastKPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDPeriod | <code>Number</code> \| <code>Null</code> |  |
 | fastDmaType | <code>Number</code> \| <code>Null</code> | Integers 0 - 8 are accepted with the following mappings: 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
+
+<a name="AlphaVantage+bbands"></a>
+
+### alphaVantage.bbands(symbol, interval, timePeriod, seriesType, nbdevup, nbdevdn, matype) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of bollinger bands for the equity specified.
+https://www.investopedia.com/articles/technical/04/030304.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time interval between two consecutive data points in the time series. The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each BBANDS value. Positive integers are accepted (e.g., time_period=60, time_period=200) |
+| seriesType | <code>String</code> | The desired price type in the time series. Four types are supported: close, open, high, low |
+| nbdevup | <code>Number</code> \| <code>Null</code> | The standard deviation multiplier of the upper band. Positive integers are accepted. By default, nbdevup=2. |
+| nbdevdn | <code>Number</code> \| <code>Null</code> | The standard deviation multiplier of the lower band. Positive integers are accepted. By default, nbdevdn=2. |
+| matype | <code>Number</code> \| <code>Null</code> | Moving average type of the time series. By default, matype=0. Integers 0 - 8 are accepted with the following mappings. 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
 
 <a name="IEX"></a>
 

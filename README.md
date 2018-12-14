@@ -105,6 +105,16 @@ myUser.authenticate()
 ```
 Personally, I either store user data as an array in a .json file, then require it into the class, (insecure) or ask for the user's credentials in the console. You should handle this sensitive data in a way that you're comfortable with.
 
+**Note:** providing a password in the User constructor is optional. If it is not provided, you will be prompted via CLI.
+
+##### MFA
+
+Algotrader now supports multifactor authentication. So, if you have this enabled on your account (which is a good idea by the way), you'll be prompted to enter the six-digit code after login. If you run a trading script with this library automatically and have MFA enabled, it may be worth your while to utilize a telecom API (possible through Twilio?) to have the code programmatically entered into the CLI.
+
+The MFA prompt will appear like so:
+
+![Algotrader MFA Prompt](https://i.gyazo.com/11420983d69bf02a59026947513408ac.png)
+
 #### Get a user's portfolio
 There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using ``` User.getPortfolio()``` which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
 ```js

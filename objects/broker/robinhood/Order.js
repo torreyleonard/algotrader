@@ -81,7 +81,7 @@ class Order extends Robinhood {
 			else request.post({
 				uri: _this.url + "/orders/",
 				headers: {
-					'Authorization': 'Token ' + _this.user.getAuthToken()
+					'Authorization': 'Bearer ' + _this.user.getAuthToken()
 				},
 				form: {
 					account: _this.url + "/accounts/" + _this.user.getAccountNumber() + "/",
@@ -124,7 +124,7 @@ class Order extends Robinhood {
 				request.post({
 					uri: _this.response.urls.cancel,
 					headers: {
-						'Authorization': 'Token ' + _this.user.getAuthToken()
+						'Authorization': 'Bearer ' + _this.user.getAuthToken()
 					}
 				}, (error, response, body) => {
 					return Robinhood.handleResponse(error, response, body, _this.user.getAuthToken(), resolve, reject);
@@ -144,7 +144,7 @@ class Order extends Robinhood {
 			request({
 				uri: "https://api.robinhood.com/orders/" + orderID + "/",
 				headers: {
-					'Authorization': 'Token ' + user.getAuthToken()
+					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
@@ -164,7 +164,7 @@ class Order extends Robinhood {
 			request({
 				uri: "https://api.robinhood.com/orders/",
 				headers: {
-					'Authorization': 'Token ' + user.getAuthToken()
+					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
