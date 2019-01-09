@@ -11,7 +11,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Creates a new Market object.
-	 * @param object
+	 * @param object - Created using this class' static methods. For example, use 'getByMIC("XNAS")' to create an instance of the Nasdaq.
 	 */
 	constructor(object) {
 		if (!object instanceof Object) throw new Error("Parameter 'object' must be an object.");
@@ -42,6 +42,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns a Market object for the given Market Identifier Code (MIC).
+	 * See ISO 10383: https://www.iso20022.org/10383/iso-10383-market-identifier-codes
 	 * @param {String} code
 	 */
 	static getByMIC(code) {

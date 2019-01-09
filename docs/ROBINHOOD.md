@@ -488,9 +488,9 @@ Represents an exchange on which securities are traded.
 Creates a new Market object.
 
 
-| Param |
-| --- |
-| object | 
+| Param | Description |
+| --- | --- |
+| object | Created using this class' static methods. For example, use 'getByMIC("XNAS")' to create an instance of the Nasdaq. |
 
 <a name="Market+getNextTradingHours"></a>
 
@@ -598,6 +598,7 @@ Returns the next date and time that the market will close.
 
 ### Market.getByMIC(code)
 Returns a Market object for the given Market Identifier Code (MIC).
+See ISO 10383: https://www.iso20022.org/10383/iso-10383-market-identifier-codes
 
 **Kind**: static method of [<code>Market</code>](#Market)  
 
