@@ -12,7 +12,7 @@ class Portfolio extends Robinhood {
 	/**
 	 * Creates a new Portfolio object.
 	 * @param {User} user
-	 * @param {Array} array
+	 * @param {Array} array - Created via User.getPortfolio()
 	 */
 	constructor(user, array) {
 		if (!array instanceof Array) throw new Error("Parameter 'array' must be an array.");

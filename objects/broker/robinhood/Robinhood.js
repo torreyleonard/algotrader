@@ -17,12 +17,8 @@ class Robinhood {
 		if (error) reject(error);
 		else if (response.statusCode > 299 || response.statusCode < 200) {
 			if (body.indexOf("{") === 0) {
-
 				let json = JSON.parse(body);
-				let keys = Object.keys(json);
-				if (keys.length === 1) body = " | " + json[keys[0]];
-				else body = ".\n\n" + JSON.stringify(json, null, 2);
-
+				body = ".\n\n" + JSON.stringify(json, null, 2);
 			} else body = " | " + body;
 			reject(new LibraryError("Robinhood responded with code " + response.statusCode + body));
 		} else {

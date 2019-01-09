@@ -924,10 +924,10 @@ Represents all of the user's holdings on Robinhood and allows for various querie
 Creates a new Portfolio object.
 
 
-| Param | Type |
-| --- | --- |
-| user | [<code>User</code>](#User) | 
-| array | <code>Array</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| user | [<code>User</code>](#User) |  |
+| array | <code>Array</code> | Created via User.getPortfolio() |
 
 <a name="Portfolio+sellAll"></a>
 
@@ -1166,6 +1166,7 @@ Represents the user that is logged in while accessing the Robinhood API.
     * [.cancelOpenOrders()](#User+cancelOpenOrders) ⇒ <code>Promise</code>
     * [.getRecentOptionOrders()](#User+getRecentOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
+    * [.getHistoricals()](#User+getHistoricals) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
     * [.getDocuments()](#User+getDocuments) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -1276,6 +1277,12 @@ Returns an array of recent option orders.
 
 ### user.getPortfolio() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns a Portfolio object containing all open positions in a user's portfolio.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+getHistoricals"></a>
+
+### user.getHistoricals() ⇒ <code>Promise.&lt;Object&gt;</code>
+Returns an object that can be used to create a chart, show total return, etc.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getLinkedBanks"></a>

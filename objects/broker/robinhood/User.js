@@ -392,6 +392,30 @@ class User extends Robinhood {
 		})
 	}
 
+	/**
+	 * Returns an object that can be used to create a chart, show total return, etc.
+	 * @returns {Promise<Object>}
+	 */
+	getHistoricals(span, interval) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + "/portfolios/historicals/" + _this.account,
+				headers: {
+					'Authorization': 'Bearer ' + _this.token
+				},
+				qs: {
+					span: span,
+					interval: interval
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, _this.token, res => {
+					resolve(res);
+				}, reject);
+			})
+		})
+	}
+
 	// Invalid token?
 	//
 	// getNotifications() {
