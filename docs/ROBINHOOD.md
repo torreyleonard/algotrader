@@ -1150,7 +1150,7 @@ Represents the user that is logged in while accessing the Robinhood API.
 
 * [User](#User)
     * [new User(username, password)](#new_User_new)
-    * [.authenticate()](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+    * [.authenticate(mfaFunction)](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.logout()](#User+logout) ⇒ <code>Promise.&lt;Boolean&gt;</code>
     * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
     * [.getBalances()](#User+getBalances) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1185,10 +1185,15 @@ Creates a new User object.
 
 <a name="User+authenticate"></a>
 
-### user.authenticate() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### user.authenticate(mfaFunction) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Authenticates a user using the inputted username and password.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| mfaFunction | <code>function</code> \| <code>Null</code> | Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted. |
+
 <a name="User+logout"></a>
 
 ### user.logout() ⇒ <code>Promise.&lt;Boolean&gt;</code>

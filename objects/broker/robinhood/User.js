@@ -31,9 +31,10 @@ class User extends Robinhood {
 
 	/**
 	 * Authenticates a user using the inputted username and password.
+	 * @param {Function|Null} mfaFunction - Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted.
 	 * @returns {Promise<Boolean>}
 	 */
-	authenticate() {
+	authenticate(mfaFunction) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			if (_this.password == null) {
@@ -67,34 +68,52 @@ class User extends Robinhood {
 				else {
 					const json = JSON.parse(body);
 					if (json.mfa_required) {
-						console.log("Multifactor authentication detected. Please enter your six-digit code below:");
-						prompt.get({
-							properties: {
-								code: {
-									pattern: /^[0-9]{6}$/,
-									message: "Your Robinhood code will most likely be texted to you and should only contain 6 integers.",
-									required: true
+						if (mfaFunction !== undefined) {
+							console.log("Multi-factor authentication detected. Executing the provided function...");
+							mfaFunction()
+								.then(mfa => {
+									if (!mfa instanceof String) reject(new Error("The provided function did not return a string after the promise resolved."));
+									else if (mfa.length !== 6) reject(new Error("The provided function returned a string, but it is not six-characters in length."));
+									else _sendMFA(mfa, resolve, reject);
+								})
+								.catch(error => {
+									console.log("An error occurred while executing the provided MFA function.");
+									reject(error);
+								})
+						} else {
+							console.log("Multi-factor authentication detected. Please enter your six-digit code below:");
+							console.log(" - This can be entered programmatically by passing a function when authenticating. See documentation for more.");
+							prompt.get({
+								properties: {
+									code: {
+										pattern: /^[0-9]{6}$/,
+										message: "Your Robinhood code will most likely be texted to you and should only contain 6 integers.",
+										required: true
+									}
 								}
-							}
-						}, (error, result) => {
-							request.post({
-								uri: _this.url + '/oauth2/token/',
-								form: {
-									username: _this.username,
-									password: _this.password,
-									client_id: 'c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS',
-									grant_type: 'password',
-									scope: 'internal',
-									mfa_code: result.code
-								}
-							}, (error, response, body) => {
-								if (error) reject(error);
-								else if (response.statusCode !== 200) reject(new LibraryError(body));
-								else _postAuth(JSON.parse(body), resolve, reject);
+							}, (error, mfaCode) => {
+								_sendMFA(mfaCode.code, resolve, reject);
 							})
-						})
+						}
 					} else _postAuth(json, resolve, reject);
 				}
+			})
+		}
+		function _sendMFA(mfaCode, resolve, reject) {
+			request.post({
+				uri: _this.url + '/oauth2/token/',
+				form: {
+					username: _this.username,
+					password: _this.password,
+					client_id: 'c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS',
+					grant_type: 'password',
+					scope: 'internal',
+					mfa_code: mfaCode
+				}
+			}, (error, response, body) => {
+				if (error) reject(error);
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
+				else _postAuth(JSON.parse(body), resolve, reject);
 			})
 		}
 		function _postAuth(json, resolve, reject) {

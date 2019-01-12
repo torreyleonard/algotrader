@@ -109,11 +109,27 @@ Personally, I either store user data as an array in a .json file, then require i
 
 ##### MFA
 
-Algotrader now supports multifactor authentication. So, if you have this enabled on your account (which is a good idea by the way), you'll be prompted to enter the six-digit code after login. If you run a trading script with this library automatically and have MFA enabled, it may be worth your while to utilize a telecom API (possible through Twilio?) to have the code programmatically entered into the CLI.
+Algotrader now supports multi-factor authentication. So, if you have this enabled on your account (which is a good idea by the way), you'll be prompted to enter the six-digit code after login. If you run a trading script with this library automatically and have MFA enabled, it may be worth your while to utilize a telecom API (possible through Twilio?) to have the code programmatically entered into the CLI (see below).
 
 The MFA prompt will appear like so:
 
 ![Algotrader MFA Prompt](https://i.gyazo.com/11420983d69bf02a59026947513408ac.png)
+
+To enter the code programmatically, you can pass a function to [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) that returns a promise containing the MFA code in a six-character string. For example:
+
+```js
+function getMFA() {
+	return new Promise((resolve, reject) => {
+    	// Get the code here
+        const mfa = "123456"
+        resolve(mfa);
+    })
+}
+myUser.authenticate(getMFA)
+	.then(() => {
+		// User was authenticated
+	})
+```
 
 #### Get a user's portfolio
 There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using ``` User.getPortfolio()``` which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
