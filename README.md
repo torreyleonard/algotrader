@@ -109,7 +109,7 @@ Personally, I either store user data as an array in a .json file, then require i
 
 ##### MFA
 
-Algotrader now supports multi-factor authentication. So, if you have this enabled on your account (which is a good idea by the way), you'll be prompted to enter the six-digit code after login. If you run a trading script with this library automatically and have MFA enabled, it may be worth your while to utilize a telecom API (possible through Twilio?) to have the code programmatically entered into the CLI (see below).
+Algotrader now supports multi-factor authentication. So, if you have this enabled on your account (which is a good idea by the way), you'll be prompted to enter the six-digit code after login. If you run a trading script with this library automatically and have MFA enabled, it may be worth your while to utilize a telecom API (possible through Twilio?) to have the code programmatically retrieved (see below).
 
 The MFA prompt will appear like so:
 
