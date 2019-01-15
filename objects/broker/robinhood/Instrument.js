@@ -245,7 +245,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of instruments for stocks from Robinhood's recommendations for the given user.
-	 * @param {User} user
+	 * @param {User} user - Authenticated user object
 	 * @returns {Promise.<Array>}
 	 */
 	static getRecommendations(user) {
@@ -280,15 +280,16 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Fills the instrument object with market, fundamental, quote, and split data. Returns an array of Market, Fundamentals, Quote, and Splits objects.
+	 * @param {User} user - Authenticated user object
 	 * @returns {Promise<Array>}
 	 */
-	populate() {
+	populate(user) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			Promise.all([
 				_this.getMarket(),
 				_this.getFundamentals(),
-				_this.getQuote(),
+				_this.getQuote(user),
 				_this.getSplits()
 			]).then(q => {
 				_this.MarketObject = q[0];
@@ -318,13 +319,21 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an object with a real-time quote on this instrument.
+	 *
+	 * @author Ladinn
+	 * @author Gillinghammer (Added user authentication after Robinhood API update - issue #11)
+	 *
+	 * @param {User} user - Authenticated user object
 	 * @returns {Promise<Quote>}
 	 */
-	getQuote() {
+	getQuote(user) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			request({
-				uri: _this.urls.quote
+				uri: _this.urls.quote,
+				headers: {
+					Authorization: 'Bearer ' + user.getAuthToken()
+				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, null, res => {
 					resolve(new Quote(

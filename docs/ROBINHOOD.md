@@ -150,10 +150,10 @@ Represents a security traded on Robinhood.
 * [Instrument](#Instrument)
     * [new Instrument(object)](#new_Instrument_new)
     * _instance_
-        * [.populate()](#Instrument+populate) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.populate(user)](#Instrument+populate) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getMarket()](#Instrument+getMarket) ⇒ [<code>Promise.&lt;Market&gt;</code>](#Market)
         * [.getFundamentals()](#Instrument+getFundamentals) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
-        * [.getQuote()](#Instrument+getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
+        * [.getQuote(user)](#Instrument+getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
         * [.getSplits()](#Instrument+getSplits) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getEarnings()](#Instrument+getEarnings) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getPricesPaid()](#Instrument+getPricesPaid) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -201,10 +201,15 @@ Creates a new Instrument object.
 
 <a name="Instrument+populate"></a>
 
-### instrument.populate() ⇒ <code>Promise.&lt;Array&gt;</code>
+### instrument.populate(user) ⇒ <code>Promise.&lt;Array&gt;</code>
 Fills the instrument object with market, fundamental, quote, and split data. Returns an array of Market, Fundamentals, Quote, and Splits objects.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| user | [<code>User</code>](#User) | Authenticated user object |
+
 <a name="Instrument+getMarket"></a>
 
 ### instrument.getMarket() ⇒ [<code>Promise.&lt;Market&gt;</code>](#Market)
@@ -219,10 +224,17 @@ Returns a new Fundamentals object with information such as open, high, low, clos
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
 <a name="Instrument+getQuote"></a>
 
-### instrument.getQuote() ⇒ <code>Promise.&lt;Quote&gt;</code>
+### instrument.getQuote(user) ⇒ <code>Promise.&lt;Quote&gt;</code>
 Returns an object with a real-time quote on this instrument.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Ladinn  
+**Author**: Gillinghammer (Added user authentication after Robinhood API update - issue #11)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| user | [<code>User</code>](#User) | Authenticated user object |
+
 <a name="Instrument+getSplits"></a>
 
 ### instrument.getSplits() ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -444,9 +456,9 @@ Returns an array of instruments for stocks from Robinhood's recommendations for 
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
 
-| Param | Type |
-| --- | --- |
-| user | [<code>User</code>](#User) | 
+| Param | Type | Description |
+| --- | --- | --- |
+| user | [<code>User</code>](#User) | Authenticated user object |
 
 <a name="Market"></a>
 

@@ -188,7 +188,9 @@ With this in mind, you can place a simple market order for ten shares of Twitter
 ```js
 // ES6
 Instrument.getBySymbol("TWTR").then(async twtrInstrument => {
-	let twtrQuote = await twtrInstrument.getQuote();
+	// As of ~01/15/19, Robinhood requires an authenticated user to fetch a quote.
+    // Working with Algotrader version > 1.4.3, thanks @Gillinghammer!
+	let twtrQuote = await twtrInstrument.getQuote(user);
 	const myOrder = new Order(user, {
 		instrument: twtrInstrument,
 		quote: twtrQuote,
