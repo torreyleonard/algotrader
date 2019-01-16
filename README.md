@@ -1,5 +1,5 @@
 # Algotrader
-#### *Simple algorithmic stock trading for Node.js.*
+#### *Simple algorithmic stock and option trading for Node.js.*
 
 [![npm package](https://nodei.co/npm/algotrader.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/algotrader/)
 
