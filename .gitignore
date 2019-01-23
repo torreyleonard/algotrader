@@ -3,3 +3,4 @@ algotrader.iml
 /.idea/
 /ignore/
 .DS_Store
+/objects/broker/robinhood/User.json

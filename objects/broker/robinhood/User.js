@@ -142,7 +142,7 @@ class User extends Robinhood {
 			if (!_this.isAuthenticated()) reject(new Error('You cannot save an unauthenticated user!'));
 			else {
 				const dir = path.join(__dirname, 'User.json');
-				fs.unlinkSync(dir);
+				try { fs.unlinkSync(dir); } catch (e) {}
 				fs.writeFile(dir, JSON.stringify(_this, null, 2), error => {
 					if (error) reject(error);
 					else resolve(true);
@@ -189,7 +189,7 @@ class User extends Robinhood {
 				if (error) reject(error);
 				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
-					fs.unlinkSync(path.join(__dirname, 'User.json'));
+					try { fs.unlinkSync(dir); } catch (e) {}
 					resolve(true);
 				}
 			})

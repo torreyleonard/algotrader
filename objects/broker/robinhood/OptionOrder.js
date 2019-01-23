@@ -4,7 +4,7 @@ const request = require('request');
 const _ = require('lodash');
 
 /**
- * BETA: Represents and executes an order for the given option contract.
+ * Represents and executes an order for the given option contract.
  */
 class OptionOrder extends Robinhood {
 

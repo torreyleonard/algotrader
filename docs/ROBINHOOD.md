@@ -11,10 +11,10 @@
 <dd><p>Represents an exchange on which securities are traded.</p>
 </dd>
 <dt><a href="#OptionInstrument">OptionInstrument</a></dt>
-<dd><p>BETA: Represents an option traded on Robinhood.</p>
+<dd><p>Represents an option traded on Robinhood.</p>
 </dd>
 <dt><a href="#OptionOrder">OptionOrder</a></dt>
-<dd><p>BETA: Represents and executes an order for the given option contract.</p>
+<dd><p>Represents and executes an order for the given option contract.</p>
 </dd>
 <dt><a href="#Order">Order</a></dt>
 <dd><p>Represents and executes an order for the given instrument.</p>
@@ -632,7 +632,7 @@ Returns a Market object for the given market URL.
 <a name="OptionInstrument"></a>
 
 ## OptionInstrument
-BETA: Represents an option traded on Robinhood.
+Represents an option traded on Robinhood.
 
 **Kind**: global class  
 
@@ -648,8 +648,11 @@ BETA: Represents an option traded on Robinhood.
         * [.getOptionID()](#OptionInstrument+getOptionID) ⇒ <code>String</code>
         * [.getExpiration()](#OptionInstrument+getExpiration) ⇒ <code>Date</code>
     * _static_
-        * [.getBySymbol(user, symbol, cache)](#OptionInstrument.getBySymbol) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getAll(user)](#OptionInstrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getChain(user, instrument, expiration, side)](#OptionInstrument.getChain) ⇒ <code>Promise.&lt;any&gt;</code>
+        * [.getExpirations(user, instrument)](#OptionInstrument.getExpirations) ⇒ <code>Promise.&lt;any&gt;</code>
         * [.getByURL(user, url)](#OptionInstrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
+        * [.getPositions(user)](#OptionInstrument.getPositions) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="OptionInstrument+getTradability"></a>
 
@@ -687,19 +690,44 @@ BETA: Represents an option traded on Robinhood.
 
 ### optionInstrument.getExpiration() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
-<a name="OptionInstrument.getBySymbol"></a>
+<a name="OptionInstrument.getAll"></a>
 
-### OptionInstrument.getBySymbol(user, symbol, cache) ⇒ <code>Promise.&lt;Array&gt;</code>
-Returns an array of options instruments for the specified symbol.
-WARNING: As there is no apparent way to query Robinhood options by symbol, all instruments will be downloaded and filtered. This will take a while on first run. After, set 'cache' to true.
+### OptionInstrument.getAll(user) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of all option instruments. Note: this may take an eternity - no need to use this.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
 
 | Param | Type |
 | --- | --- |
 | user | [<code>User</code>](#User) | 
-| symbol | <code>String</code> | 
-| cache | <code>Boolean</code> | 
+
+<a name="OptionInstrument.getChain"></a>
+
+### OptionInstrument.getChain(user, instrument, expiration, side) ⇒ <code>Promise.&lt;any&gt;</code>
+Returns an array of all option instruments for the given expiration date and side.
+
+**Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Ladinn  
+**Author**: hbeere (Issue #10)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| user | [<code>User</code>](#User) |  |
+| instrument | [<code>Instrument</code>](#Instrument) |  |
+| expiration | <code>String</code> | The date of expiration for the option you are requesting. |
+| side | <code>String</code> | Can be either 'call' or 'put' |
+
+<a name="OptionInstrument.getExpirations"></a>
+
+### OptionInstrument.getExpirations(user, instrument) ⇒ <code>Promise.&lt;any&gt;</code>
+Returns an array of expiration dates for the given Instrument.
+
+**Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| instrument | [<code>Instrument</code>](#Instrument) | 
 
 <a name="OptionInstrument.getByURL"></a>
 
@@ -713,10 +741,21 @@ Returns an options instrument object for the specified instrument URL.
 | user | [<code>User</code>](#User) | 
 | url | <code>String</code> | 
 
+<a name="OptionInstrument.getPositions"></a>
+
+### OptionInstrument.getPositions(user) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of the user's open option contracts.
+
+**Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+
 <a name="OptionOrder"></a>
 
 ## OptionOrder
-BETA: Represents and executes an order for the given option contract.
+Represents and executes an order for the given option contract.
 
 **Kind**: global class  
 

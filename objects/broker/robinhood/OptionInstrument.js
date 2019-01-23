@@ -1,10 +1,9 @@
 const Robinhood = require('./Robinhood');
 const request = require('request');
-
-let allInstrumentsArray = [];
+const async = require('async');
 
 /**
- * BETA: Represents an option traded on Robinhood.
+ * Represents an option traded on Robinhood.
  */
 class OptionInstrument extends Robinhood {
 
@@ -32,31 +31,102 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
-	 * Returns an array of options instruments for the specified symbol.
-	 * WARNING: As there is no apparent way to query Robinhood options by symbol, all instruments will be downloaded and filtered. This will take a while on first run. After, set 'cache' to true.
+	 * Returns an array of all option instruments. Note: this may take an eternity - no need to use this.
 	 * @param {User} user
-	 * @param {String} symbol
-	 * @param {Boolean} cache
 	 * @returns {Promise<Array>}
 	 */
-	static getBySymbol(user, symbol, cache) {
+	static getAll(user) {
 		return new Promise((resolve, reject) => {
-			if (!symbol instanceof String) reject(new Error("Parameter 'symbol' must be a string."));
-			else if ((cache || cache === null) && allInstrumentsArray.length !== 0)
-				return allInstrumentsArray.filter(o => o.getSymbol() === symbol);
-			else request({
+			request({
 				uri: "https://api.robinhood.com/options/instruments/",
 				headers: {
 					'Authorization': 'Bearer ' + user.getAuthToken()
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
-					allInstrumentsArray = [];
-					res.forEach(o => allInstrumentsArray.push(new OptionInstrument(o)));
-					return allInstrumentsArray.filter(o => o.getSymbol() === symbol);
+					let instrumentsArray = [];
+					res.forEach(o => instrumentsArray.push(new OptionInstrument(o)));
+					resolve(instrumentsArray);
 				}, reject);
 			})
 		})
+	}
+
+	/**
+	 * Returns an array of all option instruments for the given expiration date and side.
+	 *
+	 * @author Ladinn
+	 * @author hbeere (Issue #10)
+	 *
+	 * @param {User} user
+	 * @param {Instrument} instrument
+	 * @param {String} expiration - The date of expiration for the option you are requesting.
+	 * @param {String} side - Can be either 'call' or 'put'
+	 * @returns {Promise<any>}
+	 */
+	static getChain(user, instrument, expiration, side) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/options/instruments/",
+				headers: {
+					'Authorization': 'Bearer ' + user.getAuthToken()
+				},
+				qs: {
+					chain_symbol: instrument.symbol,
+					expiration_date: expiration,
+					type: side,
+					tradability: "tradable",
+					state: "active"
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
+					let instrumentsArray = [];
+					res.forEach(o => instrumentsArray.push(new OptionInstrument(o)));
+					resolve(instrumentsArray);
+				}, reject);
+			})
+		})
+	}
+
+	/**
+	 * Returns an array of expiration dates for the given Instrument.
+	 * @param {User} user
+	 * @param {Instrument} instrument
+	 * @returns {Promise<any>}
+	 */
+	static getExpirations(user, instrument) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/options/chains/",
+				headers: {
+					'Authorization': 'Bearer ' + user.getAuthToken()
+				},
+				qs: {
+					equity_instrument_ids: instrument.id,
+					state: "active",
+					tradability: "tradable"
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
+					if (res instanceof Array) {
+						let array = [];
+						res.forEach(o => {
+							parseChains(o, a => {
+								a.forEach(o => array.push(o));
+							})
+						});
+						resolve(array);
+					} else parseChains(res, resolve);
+				}, reject);
+			})
+		});
+		function parseChains(res, callback) {
+			let array = [];
+			res.expiration_dates.forEach(date => {
+				array.push(date);
+			});
+			callback(array);
+		}
 	}
 
 	/**
@@ -76,6 +146,38 @@ class OptionInstrument extends Robinhood {
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					resolve(new OptionInstrument(res));
+				}, reject);
+			})
+		})
+	}
+
+	/**
+	 * Returns an array of the user's open option contracts.
+	 * @param {User} user
+	 * @returns {Promise<Array>}
+	 */
+	static getPositions(user) {
+		return new Promise((resolve, reject) => {
+			request({
+				uri: "https://api.robinhood.com/options/positions/",
+				headers: {
+					'Authorization': 'Bearer ' + user.getAuthToken()
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
+					let array = [];
+					async.forEachOf(res, (position, key, callback) => {
+						position.quantity = Number(position.quantity);
+						if (Number(position.quantity) !== 0) {
+							OptionInstrument.getByURL(user, position.option).then(instrument => {
+								position.InstrumentObject = instrument;
+								array.push(position);
+								callback();
+							});
+						} else callback();
+					}, () => {
+						resolve(array);
+					} );
 				}, reject);
 			})
 		})

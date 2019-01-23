@@ -192,6 +192,8 @@ myUser.getPortfolio()
 ```
 For documentation on all portfolio functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio)
 
+**Note:** the portfolio object does not return a user's open option positions. See the options section below for details.
+
 #### Placing an order
 Placing an order will require instances of the [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User), [```Instrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Instrument), [```Quote```](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote), and [```Order```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order) classes.
 
@@ -250,6 +252,58 @@ Instrument.getBySymbol("TWTR").then(async twtrInstrument => {
 });
 ```
 For documentation on all order functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order)
+
+#### Options
+Receiving open option positions and placing option orders varies slightly from stocks. These actions will require the [```OptionInstrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and [```OptionOrder```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder) classes.
+
+Here is an example for how to query an option chain and place an order for an individual option. See [```OptionOrder```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder) documentation for details on new order parameters.
+```js
+const Instrument = algotrader.Robinhood.Instrument;
+const OptionInstrument = algotrader.Robinhood.OptionInstrument;
+const OptionOrder = algotrader.Robinhood.OptionOrder;
+
+// First, we'll get the instrument and tradable expiration dates for TLRY.
+Instrument.getBySymbol("TLRY").then(ins => {
+	OptionInstrument.getExpirations(user, ins).then(option => {
+		// [ '2019-01-25',
+		//   '2019-02-01',
+		//   '2019-02-08',
+		//   '2019-02-15', ...
+        // Next, we'll fetch an option chain for the upcoming expiration date.
+        OptionInstrument.getChain(user, ins, expirations[0], "put").then(optionChain => {
+        	// An array of OptionInstruments will be returned. See the example below.
+            // You'll then want to find the specific OptionInstrument that you want to trade.
+            // In this example, we'll buy using the first element in the array.
+            let order = new OptionOrder(null, user, optionInstrument, "credit", "GFD", "buy", "market", 1);
+            order.submit().then(res => {
+            	// Order was submitted, the response will be parsed as a completed OptionOrder.
+            });
+		})
+	})
+});
+```
+##### Option chains
+Represented as an array of OptionInstruments, option chains provide you with all of the tradable contracts for a specific option instrument and expiration date. They are fetched using [```OptionInstrument.getChain```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and used for an [```OptionOrder.```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder)
+
+Below is an example of a single element from within the array:
+```js
+[ OptionInstrument {
+    url: 'https://api.robinhood.com',
+    tradability: 'tradable',
+    strikePrice: 121,
+    state: 'active',
+    type: 'put',
+    symbol: 'TLRY',
+    minTicks: { cutoff_price: '3.00', below_tick: '0.01', above_tick: '0.05' },
+    instrumentURL: 'https://api.robinhood.com/options/instruments/28c3224d-3aa3-428c-aa78-7e0f5a4d01a0/',
+    ids: 
+     { chain: 'c49063f0-557b-44b7-aeef-11fbc6a51243',
+       option: '28c3224d-3aa3-428c-aa78-7e0f5a4d01a0' },
+    dates: 
+     { expiration: 2019-02-01T00:00:00.000Z,
+       created: 2019-01-18T03:08:31.325Z,
+       updated: 2019-01-18T03:08:31.325Z } }, ...
+```
 
 ---
 
