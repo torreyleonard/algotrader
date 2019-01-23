@@ -10,6 +10,7 @@ const fs = require('fs');
 const async = require('async');
 const path = require('path');
 const prompt = require('prompt');
+const moment = require('moment');
 
 /**
  * Represents the user that is logged in while accessing the Robinhood API.
@@ -27,18 +28,20 @@ class User extends Robinhood {
 		this.password = password;
 		this.token = null; // Authentication token
 		this.account = null; // Account number
+		this.expires = null; // Auth expiration date (24 hours after login)
 	}
 
 	/**
 	 * Authenticates a user using the inputted username and password.
-	 * @param {Function|Null} mfaFunction - Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted.
+	 * @param {String|Undefined} password - Optional if not provided in constructor or re-authenticating a saved user.
+	 * @param {Function|Undefined} mfaFunction - Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted.
 	 * @returns {Promise<Boolean>}
 	 */
-	authenticate(mfaFunction) {
+	authenticate(password, mfaFunction) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
-			if (_this.password == null) {
-				console.log("You didn't include a password in the constructor of your Robinhood user and it is required to authenticate your account.");
+			if (_this.password === undefined && password === undefined) {
+				console.log("You didn't include a password in the constructor of your Robinhood user or when calling the authenciate function and it is required to authenticate your account.");
 				prompt.get({
 					properties: {
 						password: {
@@ -53,6 +56,8 @@ class User extends Robinhood {
 			} else _preAuth(resolve, reject);
 		});
 		function _preAuth(resolve, reject) {
+			if (_this.password === undefined)
+				_this.password = password;
 			request.post({
 				uri: _this.url + "/oauth2/token/",
 				form: {
@@ -117,17 +122,59 @@ class User extends Robinhood {
 			})
 		}
 		function _postAuth(json, resolve, reject) {
+			_this.expires = moment().add(json.expires_in, 'seconds');
 			_this.token = json.access_token;
 			_this.getAccount().then(account => {
 				_this.account = account.account_number;
-				_this.password = "*".repeat(_this.password.length);
+				delete _this.password;
 				resolve(_this);
 			}).catch(error => reject(error));
 		}
 	}
 
 	/**
-	 * Logout the user by expiring the authentication token.
+	 * Save the user to disk. Prevents having to login and logout each run.
+	 * @returns {Promise<Boolean>}
+	 */
+	save() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (!_this.isAuthenticated()) reject(new Error('You cannot save an unauthenticated user!'));
+			else {
+				const dir = path.join(__dirname, 'User.json');
+				fs.unlinkSync(dir);
+				fs.writeFile(dir, JSON.stringify(_this, null, 2), error => {
+					if (error) reject(error);
+					else resolve(true);
+				})
+			}
+		})
+	}
+
+	/**
+	 * If a saved user exists, this will load it into system memory. Recommended if using multi-factor authentication.
+	 * @returns {Promise<User>}
+	 */
+	static load() {
+		return new Promise((resolve, reject) => {
+			fs.readFile(path.join(__dirname, 'User.json'), 'utf8', (error, data) => {
+				if (error) {
+					if (error.errno === -2) reject(new Error("A saved user does not exist!"));
+					else reject(error);
+				} else {
+					const json = JSON.parse(data);
+					const u = new User(json.username, json.password);
+					u.token = json.token;
+					u.account = json.account;
+					u.expires = json.expires;
+					resolve(u);
+				}
+			});
+		})
+	}
+
+	/**
+	 * Logout the user by expiring the authentication token and removing any saved data.
 	 * @returns {Promise<Boolean>}
 	 */
 	logout() {
@@ -141,12 +188,19 @@ class User extends Robinhood {
 			}, (error, response, body) => {
 				if (error) reject(error);
 				else if (response.statusCode !== 200) reject(new LibraryError(body));
-				else resolve(true);
+				else {
+					fs.unlinkSync(path.join(__dirname, 'User.json'));
+					resolve(true);
+				}
 			})
 		})
 	}
 
 	// GET
+
+	isAuthenticated() {
+		return this.token !== undefined && moment().isBefore(this.expires);
+	}
 
 	getAuthToken() {
 		return this.token;

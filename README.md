@@ -105,7 +105,16 @@ myUser.authenticate()
 ```
 Personally, I either store user data as an array in a .json file, then require it into the class, (insecure) or ask for the user's credentials in the console. You should handle this sensitive data in a way that you're comfortable with.
 
-**Note:** providing a password in the User constructor is optional. If it is not provided, you will be prompted via CLI.
+**Note:** providing a password in the User constructor is optional. You can also pass it to [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter like so:
+
+```js
+const myUser = new User("username");
+myUser.authenticate("password")
+	.then(() => {
+    	// User was authenticated
+    });
+```
+If it is not provided at all, you will be prompted via CLI. 
 
 ##### MFA
 
@@ -125,14 +134,46 @@ function getMFA() {
         resolve(mfa);
     })
 }
-myUser.authenticate(getMFA)
+// Note: the first parameter here is 'password' and is only required if you are re-authenticating
+// an expired user or if you did not provide a password in the User constructor.
+myUser.authenticate(null, getMFA)
 	.then(() => {
 		// User was authenticated
 	})
 ```
 
+##### Saving & loading a user
+
+In order to reduce time logging in, you can save an authenticated user to disk and load it into memory for subsequent requests. If you're using multi-factor authentication, I definitely recommend this- it really saves a lot of time and energy.
+
+After you've logged in (see above), you can run the following:
+
+```js
+const authenticatedUser;
+authenticatedUser.save()
+	.then(() => {
+    	// The user data was saved to:
+        // project/node_modules/algotrader/objects/broker/robinhood/User.json
+    });
+```
+
+Note that your password will never be saved to disk. Keep this in mind when having to re-authenticate.
+
+Once saved, you can easily login like so:
+
+```js
+const robinhood = require('algotrader').Robinhood;
+const User = robinhood.User;
+
+User.load().then(myUser => {
+	myUser.isAuthenticated(); // Boolean - see below
+});
+```
+
+However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.
+
 #### Get a user's portfolio
-There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using ``` User.getPortfolio()``` which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
+There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using [```User.getPortfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
 ```js
 myUser.getPortfolio()
 	.then(myPortfolio => { // Algotrader retrieved the user's portfolio

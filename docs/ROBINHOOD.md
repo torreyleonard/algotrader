@@ -1162,27 +1162,31 @@ Represents the user that is logged in while accessing the Robinhood API.
 
 * [User](#User)
     * [new User(username, password)](#new_User_new)
-    * [.authenticate(mfaFunction)](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.logout()](#User+logout) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-    * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
-    * [.getBalances()](#User+getBalances) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getBuyingPower()](#User+getBuyingPower) ⇒ <code>Promise</code>
-    * [.getUserInfo()](#User+getUserInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getUID()](#User+getUID) ⇒ <code>Promise.&lt;String&gt;</code>
-    * [.getTaxInfo()](#User+getTaxInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getDisclosureInfo()](#User+getDisclosureInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getEmployerInfo()](#User+getEmployerInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getInvestmentProfile()](#User+getInvestmentProfile) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getRecentDayTrades()](#User+getRecentDayTrades) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getRecentOrders()](#User+getRecentOrders) ⇒ <code>Promise.&lt;Array.&lt;Order&gt;&gt;</code>
-    * [.cancelOpenOrders()](#User+cancelOpenOrders) ⇒ <code>Promise</code>
-    * [.getRecentOptionOrders()](#User+getRecentOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
-    * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getHistoricals()](#User+getHistoricals) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
-    * [.getDocuments()](#User+getDocuments) ⇒ <code>Promise.&lt;Array&gt;</code>
-    * [.downloadDocuments(folder)](#User+downloadDocuments) ⇒ <code>Promise</code>
+    * _instance_
+        * [.authenticate(password, mfaFunction)](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [.save()](#User+save) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [.logout()](#User+logout) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
+        * [.getBalances()](#User+getBalances) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getBuyingPower()](#User+getBuyingPower) ⇒ <code>Promise</code>
+        * [.getUserInfo()](#User+getUserInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getUID()](#User+getUID) ⇒ <code>Promise.&lt;String&gt;</code>
+        * [.getTaxInfo()](#User+getTaxInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getDisclosureInfo()](#User+getDisclosureInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getEmployerInfo()](#User+getEmployerInfo) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getInvestmentProfile()](#User+getInvestmentProfile) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getRecentDayTrades()](#User+getRecentDayTrades) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getRecentOrders()](#User+getRecentOrders) ⇒ <code>Promise.&lt;Array.&lt;Order&gt;&gt;</code>
+        * [.cancelOpenOrders()](#User+cancelOpenOrders) ⇒ <code>Promise</code>
+        * [.getRecentOptionOrders()](#User+getRecentOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getHistoricals()](#User+getHistoricals) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getDocuments()](#User+getDocuments) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.downloadDocuments(folder)](#User+downloadDocuments) ⇒ <code>Promise</code>
+    * _static_
+        * [.load()](#User.load) ⇒ [<code>Promise.&lt;User&gt;</code>](#User)
 
 <a name="new_User_new"></a>
 
@@ -1197,19 +1201,26 @@ Creates a new User object.
 
 <a name="User+authenticate"></a>
 
-### user.authenticate(mfaFunction) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### user.authenticate(password, mfaFunction) ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Authenticates a user using the inputted username and password.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| mfaFunction | <code>function</code> \| <code>Null</code> | Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted. |
+| password | <code>String</code> \| <code>Undefined</code> | Optional if not provided in constructor or re-authenticating a saved user. |
+| mfaFunction | <code>function</code> \| <code>Undefined</code> | Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted. |
 
+<a name="User+save"></a>
+
+### user.save() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+Save the user to disk. Prevents having to login and logout each run.
+
+**Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+logout"></a>
 
 ### user.logout() ⇒ <code>Promise.&lt;Boolean&gt;</code>
-Logout the user by expiring the authentication token.
+Logout the user by expiring the authentication token and removing any saved data.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getAccount"></a>
@@ -1340,3 +1351,9 @@ Downloads will be attempted every second and will wait for any connection thrott
 | --- | --- |
 | folder | <code>String</code> | 
 
+<a name="User.load"></a>
+
+### User.load() ⇒ [<code>Promise.&lt;User&gt;</code>](#User)
+If a saved user exists, this will load it into system memory. Recommended if using multi-factor authentication.
+
+**Kind**: static method of [<code>User</code>](#User)  
