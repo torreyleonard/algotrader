@@ -43,6 +43,12 @@
 	- Paper (simulated) trade your algorithm to see how it performs in real time
 - **Support for many third-party APIs**
 	- [Robinhood](http://robinhood.com/)
+		- [Multi-factor authentication](https://github.com/Ladinn/algotrader#mfa)
+		- [Saving & loading a user](https://github.com/Ladinn/algotrader#saving--loading-a-user)
+		- [Get a user's portfolio](https://github.com/Ladinn/algotrader#get-a-users-portfolio)
+		- [Placing an order](https://github.com/Ladinn/algotrader#placing-an-order)
+		- [Options](https://github.com/Ladinn/algotrader#options)
+		- [Option chains](https://github.com/Ladinn/algotrader#option-chains)
 	- [Alpha Vantage](https://www.alphavantage.co/)
 	- [Yahoo! Finance](https://finance.yahoo.com)
 	- [News API](https://newsapi.org/)
