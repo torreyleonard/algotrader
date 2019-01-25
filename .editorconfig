@@ -2,11 +2,14 @@ root = true
 
 [*]
 end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
+insert_final_newline = true
 
-[*.{js}]
+# Matches multiple files with brace expansion notation
+[*.{js,jsx,html,sass}]
 charset = utf-8
 indent_style = tab
 indent_size = 4
 trim_trailing_whitespace = true
+
+[*.md]
+trim_trailing_whitespace = false
