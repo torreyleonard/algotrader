@@ -133,6 +133,29 @@ class User extends Robinhood {
 	}
 
 	/**
+	 * Logout the user by expiring the authentication token and removing any saved data.
+	 * @returns {Promise<Boolean>}
+	 */
+	logout() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request.post({
+				uri: _this.url + "/api-token-logout/",
+				headers: {
+					'Authorization': 'Bearer ' + _this.token
+				}
+			}, (error, response, body) => {
+				if (error) reject(error);
+				else if (response.statusCode !== 200) reject(new LibraryError(body));
+				else {
+					try { fs.unlinkSync(dir); } catch (e) {}
+					resolve(true);
+				}
+			})
+		})
+	}
+
+	/**
 	 * Save the user to disk. Prevents having to login and logout each run.
 	 * @returns {Promise<Boolean>}
 	 */
@@ -163,36 +186,17 @@ class User extends Robinhood {
 					else reject(error);
 				} else {
 					const json = JSON.parse(data);
-					const u = new User(json.username, json.password);
-					u.token = json.token;
-					u.account = json.account;
-					u.expires = json.expires;
-					resolve(u);
+					if (moment().isBefore(json.expires)) {
+						const u = new User(json.username, json.password);
+						u.token = json.token;
+						u.account = json.account;
+						u.expires = json.expires;
+						resolve(u);
+					} else {
+						reject(new Error("User session has expired. Please authenticate again."))
+					}
 				}
 			});
-		})
-	}
-
-	/**
-	 * Logout the user by expiring the authentication token and removing any saved data.
-	 * @returns {Promise<Boolean>}
-	 */
-	logout() {
-		const _this = this;
-		return new Promise((resolve, reject) => {
-			request.post({
-				uri: _this.url + "/api-token-logout/",
-				headers: {
-					'Authorization': 'Bearer ' + _this.token
-				}
-			}, (error, response, body) => {
-				if (error) reject(error);
-				else if (response.statusCode !== 200) reject(new LibraryError(body));
-				else {
-					try { fs.unlinkSync(dir); } catch (e) {}
-					resolve(true);
-				}
-			})
 		})
 	}
 

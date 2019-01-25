@@ -174,9 +174,17 @@ Once saved, you can easily login like so:
 const robinhood = require('algotrader').Robinhood;
 const User = robinhood.User;
 
-User.load().then(myUser => {
-	myUser.isAuthenticated(); // Boolean - see below
-});
+User.load()
+	.then(myUser => {
+		myUser.isAuthenticated(); // Boolean - see below
+	})
+	.catch(error => {
+		// Make sure to always catch possible errors. You'll need to re-authenticate here.
+		// - Possible errors: user session has expired, a saved user does not exist.
+		if (error) {
+			// Re-auth here and save if desired.
+		}
+	});
 ```
 
 However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.

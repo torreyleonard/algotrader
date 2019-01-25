@@ -1203,8 +1203,8 @@ Represents the user that is logged in while accessing the Robinhood API.
     * [new User(username, password)](#new_User_new)
     * _instance_
         * [.authenticate(password, mfaFunction)](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
-        * [.save()](#User+save) ⇒ <code>Promise.&lt;Boolean&gt;</code>
         * [.logout()](#User+logout) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [.save()](#User+save) ⇒ <code>Promise.&lt;Boolean&gt;</code>
         * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
         * [.getBalances()](#User+getBalances) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getBuyingPower()](#User+getBuyingPower) ⇒ <code>Promise</code>
@@ -1250,16 +1250,16 @@ Authenticates a user using the inputted username and password.
 | password | <code>String</code> \| <code>Undefined</code> | Optional if not provided in constructor or re-authenticating a saved user. |
 | mfaFunction | <code>function</code> \| <code>Undefined</code> | Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted. |
 
-<a name="User+save"></a>
-
-### user.save() ⇒ <code>Promise.&lt;Boolean&gt;</code>
-Save the user to disk. Prevents having to login and logout each run.
-
-**Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+logout"></a>
 
 ### user.logout() ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Logout the user by expiring the authentication token and removing any saved data.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+<a name="User+save"></a>
+
+### user.save() ⇒ <code>Promise.&lt;Boolean&gt;</code>
+Save the user to disk. Prevents having to login and logout each run.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getAccount"></a>
