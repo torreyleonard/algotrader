@@ -43,12 +43,6 @@
 	- Paper (simulated) trade your algorithm to see how it performs in real time
 - **Support for many third-party APIs**
 	- [Robinhood](http://robinhood.com/)
-		- [Multi-factor authentication](https://github.com/Ladinn/algotrader#mfa)
-		- [Saving & loading a user](https://github.com/Ladinn/algotrader#saving--loading-a-user)
-		- [Get a user's portfolio](https://github.com/Ladinn/algotrader#get-a-users-portfolio)
-		- [Placing an order](https://github.com/Ladinn/algotrader#placing-an-order)
-		- [Options](https://github.com/Ladinn/algotrader#options)
-		- [Option chains](https://github.com/Ladinn/algotrader#option-chains)
 	- [Alpha Vantage](https://www.alphavantage.co/)
 	- [Yahoo! Finance](https://finance.yahoo.com)
 	- [News API](https://newsapi.org/)
@@ -62,17 +56,25 @@
 - [Getting Started](#getting-started)
 - Broker Library
 	- [Robinhood](#robinhood)
+		- [Multi-factor authentication](#mfa)
+    	- [Saving & loading a user](#saving--loading-a-user)
+    	- [Get a user's portfolio](#get-a-users-portfolio)
+    	- [Placing an order](#placing-an-order)
+    	- [Options](#options)
+    	- [Option chains](#option-chains)
 - Algorithm Library
 	- [Scheduler](#scheduler)
 - Data Library
-	- [OptionsChain](#optionsChain) (todo)
-	- [Query](#query)
-	- [Stream](#stream)
-	- [News](#news)
+	- [Real time streaming](#real-time-streaming)
 	- [Alpha Vantage](#alpha-vantage)
 	- [IEX](#iex)
 	- [Nasdaq](#nasdaq)
+	- [Query](#query)
+	- [News](#news)
 - [Further Notes](#notes)
+	- [Dealing with errors](#dealing-with-errors)
+	- [Error reporting](https://github.com/Ladinn/algotrader/issues)
+	
 
 ---
 
