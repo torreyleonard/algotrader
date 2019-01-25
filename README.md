@@ -56,6 +56,7 @@
 - [Getting Started](#getting-started)
 - Broker Library
 	- [Robinhood](#robinhood)
+		- [Getting started](#robinhood)
 		- [Multi-factor authentication](#mfa)
     	- [Saving & loading a user](#saving--loading-a-user)
     	- [Get a user's portfolio](#get-a-users-portfolio)
