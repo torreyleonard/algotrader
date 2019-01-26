@@ -16,11 +16,15 @@ class Robinhood {
 	static handleResponse(error, response, body, token, resolve, reject) {
 		if (error) reject(error);
 		else if (response.statusCode > 299 || response.statusCode < 200) {
-			if (body.indexOf("{") === 0) {
-				let json = JSON.parse(body);
-				body = ".\n\n" + JSON.stringify(json, null, 2);
-			} else body = " | " + body;
-			reject(new LibraryError("Robinhood responded with code " + response.statusCode + body));
+			try {
+				if (body.indexOf("{") === 0) {
+					let json = JSON.parse(body);
+					body = ".\n\n" + JSON.stringify(json, null, 2);
+				} else body = " | " + body;
+			} catch (e) {
+				body = ".\n\n" + JSON.stringify(body, null, 2);
+			}
+			reject(new LibraryError(`Robinhood responded with code ${response.statusCode}: ${response.statusMessage.toLowerCase()}${body}`))
 		} else {
 			const json = JSON.parse(body);
 			if (json.next) {
@@ -47,7 +51,7 @@ class Robinhood {
 						}
 					})
 				}, () => {
-					loading.succeed("Download complete with " + count + " requests.");
+					loading.succeed("Download completed after " + count + " requests.");
 					resolve(array);
 				});
 			} else if (json.results) resolve(json.results.length === 1 ? json.results[0] : json.results);

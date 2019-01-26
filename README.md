@@ -279,25 +279,37 @@ const Instrument = algotrader.Robinhood.Instrument;
 const OptionInstrument = algotrader.Robinhood.OptionInstrument;
 const OptionOrder = algotrader.Robinhood.OptionOrder;
 
-// First, we'll get the instrument and tradable expiration dates for TLRY.
-Instrument.getBySymbol("TLRY").then(ins => {
-	OptionInstrument.getExpirations(user, ins).then(option => {
-		// [ '2019-01-25',
-		//   '2019-02-01',
-		//   '2019-02-08',
-		//   '2019-02-15', ...
-        // Next, we'll fetch an option chain for the upcoming expiration date.
-        OptionInstrument.getChain(user, ins, expirations[0], "put").then(optionChain => {
-        	// An array of OptionInstruments will be returned. See the example below.
-            // You'll then want to find the specific OptionInstrument that you want to trade.
-            // In this example, we'll buy using the first element in the array.
-            let order = new OptionOrder(null, user, optionInstrument, "credit", "GFD", "buy", "market", 1);
-            order.submit().then(res => {
-            	// Order was submitted, the response will be parsed as a completed OptionOrder.
-            });
-		})
-	})
-});
+async function gains(user) {
+
+  // First, we'll get the instrument that corresponds to the symbol TLRY.
+  const tlry = await Instrument.getBySymbol('TLRY');
+  
+  // Next, we'll fetch an option chain containing puts for the upcoming expiration date.
+  // This will return an array of OptionInstruments. See the example in the next section below.
+  const chain = await OptionInstrument.getChain(user, tlry, expirations[0], 'put');
+  
+  // Now that we have the option chain, we'll need to find which OptionInstrument to trade
+  // based on its strike price and expiration date. See the example below for how to sort them.
+  // For now, we'll just take the first option contract in the array.
+  const optionToBuy = chain[0];
+  
+  // Finally, we can create and place an order like so:
+  let order = new OptionOrder(user, {
+  	side: 'buy',
+    type: 'limit', // Note: Robinhood does not allow market buy orders
+    price: '',
+    timeInForce: 'gtc',
+    quantity: 1,
+    option: optionToBuy
+  });
+  
+  order.submit().then(executedOrder => {
+  	// Success!
+    console.log(executedOrder);
+  }).catch(error => console.error(error));
+  
+}
+
 ```
 ##### Option chains
 Represented as an array of OptionInstruments, option chains provide you with all of the tradable contracts for a specific option instrument and expiration date. They are fetched using [```OptionInstrument.getChain```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and used for an [```OptionOrder.```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder)
@@ -320,6 +332,60 @@ Below is an example of a single element from within the array:
      { expiration: 2019-02-01T00:00:00.000Z,
        created: 2019-01-18T03:08:31.325Z,
        updated: 2019-01-18T03:08:31.325Z } }, ...
+```
+
+Here is an example of how you would sort an option chain by strike price and expiration date. For this example, we'll get a quote, the options chain, and option expiration dates and use that data buy the nearest in-the-money call.
+
+```js
+const moment = require('moment');
+
+// As of writing, QQQ share prices were $165.37.
+// Next option expiration is 02/01/2019.
+
+const qqq = await Instrument.getBySymbol('QQQ');
+const quote = await qqq.getQuote(user);
+const chain = await OptionInstrument.getChain(user, qqq, 'call');
+const expirations = await OptionInstrument.getExpirations(user, qqq);
+// Returns an array of expiration dates [ 2019-02-01T00:00:00.000Z, 2019-02-08T00:00:00.000Z, ...
+
+// Create a new array with options expiring on the next expiration date
+let optionsExpiringNext = [];
+
+const nextExpiration = moment(expirations[0]);
+
+chain.forEach(option => {
+	let thisExpiration = moment(option.getExpiration());
+    if (thisExpiration.isSame(nextExpiration)) {
+    	optionsExpiringNext.push(option);
+    }
+});
+
+// Filter out the option contracts with strike prices higher than the last trade price:
+let inTheMoneyCalls = optionsExpiringNext.filter(x => {
+	return x.getStrikePrice() < quote.getLast();
+});
+
+// Since Algotrader provides option chains ordered by strike price (low-high), we can
+// use the last element in the array to get the contract with the highest
+// strike price: the $165 call expiring on Feb 1st.
+let optionToBuy = inTheMoneyCalls[inTheMoneyCalls.length - 1];
+
+OptionInstrument {
+  url: 'https://api.robinhood.com',
+  tradability: 'tradable',
+  strikePrice: 165,
+  state: 'active',
+  type: 'put',
+  symbol: 'QQQ',
+  minTicks: { cutoff_price: '0.00', below_tick: '0.01', above_tick: '0.01' },
+  instrumentURL: 'https://api.robinhood.com/options/instruments/c8fbe71b-5fc5-4741-9b30-004e31bf89a6/',
+  ids: 
+   { chain: '1c9d052c-165d-43a3-878d-3a0a0ca1ab49',
+     option: 'c8fbe71b-5fc5-4741-9b30-004e31bf89a6' },
+  dates: 
+   { expiration: 2019-02-01T00:00:00.000Z,
+     created: 2018-12-13T03:14:20.947Z,
+     updated: 2018-12-13T03:14:20.947Z } }
 ```
 
 ---

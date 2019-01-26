@@ -41,7 +41,7 @@ class User extends Robinhood {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			if (_this.password === undefined && password === undefined) {
-				console.log("You didn't include a password in the constructor of your Robinhood user or when calling the authenciate function and it is required to authenticate your account.");
+				console.log("You didn't include a password in the constructor of your Robinhood user or when calling the authenticate function and it is required to authenticate your account.");
 				prompt.get({
 					properties: {
 						password: {
@@ -198,6 +198,10 @@ class User extends Robinhood {
 				}
 			});
 		})
+	}
+
+	static isUser(object) {
+		return object instanceof this.constructor;
 	}
 
 	// GET
@@ -430,11 +434,11 @@ class User extends Robinhood {
 	}
 
 	/**
-	 * Returns an array of recent option orders.
+	 * Returns an array of option orders.
 	 * @returns {Promise<Array>}
 	 */
-	getRecentOptionOrders() {
-		return OptionOrder.getRecentOrders(this);
+	getOptionOrders() {
+		return OptionOrder.getOrders(this);
 	}
 
 	/**

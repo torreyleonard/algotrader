@@ -1,7 +1,9 @@
 const Robinhood = require('./Robinhood');
-const User = require('./User');
+const OptionInstrument = require('./OptionInstrument');
 const request = require('request');
 const _ = require('lodash');
+const uuidv4 = require('uuid/v4');
+const assert = require('assert');
 
 /**
  * Represents and executes an order for the given option contract.
@@ -9,102 +11,94 @@ const _ = require('lodash');
 class OptionOrder extends Robinhood {
 
 	/**
-	 * Creates a new OptionOrder class.
-	 * @param {Object|Null} object - Object for previously created order. If this is a new order, this should be null.
+	 * Creates a new OptionOrder.
+	 *
 	 * @param {User} user
-	 * @param {OptionInstrument} optionInstrument
-	 * @param {String} direction - debit, credit
-	 * @param {String} timeInForce - 'GFD' / 'GTC' / 'IOC' / 'OPG'
-	 * @param {String} side - 'buy' / 'sell'
-	 * @param {String} type - 'limit' / 'market'
-	 * @param {Number} quantity
+	 * @param {Object} object
+	 * @property {String} side - buy/sell
+	 * @property {String} type - market/limit. Note: market orders are not allowed if side = buy.
+	 * @property {Number} price
+	 * @property {String} timeInForce - gtc/gfd/ioc/opg
+	 * @property {OptionInstrument} option
+	 * @property {Number} quantity
 	 */
-	constructor(object, user, optionInstrument, direction, timeInForce, side, type, quantity) {
+	constructor(user, object) {
 		super();
-		if (object === null) {
-			// if (!user instanceof User) new Error("Parameter 'user' must be a User object.");
-			// else if (!type instanceof String) new Error("Parameter 'type' must be a string.");
-			// else if (!timeInForce instanceof String) new Error("Parameter 'timeInForce' must be a string.");
-			// 	new Error("Parameter 'stopPrice' must be a string if trigger = stop, otherwise it should be null.");
-			// else if (!type instanceof String) new Error("Parameter 'type' must be a string.");
-			// else if (!Number.isInteger(quantity)) new Error("Parameter 'quantity' must be an integer.");
-			// else if (["limit", "market"].indexOf(type) === -1) new Error("Parameter 'type' must be either 'limit' or 'market.'");
-			// else if (["GFD", "GTC", "IOC", "OPG"].indexOf(timeInForce) === -1) new Error("Parameter 'timeInForce' must be 'GFD,' 'GTC,' 'IOC,' or 'OPG.'");
-			// else if (["immediate", "stop"].indexOf(trigger) === -1) new Error("Parameter 'trigger' must be either 'immediate' or 'stop.'");
-			// else if (["buy", "sell"].indexOf(side) === -1) new Error("Parameter 'side' must be either 'buy' or 'sell.'");
-			// else {
-				this.User = user;
-				this.direction = direction;
-				this.timeInForce = timeInForce;
-				this.legs = {
-					position_effect: side === "buy" ? "open" : "close",
-					side: side,
+		this.user = user;
+		if (object.state === undefined && object.cancel_url === undefined) { // This should be a new order
+			_validate();
+			this.executed = false;
+			this.form = {
+				account: this.url + "/accounts/" + this.user.getAccountNumber() + "/",
+				direction: object.side === 'buy' ? 'debit' : 'credit',
+				legs: [{
+					position_effect: object.side === "buy" ? "open" : "close",
+					side: object.side,
 					ratio_quantity: 1,
-					option: optionInstrument.instrumentURL,
-				};
-				this.type = type;
-				this.quantity = quantity;
-			// }
-		} else {
+					option: object.option.instrumentURL
+				}],
+				price: object.price,
+				time_in_force: object.timeInForce,
+				trigger: 'immediate',
+				type: object.type,
+				quantity: object.quantity,
+				override_day_trade_checks: false,
+				override_dtbp_checks: false,
+				ref_id: object.ref_id !== undefined ? object.ref_id : uuidv4()
+			};
+		} else { // This is an existing order
 			this.executed = true;
-			this.response = this._parse(object);
+			[ 'opening_strategy', 'updated_at', 'ref_id', 'time_in_force', 'response_category', 'chain_symbol', 'id', 'chain_id',
+				'state', 'trigger', 'legs', 'type', 'direction', 'premium', 'price', 'pending_quantity', 'processed_quantity',
+				'closing_strategy', 'processed_premium', 'created_at', 'cancel_url', 'canceled_quantity', 'quantity'
+			].forEach(key => this[key] = object[key]);
+		}
+		function _validate() {
+			assert(typeof user.isAuthenticated === 'function' && user.isAuthenticated(), new Error("Parameter 'user' must be an instance of the User class and authenticated with Robinhood"));
+			assert(typeof object.side === 'string', new Error("Object property 'side' must be a string"));
+			assert(object.side === 'buy' || object.side === 'sell', new Error("Object property 'side' must be either 'buy' or 'sell'"));
+			assert(typeof object.type === 'string', new Error("Object property 'type' must be a string"));
+			assert(object.type === 'market' || object.type === 'limit', new Error("Object property 'type' must be either 'market' or 'limit'"));
+			assert(!(object.side === 'buy' && object.type === 'market'), new Error("Robinhood does not allow buy orders to be of type 'market'"));
+			assert(typeof object.price === 'number', new Error("Object property 'price' must be a number"));
+			assert(typeof object.timeInForce === 'string', new Error("Object property 'timeInForce' must be a string"));
+			assert(['gfd', 'gtc', 'ioc', 'opg'].indexOf(object.timeInForce.toLowerCase()) !== -1, new Error("Object property 'timeInForce' must be either GFD, GTC, IOC, or OPG"));
+			assert(object.option instanceof OptionInstrument, new Error("Object property 'optionInstrument' must be an instance of the OptionInstrument class"));
+			assert(typeof object.quantity === 'number', new Error("Object property 'quantity' must be a number"))
 		}
 	}
 
-	_parse(object) {
-		return {
-			direction: String(object.direction),
-			premium: Number(object.premium),
-			processedPremium: Number(object.processed_premium),
-			timeInForce: String(object.time_in_force),
-			referenceID: String(object.ref_id),
-			price: Number(object.price),
-			trigger: String(object.trigger),
-			legs: object.legs,
-			type: object.type,
-			quantity: {
-				total: Number(object.quantity),
-				pending: Number(object.pending_quantity),
-				canceled: Number(object.canceled_quantity)
-			},
-			chain: {
-				id: String(object.chain_id),
-				symbol: String(object.chain_symbol)
-			},
-			dates: {
-				created: new Date(object.created_at),
-				updated: new Date(object.updated_at)
-			}
-		}
-	}
-
+	/**
+	 * Submits the OptionOrder to Robinhood and returns the executed OptionOrder.
+	 * @returns {Promise<OptionOrder>}
+	 */
 	submit() {
 		const _this = this;
 		return new Promise((resolve, reject) => {
-			request.post({
+			if (_this.executed) reject('This order has already been executed!');
+			else request.post({
 				uri: _this.url + "/options/orders/",
 				headers: {
-					'Authorization': 'Bearer ' + _this.User.getAuthToken()
+					'Authorization': 'Bearer ' + _this.user.getAuthToken()
 				},
-				form: {
-					account: _this.url + "/accounts/" + _this.User.getAccountNumber() + "/",
-					direction: _this.direction,
-					time_in_force: _this.timeInForce,
-					legs: _this.legs,
-					type: _this.type,
-					quantity: _this.quantity
-				}
+				json: _this.form,
 			}, (error, response, body) => {
-				return Robinhood.handleResponse(error, response, body, _this.User.getAuthToken(), res => {
+				return Robinhood.handleResponse(error, response, JSON.stringify(body), _this.user.getAuthToken(), res => {
 					_this.executed = true;
-					_this.response = this._parse(res);
-					resolve(res);
+					resolve(new OptionOrder(_this.user, res));
 				}, reject);
 			})
 		})
 	}
 
-	static getRecentOrders(user) {
+	/**
+	 * Returns an array of executed OptionOrders.
+	 * NOTE: See OptionInstrument.getPositions for an array of open positions.
+	 *
+	 * @param {User} user
+	 * @returns {Promise<OptionOrder[]>}
+	 */
+	static getOrders(user) {
 		return new Promise((resolve, reject) => {
 			request({
 				uri: "https://api.robinhood.com/options/orders/",
@@ -115,9 +109,9 @@ class OptionOrder extends Robinhood {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					let array = [];
 					res.forEach(o => {
-						array.push(new OptionOrder(o, user));
+						if (o.state !== undefined) array.push(new OptionOrder(user, o));
 					});
-					resolve(_.sortBy(array, 'response.dates.created'));
+					resolve(_.sortBy(array, 'created_at'));
 				}, reject);
 			})
 		})
@@ -129,105 +123,105 @@ class OptionOrder extends Robinhood {
 	 * @returns {Array}
 	 */
 	getLegs() {
-		return this.response.legs;
+		return this.legs;
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getDirection() {
-		return this.response.direction;
+		return this.direction;
 	}
 
 	/**
 	 * @returns {Number}
 	 */
 	getPremium() {
-		return this.response.premium;
+		return this.premium;
 	}
 
 	/**
 	 * @returns {Number}
 	 */
 	getProcessedPremium() {
-		return this.response.processedPremium;
+		return this.processed_premium;
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getTimeInForce() {
-		return this.response.timeInForce;
+		return this.time_in_force;
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getReferenceID() {
-		return this.response.referenceID;
+		return this.ref_id;
 	}
 
 	/**
 	 * @returns {Number}
 	 */
 	getPrice() {
-		return this.response.price;
+		return Number(this.price);
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getTrigger() {
-		return this.response.trigger;
+		return this.trigger;
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getType() {
-		return this.response.type;
+		return this.type;
 	}
 
 	/**
 	 * @returns {Number}
 	 */
 	getQuantity() {
-		return this.response.quantity.total;
+		return Number(this.quantity);
 	}
 
 	/**
 	 * @returns {Number}
 	 */
 	getQuantityPending() {
-		return this.response.quantity.pending;
+		return Number(this.pending_quantity);
 	}
 
 	/**
 	 * @returns {Number}
 	 */
 	getQuantityCanceled() {
-		return this.response.quantity.canceled;
+		return Number(this.canceled_quantity);
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getChainID() {
-		return this.response.chain.id;
+		return this.chain_id;
 	}
 
 	/**
 	 * @returns {String}
 	 */
 	getSymbol() {
-		return this.response.chain.symbol;
+		return this.chain_symbol;
 	}
 
 	/**
 	 * @returns {Date}
 	 */
 	getDateCreated() {
-		return this.response.dates.created;
+		return new Date(this.created_at);
 	}
 
 	// BOOLEANS
@@ -243,14 +237,14 @@ class OptionOrder extends Robinhood {
 	 * @returns {Boolean}
 	 */
 	isCredit() {
-		return this.response.direction === "credit";
+		return this.direction === "credit";
 	}
 
 	/**
 	 * @returns {Boolean}
 	 */
 	isDebit() {
-		return this.response.direction === "debit";
+		return this.direction === "debit";
 	}
 
 }

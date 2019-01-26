@@ -1,6 +1,7 @@
 const Robinhood = require('./Robinhood');
 const request = require('request');
 const async = require('async');
+const _ = require('lodash');
 
 /**
  * Represents an option traded on Robinhood.
@@ -53,18 +54,17 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
-	 * Returns an array of all option instruments for the given expiration date and side.
+	 * Returns an array of all option instruments for the given expiration date and side. Ordered from lowest to highest strike price.
 	 *
 	 * @author Ladinn
 	 * @author hbeere (Issue #10)
 	 *
 	 * @param {User} user
 	 * @param {Instrument} instrument
-	 * @param {String} expiration - The date of expiration for the option you are requesting.
 	 * @param {String} side - Can be either 'call' or 'put'
 	 * @returns {Promise<any>}
 	 */
-	static getChain(user, instrument, expiration, side) {
+	static getChain(user, instrument, side) {
 		return new Promise((resolve, reject) => {
 			request({
 				uri: "https://api.robinhood.com/options/instruments/",
@@ -73,7 +73,6 @@ class OptionInstrument extends Robinhood {
 				},
 				qs: {
 					chain_symbol: instrument.symbol,
-					expiration_date: expiration,
 					type: side,
 					tradability: "tradable",
 					state: "active"
@@ -81,8 +80,12 @@ class OptionInstrument extends Robinhood {
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
 					let instrumentsArray = [];
-					res.forEach(o => instrumentsArray.push(new OptionInstrument(o)));
-					resolve(instrumentsArray);
+					res.forEach(x => {
+						if (Array.isArray(x))
+							x.forEach(y => instrumentsArray.push(new OptionInstrument(y)));
+						else instrumentsArray.push(new OptionInstrument(x));
+					});
+					resolve(_.orderBy(instrumentsArray, 'strikePrice'));
 				}, reject);
 			})
 		})
@@ -92,7 +95,7 @@ class OptionInstrument extends Robinhood {
 	 * Returns an array of expiration dates for the given Instrument.
 	 * @param {User} user
 	 * @param {Instrument} instrument
-	 * @returns {Promise<any>}
+	 * @returns {Promise<Date[]>}
 	 */
 	static getExpirations(user, instrument) {
 		return new Promise((resolve, reject) => {
@@ -123,7 +126,7 @@ class OptionInstrument extends Robinhood {
 		function parseChains(res, callback) {
 			let array = [];
 			res.expiration_dates.forEach(date => {
-				array.push(date);
+				array.push(new Date(date));
 			});
 			callback(array);
 		}
@@ -211,6 +214,13 @@ class OptionInstrument extends Robinhood {
 	 */
 	getType() {
 		return this.type;
+	}
+
+	/**
+	 * @returns {String}
+	 */
+	getInstrumentURL() {
+		return this.instrumentURL;
 	}
 
 	/**
