@@ -642,6 +642,7 @@ Represents an option traded on Robinhood.
         * [.getStrikePrice()](#OptionInstrument+getStrikePrice) ⇒ <code>Number</code>
         * [.getState()](#OptionInstrument+getState) ⇒ <code>String</code>
         * [.getType()](#OptionInstrument+getType) ⇒ <code>String</code>
+        * [.getInstrumentURL()](#OptionInstrument+getInstrumentURL) ⇒ <code>String</code>
         * [.getSymbol()](#OptionInstrument+getSymbol) ⇒ <code>String</code>
         * [.getMiniumumTicks()](#OptionInstrument+getMiniumumTicks) ⇒ <code>Object</code>
         * [.getChainID()](#OptionInstrument+getChainID) ⇒ <code>String</code>
@@ -649,8 +650,8 @@ Represents an option traded on Robinhood.
         * [.getExpiration()](#OptionInstrument+getExpiration) ⇒ <code>Date</code>
     * _static_
         * [.getAll(user)](#OptionInstrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
-        * [.getChain(user, instrument, expiration, side)](#OptionInstrument.getChain) ⇒ <code>Promise.&lt;any&gt;</code>
-        * [.getExpirations(user, instrument)](#OptionInstrument.getExpirations) ⇒ <code>Promise.&lt;any&gt;</code>
+        * [.getChain(user, instrument, side)](#OptionInstrument.getChain) ⇒ <code>Promise.&lt;any&gt;</code>
+        * [.getExpirations(user, instrument)](#OptionInstrument.getExpirations) ⇒ <code>Promise.&lt;Array.&lt;Date&gt;&gt;</code>
         * [.getByURL(user, url)](#OptionInstrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getPositions(user)](#OptionInstrument.getPositions) ⇒ <code>Promise.&lt;Array&gt;</code>
 
@@ -669,6 +670,10 @@ Represents an option traded on Robinhood.
 <a name="OptionInstrument+getType"></a>
 
 ### optionInstrument.getType() ⇒ <code>String</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+<a name="OptionInstrument+getInstrumentURL"></a>
+
+### optionInstrument.getInstrumentURL() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
 <a name="OptionInstrument+getSymbol"></a>
 
@@ -703,8 +708,8 @@ Returns an array of all option instruments. Note: this may take an eternity - no
 
 <a name="OptionInstrument.getChain"></a>
 
-### OptionInstrument.getChain(user, instrument, expiration, side) ⇒ <code>Promise.&lt;any&gt;</code>
-Returns an array of all option instruments for the given expiration date and side.
+### OptionInstrument.getChain(user, instrument, side) ⇒ <code>Promise.&lt;any&gt;</code>
+Returns an array of all option instruments for the given expiration date and side. Ordered from lowest to highest strike price.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
 **Author**: Ladinn  
@@ -714,12 +719,11 @@ Returns an array of all option instruments for the given expiration date and sid
 | --- | --- | --- |
 | user | [<code>User</code>](#User) |  |
 | instrument | [<code>Instrument</code>](#Instrument) |  |
-| expiration | <code>String</code> | The date of expiration for the option you are requesting. |
 | side | <code>String</code> | Can be either 'call' or 'put' |
 
 <a name="OptionInstrument.getExpirations"></a>
 
-### OptionInstrument.getExpirations(user, instrument) ⇒ <code>Promise.&lt;any&gt;</code>
+### OptionInstrument.getExpirations(user, instrument) ⇒ <code>Promise.&lt;Array.&lt;Date&gt;&gt;</code>
 Returns an array of expiration dates for the given Instrument.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
@@ -760,43 +764,47 @@ Represents and executes an order for the given option contract.
 **Kind**: global class  
 
 * [OptionOrder](#OptionOrder)
-    * [new OptionOrder(object, user, optionInstrument, direction, timeInForce, side, type, quantity)](#new_OptionOrder_new)
-    * [.getLegs()](#OptionOrder+getLegs) ⇒ <code>Array</code>
-    * [.getDirection()](#OptionOrder+getDirection) ⇒ <code>String</code>
-    * [.getPremium()](#OptionOrder+getPremium) ⇒ <code>Number</code>
-    * [.getProcessedPremium()](#OptionOrder+getProcessedPremium) ⇒ <code>Number</code>
-    * [.getTimeInForce()](#OptionOrder+getTimeInForce) ⇒ <code>String</code>
-    * [.getReferenceID()](#OptionOrder+getReferenceID) ⇒ <code>String</code>
-    * [.getPrice()](#OptionOrder+getPrice) ⇒ <code>Number</code>
-    * [.getTrigger()](#OptionOrder+getTrigger) ⇒ <code>String</code>
-    * [.getType()](#OptionOrder+getType) ⇒ <code>String</code>
-    * [.getQuantity()](#OptionOrder+getQuantity) ⇒ <code>Number</code>
-    * [.getQuantityPending()](#OptionOrder+getQuantityPending) ⇒ <code>Number</code>
-    * [.getQuantityCanceled()](#OptionOrder+getQuantityCanceled) ⇒ <code>Number</code>
-    * [.getChainID()](#OptionOrder+getChainID) ⇒ <code>String</code>
-    * [.getSymbol()](#OptionOrder+getSymbol) ⇒ <code>String</code>
-    * [.getDateCreated()](#OptionOrder+getDateCreated) ⇒ <code>Date</code>
-    * [.isExecuted()](#OptionOrder+isExecuted) ⇒ <code>Boolean</code>
-    * [.isCredit()](#OptionOrder+isCredit) ⇒ <code>Boolean</code>
-    * [.isDebit()](#OptionOrder+isDebit) ⇒ <code>Boolean</code>
+    * [new OptionOrder(user, object)](#new_OptionOrder_new)
+    * _instance_
+        * [.submit()](#OptionOrder+submit) ⇒ [<code>Promise.&lt;OptionOrder&gt;</code>](#OptionOrder)
+        * [.getLegs()](#OptionOrder+getLegs) ⇒ <code>Array</code>
+        * [.getDirection()](#OptionOrder+getDirection) ⇒ <code>String</code>
+        * [.getPremium()](#OptionOrder+getPremium) ⇒ <code>Number</code>
+        * [.getProcessedPremium()](#OptionOrder+getProcessedPremium) ⇒ <code>Number</code>
+        * [.getTimeInForce()](#OptionOrder+getTimeInForce) ⇒ <code>String</code>
+        * [.getReferenceID()](#OptionOrder+getReferenceID) ⇒ <code>String</code>
+        * [.getPrice()](#OptionOrder+getPrice) ⇒ <code>Number</code>
+        * [.getTrigger()](#OptionOrder+getTrigger) ⇒ <code>String</code>
+        * [.getType()](#OptionOrder+getType) ⇒ <code>String</code>
+        * [.getQuantity()](#OptionOrder+getQuantity) ⇒ <code>Number</code>
+        * [.getQuantityPending()](#OptionOrder+getQuantityPending) ⇒ <code>Number</code>
+        * [.getQuantityCanceled()](#OptionOrder+getQuantityCanceled) ⇒ <code>Number</code>
+        * [.getChainID()](#OptionOrder+getChainID) ⇒ <code>String</code>
+        * [.getSymbol()](#OptionOrder+getSymbol) ⇒ <code>String</code>
+        * [.getDateCreated()](#OptionOrder+getDateCreated) ⇒ <code>Date</code>
+        * [.isExecuted()](#OptionOrder+isExecuted) ⇒ <code>Boolean</code>
+        * [.isCredit()](#OptionOrder+isCredit) ⇒ <code>Boolean</code>
+        * [.isDebit()](#OptionOrder+isDebit) ⇒ <code>Boolean</code>
+    * _static_
+        * [.getOrders(user)](#OptionOrder.getOrders) ⇒ <code>Promise.&lt;Array.&lt;OptionOrder&gt;&gt;</code>
 
 <a name="new_OptionOrder_new"></a>
 
-### new OptionOrder(object, user, optionInstrument, direction, timeInForce, side, type, quantity)
-Creates a new OptionOrder class.
+### new OptionOrder(user, object)
+Creates a new OptionOrder.
 
 
-| Param | Type | Description |
-| --- | --- | --- |
-| object | <code>Object</code> \| <code>Null</code> | Object for previously created order. If this is a new order, this should be null. |
-| user | [<code>User</code>](#User) |  |
-| optionInstrument | [<code>OptionInstrument</code>](#OptionInstrument) |  |
-| direction | <code>String</code> | debit, credit |
-| timeInForce | <code>String</code> | 'GFD' / 'GTC' / 'IOC' / 'OPG' |
-| side | <code>String</code> | 'buy' / 'sell' |
-| type | <code>String</code> | 'limit' / 'market' |
-| quantity | <code>Number</code> |  |
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| object | <code>Object</code> | 
 
+<a name="OptionOrder+submit"></a>
+
+### optionOrder.submit() ⇒ [<code>Promise.&lt;OptionOrder&gt;</code>](#OptionOrder)
+Submits the OptionOrder to Robinhood and returns the executed OptionOrder.
+
+**Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
 <a name="OptionOrder+getLegs"></a>
 
 ### optionOrder.getLegs() ⇒ <code>Array</code>
@@ -869,6 +877,18 @@ Creates a new OptionOrder class.
 
 ### optionOrder.isDebit() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+<a name="OptionOrder.getOrders"></a>
+
+### OptionOrder.getOrders(user) ⇒ <code>Promise.&lt;Array.&lt;OptionOrder&gt;&gt;</code>
+Returns an array of executed OptionOrders.
+NOTE: See OptionInstrument.getPositions for an array of open positions.
+
+**Kind**: static method of [<code>OptionOrder</code>](#OptionOrder)  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+
 <a name="Order"></a>
 
 ## Order
@@ -1217,7 +1237,7 @@ Represents the user that is logged in while accessing the Robinhood API.
         * [.getRecentDayTrades()](#User+getRecentDayTrades) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getRecentOrders()](#User+getRecentOrders) ⇒ <code>Promise.&lt;Array.&lt;Order&gt;&gt;</code>
         * [.cancelOpenOrders()](#User+cancelOpenOrders) ⇒ <code>Promise</code>
-        * [.getRecentOptionOrders()](#User+getRecentOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.getOptionOrders()](#User+getOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getHistoricals()](#User+getHistoricals) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1334,10 +1354,10 @@ Returns an array of recent orders.
 Cancels all open orders.
 
 **Kind**: instance method of [<code>User</code>](#User)  
-<a name="User+getRecentOptionOrders"></a>
+<a name="User+getOptionOrders"></a>
 
-### user.getRecentOptionOrders() ⇒ <code>Promise.&lt;Array&gt;</code>
-Returns an array of recent option orders.
+### user.getOptionOrders() ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of option orders.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 <a name="User+getPortfolio"></a>
