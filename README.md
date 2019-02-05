@@ -413,7 +413,7 @@ But first, you'll need to create a new instance of the Scheduler. Here's an easy
 const Scheduler = algotrader.Algorithm.Scheduler;
 
 const openingTask = new Scheduler(function run() {
-	console.log("Running!);
+	console.log("Running!");
 });
 
 openingTask.onMarketOpen(-5 * 60000).then(nextDate => {
@@ -424,7 +424,7 @@ openingTask.onMarketOpen(-5 * 60000).then(nextDate => {
 const Scheduler = algotrader.Algorithm.Scheduler;
 
 const halfHourTask = new Scheduler(function run() {
-	console.log("Running!);
+	console.log("Running!");
 });
 
 halfHourTask.every(30, false);
