@@ -398,28 +398,39 @@ For scheduling tasks, running backtests, and paper-trading, the algorithm librar
 
 Using the [```Scheduler```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler) class, you'll be able to define exactly when you want a function to run using the following methods:
 
-- ```Scheduler.onMarketOpen(offset, f)```
+- ```onMarketOpen(offset)```
 	- Runs every morning when the NYSE opens. (Typically 9:30 AM EST)
 	- Offset is in milliseconds and can be positive (after) or negative (before).
-- ```Scheduler.onMarketClose(offset, f)```
+- ```onMarketClose(offset)```
 	- Runs every afternoon when the NYSE closes. (Typically 4:00 PM EST)
 	- Offset is in milliseconds and can be positive (after) or negative (before).
-- ```Scheduler.every(minutes, extended, f)```
+- ```every(minutes, extended)```
 	- Runs every ```x``` minutes during market hours or during typical extended trading hours. (9 AM EST - 6 PM EST)
 
-Here's an easy example that runs a function 5 minutes before the market opens and another one every 30 minutes during regular trading hours:
+But first, you'll need to create a new instance of the Scheduler. Here's an easy example that runs a function 5 minutes before the market opens and another one every 30 minutes during regular trading hours:
 
 ```js
 const Scheduler = algotrader.Algorithm.Scheduler;
 
-Scheduler.onMarketOpen(-5 * 60000, () => {
-	// Function to run five minutes before the market opens
+const openingTask = new Scheduler(function run() {
+	console.log("Running!);
 });
 
-Scheduler.every(30, false, () => {
-	// Function to run every 1/2 hour
+openingTask.onMarketOpen(-5 * 60000).then(nextDate => {
+	// This is optional, but returns a promise with the next invocation time
 });
 ```
+```js
+const Scheduler = algotrader.Algorithm.Scheduler;
+
+const halfHourTask = new Scheduler(function run() {
+	console.log("Running!);
+});
+
+halfHourTask.every(30, false);
+```
+To cancel a task, just call ```cancel``` after it has been scheduled.
+
 For documentation on all Scheduler functions, visit the [```Algorithm Library Docs.```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler)
 
 ---

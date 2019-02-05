@@ -25,14 +25,14 @@ class IEX {
 			})
 		});
 	}
-	
+
 	/**
-   * Returns a market object.
-   * @returns {Promise<Market>}
-   */
-  static getMarket() {
-    return IEX._request('market');
-  }
+	 * Returns a market object.
+	 * @returns {Promise<Market>}
+	 */
+	static getMarket() {
+		return IEX._request('market');
+	}
 
 	/**
 	 * Returns a quote object for the given symbol.

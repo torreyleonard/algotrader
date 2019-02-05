@@ -7,33 +7,50 @@ const schedule = require('node-schedule');
 class Scheduler {
 
 	/**
+	 * Creates a new scheduled task
+	 *
+	 * @param {Function} f
+	 */
+	constructor(f) {
+		this.f = f;
+		this.job = null;
+	}
+
+	/**
 	 * Runs every day on market open.
 	 * @param {Number} offset - The offset, in milliseconds, from market open to run the algorithm. Negative is before, positive is after.
-	 * @param {Function} f - The function to run.
-	 * @returns {Promise<schedule>}
+	 * @returns {Promise<Date>} - Date object of next invocation.
 	 */
-	static onMarketOpen(offset, f) {
-		return Market.getByMIC("XNYS").then(nyse => {
-			return nyse.getNextOpen().then(next => {
-				const date = new Date(next.getTime() + offset);
-				return schedule.scheduleJob(date, f);;
-			})
-		});
+	onMarketOpen(offset) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
+			else Market.getByMIC("XNYS").then(nyse => {
+				nyse.getNextOpen().then(next => {
+					const date = new Date(next.getTime() + offset);
+					_this.job = schedule.scheduleJob(date, _this.f);
+					resolve(_this.job.nextInvocation().toDate());
+				})
+			});
+		})
 	}
 
 	/**
 	 * Runs every day on market close.
 	 * @param {Number} offset - The offset, in milliseconds, from market close to run the algorithm. Negative is before, positive is after.
-	 * @param {Function} f - The function to run.
 	 * @returns {Promise<schedule>}
 	 */
-	static onMarketClose(offset, f) {
-		return Market.getByMIC("XNYS").then(nyse => {
-			return nyse.getNextClose().then(next => {
-				const date = new Date(next.getTime() + offset);
-				schedule.scheduleJob(date, f);
-				return schedule.scheduleJob(date, f);;
-			})
+	onMarketClose(offset) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
+			else Market.getByMIC("XNYS").then(nyse => {
+				nyse.getNextClose().then(next => {
+					const date = new Date(next.getTime() + offset);
+					_this.job = schedule.scheduleJob(date, _this.f);
+					resolve(_this.job.nextInvocation().toDate());
+				})
+			});
 		});
 	}
 
@@ -41,32 +58,41 @@ class Scheduler {
 	 * Runs every 'x' minutes while the market is open.
 	 * @param {Number} minutes
 	 * @param {Boolean} extended - Whether to run during extended trading hours.
-	 * @param {Function} f - The function to run.
 	 */
-	static every(minutes, extended, f) {
-		schedule.scheduleJob("*/" + minutes + " * * * 1-5", () => {
-			Market.getByMIC("XNYS").then(nyse => {
-				if (nyse.isOpenNow()) f();
-				else if (extended && nyse.isExtendedOpenNow()) f();
-			})
+	every(minutes, extended) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
+			else {
+				_this.job = schedule.scheduleJob("*/" + minutes + " * * * 1-5", () => {
+					Market.getByMIC("XNYS").then(nyse => {
+						if (nyse.isOpenNow()) _this.f();
+						else if (extended && nyse.isExtendedOpenNow()) _this.f();
+					})
+				});
+				resolve(_this.job.nextInvocation().toDate());
+			}
 		});
 	}
 
 	/**
 	 * Cancels a job.
-	 * @param {schedule} schedule
 	 */
-	static cancel(schedule) {
-		schedule.cancel();
+	cancel() {
+		if (this.job === null) return new Error("This job has not been scheduled yet.");
+		else {
+			this.job.cancel();
+			this.job = null;
+		}
 	}
 
 	/**
 	 * Returns the date of the next invocation of the given job.
-	 * @param {schedule} schedule
-	 * @returns {Date}
+	 * @returns {Date|Error}
 	 */
-	static getNext(schedule) {
-		return schedule.nextInvocation();
+	getNext() {
+		if (this.job === null) return new Error("This job has not been scheduled yet.");
+		else return this.job.nextInvocation();
 	}
 
 }
