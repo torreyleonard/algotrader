@@ -58,11 +58,12 @@
 	- [Robinhood](#robinhood)
 		- [Getting started](#robinhood)
 		- [Multi-factor authentication](#mfa)
-    	- [Saving & loading a user](#saving--loading-a-user)
-    	- [Get a user's portfolio](#get-a-users-portfolio)
-    	- [Placing an order](#placing-an-order)
-    	- [Options](#options)
-    	- [Option chains](#option-chains)
+		- [Saving & loading a user](#saving--loading-a-user)
+		- [Automatic re-authentication](Automatic-re-authentication)
+		- [Get a user's portfolio](#get-a-users-portfolio)
+		- [Placing an order](#placing-an-order)
+		- [Options](#options)
+		- [Option chains](#option-chains)
 - Algorithm Library
 	- [Scheduler](#scheduler)
 - Data Library
@@ -188,6 +189,43 @@ User.load()
 ```
 
 However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.
+
+
+##### Automatic re-authentication
+
+You can use [```User.reauthenticate```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) function to re-authenticate the user automatically when the authentication token is expired (after 24 hours). To do this you have to use securely saved refresh token.
+ 
+You can save and restore a user data including a refresh token using [```User.serialize```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) (right after user has been authenticated) and [```User.deserialize```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) functions.
+
+**Note:** [```User.safe```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) does not save a refresh token by security reason.
+
+```js
+const authenticatedUser; // In state right after `authenticate` called, but not after `load`.
+const data = authenticatedUser.serialize();
+
+// Save the data in your secure storage
+// superSecureStorage.save(userId, data);
+```
+
+```js
+// Restore the data from your secure storage
+// const data = superSecureStorage.load(userId);
+
+User.deserialize(data)
+	.then(restoredUser => {
+		if(!restoredUser.isAuthenticated()) {
+			restoredUser.reauthenticate()
+				.then(myUser => {
+					// Now you can use your user 
+					// Don't forget to save it
+					// superSecureStorage.save(userId, data);
+				}).catch(error => {
+					// Make sure to always catch possible errors.
+					// You probably need to re-authenticate using username and password here.
+				});
+		}
+	});
+```
 
 #### Get a user's portfolio
 There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using [```User.getPortfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.

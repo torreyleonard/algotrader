@@ -29,13 +29,14 @@ class User extends Robinhood {
 		this.token = null; // Authentication token
 		this.account = null; // Account number
 		this.expires = null; // Auth expiration date (24 hours after login)
+		this.refreshToken = null; // Refresh token can be used to obtain another access token after auth expiration
 	}
 
 	/**
 	 * Authenticates a user using the inputted username and password.
 	 * @param {String|Undefined} password - Optional if not provided in constructor or re-authenticating a saved user.
 	 * @param {Function|Undefined} mfaFunction - Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted.
-	 * @returns {Promise<Boolean>}
+	 * @returns {Promise<User>}
 	 */
 	authenticate(password, mfaFunction) {
 		const _this = this;
@@ -124,12 +125,53 @@ class User extends Robinhood {
 		function _postAuth(json, resolve, reject) {
 			_this.expires = moment().add(json.expires_in, 'seconds');
 			_this.token = json.access_token;
+			_this.refreshToken = json.refresh_token;
 			_this.getAccount().then(account => {
 				_this.account = account.account_number;
 				delete _this.password;
 				resolve(_this);
 			}).catch(error => reject(error));
 		}
+	}
+
+	/**
+	 * Re-authenticates a user with the the expired authentication token using the refresh token.
+	 * @returns {Promise<User>}
+	 */
+	reauthenticate(refreshToken) {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			if (_this.refreshToken === undefined && refreshToken === undefined) {
+				console.log("A refresh token is not provided.");
+			} else {
+				if (_this.refreshToken === undefined) {
+					_this.refreshToken = refreshToken;
+				}
+				request.post({
+					uri: _this.url + "/oauth2/token/",
+					form: {
+						refresh_token: _this.refreshToken,
+						client_id: 'c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS',
+						grant_type: 'refresh_token',
+						scope: 'internal'
+					}
+				}, (error, response, body) => {
+					if (error) reject(error);
+					else if (response.statusCode !== 200) reject(new LibraryError(body));
+
+					const json = JSON.parse(body);
+
+					_this.expires = moment().add(json.expires_in, 'seconds');
+					_this.token = json.access_token;
+					_this.refreshToken = json.refresh_token;
+					_this.getAccount().then(account => {
+						_this.account = account.account_number;
+						delete _this.password;
+						resolve(_this);
+					}).catch(error => reject(error));
+				})
+			}
+		});
 	}
 
 	/**
@@ -148,11 +190,49 @@ class User extends Robinhood {
 				if (error) reject(error);
 				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
+					const dir = path.join(__dirname, 'User.json');
 					try { fs.unlinkSync(dir); } catch (e) {}
 					resolve(true);
 				}
 			})
 		})
+	}
+
+	/**
+	 * Converts a user object to a string to be securely stored.
+	 *
+	 * Note that serialized object contains refreshToken and it's subject to strict storage requirements
+	 * to ensure that they are not leaked
+	 *
+	 * @returns {string}
+	 */
+	serialize() {
+		return JSON.stringify(this)
+	}
+
+	/**
+	 * Restores a user from the serialized object.
+	 * @param {String} data - serialized data
+	 * @returns {Promise<User>}
+	 */
+	static deserialize(data) {
+		return new Promise((resolve, reject) => {
+			const json = JSON.parse(data);
+
+			if (json === null || json.username === undefined) {
+				reject(new Error("Provided data doesn't have a username"));
+			} else {
+				const json = JSON.parse(data);
+
+				const u = new User(json.username, json.password);
+
+				u.token = json.token;
+				u.account = json.account;
+				u.expires = json.expires;
+				u.refreshToken = json.refreshToken;
+				resolve(u);
+			}
+		});
 	}
 
 	/**
@@ -166,7 +246,8 @@ class User extends Robinhood {
 			else {
 				const dir = path.join(__dirname, 'User.json');
 				try { fs.unlinkSync(dir); } catch (e) {}
-				fs.writeFile(dir, JSON.stringify(_this, null, 2), error => {
+				delete _this.refreshToken; // It's not secure to store refreshToken locally
+				fs.writeFile(dir, _this.serialize(), error => {
 					if (error) reject(error);
 					else resolve(true);
 				})
@@ -185,39 +266,59 @@ class User extends Robinhood {
 					if (error.errno === -2) reject(new Error("A saved user does not exist!"));
 					else reject(error);
 				} else {
-					const json = JSON.parse(data);
-					if (moment().isBefore(json.expires)) {
-						const u = new User(json.username, json.password);
-						u.token = json.token;
-						u.account = json.account;
-						u.expires = json.expires;
-						resolve(u);
-					} else {
-						reject(new Error("User session has expired. Please authenticate again."))
-					}
+					this.deserialize(data)
+						.then(user => {
+							if (moment().isBefore(user.expires)) {
+								resolve(user);
+							} else {
+								reject(new Error("User session has expired. Please authenticate again."))
+							}
+						})
+						.catch(error => reject(error));
 				}
 			});
 		})
 	}
 
+	/**
+	 * Checks if the provided object an instance of User object
+	 * @param {Object} object
+	 * @returns {boolean}
+	 */
 	static isUser(object) {
 		return object instanceof this.constructor;
 	}
 
 	// GET
 
+	/**
+	 * Checks if the current user is authenticated and authentication is not expired.
+	 * @returns {boolean}
+	 */
 	isAuthenticated() {
 		return this.token !== undefined && moment().isBefore(this.expires);
 	}
 
+	/**
+	 * Returns an auth token.
+	 * @returns {null|string}
+	 */
 	getAuthToken() {
 		return this.token;
 	}
 
+	/**
+	 * Returns an account number.
+	 * @returns {null|string}
+	 */
 	getAccountNumber() {
 		return this.account;
 	}
 
+	/**
+	 * Returns a username.
+	 * @returns {null|string}
+	 */
 	getUsername() {
 		return this.username;
 	}
