@@ -657,6 +657,30 @@ class AlphaVantage {
 			}
 		]);
 	}
+	
+	 /**
+   * This API returns the minus directional indicator (MINUS_DI) values
+   * http://www.investopedia.com/articles/technical/02/050602.asp
+   * @param {String} symbol
+   * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+   * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+   * @returns {Promise<Array>}
+   */
+  minus_di(symbol, interval, timePeriod) {
+    return this._technical('MINUS_DI', symbol, interval, timePeriod);
+  }
+
+  /**
+   * This API returns the plus directional indicator (PLUS_DI) values
+   * http://www.investopedia.com/articles/technical/02/050602.asp
+   * @param {String} symbol
+   * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
+   * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
+   * @returns {Promise<Array>}
+   */
+  plus_di(symbol, interval, timePeriod) {
+    return this._technical('PLUS_DI', symbol, interval, timePeriod);
+  }
 
 }
 
