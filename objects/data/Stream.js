@@ -111,7 +111,9 @@ class Stream extends EventEmitter {
 	 */
 	stop() {
 		this.request.abort();
-		this.socket.disconnect();
+		if(this.iex){
+			this.socket.disconnect();
+		}
 	}
 
 	_createQuote(input) {
