@@ -1,6 +1,7 @@
 /docs/
 *.png
 *.psd
+.editorconfig
 
 # Git ignore
 
