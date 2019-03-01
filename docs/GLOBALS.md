@@ -1,16 +1,42 @@
 ## Classes
 
 <dl>
+<dt><a href="#LibraryError">LibraryError</a></dt>
+<dd></dd>
 <dt><a href="#OptionsChain">OptionsChain</a></dt>
 <dd></dd>
 <dt><a href="#Quote">Quote</a></dt>
 <dd></dd>
 </dl>
 
+<a name="LibraryError"></a>
+
+## LibraryError
+**Kind**: global class  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+
+* [LibraryError](#LibraryError)
+    * [new LibraryError(message)](#new_LibraryError_new)
+    * [.toString()](#LibraryError+toString) ⇒ <code>string</code>
+
+<a name="new_LibraryError_new"></a>
+
+### new LibraryError(message)
+
+| Param |
+| --- |
+| message | 
+
+<a name="LibraryError+toString"></a>
+
+### libraryError.toString() ⇒ <code>string</code>
+**Kind**: instance method of [<code>LibraryError</code>](#LibraryError)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionsChain"></a>
 
 ## OptionsChain
 **Kind**: global class  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 * [OptionsChain](#OptionsChain)
     * [new OptionsChain(array)](#new_OptionsChain_new)
@@ -45,12 +71,14 @@ Creates a new OptionsChain object.
 Returns an array of all expiration dates for the OptionsChain object.
 
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionsChain+getStrikePrices"></a>
 
 ### optionsChain.getStrikePrices(date, side) ⇒ <code>Array.&lt;Number&gt;</code> \| <code>Error</code>
 Returns an array of all strike prices for the OptionsChain object.
 
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -63,6 +91,7 @@ Returns an array of all strike prices for the OptionsChain object.
 Returns an options chain for the given date.
 
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -74,6 +103,7 @@ Returns an options chain for the given date.
 Returns the nearest strike price to the given price target.
 
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -87,6 +117,7 @@ Returns the nearest strike price to the given price target.
 Returns the nearest expiration date to the given date.
 
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -96,6 +127,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getVolume(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -107,6 +139,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getOpenInterest(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -118,6 +151,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getLastPrice(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -129,6 +163,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getBid(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -140,6 +175,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getAsk(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -151,6 +187,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getChange(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -162,6 +199,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getLastTradeDate(date, strike, side) ⇒ <code>Date</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -173,6 +211,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.getImpliedVolatility(date, strike, side) ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -184,6 +223,7 @@ Returns the nearest expiration date to the given date.
 
 ### optionsChain.isInTheMoney(date, strike, side) ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>OptionsChain</code>](#OptionsChain)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -195,6 +235,7 @@ Returns the nearest expiration date to the given date.
 
 ## Quote
 **Kind**: global class  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 **Properties**
 
 | Name | Type | Description |
@@ -230,6 +271,7 @@ Returns the nearest expiration date to the given date.
         * [.getHigh()](#Quote+getHigh) ⇒ <code>Number</code> \| <code>Null</code>
         * [.getLow()](#Quote+getLow) ⇒ <code>Number</code> \| <code>Null</code>
         * [.getClose()](#Quote+getClose) ⇒ <code>Number</code> \| <code>Null</code>
+        * [.getOHLC4()](#Quote+getOHLC4) ⇒ <code>number</code>
         * [.getVolume()](#Quote+getVolume) ⇒ <code>Number</code> \| <code>Null</code>
         * [.getAdjustedClose()](#Quote+getAdjustedClose) ⇒ <code>Number</code> \| <code>Null</code>
         * [.getBidPrice()](#Quote+getBidPrice) ⇒ <code>Number</code> \| <code>Null</code>
@@ -256,66 +298,87 @@ Creates a new Quote instance.
 
 ### quote.getSymbol() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getDate"></a>
 
 ### quote.getDate() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getSource"></a>
 
 ### quote.getSource() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getLast"></a>
 
 ### quote.getLast() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getOpen"></a>
 
 ### quote.getOpen() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getHigh"></a>
 
 ### quote.getHigh() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getLow"></a>
 
 ### quote.getLow() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getClose"></a>
 
 ### quote.getClose() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="Quote+getOHLC4"></a>
+
+### quote.getOHLC4() ⇒ <code>number</code>
+**Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getVolume"></a>
 
 ### quote.getVolume() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getAdjustedClose"></a>
 
 ### quote.getAdjustedClose() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getBidPrice"></a>
 
 ### quote.getBidPrice() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getBidSize"></a>
 
 ### quote.getBidSize() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getAskPrice"></a>
 
 ### quote.getAskPrice() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getAskSize"></a>
 
 ### quote.getAskSize() ⇒ <code>Number</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getMeta"></a>
 
 ### quote.getMeta() ⇒ <code>Object</code> \| <code>Null</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote+getOriginal"></a>
 
 ### quote.getOriginal() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Quote.getVWAP"></a>
 
 ### Quote.getVWAP(quoteArray) ⇒ <code>Number</code>
@@ -323,6 +386,7 @@ Returns the volume weighted average price (VWAP) for the given quote array.
 https://www.investopedia.com/terms/v/vwap.asp
 
 **Kind**: static method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -334,6 +398,7 @@ https://www.investopedia.com/terms/v/vwap.asp
 Calculates the highest high and lowest low for the provided period of time.
 
 **Kind**: static method of [<code>Quote</code>](#Quote)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |

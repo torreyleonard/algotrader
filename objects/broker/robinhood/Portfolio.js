@@ -11,6 +11,8 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Creates a new Portfolio object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {User} user
 	 * @param {Array} array - Created via User.getPortfolio()
 	 */
@@ -50,6 +52,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Sells all positions in the user's portfolio at the market price.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Boolean|Error>}
 	 */
 	sellAll() {
@@ -78,6 +81,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Executes a new order to reduce or increase the user's position in the given symbol by the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {Number} targetQuantity
 	 * @returns {Promise<Order>}
@@ -110,6 +114,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns the total market value of all stocks held by the user.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Number>}
 	 */
 	getStockValue() {
@@ -130,6 +135,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all instruments in the user's portfolio.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Array}
 	 */
 	getInstrumentArray() {
@@ -142,6 +148,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all symbols in the user's portfolio.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Array}
 	 */
 	getSymbols() {
@@ -154,6 +161,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns the average buy price for the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Number}
 	 */
@@ -163,6 +171,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns the quantity owned of the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Number}
 	 */
@@ -174,6 +183,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Get total shares held for the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Number}
 	 */
@@ -184,6 +194,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns the date of original purchase for the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Date}
 	 */
@@ -193,6 +204,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns the date of last trade for the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Date}
 	 */
@@ -204,6 +216,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an object containing the user's position in the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Object}
 	 */
@@ -213,6 +226,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of objects containing the user's positions in the given symbols.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Array} array
 	 * @returns {Array<Object>}
 	 */
@@ -222,6 +236,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions greater than the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} size
 	 * @returns {Array<Object>}
 	 */
@@ -231,6 +246,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions less than the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} size
 	 * @returns {Array<Object>}
 	 */
@@ -240,6 +256,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions equal to than the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} size
 	 * @returns {Array<Object>}
 	 */
@@ -249,6 +266,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions opened after the given date (UTC).
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Compared with UTC time.
 	 * @returns {Array<Object>}
 	 */
@@ -258,6 +276,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions opened before the given date (UTC).
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Compared with UTC time.
 	 * @returns {Array<Object>}
 	 */
@@ -267,6 +286,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions opened on the given date (UTC).
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Compared with UTC time.
 	 * @returns {Array<Object>}
 	 */
@@ -280,6 +300,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions with an average buy price greater than the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} amount
 	 * @returns {Array<Object>}
 	 */
@@ -289,6 +310,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions with an average buy price less than the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} amount
 	 * @returns {Array<Object>}
 	 */
@@ -298,6 +320,7 @@ class Portfolio extends Robinhood {
 
 	/**
 	 * Returns an array of all positions with an average buy price equal to the given amount.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} amount
 	 * @returns {Array<Object>}
 	 */

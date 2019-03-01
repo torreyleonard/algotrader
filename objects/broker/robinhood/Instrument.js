@@ -14,6 +14,8 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Creates a new Instrument object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {Object} object
 	 */
 	constructor(object) {
@@ -50,6 +52,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns an array of all available instruments.
 	 * WARNING: this will take a while!
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Array>}
 	 */
 	static getAll() {
@@ -70,6 +73,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an instrument object for the specified symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Promise<Instrument>}
 	 */
@@ -92,6 +96,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an instrument object for the specified Robinhood instrument ID.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} id
 	 * @returns {Promise<Instrument>}
 	 */
@@ -110,6 +115,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an instrument object for the specified instrument URL.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} instrumentURL
 	 * @returns {Promise<Instrument>}
 	 */
@@ -128,6 +134,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of Instruments for 10 of the top moving S&P 500 equities.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} direction - Possible options: [up, down]
 	 * @returns {Promise<Instrument>}
 	 */
@@ -159,6 +166,8 @@ class Instrument extends Robinhood {
 	 *
 	 * Note: large arrays will take longer to process and are capped at 50 per request, so multiple
 	 * requests will be sent as the function iterates through the array.
+	 *
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 *
 	 * @param {Array} ids
 	 * @returns {Promise<Array>}
@@ -194,6 +203,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of known categories that can be used with getByCategory(). This list is non-exhaustive.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Array<String>}
 	 */
 	static getCategories() {
@@ -208,6 +218,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of Instruments related to the given category.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} category - For possible options see getCategories().
 	 * @returns {Promise<Array>}
 	 */
@@ -229,6 +240,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of Instruments for the top 100 most popular equities on Robinhood.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Array>}
 	 */
 	static getMostPopular() {
@@ -237,6 +249,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of Instruments that have upcoming earnings.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise.<Array>}
 	 */
 	static getUpcomingEarnings() {
@@ -245,6 +258,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an array of instruments for stocks from Robinhood's recommendations for the given user.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user - Authenticated user object
 	 * @returns {Promise.<Array>}
 	 */
@@ -280,6 +294,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Fills the instrument object with market, fundamental, quote, and split data. Returns an array of Market, Fundamentals, Quote, and Splits objects.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user - Authenticated user object
 	 * @returns {Promise<Array>}
 	 */
@@ -303,6 +318,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an object with information on the market that this instrument trades on.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Market>}
 	 */
 	getMarket() {
@@ -311,6 +327,9 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns a new Fundamentals object with information such as open, high, low, close, volume, market cap, and more, on this instrument.
+	 *
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 *
 	 * @returns {Promise<Fundamentals>}
 	 */
 	getFundamentals() {
@@ -320,8 +339,8 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns an object with a real-time quote on this instrument.
 	 *
-	 * @author Ladinn
-	 * @author Gillinghammer (Added user authentication after Robinhood API update - issue #11)
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @author Colin Gillingham <https://github.com/Gillinghammer> (Added user authentication after Robinhood API update - issue #11)
 	 *
 	 * @param {User} user - Authenticated user object
 	 * @returns {Promise<Quote>}
@@ -368,6 +387,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an object containing details on past stock splits.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Object>}
 	 */
 	getSplits() {
@@ -383,6 +403,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns an object containing this company's past and future earnings data.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Object>}
 	 */
 	getEarnings() {
@@ -401,10 +422,8 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Returns the high, low, and average prices paid for the instrument by other Robinhood users.
-	 *
-	 * @author Ladinn
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @author rclai (Discovered API endpoint)
-	 *
 	 * @returns {Promise<Object>}
 	 */
 	getPricesPaid() {
@@ -428,7 +447,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns the total amount of open positions on this instrument among all Robinhood users.
 	 *
-	 * @author Ladinn
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @author rclai (Discovered API endpoint)
 	 *
 	 * @returns {Promise<Number>}
@@ -452,7 +471,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Returns an object containing buy hold, and sell ratings from major financial institutions, along with text describing the rating.
 	 *
-	 * @author Ladinn
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @author rclai (Discovered API endpoint)
 	 *
 	 * @returns {Promise<Object>}
@@ -474,6 +493,7 @@ class Instrument extends Robinhood {
 	// GET from object
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getName() {
@@ -481,6 +501,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSimpleName() {
@@ -488,6 +509,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSymbol() {
@@ -495,6 +517,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getListDate() {
@@ -502,6 +525,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getCountry() {
@@ -509,6 +533,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getType() {
@@ -516,6 +541,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getBloombergID() {
@@ -523,7 +549,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
-	 *
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getState() {
@@ -531,6 +557,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getID() {
@@ -538,6 +565,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getMarginInitialRatio() {
@@ -545,6 +573,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getDayTradeRatio() {
@@ -552,6 +581,7 @@ class Instrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getMaintenanceRatio() {
@@ -562,18 +592,24 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Checks if the instrument is able to be traded.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isTradeable() {
 		return this.tradeable;
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {boolean}
+	 */
 	isActive() {
 		return this.state === "active";
 	}
 
 	/**
 	 * Checks if the instrument is a stock.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isStock() {
@@ -582,6 +618,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Checks if the instrument is an exchange traded product.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isETP() {
@@ -591,6 +628,7 @@ class Instrument extends Robinhood {
 	/**
 	 * Checks if the instrument is an American Depositary Receipt. Typically applies to foreign companies.
 	 * https://www.investopedia.com/terms/a/adr.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isADR() {
@@ -599,6 +637,7 @@ class Instrument extends Robinhood {
 
 	/**
 	 * Check whether another instance of Instrument equals this instance.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Instrument} otherInstrument
 	 * @returns {Boolean}
 	 */

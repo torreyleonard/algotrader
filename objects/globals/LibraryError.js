@@ -1,5 +1,9 @@
 class LibraryError extends Error {
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @param message
+	 */
 	constructor(message) {
 		if (message.indexOf("{") === 0) {
 			let json = JSON.parse(message);
@@ -10,6 +14,10 @@ class LibraryError extends Error {
 		super(message + "\n\n> Please report all unexpected errors on GitHub: https://git.io/vpYYL\n");
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {string}
+	 */
 	toString() {
 		let line = "\u2501".repeat(process.stdout.columns - 5);
 		return line + "\n" + this.message + "\b\n" + line;

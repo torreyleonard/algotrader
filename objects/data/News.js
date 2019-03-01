@@ -9,6 +9,8 @@ class News {
 
 	/**
 	 * Creates a new News instance.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param object
 	 * @property {String} symbol
 	 * @property {String} description
@@ -28,6 +30,7 @@ class News {
 
 	/**
 	 * Returns an array of News objects for the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Promise<Array>}
 	 */
@@ -58,6 +61,7 @@ class News {
 	/**
 	 * Search through millions of articles from over 30,000 large and small news sources and blogs. This includes breaking news as well as lesser articles.
 	 * Returns an array of News objects for the given symbol from News API.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} apiKey - Your News API key, found for free here: https://newsapi.org/register
 	 * @param {Object} object - Further documentation can be found here: https://newsapi.org/docs/endpoints/everything
 	 * @property {String} q - Keywords or phrases to search for.
@@ -104,6 +108,7 @@ class News {
 	/**
 	 * This endpoint provides live top and breaking headlines for a country, specific category in a country, single source, or multiple sources. You can also search with keywords. Articles are sorted by the earliest date published first.
 	 * Returns an array of News objects for the given symbol from News API.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} apiKey - Your News API key, found for free here: https://newsapi.org/register
 	 * @param {Object} object - Further documentation can be found here: https://newsapi.org/docs/endpoints/top-headlines
 	 * @property {String} q - Keywords or phrases to search for.
@@ -148,6 +153,7 @@ class News {
 
 	/**
 	 * Using the URL provided for the news article, this will return the contents of that page.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<String>}
 	 */
 	getArticle() {
@@ -167,6 +173,7 @@ class News {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getTitle() {
@@ -174,6 +181,7 @@ class News {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getDescription() {
@@ -181,6 +189,7 @@ class News {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getDate() {
@@ -188,6 +197,7 @@ class News {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSource() {
@@ -195,6 +205,7 @@ class News {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getAuthor() {
@@ -202,6 +213,7 @@ class News {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getURL() {

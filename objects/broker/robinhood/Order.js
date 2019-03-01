@@ -10,6 +10,8 @@ class Order extends Robinhood {
 
 	/**
 	 * Creates a new Order object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {User} user
 	 * @param {Object} object
 	 * @property {Instrument} instrument
@@ -34,6 +36,7 @@ class Order extends Robinhood {
 
 	/**
 	 * Parse an executed order.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @private
 	 */
 	_parse(object) {
@@ -72,6 +75,7 @@ class Order extends Robinhood {
 
 	/**
 	 * Submits an order to Robinhood to be executed by the exchange.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Object>}
 	 */
 	submit() {
@@ -113,6 +117,7 @@ class Order extends Robinhood {
 
 	/**
 	 * Attempts to cancel an order.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Object>}
 	 */
 	cancel() {
@@ -135,6 +140,7 @@ class Order extends Robinhood {
 
 	/**
 	 * Returns a new order object for the specified order ID, if found.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @param {String} orderID
 	 * @returns {Promise<Order>}
@@ -156,6 +162,7 @@ class Order extends Robinhood {
 
 	/**
 	 * Returns an array of recent orders for the given user object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @returns {Promise<Array>}
 	 */
@@ -181,6 +188,11 @@ class Order extends Robinhood {
 		})
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @param user
+	 * @returns {Promise<any>}
+	 */
 	static cancelOpenOrders(user) {
 		return new Promise((resolve, reject) => {
 			Order.getRecentOrders(user).then(array => {
@@ -199,6 +211,7 @@ class Order extends Robinhood {
 
 	/**
 	 * If an order has been executed, this will return the response object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Object|Null}
 	 */
 	getResponse() {

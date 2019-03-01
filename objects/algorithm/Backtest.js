@@ -1,5 +1,8 @@
 const Yahoo = require('../data/Yahoo');
 
+/**
+ * Incomplete
+ */
 class Backtest {
 
 	constructor(symbol, algorithm) {

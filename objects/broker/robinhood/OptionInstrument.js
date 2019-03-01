@@ -8,6 +8,11 @@ const _ = require('lodash');
  */
 class OptionInstrument extends Robinhood {
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
+	 * @param object
+	 */
 	constructor(object) {
 		if (!object instanceof Object) throw new Error("Parameter 'object' must be an object.");
 		else {
@@ -33,6 +38,7 @@ class OptionInstrument extends Robinhood {
 
 	/**
 	 * Returns an array of all option instruments. Note: this may take an eternity - no need to use this.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @returns {Promise<Array>}
 	 */
@@ -56,7 +62,7 @@ class OptionInstrument extends Robinhood {
 	/**
 	 * Returns an array of all option instruments for the given expiration date and side. Ordered from lowest to highest strike price.
 	 *
-	 * @author Ladinn
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @author hbeere (Issue #10)
 	 *
 	 * @param {User} user
@@ -93,6 +99,7 @@ class OptionInstrument extends Robinhood {
 
 	/**
 	 * Returns an array of expiration dates for the given Instrument.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @param {Instrument} instrument
 	 * @returns {Promise<Date[]>}
@@ -134,6 +141,7 @@ class OptionInstrument extends Robinhood {
 
 	/**
 	 * Returns an options instrument object for the specified instrument URL.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @param {String} url
 	 * @returns {Promise<Instrument>}
@@ -156,6 +164,7 @@ class OptionInstrument extends Robinhood {
 
 	/**
 	 * Returns an array of the user's open option contracts.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @returns {Promise<Array>}
 	 */
@@ -189,6 +198,7 @@ class OptionInstrument extends Robinhood {
 	// GET
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getTradability() {
@@ -196,6 +206,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getStrikePrice() {
@@ -203,6 +214,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getState() {
@@ -210,6 +222,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getType() {
@@ -217,6 +230,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getInstrumentURL() {
@@ -224,6 +238,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSymbol() {
@@ -231,6 +246,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Object}
 	 */
 	getMiniumumTicks() {
@@ -238,6 +254,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getChainID() {
@@ -245,6 +262,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getOptionID() {
@@ -252,6 +270,7 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getExpiration() {
@@ -260,10 +279,18 @@ class OptionInstrument extends Robinhood {
 
 	// BOOLEANS
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {boolean}
+	 */
 	isPut() {
 		return this.type === "put";
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {boolean}
+	 */
 	isCall() {
 		return this.type === "call";
 	}

@@ -1,3 +1,31 @@
+## Classes
+
+<dl>
+<dt><a href="#Backtest">Backtest</a></dt>
+<dd><p>Incomplete</p>
+</dd>
+<dt><a href="#Scheduler">Scheduler</a></dt>
+<dd><p>Used to run functions at specified intervals or times of day.</p>
+</dd>
+</dl>
+
+<a name="Backtest"></a>
+
+## Backtest
+Incomplete
+
+**Kind**: global class  
+<a name="Backtest+run"></a>
+
+### backtest.run(minute) ⇒ <code>Promise.&lt;Object&gt;</code>
+Runs a backtest on the given algorithm.
+
+**Kind**: instance method of [<code>Backtest</code>](#Backtest)  
+
+| Param |
+| --- |
+| minute | 
+
 <a name="Scheduler"></a>
 
 ## Scheduler
@@ -30,6 +58,7 @@ Runs every day on market open.
 
 **Kind**: instance method of [<code>Scheduler</code>](#Scheduler)  
 **Returns**: <code>Promise.&lt;Date&gt;</code> - - Date object of next invocation.  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -41,6 +70,7 @@ Runs every day on market open.
 Runs every day on market close.
 
 **Kind**: instance method of [<code>Scheduler</code>](#Scheduler)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -52,6 +82,7 @@ Runs every day on market close.
 Runs every 'x' minutes while the market is open.
 
 **Kind**: instance method of [<code>Scheduler</code>](#Scheduler)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -64,9 +95,11 @@ Runs every 'x' minutes while the market is open.
 Cancels a job.
 
 **Kind**: instance method of [<code>Scheduler</code>](#Scheduler)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Scheduler+getNext"></a>
 
 ### scheduler.getNext() ⇒ <code>Date</code> \| <code>Error</code>
 Returns the date of the next invocation of the given job.
 
 **Kind**: instance method of [<code>Scheduler</code>](#Scheduler)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  

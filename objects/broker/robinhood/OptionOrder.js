@@ -12,7 +12,8 @@ class OptionOrder extends Robinhood {
 
 	/**
 	 * Creates a new OptionOrder.
-	 *
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {User} user
 	 * @param {Object} object
 	 * @property {String} side - buy/sell
@@ -70,6 +71,7 @@ class OptionOrder extends Robinhood {
 
 	/**
 	 * Submits the OptionOrder to Robinhood and returns the executed OptionOrder.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<OptionOrder>}
 	 */
 	submit() {
@@ -94,7 +96,7 @@ class OptionOrder extends Robinhood {
 	/**
 	 * Returns an array of executed OptionOrders.
 	 * NOTE: See OptionInstrument.getPositions for an array of open positions.
-	 *
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
 	 * @returns {Promise<OptionOrder[]>}
 	 */
@@ -120,6 +122,7 @@ class OptionOrder extends Robinhood {
 	// GET
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Array}
 	 */
 	getLegs() {
@@ -127,6 +130,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getDirection() {
@@ -134,6 +138,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getPremium() {
@@ -141,6 +146,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getProcessedPremium() {
@@ -148,6 +154,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getTimeInForce() {
@@ -155,6 +162,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getReferenceID() {
@@ -162,6 +170,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getPrice() {
@@ -169,6 +178,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getTrigger() {
@@ -176,6 +186,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getType() {
@@ -183,6 +194,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getQuantity() {
@@ -190,6 +202,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getQuantityPending() {
@@ -197,6 +210,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getQuantityCanceled() {
@@ -204,6 +218,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getChainID() {
@@ -211,6 +226,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSymbol() {
@@ -218,6 +234,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getDateCreated() {
@@ -227,6 +244,7 @@ class OptionOrder extends Robinhood {
 	// BOOLEANS
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isExecuted() {
@@ -234,6 +252,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isCredit() {
@@ -241,6 +260,7 @@ class OptionOrder extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isDebit() {

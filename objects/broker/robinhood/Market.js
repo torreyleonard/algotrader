@@ -11,6 +11,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Creates a new Market object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param object - Created using this class' static methods. For example, use 'getByMIC("XNAS")' to create an instance of the Nasdaq.
 	 */
 	constructor(object) {
@@ -43,6 +44,7 @@ class Market extends Robinhood {
 	/**
 	 * Returns a Market object for the given Market Identifier Code (MIC).
 	 * See ISO 10383: https://www.iso20022.org/10383/iso-10383-market-identifier-codes
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} code
 	 */
 	static getByMIC(code) {
@@ -67,6 +69,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns a Market object for the given market URL.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} url
 	 */
 	static getByURL(url) {
@@ -93,6 +96,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns an object with hours on the next trading period.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Object>}
 	 */
 	getNextTradingHours() {
@@ -110,6 +114,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns an object with hours on the previous trading period.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Object>}
 	 */
 	getPreviousTradingHours() {
@@ -127,6 +132,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns an object with hours for the given date.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date
 	 * @returns {Promise<Object>}
 	 */
@@ -146,6 +152,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Checks whether the market is open on the given date.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date
 	 * @returns {Promise.<Boolean>}
 	 */
@@ -157,6 +164,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns the next date and time that the market will be open.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise.<Date>}
 	 */
 	getNextOpen() {
@@ -182,6 +190,7 @@ class Market extends Robinhood {
 
 	/**
 	 * Returns the next date and time that the market will close.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<Date>}
 	 */
 	getNextClose() {
@@ -206,6 +215,7 @@ class Market extends Robinhood {
 	// GET
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getWebsite() {
@@ -213,6 +223,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getCity() {
@@ -220,6 +231,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getName() {
@@ -227,6 +239,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getCountry() {
@@ -234,6 +247,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getCode() {
@@ -241,6 +255,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getAcronym() {
@@ -248,6 +263,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {{isOpen: boolean, close: Date, open: Date, extendedOpen: Date, extendedClose: Date, date: Date}}
 	 */
 	getHours() {
@@ -255,6 +271,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getClose() {
@@ -262,6 +279,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getOpen() {
@@ -269,6 +287,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getExtendedClose() {
@@ -276,6 +295,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getExtendedOpen() {
@@ -285,6 +305,7 @@ class Market extends Robinhood {
 	// BOOLEAN
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isOpenToday() {
@@ -292,6 +313,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isOpenNow() {
@@ -299,6 +321,7 @@ class Market extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Boolean}
 	 */
 	isExtendedOpenNow() {

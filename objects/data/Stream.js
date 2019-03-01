@@ -18,6 +18,8 @@ class Stream extends EventEmitter {
 
 	/**
 	 * Creates a new Stream class.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {Array} symbols
 	 * @param {Object|Null} options
 	 * @property {Boolean} iex - Whether to include real time IEX data in stream
@@ -41,6 +43,7 @@ class Stream extends EventEmitter {
 
 	/**
 	 * Start the streaming class.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 */
 	start() {
 		const _this = this;
@@ -108,6 +111,8 @@ class Stream extends EventEmitter {
 
 	/**
 	 * Stop the streaming class.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @author Wyatt Calandro <https://github.com/wclandro>
 	 */
 	stop() {
 		this.request.abort();
@@ -116,6 +121,12 @@ class Stream extends EventEmitter {
 		}
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @param input
+	 * @returns {Quote}
+	 * @private
+	 */
 	_createQuote(input) {
 		const yahooKeys = {
 			a00: 'ask',
@@ -185,6 +196,11 @@ class Stream extends EventEmitter {
 
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {string[]}
+	 * @private
+	 */
 	_getYahooKeys() {
 		const keys = {
 			Ask: 'a00',

@@ -48,6 +48,7 @@ Market data for the given equity, such as market cap, dividend yield, P/E ratio,
         * [.getDividendYield()](#Fundamentals+getDividendYield) ⇒ <code>Number</code>
         * [.getPERatio()](#Fundamentals+getPERatio) ⇒ <code>Number</code>
         * [.getDescription()](#Fundamentals+getDescription) ⇒ <code>String</code>
+        * [.getHeadquarters()](#Fundamentals+getHeadquarters) ⇒ <code>String</code>
     * _static_
         * [.getBySymbol(symbol)](#Fundamentals.getBySymbol) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
         * [.getBySymbolArray(array)](#Fundamentals.getBySymbolArray) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -67,52 +68,69 @@ Creates a new Fundamentals object.
 
 ### fundamentals.getOpen() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getHigh"></a>
 
 ### fundamentals.getHigh() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getLow"></a>
 
 ### fundamentals.getLow() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getVolume"></a>
 
 ### fundamentals.getVolume() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getAverageVolume"></a>
 
 ### fundamentals.getAverageVolume() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+get52WeekHigh"></a>
 
 ### fundamentals.get52WeekHigh() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+get52WeekLow"></a>
 
 ### fundamentals.get52WeekLow() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getMarketCap"></a>
 
 ### fundamentals.getMarketCap() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getDividendYield"></a>
 
 ### fundamentals.getDividendYield() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getPERatio"></a>
 
 ### fundamentals.getPERatio() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals+getDescription"></a>
 
 ### fundamentals.getDescription() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="Fundamentals+getHeadquarters"></a>
+
+### fundamentals.getHeadquarters() ⇒ <code>String</code>
+**Kind**: instance method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Fundamentals.getBySymbol"></a>
 
 ### Fundamentals.getBySymbol(symbol) ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
 Returns a fundamentals object for the given symbol.
 
 **Kind**: static method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -124,6 +142,7 @@ Returns a fundamentals object for the given symbol.
 Returns an array of fundamentals objects for the symbols in the given array.
 
 **Kind**: static method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -135,6 +154,7 @@ Returns an array of fundamentals objects for the symbols in the given array.
 Returns a fundamentals object for the given URL.
 
 **Kind**: static method of [<code>Fundamentals</code>](#Fundamentals)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -172,6 +192,7 @@ Represents a security traded on Robinhood.
         * [.getDayTradeRatio()](#Instrument+getDayTradeRatio) ⇒ <code>Number</code>
         * [.getMaintenanceRatio()](#Instrument+getMaintenanceRatio) ⇒ <code>Number</code>
         * [.isTradeable()](#Instrument+isTradeable) ⇒ <code>Boolean</code>
+        * [.isActive()](#Instrument+isActive) ⇒ <code>boolean</code>
         * [.isStock()](#Instrument+isStock) ⇒ <code>Boolean</code>
         * [.isETP()](#Instrument+isETP) ⇒ <code>Boolean</code>
         * [.isADR()](#Instrument+isADR) ⇒ <code>Boolean</code>
@@ -205,6 +226,7 @@ Creates a new Instrument object.
 Fills the instrument object with market, fundamental, quote, and split data. Returns an array of Market, Fundamentals, Quote, and Splits objects.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -216,20 +238,22 @@ Fills the instrument object with market, fundamental, quote, and split data. Ret
 Returns an object with information on the market that this instrument trades on.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getFundamentals"></a>
 
 ### instrument.getFundamentals() ⇒ [<code>Promise.&lt;Fundamentals&gt;</code>](#Fundamentals)
 Returns a new Fundamentals object with information such as open, high, low, close, volume, market cap, and more, on this instrument.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getQuote"></a>
 
 ### instrument.getQuote(user) ⇒ <code>Promise.&lt;Quote&gt;</code>
 Returns an object with a real-time quote on this instrument.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
-**Author**: Ladinn  
-**Author**: Gillinghammer (Added user authentication after Robinhood API update - issue #11)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+**Author**: Colin Gillingham <https://github.com/Gillinghammer> (Added user authentication after Robinhood API update - issue #11)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -241,19 +265,21 @@ Returns an object with a real-time quote on this instrument.
 Returns an object containing details on past stock splits.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getEarnings"></a>
 
 ### instrument.getEarnings() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object containing this company's past and future earnings data.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getPricesPaid"></a>
 
 ### instrument.getPricesPaid() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns the high, low, and average prices paid for the instrument by other Robinhood users.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
-**Author**: Ladinn  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 **Author**: rclai (Discovered API endpoint)  
 <a name="Instrument+getPopularity"></a>
 
@@ -261,7 +287,7 @@ Returns the high, low, and average prices paid for the instrument by other Robin
 Returns the total amount of open positions on this instrument among all Robinhood users.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
-**Author**: Ladinn  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 **Author**: rclai (Discovered API endpoint)  
 <a name="Instrument+getRatings"></a>
 
@@ -269,74 +295,94 @@ Returns the total amount of open positions on this instrument among all Robinhoo
 Returns an object containing buy hold, and sell ratings from major financial institutions, along with text describing the rating.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
-**Author**: Ladinn  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 **Author**: rclai (Discovered API endpoint)  
 <a name="Instrument+getName"></a>
 
 ### instrument.getName() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getSimpleName"></a>
 
 ### instrument.getSimpleName() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getSymbol"></a>
 
 ### instrument.getSymbol() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getListDate"></a>
 
 ### instrument.getListDate() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getCountry"></a>
 
 ### instrument.getCountry() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getType"></a>
 
 ### instrument.getType() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getBloombergID"></a>
 
 ### instrument.getBloombergID() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getState"></a>
 
 ### instrument.getState() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getID"></a>
 
 ### instrument.getID() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getMarginInitialRatio"></a>
 
 ### instrument.getMarginInitialRatio() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getDayTradeRatio"></a>
 
 ### instrument.getDayTradeRatio() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+getMaintenanceRatio"></a>
 
 ### instrument.getMaintenanceRatio() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+isTradeable"></a>
 
 ### instrument.isTradeable() ⇒ <code>Boolean</code>
 Checks if the instrument is able to be traded.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="Instrument+isActive"></a>
+
+### instrument.isActive() ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+isStock"></a>
 
 ### instrument.isStock() ⇒ <code>Boolean</code>
 Checks if the instrument is a stock.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+isETP"></a>
 
 ### instrument.isETP() ⇒ <code>Boolean</code>
 Checks if the instrument is an exchange traded product.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+isADR"></a>
 
 ### instrument.isADR() ⇒ <code>Boolean</code>
@@ -344,12 +390,14 @@ Checks if the instrument is an American Depositary Receipt. Typically applies to
 https://www.investopedia.com/terms/a/adr.asp
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument+equals"></a>
 
 ### instrument.equals(otherInstrument) ⇒ <code>Boolean</code>
 Check whether another instance of Instrument equals this instance.
 
 **Kind**: instance method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -362,12 +410,14 @@ Returns an array of all available instruments.
 WARNING: this will take a while!
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument.getBySymbol"></a>
 
 ### Instrument.getBySymbol(symbol) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
 Returns an instrument object for the specified symbol.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -379,6 +429,7 @@ Returns an instrument object for the specified symbol.
 Returns an instrument object for the specified Robinhood instrument ID.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -390,6 +441,7 @@ Returns an instrument object for the specified Robinhood instrument ID.
 Returns an instrument object for the specified instrument URL.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -401,6 +453,7 @@ Returns an instrument object for the specified instrument URL.
 Returns an array of Instruments for 10 of the top moving S&P 500 equities.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -415,6 +468,7 @@ Note: large arrays will take longer to process and are capped at 50 per request,
 requests will be sent as the function iterates through the array.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -426,12 +480,14 @@ requests will be sent as the function iterates through the array.
 Returns an array of known categories that can be used with getByCategory(). This list is non-exhaustive.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument.getByCategory"></a>
 
 ### Instrument.getByCategory(category) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of Instruments related to the given category.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -443,18 +499,21 @@ Returns an array of Instruments related to the given category.
 Returns an array of Instruments for the top 100 most popular equities on Robinhood.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument.getUpcomingEarnings"></a>
 
 ### Instrument.getUpcomingEarnings() ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of Instruments that have upcoming earnings.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Instrument.getRecommendations"></a>
 
 ### Instrument.getRecommendations(user) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of instruments for stocks from Robinhood's recommendations for the given user.
 
 **Kind**: static method of [<code>Instrument</code>](#Instrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -510,18 +569,21 @@ Creates a new Market object.
 Returns an object with hours on the next trading period.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getPreviousTradingHours"></a>
 
 ### market.getPreviousTradingHours() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object with hours on the previous trading period.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getHoursOn"></a>
 
 ### market.getHoursOn(date) ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object with hours for the given date.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -533,6 +595,7 @@ Returns an object with hours for the given date.
 Checks whether the market is open on the given date.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -544,68 +607,84 @@ Checks whether the market is open on the given date.
 Returns the next date and time that the market will be open.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getNextClose"></a>
 
 ### market.getNextClose() ⇒ <code>Promise.&lt;Date&gt;</code>
 Returns the next date and time that the market will close.
 
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getWebsite"></a>
 
 ### market.getWebsite() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getCity"></a>
 
 ### market.getCity() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getName"></a>
 
 ### market.getName() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getCountry"></a>
 
 ### market.getCountry() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getCode"></a>
 
 ### market.getCode() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getAcronym"></a>
 
 ### market.getAcronym() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getHours"></a>
 
 ### market.getHours() ⇒ <code>Object</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getClose"></a>
 
 ### market.getClose() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getOpen"></a>
 
 ### market.getOpen() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getExtendedClose"></a>
 
 ### market.getExtendedClose() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+getExtendedOpen"></a>
 
 ### market.getExtendedOpen() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+isOpenToday"></a>
 
 ### market.isOpenToday() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+isOpenNow"></a>
 
 ### market.isOpenNow() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market+isExtendedOpenNow"></a>
 
 ### market.isExtendedOpenNow() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Market.getByMIC"></a>
 
 ### Market.getByMIC(code)
@@ -613,6 +692,7 @@ Returns a Market object for the given Market Identifier Code (MIC).
 See ISO 10383: https://www.iso20022.org/10383/iso-10383-market-identifier-codes
 
 **Kind**: static method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -624,6 +704,7 @@ See ISO 10383: https://www.iso20022.org/10383/iso-10383-market-identifier-codes
 Returns a Market object for the given market URL.
 
 **Kind**: static method of [<code>Market</code>](#Market)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -637,6 +718,7 @@ Represents an option traded on Robinhood.
 **Kind**: global class  
 
 * [OptionInstrument](#OptionInstrument)
+    * [new OptionInstrument(object)](#new_OptionInstrument_new)
     * _instance_
         * [.getTradability()](#OptionInstrument+getTradability) ⇒ <code>String</code>
         * [.getStrikePrice()](#OptionInstrument+getStrikePrice) ⇒ <code>Number</code>
@@ -648,6 +730,8 @@ Represents an option traded on Robinhood.
         * [.getChainID()](#OptionInstrument+getChainID) ⇒ <code>String</code>
         * [.getOptionID()](#OptionInstrument+getOptionID) ⇒ <code>String</code>
         * [.getExpiration()](#OptionInstrument+getExpiration) ⇒ <code>Date</code>
+        * [.isPut()](#OptionInstrument+isPut) ⇒ <code>boolean</code>
+        * [.isCall()](#OptionInstrument+isCall) ⇒ <code>boolean</code>
     * _static_
         * [.getAll(user)](#OptionInstrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getChain(user, instrument, side)](#OptionInstrument.getChain) ⇒ <code>Promise.&lt;any&gt;</code>
@@ -655,52 +739,81 @@ Represents an option traded on Robinhood.
         * [.getByURL(user, url)](#OptionInstrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getPositions(user)](#OptionInstrument.getPositions) ⇒ <code>Promise.&lt;Array&gt;</code>
 
+<a name="new_OptionInstrument_new"></a>
+
+### new OptionInstrument(object)
+
+| Param |
+| --- |
+| object | 
+
 <a name="OptionInstrument+getTradability"></a>
 
 ### optionInstrument.getTradability() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getStrikePrice"></a>
 
 ### optionInstrument.getStrikePrice() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getState"></a>
 
 ### optionInstrument.getState() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getType"></a>
 
 ### optionInstrument.getType() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getInstrumentURL"></a>
 
 ### optionInstrument.getInstrumentURL() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getSymbol"></a>
 
 ### optionInstrument.getSymbol() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getMiniumumTicks"></a>
 
 ### optionInstrument.getMiniumumTicks() ⇒ <code>Object</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getChainID"></a>
 
 ### optionInstrument.getChainID() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getOptionID"></a>
 
 ### optionInstrument.getOptionID() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument+getExpiration"></a>
 
 ### optionInstrument.getExpiration() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="OptionInstrument+isPut"></a>
+
+### optionInstrument.isPut() ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="OptionInstrument+isCall"></a>
+
+### optionInstrument.isCall() ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionInstrument.getAll"></a>
 
 ### OptionInstrument.getAll(user) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of all option instruments. Note: this may take an eternity - no need to use this.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -712,7 +825,7 @@ Returns an array of all option instruments. Note: this may take an eternity - no
 Returns an array of all option instruments for the given expiration date and side. Ordered from lowest to highest strike price.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
-**Author**: Ladinn  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 **Author**: hbeere (Issue #10)  
 
 | Param | Type | Description |
@@ -727,6 +840,7 @@ Returns an array of all option instruments for the given expiration date and sid
 Returns an array of expiration dates for the given Instrument.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -739,6 +853,7 @@ Returns an array of expiration dates for the given Instrument.
 Returns an options instrument object for the specified instrument URL.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -751,6 +866,7 @@ Returns an options instrument object for the specified instrument URL.
 Returns an array of the user's open option contracts.
 
 **Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -805,78 +921,97 @@ Creates a new OptionOrder.
 Submits the OptionOrder to Robinhood and returns the executed OptionOrder.
 
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getLegs"></a>
 
 ### optionOrder.getLegs() ⇒ <code>Array</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getDirection"></a>
 
 ### optionOrder.getDirection() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getPremium"></a>
 
 ### optionOrder.getPremium() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getProcessedPremium"></a>
 
 ### optionOrder.getProcessedPremium() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getTimeInForce"></a>
 
 ### optionOrder.getTimeInForce() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getReferenceID"></a>
 
 ### optionOrder.getReferenceID() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getPrice"></a>
 
 ### optionOrder.getPrice() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getTrigger"></a>
 
 ### optionOrder.getTrigger() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getType"></a>
 
 ### optionOrder.getType() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getQuantity"></a>
 
 ### optionOrder.getQuantity() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getQuantityPending"></a>
 
 ### optionOrder.getQuantityPending() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getQuantityCanceled"></a>
 
 ### optionOrder.getQuantityCanceled() ⇒ <code>Number</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getChainID"></a>
 
 ### optionOrder.getChainID() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getSymbol"></a>
 
 ### optionOrder.getSymbol() ⇒ <code>String</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+getDateCreated"></a>
 
 ### optionOrder.getDateCreated() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+isExecuted"></a>
 
 ### optionOrder.isExecuted() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+isCredit"></a>
 
 ### optionOrder.isCredit() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder+isDebit"></a>
 
 ### optionOrder.isDebit() ⇒ <code>Boolean</code>
 **Kind**: instance method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="OptionOrder.getOrders"></a>
 
 ### OptionOrder.getOrders(user) ⇒ <code>Promise.&lt;Array.&lt;OptionOrder&gt;&gt;</code>
@@ -884,6 +1019,7 @@ Returns an array of executed OptionOrders.
 NOTE: See OptionInstrument.getPositions for an array of open positions.
 
 **Kind**: static method of [<code>OptionOrder</code>](#OptionOrder)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -905,6 +1041,7 @@ Represents and executes an order for the given instrument.
     * _static_
         * [.getByOrderID(user, orderID)](#Order.getByOrderID) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
         * [.getRecentOrders(user)](#Order.getRecentOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
+        * [.cancelOpenOrders(user)](#Order.cancelOpenOrders) ⇒ <code>Promise.&lt;any&gt;</code>
 
 <a name="new_Order_new"></a>
 
@@ -923,24 +1060,28 @@ Creates a new Order object.
 Submits an order to Robinhood to be executed by the exchange.
 
 **Kind**: instance method of [<code>Order</code>](#Order)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Order+cancel"></a>
 
 ### order.cancel() ⇒ <code>Promise.&lt;Object&gt;</code>
 Attempts to cancel an order.
 
 **Kind**: instance method of [<code>Order</code>](#Order)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Order+getResponse"></a>
 
 ### order.getResponse() ⇒ <code>Object</code> \| <code>Null</code>
 If an order has been executed, this will return the response object.
 
 **Kind**: instance method of [<code>Order</code>](#Order)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Order.getByOrderID"></a>
 
 ### Order.getByOrderID(user, orderID) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
 Returns a new order object for the specified order ID, if found.
 
 **Kind**: static method of [<code>Order</code>](#Order)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -953,10 +1094,21 @@ Returns a new order object for the specified order ID, if found.
 Returns an array of recent orders for the given user object.
 
 **Kind**: static method of [<code>Order</code>](#Order)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
 | user | [<code>User</code>](#User) | 
+
+<a name="Order.cancelOpenOrders"></a>
+
+### Order.cancelOpenOrders(user) ⇒ <code>Promise.&lt;any&gt;</code>
+**Kind**: static method of [<code>Order</code>](#Order)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+
+| Param |
+| --- |
+| user | 
 
 <a name="Portfolio"></a>
 
@@ -1006,12 +1158,14 @@ Creates a new Portfolio object.
 Sells all positions in the user's portfolio at the market price.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Portfolio+setQuantity"></a>
 
 ### portfolio.setQuantity(symbol, targetQuantity) ⇒ [<code>Promise.&lt;Order&gt;</code>](#Order)
 Executes a new order to reduce or increase the user's position in the given symbol by the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1024,24 +1178,28 @@ Executes a new order to reduce or increase the user's position in the given symb
 Returns the total market value of all stocks held by the user.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Portfolio+getInstrumentArray"></a>
 
 ### portfolio.getInstrumentArray() ⇒ <code>Array</code>
 Returns an array of all instruments in the user's portfolio.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Portfolio+getSymbols"></a>
 
 ### portfolio.getSymbols() ⇒ <code>Array</code>
 Returns an array of all symbols in the user's portfolio.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Portfolio+getBuyPrice"></a>
 
 ### portfolio.getBuyPrice(symbol) ⇒ <code>Number</code>
 Returns the average buy price for the given symbol.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1053,6 +1211,7 @@ Returns the average buy price for the given symbol.
 Returns the quantity owned of the given symbol.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1064,6 +1223,7 @@ Returns the quantity owned of the given symbol.
 Get total shares held for the given symbol.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1075,6 +1235,7 @@ Get total shares held for the given symbol.
 Returns the date of original purchase for the given symbol.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1086,6 +1247,7 @@ Returns the date of original purchase for the given symbol.
 Returns the date of last trade for the given symbol.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1097,6 +1259,7 @@ Returns the date of last trade for the given symbol.
 Returns an object containing the user's position in the given symbol.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1108,6 +1271,7 @@ Returns an object containing the user's position in the given symbol.
 Returns an array of objects containing the user's positions in the given symbols.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1119,6 +1283,7 @@ Returns an array of objects containing the user's positions in the given symbols
 Returns an array of all positions greater than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1130,6 +1295,7 @@ Returns an array of all positions greater than the given amount.
 Returns an array of all positions less than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1141,6 +1307,7 @@ Returns an array of all positions less than the given amount.
 Returns an array of all positions equal to than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1152,6 +1319,7 @@ Returns an array of all positions equal to than the given amount.
 Returns an array of all positions opened after the given date (UTC).
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1163,6 +1331,7 @@ Returns an array of all positions opened after the given date (UTC).
 Returns an array of all positions opened before the given date (UTC).
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1174,6 +1343,7 @@ Returns an array of all positions opened before the given date (UTC).
 Returns an array of all positions opened on the given date (UTC).
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1185,6 +1355,7 @@ Returns an array of all positions opened on the given date (UTC).
 Returns an array of all positions with an average buy price greater than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1196,6 +1367,7 @@ Returns an array of all positions with an average buy price greater than the giv
 Returns an array of all positions with an average buy price less than the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1207,6 +1379,7 @@ Returns an array of all positions with an average buy price less than the given 
 Returns an array of all positions with an average buy price equal to the given amount.
 
 **Kind**: instance method of [<code>Portfolio</code>](#Portfolio)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1272,6 +1445,7 @@ Creates a new User object.
 Authenticates a user using the inputted username and password.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1284,12 +1458,14 @@ Authenticates a user using the inputted username and password.
 Re-authenticates a user with the the expired authentication token using the refresh token.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Egor Verbitskiy <https://github.com/egorio>  
 <a name="User+logout"></a>
 
 ### user.logout() ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Logout the user by expiring the authentication token and removing any saved data.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+serialize"></a>
 
 ### user.serialize() ⇒ <code>string</code>
@@ -1299,138 +1475,161 @@ Note that serialized object contains refreshToken and it's subject to strict sto
 to ensure that they are not leaked
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Egor Verbitskiy <https://github.com/egorio>  
 <a name="User+save"></a>
 
 ### user.save() ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Save the user to disk. Prevents having to login and logout each run.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+isAuthenticated"></a>
 
 ### user.isAuthenticated() ⇒ <code>boolean</code>
 Checks if the current user is authenticated and authentication is not expired.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getAuthToken"></a>
 
 ### user.getAuthToken() ⇒ <code>null</code> \| <code>string</code>
 Returns an auth token.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getAccountNumber"></a>
 
 ### user.getAccountNumber() ⇒ <code>null</code> \| <code>string</code>
 Returns an account number.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getUsername"></a>
 
 ### user.getUsername() ⇒ <code>null</code> \| <code>string</code>
 Returns a username.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getAccount"></a>
 
 ### user.getAccount() ⇒ <code>Promise</code>
 Returns vital information about balances and enabled features.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getBalances"></a>
 
 ### user.getBalances() ⇒ <code>Promise.&lt;Object&gt;</code>
-Returns an object containing details on the user's cash and marginbalance.
+Returns an object containing details on the user's cash and margin balance.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getBuyingPower"></a>
 
 ### user.getBuyingPower() ⇒ <code>Promise</code>
 Returns the amount of money available to be spent.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getUserInfo"></a>
 
 ### user.getUserInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information like username, first / last name, creation date, id, and more.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getUID"></a>
 
 ### user.getUID() ⇒ <code>Promise.&lt;String&gt;</code>
 Returns the user's unique ID.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getTaxInfo"></a>
 
 ### user.getTaxInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information like address, citizenship, SSN, date of birth, and more.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getDisclosureInfo"></a>
 
 ### user.getDisclosureInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information on the user pertaining to SEC rule 405.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getEmployerInfo"></a>
 
 ### user.getEmployerInfo() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns information on the user's employment.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getInvestmentProfile"></a>
 
 ### user.getInvestmentProfile() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns the user's answers to basic questions regarding investment experiences.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getRecentDayTrades"></a>
 
 ### user.getRecentDayTrades() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns arrays of recent option and equity day trades.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getRecentOrders"></a>
 
 ### user.getRecentOrders() ⇒ <code>Promise.&lt;Array.&lt;Order&gt;&gt;</code>
 Returns an array of recent orders.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+cancelOpenOrders"></a>
 
 ### user.cancelOpenOrders() ⇒ <code>Promise</code>
 Cancels all open orders.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getOptionOrders"></a>
 
 ### user.getOptionOrders() ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of option orders.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getPortfolio"></a>
 
 ### user.getPortfolio() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns a Portfolio object containing all open positions in a user's portfolio.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getHistoricals"></a>
 
 ### user.getHistoricals() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object that can be used to create a chart, show total return, etc.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+getLinkedBanks"></a>
 
 ### user.getLinkedBanks() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns an object representing the user's linked bank account. If the user has linked multiple, this returns an array.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+addDeposit"></a>
 
 ### user.addDeposit(bankID, amount, frequency) ⇒ <code>Promise.&lt;Object&gt;</code>
 Deposits money into the user's account. If frequency is not empty, this becomes an automatic deposit.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1444,6 +1643,7 @@ Deposits money into the user's account. If frequency is not empty, this becomes 
 Returns an array of account documents (taxes, statements, etc). Use 'downloadDocuments()' to view them.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User+downloadDocuments"></a>
 
 ### user.downloadDocuments(folder) ⇒ <code>Promise</code>
@@ -1452,6 +1652,7 @@ Note that, because of Robinhood's connection throttling, this will take a while 
 Downloads will be attempted every second and will wait for any connection throttling to end before continuing.
 
 **Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -1463,6 +1664,7 @@ Downloads will be attempted every second and will wait for any connection thrott
 Restores a user from the serialized object.
 
 **Kind**: static method of [<code>User</code>](#User)  
+**Author**: Egor Verbitskiy <https://github.com/egorio>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1474,12 +1676,14 @@ Restores a user from the serialized object.
 If a saved user exists, this will load it into system memory. Recommended if using multi-factor authentication.
 
 **Kind**: static method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="User.isUser"></a>
 
 ### User.isUser(object) ⇒ <code>boolean</code>
-Checks if the provided object an instance of User object
+Checks if the provided object an instance of User object.
 
 **Kind**: static method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |

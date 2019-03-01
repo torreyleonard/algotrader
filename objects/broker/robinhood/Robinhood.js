@@ -5,6 +5,7 @@ const ora = require('ora');
 
 /**
  * Robinhood superclass.
+ * @author Torrey Leonard <https://github.com/Ladinn>
  * @private
  */
 class Robinhood {

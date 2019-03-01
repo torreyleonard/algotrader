@@ -8,6 +8,7 @@ class Fundamentals extends Robinhood {
 
 	/**
 	 * Creates a new Fundamentals object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Object} object
 	 */
 	constructor(object) {
@@ -30,6 +31,7 @@ class Fundamentals extends Robinhood {
 
 	/**
 	 * Returns a fundamentals object for the given symbol.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @returns {Promise<Fundamentals>}
 	 */
@@ -48,6 +50,7 @@ class Fundamentals extends Robinhood {
 
 	/**
 	 * Returns an array of fundamentals objects for the symbols in the given array.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Array} array
 	 * @returns {Promise<Array>}
 	 */
@@ -68,6 +71,7 @@ class Fundamentals extends Robinhood {
 
 	/**
 	 * Returns a fundamentals object for the given URL.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} url
 	 * @returns {Promise<Fundamentals>}
 	 */
@@ -87,6 +91,7 @@ class Fundamentals extends Robinhood {
 	// GET
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getOpen() {
@@ -94,6 +99,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getHigh() {
@@ -101,6 +107,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getLow() {
@@ -108,6 +115,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getVolume() {
@@ -115,6 +123,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getAverageVolume() {
@@ -122,6 +131,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	get52WeekHigh() {
@@ -129,6 +139,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	get52WeekLow() {
@@ -136,6 +147,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getMarketCap() {
@@ -143,6 +155,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getDividendYield() {
@@ -150,6 +163,7 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number}
 	 */
 	getPERatio() {
@@ -157,12 +171,17 @@ class Fundamentals extends Robinhood {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getDescription() {
 		return this.description;
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {String}
+	 */
 	getHeadquarters() {
 		let location = this.description.split("headquartered in ")[1];
 		if (location !== undefined) return location.slice(0, -1);

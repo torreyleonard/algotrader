@@ -2,6 +2,8 @@ class Quote {
 
 	/**
 	 * Creates a new Quote instance.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {Object} object
 	 * @property {String} symbol
 	 * @property {Date} date
@@ -35,6 +37,7 @@ class Quote {
 	/**
 	 * Returns the volume weighted average price (VWAP) for the given quote array.
 	 * https://www.investopedia.com/terms/v/vwap.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Array} quoteArray
 	 * @returns {Number}
 	 */
@@ -50,6 +53,7 @@ class Quote {
 
 	/**
 	 * Calculates the highest high and lowest low for the provided period of time.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Array} quoteArray
 	 * @param {int} period
 	 * @returns {Object}
@@ -71,6 +75,7 @@ class Quote {
 	// GET
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSymbol() {
@@ -78,6 +83,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date}
 	 */
 	getDate() {
@@ -85,6 +91,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getSource() {
@@ -92,6 +99,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getLast() {
@@ -99,6 +107,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getOpen() {
@@ -106,6 +115,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getHigh() {
@@ -113,6 +123,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getLow() {
@@ -120,17 +131,23 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getClose() {
 		return this.price.close;
 	}
 
+	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {number}
+	 */
 	getOHLC4() {
 		return (this.price.open + this.price.high + this.price.low + this.price.close) / 4;
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getVolume() {
@@ -138,6 +155,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getAdjustedClose() {
@@ -145,6 +163,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getBidPrice() {
@@ -152,6 +171,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getBidSize() {
@@ -159,6 +179,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getAskPrice() {
@@ -166,6 +187,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Number|Null}
 	 */
 	getAskSize() {
@@ -173,6 +195,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Object|Null}
 	 */
 	getMeta() {
@@ -180,6 +203,7 @@ class Quote {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {String}
 	 */
 	getOriginal() {

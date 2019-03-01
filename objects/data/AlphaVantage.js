@@ -10,6 +10,8 @@ class AlphaVantage {
 
 	/**
 	 * Creates a new AlphaVantage instance.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @constructor
 	 * @param {String} apiKey - The free API key retrieved from
 	 */
 	constructor(apiKey) {
@@ -18,6 +20,7 @@ class AlphaVantage {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @private
 	 */
 	_requester(qs) {
@@ -43,6 +46,7 @@ class AlphaVantage {
 
 	/**
 	 * Returns an array of objects showing historical and real time S&P sector performance.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise}
 	 */
 	sectorPerformance() {
@@ -68,6 +72,7 @@ class AlphaVantage {
 
 	/**
 	 * Returns an array of quotes for the equity specified, updated in real time.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - How long each quote should represent: 1min, 5min, 15min, 30min, 60min
 	 * @returns {Promise.<Array>}
@@ -103,6 +108,7 @@ class AlphaVantage {
 
 	/**
 	 * Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {Boolean} compact - If true, this will return the last 100 data points. If false, it will return up to 20 years of historical data.
 	 * @param {Boolean} adjusted - If true, prices will be adjusted for split/dividend events.
@@ -161,6 +167,7 @@ class AlphaVantage {
 
 	/**
 	 * Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {Boolean} adjusted - If true, prices will be adjusted for split/dividend events.
 	 * @returns {Promise<Array>}
@@ -217,6 +224,7 @@ class AlphaVantage {
 
 	/**
 	 * Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {Boolean} adjusted - If true, prices will be adjusted for split/dividend events.
 	 * @returns {Promise<Array>}
@@ -274,6 +282,7 @@ class AlphaVantage {
 	// TECHNICALS
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @private
 	 */
 	_technical(type, symbol, interval, timePeriod, seriesType, qs) {
@@ -306,6 +315,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of simple moving averages for the equity specified.
 	 * https://www.investopedia.com/articles/technical/052201.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -321,6 +331,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of exponential moving averages for the equity specified.
 	 * https://www.investopedia.com/terms/e/ema.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -334,6 +345,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of weighted moving averages for the equity specified.
 	 * https://www.investopedia.com/articles/technical/060401.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -347,6 +359,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of double exponential moving averages for the equity specified.
 	 * http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -360,6 +373,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of double exponential moving averages for the equity specified.
 	 * http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -373,6 +387,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of triple exponential moving averages for the equity specified.
 	 * https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -386,6 +401,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of triangular moving averages for the equity specified.
 	 * http://www.fmlabs.com/reference/default.htm?url=TriangularMA.htm
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -399,6 +415,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of Kaufman adaptive moving averages for the equity specified.
 	 * http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -412,6 +429,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of MESA adaptive moving averages for the equity specified.
 	 * http://www.binarytribune.com/forex-trading-indicators/ehlers-mesa-adaptive-moving-average
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -436,6 +454,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of T3 values for the equity specified.
 	 * http://www.fmlabs.com/reference/default.htm?url=T3.htm
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -449,6 +468,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of moving average convergence / divergence values for the equity specified.
 	 * http://www.investopedia.com/articles/forex/05/macddiverge.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -478,6 +498,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of moving average convergence / divergence values with controllable moving average type for the equity specified.
 	 * http://www.investopedia.com/articles/forex/05/macddiverge.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -522,6 +543,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of stochastic oscillators for the equity specified.
 	 * http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -561,6 +583,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of stochastic fast oscillators for the equity specified.
 	 * http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -590,6 +613,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of relative strength index values for the equity specified.
 	 * http://www.investopedia.com/articles/technical/071601.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -603,6 +627,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of stochastic relative strength index values for the equity specified.
 	 * http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -632,6 +657,7 @@ class AlphaVantage {
 	/**
 	 * Returns an array of bollinger bands for the equity specified.
 	 * https://www.investopedia.com/articles/technical/04/030304.asp
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {String} symbol
 	 * @param {String} interval - Time interval between two consecutive data points in the time series. The following values are supported: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
 	 * @param {Number} timePeriod - Number of data points used to calculate each BBANDS value. Positive integers are accepted (e.g., time_period=60, time_period=200)
@@ -657,10 +683,11 @@ class AlphaVantage {
 			}
 		]);
 	}
-  
+
 	 /**
    * This API returns the minus directional indicator (MINUS_DI) values
    * http://www.investopedia.com/articles/technical/02/050602.asp
+   * @author Colin Gillingham <https://github.com/Gillinghammer>
    * @param {String} symbol
    * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
    * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -673,6 +700,7 @@ class AlphaVantage {
   /**
    * This API returns the plus directional indicator (PLUS_DI) values
    * http://www.investopedia.com/articles/technical/02/050602.asp
+   * @author Colin Gillingham <https://github.com/Gillinghammer>
    * @param {String} symbol
    * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
    * @param {Number} timePeriod - Number of data points used to calculate each moving average value. Positive integers are accepted.
@@ -681,10 +709,11 @@ class AlphaVantage {
   plus_di(symbol, interval, timePeriod) {
     return this._technical('PLUS_DI', symbol, interval, timePeriod);
   }
-    
+
 	/**
    * This API returns the average directional movement index (ADX) values
-   * http://www.investopedia.com/articles/trading/07/adx-trend-indicator.asp
+   * http://www.investopedia.com/articles/trading/07/adx-trend-indicator.as
+   * @author Colin Gillingham <https://github.com/Gillinghammer>
    * @param {String} symbol
    * @param {String} interval - Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly
    * @param {Number} timePeriod - Number of data points used to calculate each ADX value. Positive integers are accepted
@@ -692,7 +721,7 @@ class AlphaVantage {
    */
   adx(symbol, interval, timePeriod) {
     return this._technical('ADX', symbol, interval, timePeriod);
-    
+
   }
 
 }

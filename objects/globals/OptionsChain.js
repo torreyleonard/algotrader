@@ -4,6 +4,7 @@ class OptionsChain {
 
 	/**
 	 * Creates a new OptionsChain object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Array} array
 	 */
 	constructor(array) {
@@ -13,6 +14,7 @@ class OptionsChain {
 	// PRIVATE
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @private
 	 */
 	_getOption(date, strike, side) {
@@ -28,6 +30,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @private
 	 */
 	_getClosest(numberArray, target) {
@@ -40,6 +43,7 @@ class OptionsChain {
 
 	/**
 	 * Returns an array of all expiration dates for the OptionsChain object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Array<Date>}
 	 */
 	getExpirationDates() {
@@ -52,6 +56,7 @@ class OptionsChain {
 
 	/**
 	 * Returns an array of all strike prices for the OptionsChain object.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date
 	 * @param {String} side - put, call
 	 * @returns {Array<Number>|Error}
@@ -73,6 +78,7 @@ class OptionsChain {
 
 	/**
 	 * Returns an options chain for the given date.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date
 	 * @returns {Object}
 	 */
@@ -84,6 +90,7 @@ class OptionsChain {
 
 	/**
 	 * Returns the nearest strike price to the given price target.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {String} side - Strike price to query.
 	 * @param {Number} priceTarget
@@ -96,6 +103,7 @@ class OptionsChain {
 
 	/**
 	 * Returns the nearest expiration date to the given date.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} targetDate
 	 * @returns {Date}
 	 */
@@ -110,6 +118,7 @@ class OptionsChain {
 	// Get specific option data
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query.
 	 * @param {String} side - put, call
@@ -122,6 +131,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -134,6 +144,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -146,6 +157,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -158,6 +170,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -170,6 +183,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -182,6 +196,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -194,6 +209,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call
@@ -206,6 +222,7 @@ class OptionsChain {
 	}
 
 	/**
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Date} date - Expiration date to query.
 	 * @param {Number} strike - Strike price to query
 	 * @param {String} side - put, call

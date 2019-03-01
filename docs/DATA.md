@@ -74,12 +74,14 @@ Creates a new AlphaVantage instance.
 Returns an array of objects showing historical and real time S&P sector performance.
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="AlphaVantage+timeSeriesIntraday"></a>
 
 ### alphaVantage.timeSeriesIntraday(symbol, interval) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of quotes for the equity specified, updated in real time.
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -92,6 +94,7 @@ Returns an array of quotes for the equity specified, updated in real time.
 Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -105,6 +108,7 @@ Returns an array of quotes for the equity specified, covering up to 20 years of 
 Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -117,6 +121,7 @@ Returns an array of quotes for the equity specified, covering up to 20 years of 
 Returns an array of quotes for the equity specified, covering up to 20 years of historical data.
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -130,6 +135,7 @@ Returns an array of simple moving averages for the equity specified.
 https://www.investopedia.com/articles/technical/052201.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -147,6 +153,7 @@ Returns an array of exponential moving averages for the equity specified.
 https://www.investopedia.com/terms/e/ema.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -162,6 +169,7 @@ Returns an array of weighted moving averages for the equity specified.
 https://www.investopedia.com/articles/technical/060401.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -177,6 +185,7 @@ Returns an array of double exponential moving averages for the equity specified.
 http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -192,6 +201,7 @@ Returns an array of double exponential moving averages for the equity specified.
 http://www.investopedia.com/articles/trading/10/double-exponential-moving-average.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -207,6 +217,7 @@ Returns an array of triple exponential moving averages for the equity specified.
 https://www.investopedia.com/terms/t/triple-exponential-moving-average.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -222,6 +233,7 @@ Returns an array of triangular moving averages for the equity specified.
 http://www.fmlabs.com/reference/default.htm?url=TriangularMA.htm
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -237,6 +249,7 @@ Returns an array of Kaufman adaptive moving averages for the equity specified.
 http://stockcharts.com/school/doku.php?id=chart_school:technical_indicators:kaufman_s_adaptive_moving_average
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -252,6 +265,7 @@ Returns an array of MESA adaptive moving averages for the equity specified.
 http://www.binarytribune.com/forex-trading-indicators/ehlers-mesa-adaptive-moving-average
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -269,6 +283,7 @@ Returns an array of T3 values for the equity specified.
 http://www.fmlabs.com/reference/default.htm?url=T3.htm
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -284,6 +299,7 @@ Returns an array of moving average convergence / divergence values for the equit
 http://www.investopedia.com/articles/forex/05/macddiverge.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -302,6 +318,7 @@ Returns an array of moving average convergence / divergence values with controll
 http://www.investopedia.com/articles/forex/05/macddiverge.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -323,6 +340,7 @@ Returns an array of stochastic oscillators for the equity specified.
 http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -343,6 +361,7 @@ Returns an array of stochastic fast oscillators for the equity specified.
 http://www.investopedia.com/university/indicator_oscillator/ind_osc8.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -361,6 +380,7 @@ Returns an array of relative strength index values for the equity specified.
 http://www.investopedia.com/articles/technical/071601.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -376,6 +396,7 @@ Returns an array of stochastic relative strength index values for the equity spe
 http://www.fmlabs.com/reference/default.htm?url=StochRSI.htm
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -394,6 +415,7 @@ Returns an array of bollinger bands for the equity specified.
 https://www.investopedia.com/articles/technical/04/030304.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -412,6 +434,7 @@ This API returns the minus directional indicator (MINUS_DI) values
 http://www.investopedia.com/articles/technical/02/050602.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Colin Gillingham <https://github.com/Gillinghammer>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -426,6 +449,7 @@ This API returns the plus directional indicator (PLUS_DI) values
 http://www.investopedia.com/articles/technical/02/050602.asp
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Colin Gillingham <https://github.com/Gillinghammer>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -437,9 +461,10 @@ http://www.investopedia.com/articles/technical/02/050602.asp
 
 ### alphaVantage.adx(symbol, interval, timePeriod) ⇒ <code>Promise.&lt;Array&gt;</code>
 This API returns the average directional movement index (ADX) values
-http://www.investopedia.com/articles/trading/07/adx-trend-indicator.asp
+http://www.investopedia.com/articles/trading/07/adx-trend-indicator.as
 
 **Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Colin Gillingham <https://github.com/Gillinghammer>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -476,12 +501,14 @@ Used to interact with the IEX api. See the official documentation for more: http
 Returns a market object.
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Colin Gillingham <https://github.com/Gillinghammer>  
 <a name="IEX.getQuote"></a>
 
 ### IEX.getQuote(symbol) ⇒ <code>Promise.&lt;Quote&gt;</code>
 Returns a quote object for the given symbol.
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -493,6 +520,7 @@ Returns a quote object for the given symbol.
 Returns an array of quote objects for the given symbols.
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -505,6 +533,7 @@ Returns an object containing data on the given company.
 https://iextrading.com/developer/docs/#company
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -517,6 +546,7 @@ Returns an object containing data on dividends issued by the given company.
 https://iextrading.com/developer/docs/#dividends
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -529,6 +559,7 @@ Returns an object containing data on the four most recent earnings reports by th
 https://iextrading.com/developer/docs/#earnings
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -541,6 +572,7 @@ Returns an object containing data on the given company's income statement, balan
 https://iextrading.com/developer/docs/#financials
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -553,6 +585,7 @@ Returns an object containing data on the given company's market cap, beta, 52-we
 https://iextrading.com/developer/docs/#key-stats
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -565,6 +598,7 @@ Returns a string containing a URL endpoint with the given company's logo.
 https://iextrading.com/developer/docs/#logo
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -577,6 +611,7 @@ Returns an array of news objects for the given symbol.
 https://iextrading.com/developer/docs/#logo
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -589,6 +624,7 @@ Returns an array of peer tickers as defined by IEX.
 https://iextrading.com/developer/docs/#peers
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -601,6 +637,7 @@ Returns an object containing data on stock splits issued by the given company.
 https://iextrading.com/developer/docs/#dividends
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -614,6 +651,7 @@ This call will always return 13 values, and will be sorted in ascending order by
 https://iextrading.com/developer/docs/#volume-by-venue
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -626,6 +664,7 @@ Returns an array of symbols IEX supports for trading.
 https://iextrading.com/developer/docs/#symbols
 
 **Kind**: static method of [<code>IEX</code>](#IEX)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Nasdaq"></a>
 
 ## Nasdaq
@@ -647,30 +686,35 @@ For use with the Nasdaq's public data repository.
 Returns an array of objects with details on Nasdaq listed equities.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Nasdaq.getTraded"></a>
 
 ### Nasdaq.getTraded() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Returns an array of objects with details on Nasdaq traded equities.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Nasdaq.getOtherListings"></a>
 
 ### Nasdaq.getOtherListings() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Returns an array of objects with details on other equities.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Nasdaq.getOTCListings"></a>
 
 ### Nasdaq.getOTCListings() ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Returns an array of objects with details on OTC traded equities.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Nasdaq.getByName"></a>
 
 ### Nasdaq.getByName(string) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 Returns an array of objects with details on equities whose name matchs the given filter.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -682,6 +726,7 @@ Returns an array of objects with details on equities whose name matchs the given
 Returns an array of symbols that represent exchange traded funds.
 
 **Kind**: static method of [<code>Nasdaq</code>](#Nasdaq)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News"></a>
 
 ## News
@@ -720,36 +765,44 @@ Creates a new News instance.
 Using the URL provided for the news article, this will return the contents of that page.
 
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News+getTitle"></a>
 
 ### news.getTitle() ⇒ <code>String</code>
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News+getDescription"></a>
 
 ### news.getDescription() ⇒ <code>String</code>
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News+getDate"></a>
 
 ### news.getDate() ⇒ <code>Date</code>
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News+getSource"></a>
 
 ### news.getSource() ⇒ <code>String</code>
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News+getAuthor"></a>
 
 ### news.getAuthor() ⇒ <code>String</code>
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News+getURL"></a>
 
 ### news.getURL() ⇒ <code>String</code>
 **Kind**: instance method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="News.getFromYahoo"></a>
 
 ### News.getFromYahoo(symbol) ⇒ <code>Promise.&lt;Array&gt;</code>
 Returns an array of News objects for the given symbol.
 
 **Kind**: static method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -762,6 +815,7 @@ Search through millions of articles from over 30,000 large and small news source
 Returns an array of News objects for the given symbol from News API.
 
 **Kind**: static method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -789,6 +843,7 @@ This endpoint provides live top and breaking headlines for a country, specific c
 Returns an array of News objects for the given symbol from News API.
 
 **Kind**: static method of [<code>News</code>](#News)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -831,6 +886,7 @@ Find and filter securities based on certain criteria.
 Searches for a given symbol based on the given string.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -842,6 +898,7 @@ Searches for a given symbol based on the given string.
 Returns an array of quotes for the best performing 'x' amount of stocks.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -853,6 +910,7 @@ Returns an array of quotes for the best performing 'x' amount of stocks.
 Returns an array of quotes for the worst performing 'x' amount of stocks.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -864,6 +922,7 @@ Returns an array of quotes for the worst performing 'x' amount of stocks.
 Returns an array of quotes for 'x' amount of stocks with the highest volume today.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -875,6 +934,7 @@ Returns an array of quotes for 'x' amount of stocks with the highest volume toda
 Returns an array of quotes for options with the highest open interest.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -886,6 +946,7 @@ Returns an array of quotes for options with the highest open interest.
 Returns an array of quotes for the most actively traded ETFs.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -897,6 +958,7 @@ Returns an array of quotes for the most actively traded ETFs.
 Returns an array of equities similar to the one given.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -908,6 +970,7 @@ Returns an array of equities similar to the one given.
 Returns an array of 'x' amount of trending symbols on Yahoo Finance.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -919,6 +982,7 @@ Returns an array of 'x' amount of trending symbols on Yahoo Finance.
 Returns an array of objects with information on companies that are reporting earnings within 'x' number of days, along with estimates and call URLs.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -930,6 +994,7 @@ Returns an array of objects with information on companies that are reporting ear
 Returns an object containing this company's past and future earnings data.
 
 **Kind**: static method of [<code>Query</code>](#Query)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |
@@ -939,6 +1004,7 @@ Returns an object containing this company's past and future earnings data.
 
 ## Stream
 **Kind**: global class  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 **Properties**
 
 | Name | Type | Description |
@@ -973,12 +1039,15 @@ Creates a new Stream class.
 Start the streaming class.
 
 **Kind**: instance method of [<code>Stream</code>](#Stream)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 <a name="Stream+stop"></a>
 
 ### stream.stop()
 Stop the streaming class.
 
 **Kind**: instance method of [<code>Stream</code>](#Stream)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+**Author**: Wyatt Calandro <https://github.com/wclandro>  
 <a name="Stream+event_iex"></a>
 
 ### "iex"
@@ -993,15 +1062,20 @@ Used to interact with the Yahoo Finance API.
 **Kind**: global class  
 
 * [Yahoo](#Yahoo)
-    * [.getQuotes(symbol, range, interval, extended)](#Yahoo.getQuotes) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.getQuotes](#Yahoo.getQuotes)
+        * [new Yahoo.getQuotes(symbol, range, interval, extended)](#new_Yahoo.getQuotes_new)
     * [.getOptionsChain(symbol)](#Yahoo.getOptionsChain) ⇒ <code>Promise.&lt;OptionsChain&gt;</code>
 
 <a name="Yahoo.getQuotes"></a>
 
-### Yahoo.getQuotes(symbol, range, interval, extended) ⇒ <code>Promise.&lt;Array&gt;</code>
+### Yahoo.getQuotes
+**Kind**: static class of [<code>Yahoo</code>](#Yahoo)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="new_Yahoo.getQuotes_new"></a>
+
+#### new Yahoo.getQuotes(symbol, range, interval, extended)
 Returns an array of Quote objects from Yahoo Finance.
 
-**Kind**: static method of [<code>Yahoo</code>](#Yahoo)  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1016,6 +1090,7 @@ Returns an array of Quote objects from Yahoo Finance.
 Returns a new OptionsChain object with data from Yahoo Finance.
 
 **Kind**: static method of [<code>Yahoo</code>](#Yahoo)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
 
 | Param | Type |
 | --- | --- |

@@ -8,7 +8,7 @@ class Scheduler {
 
 	/**
 	 * Creates a new scheduled task
-	 *
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Function} f
 	 */
 	constructor(f) {
@@ -18,6 +18,7 @@ class Scheduler {
 
 	/**
 	 * Runs every day on market open.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} offset - The offset, in milliseconds, from market open to run the algorithm. Negative is before, positive is after.
 	 * @returns {Promise<Date>} - Date object of next invocation.
 	 */
@@ -37,6 +38,7 @@ class Scheduler {
 
 	/**
 	 * Runs every day on market close.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} offset - The offset, in milliseconds, from market close to run the algorithm. Negative is before, positive is after.
 	 * @returns {Promise<schedule>}
 	 */
@@ -56,6 +58,7 @@ class Scheduler {
 
 	/**
 	 * Runs every 'x' minutes while the market is open.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {Number} minutes
 	 * @param {Boolean} extended - Whether to run during extended trading hours.
 	 */
@@ -77,6 +80,7 @@ class Scheduler {
 
 	/**
 	 * Cancels a job.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 */
 	cancel() {
 		if (this.job === null) return new Error("This job has not been scheduled yet.");
@@ -88,6 +92,7 @@ class Scheduler {
 
 	/**
 	 * Returns the date of the next invocation of the given job.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Date|Error}
 	 */
 	getNext() {
