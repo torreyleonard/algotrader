@@ -213,18 +213,18 @@ const data = authenticatedUser.serialize();
 
 User.deserialize(data)
 	.then(restoredUser => {
-		if(!restoredUser.isAuthenticated()) {
+		if(!restoredUser.isAuthenticated()) 
 			restoredUser.reauthenticate()
-				.then(myUser => {
-					// Now you can use your user 
-					// Don't forget to save it
-					// superSecureStorage.save(userId, data);
-				}).catch(error => {
-					// Make sure to always catch possible errors.
-					// You probably need to re-authenticate using username and password here.
-				});
+			.then(myUser => {
+				// Now you can use your user 
+				// Don't forget to save it
+				// superSecureStorage.save(userId, data);
+			}).catch(error => {
+				// Make sure to always catch possible errors.
+				// You probably need to re-authenticate using username and password here.
+			});
 		}
-	});
+	);
 ```
 
 #### Get a user's portfolio
