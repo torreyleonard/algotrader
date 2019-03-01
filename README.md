@@ -7,7 +7,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dt/algotrader.svg?style=flat-square)](https://www.npmjs.com/package/algotrader)
 [![GitHub Commit](https://img.shields.io/github/last-commit/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader)
 [![GitHub Issues](https://img.shields.io/github/issues/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader/issues)
-[![Discord](https://img.shields.io/discord/224996786547326976.svg?style=flat-square)](https://discord.gg/Sjyw5eD)
+[![Discord](https://img.shields.io/discord/551040132476567563.svg?style=flat-square&logo=discord)](https://discord.gg/RAtwEXc)
 
 ---
 
@@ -76,6 +76,21 @@
 	- [Dealing with errors](#dealing-with-errors)
 	- [Error reporting](https://github.com/Ladinn/algotrader/issues)
 	
+
+---
+
+### Support
+
+* [Issues](https://github.com/Ladinn/algotrader/issues)
+* [Pull Requests](https://github.com/Ladinn/algotrader/pulls)
+* [Releases](https://github.com/Ladinn/algotrader/releases)
+* [Further Documentation](https://github.com/Ladinn/algotrader/tree/master/docs)
+
+### <img align="center" src="https://i.imgur.com/nPCnzon.png">
+
+* Join our Discord: [https://discord.gg/RAtwEXc](https://discord.gg/RAtwEXc)
+* Get answers to questions or help us deal with open issues.
+* Tell us about how you're using Algotrader!
 
 ---
 
