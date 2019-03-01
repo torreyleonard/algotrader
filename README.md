@@ -1,4 +1,4 @@
-![algotrader](https://i.imgur.com/gVbBwgh.png)
+![algotrader](https://raw.githubusercontent.com/Ladinn/algotrader/master/docs/img/algotrader.png)
 #### *Simple algorithmic stock and option trading for Node.js.*
 
 [![npm package](https://nodei.co/npm/algotrader.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/algotrader/)
