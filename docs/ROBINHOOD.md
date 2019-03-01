@@ -1225,6 +1225,11 @@ Represents the user that is logged in while accessing the Robinhood API.
         * [.authenticate(password, mfaFunction)](#User+authenticate) ⇒ <code>Promise.&lt;Boolean&gt;</code>
         * [.logout()](#User+logout) ⇒ <code>Promise.&lt;Boolean&gt;</code>
         * [.save()](#User+save) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+        * [.serialize()](#User+serialize) ⇒ <code>String</code>
+        * [.isAuthenticated()](#User+isAuthenticated) ⇒ <code>Boolean</code>
+        * [.getAuthToken()](#User+getAuthToken) ⇒ <code>String</code> \| <code>Null</code>
+        * [.getAccountNumber()](#User+getAccountNumber) ⇒ <code>String</code> \| <code>Null</code>
+        * [.getUsername()](#User+getUsername) ⇒ <code>String</code> \| <code>Null</code>
         * [.getAccount()](#User+getAccount) ⇒ <code>Promise</code>
         * [.getBalances()](#User+getBalances) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getBuyingPower()](#User+getBuyingPower) ⇒ <code>Promise</code>
@@ -1246,6 +1251,7 @@ Represents the user that is logged in while accessing the Robinhood API.
         * [.downloadDocuments(folder)](#User+downloadDocuments) ⇒ <code>Promise</code>
     * _static_
         * [.load()](#User.load) ⇒ [<code>Promise.&lt;User&gt;</code>](#User)
+        * [.deserialize()](#User.deserialize) ⇒ [<code>Promise.&lt;User&gt;</code>](#User)
 
 <a name="new_User_new"></a>
 
@@ -1260,7 +1266,7 @@ Creates a new User object.
 
 <a name="User+authenticate"></a>
 
-### user.authenticate(password, mfaFunction) ⇒ <code>Promise.&lt;Boolean&gt;</code>
+### user.authenticate(password, mfaFunction) ⇒ <code>Promise.&lt;Object&gt;</code>
 Authenticates a user using the inputted username and password.
 
 **Kind**: instance method of [<code>User</code>](#User)  
@@ -1269,6 +1275,16 @@ Authenticates a user using the inputted username and password.
 | --- | --- | --- |
 | password | <code>String</code> \| <code>Undefined</code> | Optional if not provided in constructor or re-authenticating a saved user. |
 | mfaFunction | <code>function</code> \| <code>Undefined</code> | Optional function that is called when prompted for multi-factor authentication. Must return a promise with a six-character string. If not provided the CLI will be prompted. |
+
+<a name="User+reauthenticate"></a>
+
+### user.reauthenticate() ⇒ <code>Promise.&lt;Object&gt;</code>
+Re-authenticates a user using the refresh token.
+**Kind**: instance method of [<code>User</code>](#User)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| refreshToken | <code>String</code> \| <code>Undefined</code> | Optional if not restored from a securely saved user. |
 
 <a name="User+logout"></a>
 
@@ -1280,8 +1296,41 @@ Logout the user by expiring the authentication token and removing any saved data
 
 ### user.save() ⇒ <code>Promise.&lt;Boolean&gt;</code>
 Save the user to disk. Prevents having to login and logout each run.
-
+Note that this function does not save a refreshToken since it's a subject to strict storage requirements.
+Use `serialize` and `deserealize` functions and safe storage to use `reauthenticate` .
 **Kind**: instance method of [<code>User</code>](#User)  
+
+<a name="User+serialize"></a>
+
+### user.serialize() ⇒ <code>String</code>
+Converts a user object to a string to be securely stored.
+Note that serialized object contains refreshToken and it's a subject to strict storage requirements to ensure that they are not leaked.
+**Kind**: instance method of [<code>User</code>](#User)  
+
+<a name="User+isAuthenticated"></a>
+
+### user.isAuthenticated() ⇒ <code>Boolean</code>
+Checks if the current user is authenticated and authentication is not expired.
+**Kind**: instance method of [<code>User</code>](#User)  
+
+<a name="User+getAuthToken"></a>
+
+### user.getAuthToken() ⇒ <code>String</code> \| <code>Null</code>
+Returns an auth token.
+**Kind**: instance method of [<code>User</code>](#User)  
+
+<a name="User+getAccountNumber"></a>
+
+### user.getAccountNumber() ⇒ <code>String</code> \| <code>Null</code>
+Returns an account number.
+**Kind**: instance method of [<code>User</code>](#User)  
+
+<a name="User+getUsername"></a>
+
+### user.getUsername() ⇒ <code>String</code> \| <code>Null</code>
+Returns a username.
+**Kind**: instance method of [<code>User</code>](#User)  
+        	
 <a name="User+getAccount"></a>
 
 ### user.getAccount() ⇒ <code>Promise</code>
@@ -1414,5 +1463,14 @@ Downloads will be attempted every second and will wait for any connection thrott
 
 ### User.load() ⇒ [<code>Promise.&lt;User&gt;</code>](#User)
 If a saved user exists, this will load it into system memory. Recommended if using multi-factor authentication.
-
 **Kind**: static method of [<code>User</code>](#User)  
+
+<a name="User.unserialize"></a>
+
+### User.deserialize(data) ⇒ [<code>Promise.&lt;User&gt;</code>](#User)
+Restores a user object from a serialized string.
+**Kind**: static method of [<code>User</code>](#User)  
+
+ Param | Type |
+| --- | --- |
+| data | <code>String</code> | 
