@@ -299,7 +299,7 @@ class AlphaVantage {
 					array.push(newObject);
 				}
 			}
-			return _.sortBy(array, 'date');
+			return array;
 		})
 	}
 
