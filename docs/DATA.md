@@ -54,6 +54,9 @@ Further documentation can be found here: https://www.alphavantage.co/documentati
     * [.rsi(symbol, interval, timePeriod, seriesType)](#AlphaVantage+rsi) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.stochRSI(symbol, interval, timePeriod, seriesType, fastKPeriod, fastDPeriod, fastDmaType)](#AlphaVantage+stochRSI) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.bbands(symbol, interval, timePeriod, seriesType, nbdevup, nbdevdn, matype)](#AlphaVantage+bbands) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.minus_di(symbol, interval, timePeriod)](#AlphaVantage+minus_di) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.plus_di(symbol, interval, timePeriod)](#AlphaVantage+plus_di) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.adx(symbol, interval, timePeriod)](#AlphaVantage+adx) ⇒ <code>Promise.&lt;Array&gt;</code>
 
 <a name="new_AlphaVantage_new"></a>
 
@@ -402,6 +405,48 @@ https://www.investopedia.com/articles/technical/04/030304.asp
 | nbdevdn | <code>Number</code> \| <code>Null</code> | The standard deviation multiplier of the lower band. Positive integers are accepted. By default, nbdevdn=2. |
 | matype | <code>Number</code> \| <code>Null</code> | Moving average type of the time series. By default, matype=0. Integers 0 - 8 are accepted with the following mappings. 0 = Simple Moving Average (SMA), 1 = Exponential Moving Average (EMA), 2 = Weighted Moving Average (WMA), 3 = Double Exponential Moving Average (DEMA), 4 = Triple Exponential Moving Average (TEMA), 5 = Triangular Moving Average (TRIMA), 6 = T3 Moving Average, 7 = Kaufman Adaptive Moving Average (KAMA), 8 = MESA Adaptive Moving Average (MAMA). |
 
+<a name="AlphaVantage+minus_di"></a>
+
+### alphaVantage.minus\_di(symbol, interval, timePeriod) ⇒ <code>Promise.&lt;Array&gt;</code>
+This API returns the minus directional indicator (MINUS_DI) values
+http://www.investopedia.com/articles/technical/02/050602.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+
+<a name="AlphaVantage+plus_di"></a>
+
+### alphaVantage.plus\_di(symbol, interval, timePeriod) ⇒ <code>Promise.&lt;Array&gt;</code>
+This API returns the plus directional indicator (PLUS_DI) values
+http://www.investopedia.com/articles/technical/02/050602.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each moving average value. Positive integers are accepted. |
+
+<a name="AlphaVantage+adx"></a>
+
+### alphaVantage.adx(symbol, interval, timePeriod) ⇒ <code>Promise.&lt;Array&gt;</code>
+This API returns the average directional movement index (ADX) values
+http://www.investopedia.com/articles/trading/07/adx-trend-indicator.asp
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| symbol | <code>String</code> |  |
+| interval | <code>String</code> | Time between two data points in the series: 1min, 5min, 15min, 30min, 60min, daily, weekly, monthly |
+| timePeriod | <code>Number</code> | Number of data points used to calculate each ADX value. Positive integers are accepted |
+
 <a name="IEX"></a>
 
 ## IEX
@@ -410,6 +455,7 @@ Used to interact with the IEX api. See the official documentation for more: http
 **Kind**: global class  
 
 * [IEX](#IEX)
+    * [.getMarket()](#IEX.getMarket) ⇒ <code>Promise.&lt;Market&gt;</code>
     * [.getQuote(symbol)](#IEX.getQuote) ⇒ <code>Promise.&lt;Quote&gt;</code>
     * [.getBatchQuotes(symbolArray)](#IEX.getBatchQuotes) ⇒ <code>Promise.&lt;Array.&lt;Quote&gt;&gt;</code>
     * [.getCompanyDetails(symbol)](#IEX.getCompanyDetails) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -424,6 +470,12 @@ Used to interact with the IEX api. See the official documentation for more: http
     * [.getVolumeByVenue(symbol)](#IEX.getVolumeByVenue) ⇒ <code>Promise.&lt;Array.&lt;String&gt;&gt;</code>
     * [.getAllSymbols()](#IEX.getAllSymbols) ⇒ <code>Promise.&lt;Array.&lt;Object&gt;&gt;</code>
 
+<a name="IEX.getMarket"></a>
+
+### IEX.getMarket() ⇒ <code>Promise.&lt;Market&gt;</code>
+Returns a market object.
+
+**Kind**: static method of [<code>IEX</code>](#IEX)  
 <a name="IEX.getQuote"></a>
 
 ### IEX.getQuote(symbol) ⇒ <code>Promise.&lt;Quote&gt;</code>
