@@ -1,4 +1,4 @@
-# Algotrader
+![algotrader](https://i.imgur.com/gVbBwgh.png)
 #### *Simple algorithmic stock and option trading for Node.js.*
 
 [![npm package](https://nodei.co/npm/algotrader.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/algotrader/)
@@ -58,12 +58,11 @@
 	- [Robinhood](#robinhood)
 		- [Getting started](#robinhood)
 		- [Multi-factor authentication](#mfa)
-		- [Saving & loading a user](#saving--loading-a-user)
-		- [Automatic re-authentication](Automatic-re-authentication)
-		- [Get a user's portfolio](#get-a-users-portfolio)
-		- [Placing an order](#placing-an-order)
-		- [Options](#options)
-		- [Option chains](#option-chains)
+    	- [Saving & loading a user](#saving--loading-a-user)
+    	- [Get a user's portfolio](#get-a-users-portfolio)
+    	- [Placing an order](#placing-an-order)
+    	- [Options](#options)
+    	- [Option chains](#option-chains)
 - Algorithm Library
 	- [Scheduler](#scheduler)
 - Data Library
@@ -189,43 +188,6 @@ User.load()
 ```
 
 However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.
-
-
-##### Automatic re-authentication
-
-You can use [```User.reauthenticate```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) function to re-authenticate the user automatically when the authentication token is expired (after 24 hours). To do this you have to use securely saved refresh token.
- 
-You can save and restore a user data including a refresh token using [```User.serialize```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) (right after user has been authenticated) and [```User.deserialize```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) functions.
-
-**Note:** [```User.safe```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) does not save a refresh token by security reason.
-
-```js
-const authenticatedUser; // In state right after `authenticate` called, but not after `load`.
-const data = authenticatedUser.serialize();
-
-// Save the data in your secure storage
-// superSecureStorage.save(userId, data);
-```
-
-```js
-// Restore the data from your secure storage
-// const data = superSecureStorage.load(userId);
-
-User.deserialize(data)
-	.then(restoredUser => {
-		if(!restoredUser.isAuthenticated()) 
-			restoredUser.reauthenticate()
-			.then(myUser => {
-				// Now you can use your user 
-				// Don't forget to save it
-				// superSecureStorage.save(userId, data);
-			}).catch(error => {
-				// Make sure to always catch possible errors.
-				// You probably need to re-authenticate using username and password here.
-			});
-		}
-	);
-```
 
 #### Get a user's portfolio
 There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using [```User.getPortfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
@@ -377,19 +339,15 @@ Here is an example of how you would sort an option chain by strike price and exp
 ```js
 const moment = require('moment');
 
-// As of writing, QQQ share prices were $165.37.
-// Next option expiration is 02/01/2019.
-
 const qqq = await Instrument.getBySymbol('QQQ');
 const quote = await qqq.getQuote(user);
 const chain = await OptionInstrument.getChain(user, qqq, 'call');
 const expirations = await OptionInstrument.getExpirations(user, qqq);
 // Returns an array of expiration dates [ 2019-02-01T00:00:00.000Z, 2019-02-08T00:00:00.000Z, ...
 
-// Create a new array with options expiring on the next expiration date
-let optionsExpiringNext = [];
-
 const nextExpiration = moment(expirations[0]);
+
+let optionsExpiringNext = [];
 
 chain.forEach(option => {
 	let thisExpiration = moment(option.getExpiration());
@@ -398,32 +356,8 @@ chain.forEach(option => {
     }
 });
 
-// Filter out the option contracts with strike prices higher than the last trade price:
-let inTheMoneyCalls = optionsExpiringNext.filter(x => {
-	return x.getStrikePrice() < quote.getLast();
-});
 
-// Since Algotrader provides option chains ordered by strike price (low-high), we can
-// use the last element in the array to get the contract with the highest
-// strike price: the $165 call expiring on Feb 1st.
-let optionToBuy = inTheMoneyCalls[inTheMoneyCalls.length - 1];
 
-OptionInstrument {
-  url: 'https://api.robinhood.com',
-  tradability: 'tradable',
-  strikePrice: 165,
-  state: 'active',
-  type: 'put',
-  symbol: 'QQQ',
-  minTicks: { cutoff_price: '0.00', below_tick: '0.01', above_tick: '0.01' },
-  instrumentURL: 'https://api.robinhood.com/options/instruments/c8fbe71b-5fc5-4741-9b30-004e31bf89a6/',
-  ids: 
-   { chain: '1c9d052c-165d-43a3-878d-3a0a0ca1ab49',
-     option: 'c8fbe71b-5fc5-4741-9b30-004e31bf89a6' },
-  dates: 
-   { expiration: 2019-02-01T00:00:00.000Z,
-     created: 2018-12-13T03:14:20.947Z,
-     updated: 2018-12-13T03:14:20.947Z } }
 ```
 
 ---
@@ -436,39 +370,28 @@ For scheduling tasks, running backtests, and paper-trading, the algorithm librar
 
 Using the [```Scheduler```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler) class, you'll be able to define exactly when you want a function to run using the following methods:
 
-- ```onMarketOpen(offset)```
+- ```Scheduler.onMarketOpen(offset, f)```
 	- Runs every morning when the NYSE opens. (Typically 9:30 AM EST)
 	- Offset is in milliseconds and can be positive (after) or negative (before).
-- ```onMarketClose(offset)```
+- ```Scheduler.onMarketClose(offset, f)```
 	- Runs every afternoon when the NYSE closes. (Typically 4:00 PM EST)
 	- Offset is in milliseconds and can be positive (after) or negative (before).
-- ```every(minutes, extended)```
+- ```Scheduler.every(minutes, extended, f)```
 	- Runs every ```x``` minutes during market hours or during typical extended trading hours. (9 AM EST - 6 PM EST)
 
-But first, you'll need to create a new instance of the Scheduler. Here's an easy example that runs a function 5 minutes before the market opens and another one every 30 minutes during regular trading hours:
+Here's an easy example that runs a function 5 minutes before the market opens and another one every 30 minutes during regular trading hours:
 
 ```js
 const Scheduler = algotrader.Algorithm.Scheduler;
 
-const openingTask = new Scheduler(function run() {
-	console.log("Running!");
+Scheduler.onMarketOpen(-5 * 60000, () => {
+	// Function to run five minutes before the market opens
 });
 
-openingTask.onMarketOpen(-5 * 60000).then(nextDate => {
-	// This is optional, but returns a promise with the next invocation time
+Scheduler.every(30, false, () => {
+	// Function to run every 1/2 hour
 });
 ```
-```js
-const Scheduler = algotrader.Algorithm.Scheduler;
-
-const halfHourTask = new Scheduler(function run() {
-	console.log("Running!");
-});
-
-halfHourTask.every(30, false);
-```
-To cancel a task, just call ```cancel``` after it has been scheduled.
-
 For documentation on all Scheduler functions, visit the [```Algorithm Library Docs.```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler)
 
 ---
