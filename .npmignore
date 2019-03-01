@@ -1,4 +1,6 @@
 /docs/
+*.png
+*.psd
 
 # Git ignore
 
