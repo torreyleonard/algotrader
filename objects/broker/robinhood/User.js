@@ -404,7 +404,7 @@ class User extends Robinhood {
 				if (res.accountType === 'margin') {
 					resolve(Number(res.margin.unallocatedMarginCash));
 				} else {
-					resolve(Number(res.buying_power));
+					resolve(Number(res.buyingPower));
 				}
 			}).catch(error => reject(error));
 		})
