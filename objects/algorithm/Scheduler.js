@@ -1,5 +1,6 @@
 const Market = require('../broker/robinhood/Market');
 const schedule = require('node-schedule');
+const moment = require('moment');
 
 /**
  * Used to run functions at specified intervals or times of day.
@@ -29,8 +30,15 @@ class Scheduler {
 			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
 			else Market.getByMIC("XNYS").then(nyse => {
 				nyse.getNextOpen().then(next => {
-					const date = new Date(next.getTime() + offset);
-					_this.job = schedule.scheduleJob(date, _this.f);
+					let date = new Date(next.getTime() + offset);
+					if (moment(date).isBefore(moment())) {
+						date = moment(date).add('1', 'day').toDate();
+					}
+					_this.job = schedule.scheduleJob(date, (invocationDate) => {
+						_this.f();
+						let date = moment(invocationDate);
+						schedule.scheduleJob(date.add('1', 'day'), _this.f);
+					});
 					resolve(_this.job.nextInvocation().toDate());
 				})
 			});
@@ -50,8 +58,15 @@ class Scheduler {
 			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
 			else Market.getByMIC("XNYS").then(nyse => {
 				nyse.getNextClose().then(next => {
-					const date = new Date(next.getTime() + offset);
-					_this.job = schedule.scheduleJob(date, _this.f);
+					let date = new Date(next.getTime() + offset);
+					if (moment(date).isBefore(moment())) {
+						date = moment(date).add('1', 'day').toDate();
+					}
+					_this.job = schedule.scheduleJob(date, (invocationDate) => {
+						_this.f();
+						let date = moment(invocationDate);
+						schedule.scheduleJob(date.add('1', 'day'), _this.f);
+					});
 					resolve(_this.job.nextInvocation().toDate());
 				})
 			});

@@ -735,6 +735,7 @@ Represents an option traded on Robinhood.
     * _static_
         * [.getAll(user)](#OptionInstrument.getAll) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getChain(user, instrument, side)](#OptionInstrument.getChain) ⇒ <code>Promise.&lt;any&gt;</code>
+        * [.getPrices(user, instruments)](#OptionInstrument.getPrices) ⇒ <code>Promise.&lt;any&gt;</code>
         * [.getExpirations(user, instrument)](#OptionInstrument.getExpirations) ⇒ <code>Promise.&lt;Array.&lt;Date&gt;&gt;</code>
         * [.getByURL(user, url)](#OptionInstrument.getByURL) ⇒ [<code>Promise.&lt;Instrument&gt;</code>](#Instrument)
         * [.getPositions(user)](#OptionInstrument.getPositions) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -833,6 +834,19 @@ Returns an array of all option instruments for the given expiration date and sid
 | user | [<code>User</code>](#User) |  |
 | instrument | [<code>Instrument</code>](#Instrument) |  |
 | side | <code>String</code> | Can be either 'call' or 'put' |
+
+<a name="OptionInstrument.getPrices"></a>
+
+### OptionInstrument.getPrices(user, instruments) ⇒ <code>Promise.&lt;any&gt;</code>
+Returns an array prices arranged by strike price. Make sure to only send a maximum of about 50 instruments.
+
+**Kind**: static method of [<code>OptionInstrument</code>](#OptionInstrument)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+
+| Param | Type |
+| --- | --- |
+| user | [<code>User</code>](#User) | 
+| instruments | [<code>Array.&lt;OptionInstrument&gt;</code>](#OptionInstrument) | 
 
 <a name="OptionInstrument.getExpirations"></a>
 

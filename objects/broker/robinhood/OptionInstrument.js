@@ -98,6 +98,44 @@ class OptionInstrument extends Robinhood {
 	}
 
 	/**
+	 * Returns an array prices arranged by strike price. Make sure to only send a maximum of about 50 instruments.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @param {User} user
+	 * @param {OptionInstrument[]} instruments
+	 * @returns {Promise<any>}
+	 */
+	static getPrices(user, instruments) {
+		return new Promise((resolve, reject) => {
+			console.log(instruments.map(ins => {
+				return ins.getInstrumentURL();
+			}).join(','));
+			request({
+				uri: 'https://api.robinhood.com/marketdata/options/',
+				headers: {
+					'Authorization': 'Bearer ' + user.getAuthToken()
+				},
+				qs: {
+					instruments: instruments.map(ins => {
+						return ins.getInstrumentURL();
+					}).join(',')
+				}
+			}, (error, response, body) => {
+				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
+					let array = [];
+					instruments.forEach(instrument => {
+						let price = _.find(res, o => {
+							return o.instrument === instrument.getInstrumentURL();
+						});
+						instrument._setPriceObject(price);
+						array.push(instrument);
+					});
+					resolve(array);
+				}, reject);
+			})
+		})
+	}
+
+	/**
 	 * Returns an array of expiration dates for the given Instrument.
 	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @param {User} user
@@ -193,6 +231,12 @@ class OptionInstrument extends Robinhood {
 				}, reject);
 			})
 		})
+	}
+
+	// SET
+
+	_setPriceObject(price) {
+		this.price = price;
 	}
 
 	// GET
