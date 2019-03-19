@@ -106,9 +106,6 @@ class OptionInstrument extends Robinhood {
 	 */
 	static getPrices(user, instruments) {
 		return new Promise((resolve, reject) => {
-			console.log(instruments.map(ins => {
-				return ins.getInstrumentURL();
-			}).join(','));
 			request({
 				uri: 'https://api.robinhood.com/marketdata/options/',
 				headers: {
