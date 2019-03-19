@@ -400,8 +400,12 @@ class User extends Robinhood {
 	getBuyingPower() {
 		const _this = this;
 		return new Promise((resolve, reject) => {
-			_this.getAccount().then(res => {
-				resolve(Number(res.buying_power));
+			_this.getBalances().then(res => {
+				if (res.accountType === 'margin') {
+					resolve(Number(res.margin.unallocatedMarginCash));
+				} else {
+					resolve(Number(res.buying_power));
+				}
 			}).catch(error => reject(error));
 		})
 	}

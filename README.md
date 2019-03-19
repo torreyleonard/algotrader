@@ -302,7 +302,7 @@ async function gains(user) {
   
   // Next, we'll fetch an option chain containing puts for the upcoming expiration date.
   // This will return an array of OptionInstruments. See the example in the next section below.
-  const chain = await OptionInstrument.getChain(user, tlry, expirations[0], 'put');
+  const chain = await OptionInstrument.getChain(user, tlry, 'put');
   
   // Now that we have the option chain, we'll need to find which OptionInstrument to trade
   // based on its strike price and expiration date. See the example below for how to sort them.
