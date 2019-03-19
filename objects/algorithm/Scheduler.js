@@ -24,6 +24,7 @@ class Scheduler {
 	 */
 	onMarketOpen(offset) {
 		const _this = this;
+		if (!offset) offset = 0;
 		return new Promise((resolve, reject) => {
 			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
 			else Market.getByMIC("XNYS").then(nyse => {
@@ -44,6 +45,7 @@ class Scheduler {
 	 */
 	onMarketClose(offset) {
 		const _this = this;
+		if (!offset) offset = 0;
 		return new Promise((resolve, reject) => {
 			if (_this.job !== null) reject(new Error("You must cancel this job before scheduling it again!"));
 			else Market.getByMIC("XNYS").then(nyse => {
