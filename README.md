@@ -7,6 +7,7 @@
 [![NPM Downloads](https://img.shields.io/npm/dt/algotrader.svg?style=flat-square)](https://www.npmjs.com/package/algotrader)
 [![GitHub Commit](https://img.shields.io/github/last-commit/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader)
 [![GitHub Issues](https://img.shields.io/github/issues/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader)
 [![Discord](https://img.shields.io/discord/551040132476567563.svg?style=flat-square&logo=discord)](https://discord.gg/RAtwEXc)
 
 ---
