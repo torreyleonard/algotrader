@@ -20,7 +20,8 @@ class OptionOrder extends Robinhood {
 	 * @property {String} type - market/limit. Note: market orders are not allowed if side = buy.
 	 * @property {Number} price
 	 * @property {String} timeInForce - gtc/gfd/ioc/opg
-	 * @property {OptionInstrument} option
+	 * @property {OptionInstrument|Null} option - Required if no legs are provided
+	 * @property {Array|Null} legs - Required if no option is provided
 	 * @property {Number} quantity
 	 */
 	constructor(user, object) {
@@ -29,15 +30,19 @@ class OptionOrder extends Robinhood {
 		if (object.state === undefined && object.cancel_url === undefined) { // This should be a new order
 			_validate();
 			this.executed = false;
-			this.form = {
-				account: this.url + "/accounts/" + this.user.getAccountNumber() + "/",
-				direction: object.side === 'buy' ? 'debit' : 'credit',
-				legs: [{
+			let legs = null;
+			if (!object.legs) {
+				legs = [{
 					position_effect: object.side === "buy" ? "open" : "close",
 					side: object.side,
 					ratio_quantity: 1,
 					option: object.option.instrumentURL
-				}],
+				}];
+			} else legs = object.legs;
+			this.form = {
+				account: this.url + "/accounts/" + this.user.getAccountNumber() + "/",
+				direction: object.side === 'buy' ? 'debit' : 'credit',
+				legs: legs,
 				price: object.price,
 				time_in_force: object.timeInForce,
 				trigger: 'immediate',
@@ -64,7 +69,8 @@ class OptionOrder extends Robinhood {
 			assert(typeof object.price === 'number', new Error("Object property 'price' must be a number"));
 			assert(typeof object.timeInForce === 'string', new Error("Object property 'timeInForce' must be a string"));
 			assert(['gfd', 'gtc', 'ioc', 'opg'].indexOf(object.timeInForce.toLowerCase()) !== -1, new Error("Object property 'timeInForce' must be either GFD, GTC, IOC, or OPG"));
-			assert(object.option instanceof OptionInstrument, new Error("Object property 'optionInstrument' must be an instance of the OptionInstrument class"));
+			assert(object.option instanceof OptionInstrument || typeof object.legs !== 'undefined', new Error("Object property 'optionInstrument' must be an instance of the OptionInstrument class"));
+			assert(Array.isArray(object.legs) || typeof object.option !== 'undefined', new Error("Object property 'legs' must be an array. Required parameter if 'option' is undefined"));
 			assert(typeof object.quantity === 'number', new Error("Object property 'quantity' must be a number"))
 		}
 	}

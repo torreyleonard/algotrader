@@ -1432,6 +1432,7 @@ Represents the user that is logged in while accessing the Robinhood API.
         * [.cancelOpenOrders()](#User+cancelOpenOrders) ⇒ <code>Promise</code>
         * [.getOptionOrders()](#User+getOptionOrders) ⇒ <code>Promise.&lt;Array&gt;</code>
         * [.getPortfolio()](#User+getPortfolio) ⇒ <code>Promise.&lt;Object&gt;</code>
+        * [.getOptionPositions()](#User+getOptionPositions) ⇒ <code>Promise.&lt;any&gt;</code>
         * [.getHistoricals()](#User+getHistoricals) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.getLinkedBanks()](#User+getLinkedBanks) ⇒ <code>Promise.&lt;Object&gt;</code>
         * [.addDeposit(bankID, amount, frequency)](#User+addDeposit) ⇒ <code>Promise.&lt;Object&gt;</code>
@@ -1620,6 +1621,13 @@ Returns an array of option orders.
 
 ### user.getPortfolio() ⇒ <code>Promise.&lt;Object&gt;</code>
 Returns a Portfolio object containing all open positions in a user's portfolio.
+
+**Kind**: instance method of [<code>User</code>](#User)  
+**Author**: Torrey Leonard <https://github.com/Ladinn>  
+<a name="User+getOptionPositions"></a>
+
+### user.getOptionPositions() ⇒ <code>Promise.&lt;any&gt;</code>
+Returns an array of options that the user holds.
 
 **Kind**: instance method of [<code>User</code>](#User)  
 **Author**: Torrey Leonard <https://github.com/Ladinn>  

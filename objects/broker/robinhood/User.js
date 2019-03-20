@@ -4,6 +4,7 @@ const Instrument = require('./Instrument');
 const Portfolio = require('./Portfolio');
 const Order = require('./Order');
 const OptionOrder = require('./OptionOrder');
+const OptionInstrument = require('./OptionInstrument');
 
 const request = require('request');
 const fs = require('fs');
@@ -584,6 +585,9 @@ class User extends Robinhood {
 				uri: _this.url + "/accounts/" + _this.account + "/positions/",
 				headers: {
 					'Authorization': 'Bearer ' + _this.token
+				},
+				qs: {
+					nonzero: true
 				}
 			}, (error, response, body) => {
 				Robinhood.handleResponse(error, response, body, _this.token, res => {
@@ -600,6 +604,40 @@ class User extends Robinhood {
 					}, () => {
 						resolve(new Portfolio(_this, array));
 					} );
+				}, reject);
+			})
+		})
+	}
+
+	/**
+	 * Returns an array of options that the user holds.
+	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @returns {Promise<any>}
+	 */
+	getOptionPositions() {
+		const _this = this;
+		return new Promise((resolve, reject) => {
+			request({
+				uri: _this.url + "/options/positions/",
+				headers: {
+					'Authorization': 'Bearer ' + _this.token
+				},
+				qs: {
+					nonzero: 'True'
+				}
+			}, (error, response, body) => {
+				Robinhood.handleResponse(error, response, body, _this.token, res => {
+					if (!Array.isArray(res)) res = [res];
+					let array = [];
+					async.forEachOf(res, (position, key, callback) => {
+						OptionInstrument.getByURL(_this, position.option).then(option => {
+							position.option = option;
+							array.push(position);
+							callback();
+						}).catch(reject);
+					}, () => {
+						resolve(array);
+					})
 				}, reject);
 			})
 		})
