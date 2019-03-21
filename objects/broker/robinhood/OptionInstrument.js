@@ -118,6 +118,7 @@ class OptionInstrument extends Robinhood {
 				}
 			}, (error, response, body) => {
 				return Robinhood.handleResponse(error, response, body, user.getAuthToken(), res => {
+					if (!Array.isArray(res)) res = [res];
 					let array = [];
 					instruments.forEach(instrument => {
 						let price = _.find(res, o => {
