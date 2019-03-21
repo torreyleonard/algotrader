@@ -21,10 +21,10 @@ class Market extends Robinhood {
 			this.parseHours = function(object) {
 				return {
 					isOpen: Boolean(object.is_open),
-					close: new Date(object.closes_at),
-					open: new Date(object.opens_at),
-					extendedOpen: new Date(object.extended_opens_at),
-					extendedClose: new Date(object.extended_closes_at),
+					close: object.closes_at === null ? null : new Date(object.closes_at),
+					open: object.opens_at === null ? null : new Date(object.opens_at),
+					extendedOpen: object.extended_opens_at === null ? null : new Date(object.extended_opens_at),
+					extendedClose: object.extended_closes_at === null ? null : new Date(object.extended_closes_at),
 					date: new Date(object.date),
 					nextTradingDay: String(object.next_open_hours),
 					previousTradingDay: String(object.previous_open_hours)
@@ -171,7 +171,7 @@ class Market extends Robinhood {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			let next = null;
-			let days = _this.isOpenToday() ? 1 : 0;
+			let days = moment().isAfter(_this.getOpen()) ? 1 : 0;
 			async.whilst(
 				() => { return next === null; },
 				callback => {
@@ -179,11 +179,9 @@ class Market extends Robinhood {
 					_this.getHoursOn(newDate.toDate()).then(hours => {
 						if (hours.isOpen) next = hours.open;
 						callback();
-					})
-				},
-				error => {
-					if (error) reject(error);
-					else resolve(next);
+					}).catch(error => reject(new LibraryError(error)));
+				}, () => {
+					resolve(next);
 				})
 		})
 	}
