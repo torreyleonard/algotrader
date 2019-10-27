@@ -419,9 +419,6 @@ chain.forEach(option => {
         optionsExpiringNext.push(option);
     }
 });
-
-
-
 ```
 
 ---
@@ -490,6 +487,7 @@ myStream
         // Returns an error if the stream failed to start.
     });
 ```
+
 For documentation on Quotes, visit the [Global Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote)
 
 Not only can you stream quotes, but you can include news articles using the built-in [News Library.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) This is useful for reacting to breaking headlines with pre-determined trades (for example, earnings reports or FOMC results). To do this, just add a second parameter (an object) to ```new Stream()``` as shown below.
@@ -575,44 +573,44 @@ const IEX = algotrader.Data.IEX;
 
 // Returns a quote object
 IEX.getQuote("CSX").then(quote => {
-	// Quote {
-	// 	symbol: 'CSX',
-	// 		date: 2018-05-04T20:00:00.251Z,
-	// 		source: 'IEX',
-	// 		price:
-	// 	{ last: 59.97,
-	// 		open: 58.69,
-	// 		high: 60.41,
-	// 		low: 58.575,
-	// 		close: 59.97,
-	// 		volume: 4186069 },
-	// 	dom: { bids: [], asks: [] }, - This was written while the market was closed. While the market is open, DOM elements are supported in the Quote object.
-	// 	meta: undefined,
-	// 		original: undefined }
+    // Quote {
+    // symbol: 'CSX',
+    //     date: 2018-05-04T20:00:00.251Z,
+    //     source: 'IEX',
+    //     price:
+    // { last: 59.97,
+    //     open: 58.69,
+    //     high: 60.41,
+    //     low: 58.575,
+    //     close: 59.97,
+    //     volume: 4186069 },
+    // dom: { bids: [], asks: [] }, - This was written while the market was closed. While the market is open, DOM elements are supported in the Quote object.
+    // meta: undefined,
+    //     original: undefined }
 });
 
 // Returns an array of fiscal reports dating back 5 years
 IEX.getFinancials("AVGO").then(financials => {
-	// [ { reportDate: '2018-01-31',
-	// 	grossProfit: 2643000000,
-	// 	costOfRevenue: 2684000000,
-	// 	operatingRevenue: 5327000000,
-	// 	totalRevenue: 5327000000,
-	// 	operatingIncome: 1088000000,
-	// 	netIncome: 6230000000,
-	// 	researchAndDevelopment: 925000000,
-	// 	operatingExpense: 1555000000,
-	// 	currentAssets: 11220000000,
-	// 	totalAssets: 54544000000,
-	// 	totalLiabilities: 28643000000,
-	// 	currentCash: 7076000000,
-	// 	currentDebt: 117000000,
-	// 	totalCash: 7076000000,
-	// 	totalDebt: 17592000000,
-	// 	shareholderEquity: 25901000000,
-	// 	cashChange: -4128000000,
-	// 	cashFlow: 1685000000,
-	// 	operatingGainsLosses: null },
+    // [ { reportDate: '2018-01-31',
+    // 	grossProfit: 2643000000,
+    // 	costOfRevenue: 2684000000,
+    // 	operatingRevenue: 5327000000,
+    // 	totalRevenue: 5327000000,
+    // 	operatingIncome: 1088000000,
+    // 	netIncome: 6230000000,
+    // 	researchAndDevelopment: 925000000,
+    // 	operatingExpense: 1555000000,
+    // 	currentAssets: 11220000000,
+    // 	totalAssets: 54544000000,
+    // 	totalLiabilities: 28643000000,
+    // 	currentCash: 7076000000,
+    // 	currentDebt: 117000000,
+    // 	totalCash: 7076000000,
+    // 	totalDebt: 17592000000,
+    // 	shareholderEquity: 25901000000,
+    // 	cashChange: -4128000000,
+    // 	cashFlow: 1685000000,
+    // 	operatingGainsLosses: null },
 });
 
 // Returns company name, EPS, divided, short interest, 52-week high/low, percent change, EBITDA, and more.
@@ -644,28 +642,28 @@ By market cap, the Nasdaq is the second largest global stock exchange behind onl
 const Nasdaq = algotrader.Data.Nasdaq;
 
 Nasdaq.getListings().then(array => {
-	// [
-	// 	{
-	// 		Symbol: 'AABA',
-	// 		'Security Name': 'Altaba Inc. - Common Stock',
-	// 		'Market Category': 'Q',
-	// 		'Test Issue': 'N',
-	// 		'Financial Status': 'N',
-	// 		'Round Lot Size': '100',
-	// 		ETF: 'N',
-	// 		NextShares: 'N'
-	// 	},
-	// 	{
-	// 		Symbol: 'AAL',
-	// 		'Security Name': 'American Airlines Group, Inc. - Common Stock',
-	// 		'Market Category': 'Q',
-	// 		'Test Issue': 'N',
-	// 		'Financial Status': 'N',
-	// 		'Round Lot Size': '100',
-	// 		ETF: 'N',
-	// 		NextShares: 'N'
-	// 	},
-	// ... and thousands more
+    // [
+    //     {
+    //         Symbol: 'AABA',
+    //         'Security Name': 'Altaba Inc. - Common Stock',
+    //         'Market Category': 'Q',
+    //         'Test Issue': 'N',
+    //         'Financial Status': 'N',
+    //         'Round Lot Size': '100',
+    //         ETF: 'N',
+    //         NextShares: 'N'
+    //     },
+    //     {
+    //         Symbol: 'AAL',
+    //         'Security Name': 'American Airlines Group, Inc. - Common Stock',
+    //         'Market Category': 'Q',
+    //         'Test Issue': 'N',
+    //         'Financial Status': 'N',
+    //         'Round Lot Size': '100',
+    //         ETF: 'N',
+    //         NextShares: 'N'
+    //     },
+    // ... and thousands more
 });
 ```
 
@@ -681,39 +679,39 @@ Here are a few examples:
 const Query = algotrader.Data.Query;
 
 Query.getEarnings(1).then(array => {
-	// Returns an array of companies that are reporting their earnings within the next '1' day.
-	// [
-	//     {
-	//      symbol: 'NFLX',
-	// 	    instrument: 'https://api.robinhood.com/instruments/81733743-965a-4d93-b87a-6973cb9efd34/',
-	//      year: 2018,
-	//      quarter: 1,
-	//      eps: { estimate: '0.6400', actual: null },
-	//      report: { date: '2018-04-16', timing: 'pm', verified: true },
-	//      call:
-	//          { datetime: '2018-04-16T22:00:00Z',
-	//            broadcast_url: 'http://mmm.wallstreethorizon.com/u.asp?u=152320',
-	//            replay_url: null }
-	//     },
-	// ... and more
+    // Returns an array of companies that are reporting their earnings within the next '1' day.
+    // [
+    //     {
+    //         symbol: 'NFLX',
+    //         instrument: 'https://api.robinhood.com/instruments/81733743-965a-4d93-b87a-6973cb9efd34/',
+    //         year: 2018,
+    //         quarter: 1,
+    //         eps: { estimate: '0.6400', actual: null },
+    //         report: { date: '2018-04-16', timing: 'pm', verified: true },
+    //         call:
+    //             { datetime: '2018-04-16T22:00:00Z',
+    //             broadcast_url: 'http://mmm.wallstreethorizon.com/u.asp?u=152320',
+    //             replay_url: null }
+    //     },
+    // ... and more
 });
 
 Query.search("Nordstrom").then(array => {
-	// Returns an array of matching stocks, options, ETF's, and others.
-	// [
-	// 	{ symbol: 'JWN',
-	// 		name: 'Nordstrom, Inc.',
-	// 		exch: 'NYQ',
-	// 		type: 'S',
-	// 		exchDisp: 'NYSE',
-	// 		typeDisp: 'Equity' },
-	// 	{ symbol: 'JWN180420C00045000',
-	// 		name: 'JWN Apr 2018 call 45.000',
-	// 		exch: 'OPR',
-	// 		type: 'O',
-	// 		exchDisp: 'OPR',
-	// 		typeDisp: 'Option' },
-	//  ... and more
+    // Returns an array of matching stocks, options, ETF's, and others.
+    // [
+    //     { symbol: 'JWN',
+    //         name: 'Nordstrom, Inc.',
+    //         exch: 'NYQ',
+    //         type: 'S',
+    //         exchDisp: 'NYSE',
+    //         typeDisp: 'Equity' },
+    //     { symbol: 'JWN180420C00045000',
+    //         name: 'JWN Apr 2018 call 45.000',
+    //         exch: 'OPR',
+    //         type: 'O',
+    //         exchDisp: 'OPR',
+    //         typeDisp: 'Option' },
+    //  ... and more
 });
 
 Query.getTopGainers(5).then(array => {
@@ -740,22 +738,22 @@ For Yahoo Finance, simply do the following:
 
 ```js
 News.getFromYahoo("AAPL").then(array => {
-	// Returns an array of news articles for the given symbol
-	// [
-	// 	    News {
-	// 		    title: 'Amazon and Walmart Battle for Control of Flipkart',
-	// 		    description: 'The world&apos;s largest retailer and its online counterpart compete on many fronts, but the fight for India&apos;s largest online retailer may be one of the most important.',
-	// 		    date: 2018-04-15T15:45:00.000Z,
-	// 		    source: undefined,
-	// 		    author: undefined,
-	// 		    url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss' },
-	// 	    News {
-	// 		    title: 'President Trump is considering rejoining the Trans Pacific Partnership trade deal',
-	// 		    	description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
-	// 		    	date: 2018-04-13T14:40:56.000Z,
-	// 		    	source: undefined,
-	// 		    	author: undefined,
-	// 		    	url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss' },
+    // Returns an array of news articles for the given symbol
+    // [
+    //     News {
+    //         title: 'Amazon and Walmart Battle for Control of Flipkart',
+    //         description: 'The world&apos;s largest retailer and its online counterpart compete on many fronts, but the fight for India&apos;s largest online retailer may be one of the most important.',
+    //         date: 2018-04-15T15:45:00.000Z,
+    //         source: undefined,
+    //         author: undefined,
+    //         url: 'https://finance.yahoo.com/news/amazon-walmart-battle-control-flipkart-154500760.html?.tsrc=rss' },
+    //     News {
+    //         title: 'President Trump is considering rejoining the Trans Pacific Partnership trade deal',
+    //             description: 'President Trump is opening the door to rejoining the Trans Pacific Partnership trade deal. Yahoo Finance’s Jen Rogers and Rick Newman look at the implications.',
+    //             date: 2018-04-13T14:40:56.000Z,
+    //             source: undefined,
+    //             author: undefined,
+    //             url: 'https://finance.yahoo.com/video/president-trump-considering-rejoining-trans-144056381.html?.tsrc=rss' },
     // ... and more
 });
 ```
@@ -791,23 +789,23 @@ News.getHeadlines("myApiKey", {
     country: "us",
     category: "business"
 }).then(array => {
-	// Returns an array of News objects related to U.S. business.
-	// [
-	//      News {
-	//              title: 'Two black men were arrested waiting at a Starbucks. Now the company, police are on the defensive.',
-	//              description: 'The backlash is a dramatic turn from efforts to craft the company as a progressive 	corporate leader that values “diversity and inclusion.”',
-	//              date: 2018-04-15T15:22:22.000Z,
-	//              source: 'The Washington Post',
-	//              author: null,
-	//              url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
-	//      News {
-	//              title: 'Zillow surprises investors by buying up homes',
-	//              description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
-	//              date: 2018-04-15T00:27:56.000Z,
-	//              source: 'TechCrunch',
-	//              author: 'Katie Roof',
-	//              url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
-	// ... and more
+    // Returns an array of News objects related to U.S. business.
+    // [
+    //     News {
+    //         title: 'Two black men were arrested waiting at a Starbucks. Now the company, police are on the defensive.',
+    //         description: 'The backlash is a dramatic turn from efforts to craft the company as a progressive 	corporate leader that values “diversity and inclusion.”',
+    //         date: 2018-04-15T15:22:22.000Z,
+    //         source: 'The Washington Post',
+    //         author: null,
+    //         url: 'https://www.washingtonpost.com/news/business/wp/2018/04/15/two-black-men-were-arrested-waiting-at-a-starbucks-now-the-company-police-are-on-the-defensive/' },
+    //     News {
+    //         title: 'Zillow surprises investors by buying up homes',
+    //         description: 'Real estate platform Zillow changed up its business model this week, announcing that it plans to purchase and sell homes in Las Vegas and Phoenix. Zillow will be working with Berkshire Hathaway and Coldwell Banker to make offers on homes before it finds a buy…',
+    //         date: 2018-04-15T00:27:56.000Z,
+    //         source: 'TechCrunch',
+    //         author: 'Katie Roof',
+    //         url: 'https://techcrunch.com/2018/04/14/zillow-surprises-investors-by-buying-up-homes/' }
+    // ... and more
 });
 ```
 
@@ -815,7 +813,7 @@ The [News Class](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#n
 
 ```js
 news.getArticle().then(html => {
-	// This will return raw HTML from the source. You'll have to parse it yourself if you want to read the entire article, but typically the description - news.getDescription() - is sufficient.
+    // This will return raw HTML from the source. You'll have to parse it yourself if you want to read the entire article, but typically the description - news.getDescription() - is sufficient.
 });
 ```
 
@@ -833,7 +831,7 @@ For example:
 
 ```js
 myOrder.submit().then(res => {
-	// Order was successful
+    // Order was successful
 }).catch(error => { console.error(error.toString()) });
 ```
 
