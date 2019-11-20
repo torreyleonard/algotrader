@@ -94,7 +94,9 @@ class Order extends Robinhood {
 					type: _this.order.type,
 					time_in_force: _this.order.timeInForce,
 					trigger: _this.order.trigger,
-					price: (_this.order.quote.getLast()).toFixed(2),
+					price:
+                (_this.order.price && _this.order.price.toFixed(2)) ||
+                _this.order.quote.getLast().toFixed(2),
 					stop_price: _this.order.stopPrice,
 					quantity: _this.order.quantity,
 					side: _this.order.side,
