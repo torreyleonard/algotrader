@@ -105,8 +105,8 @@ class Yahoo {
 										let putObject = {};
 
 										calls.forEach(value => {
-											callVolume += value.volume;
-											callOpenInterest += value.openInterest;
+											callVolume += value.volume || 0;
+											callOpenInterest += value.openInterest || 0;
 											callObject[Number(value.strike)] = {
 												strike: Number(value.strike),
 												lastPrice: Number(value.lastPrice),
@@ -122,15 +122,15 @@ class Yahoo {
 										});
 
 										puts.forEach(value => {
-											putVolume += Number(value.volume);
-											putOpenInterest += Number(value.openInterest);
+											putVolume += Number(value.volume || 0);
+											putOpenInterest += Number(value.openInterest || 0);
 											putObject[Number(value.strike)] = {
 												strike: Number(value.strike),
-												lastPrice: Number(value.lastPrice),
-												bid: Number(value.bid),
-												ask: Number(value.ask),
-												change: Number(value.change),
-												volume: Number(value.volume),
+												lastPrice: Number(value.lastPrice || 0),
+												bid: Number(value.bid || 0),
+												ask: Number(value.ask || 0),
+												change: Number(value.change || 0),
+												volume: Number(value.volume || 0),
 												openInterest: Number(value.openInterest),
 												lastTradeDate: new Date(value.lastTradeDate * 1000),
 												impliedVolatility: Number(value.impliedVolatility),
