@@ -1,13 +1,13 @@
-![algotrader](https://raw.githubusercontent.com/Ladinn/algotrader/master/docs/img/algotrader.png)
+![algotrader](https://raw.githubusercontent.com/torreyleonard/algotrader/master/docs/img/algotrader.png)
 #### *Simple algorithmic stock and option trading for Node.js.*
 
 [![npm package](https://nodei.co/npm/algotrader.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/algotrader/)
 
 [![NPM Version](https://img.shields.io/npm/v/algotrader.svg?style=flat-square)](https://www.npmjs.com/package/algotrader)
 [![NPM Downloads](https://img.shields.io/npm/dt/algotrader.svg?style=flat-square)](https://www.npmjs.com/package/algotrader)
-[![GitHub Commit](https://img.shields.io/github/last-commit/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader)
-[![GitHub Issues](https://img.shields.io/github/issues/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader/issues)
-[![GitHub Stars](https://img.shields.io/github/stars/Ladinn/algotrader.svg?style=flat-square)](https://github.com/Ladinn/algotrader)
+[![GitHub Commit](https://img.shields.io/github/last-commit/torreyleonard/algotrader.svg?style=flat-square)](https://github.com/torreyleonard/algotrader)
+[![GitHub Issues](https://img.shields.io/github/issues/torreyleonard/algotrader.svg?style=flat-square)](https://github.com/torreyleonard/algotrader/issues)
+[![GitHub Stars](https://img.shields.io/github/stars/torreyleonard/algotrader.svg?style=flat-square)](https://github.com/torreyleonard/algotrader)
 [![Discord](https://img.shields.io/discord/551040132476567563.svg?style=flat-square&logo=discord)](https://discord.gg/RAtwEXc)
 
 ---
@@ -75,16 +75,16 @@
 	- [News](#news)
 - [Further Notes](#notes)
 	- [Dealing with errors](#dealing-with-errors)
-	- [Error reporting](https://github.com/Ladinn/algotrader/issues)
+	- [Error reporting](https://github.com/torreyleonard/algotrader/issues)
 
 ---
 
 ### Support
 
-* [Issues](https://github.com/Ladinn/algotrader/issues)
-* [Pull Requests](https://github.com/Ladinn/algotrader/pulls)
-* [Releases](https://github.com/Ladinn/algotrader/releases)
-* [Further Documentation](https://github.com/Ladinn/algotrader/tree/master/docs)
+* [Issues](https://github.com/torreyleonard/algotrader/issues)
+* [Pull Requests](https://github.com/torreyleonard/algotrader/pulls)
+* [Releases](https://github.com/torreyleonard/algotrader/releases)
+* [Further Documentation](https://github.com/torreyleonard/algotrader/tree/master/docs)
 
 ### <img align="center" src="https://i.imgur.com/nPCnzon.png">
 
@@ -116,7 +116,7 @@ const Algorithm = algotrader.Algorithm; // in progress
 
 ### Robinhood
 
-First, you'll need to create a new [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance and authenticate them.
+First, you'll need to create a new [```User```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) instance and authenticate them.
 
 ```js
 const robinhood = require('algotrader').Robinhood;
@@ -140,7 +140,7 @@ myUser.authenticate()
 
 Personally, I either store user data as an array in a `.json` file, then require it into the class, (insecure) or ask for the user's credentials in the console. You should handle this sensitive data in a way that you're comfortable with.
 
-**Note:** providing a password in the User constructor is optional. You can also pass it to [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter like so:
+**Note:** providing a password in the User constructor is optional. You can also pass it to [```User.authenticate()```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter like so:
 
 ```js
 const myUser = new User("username");
@@ -162,7 +162,7 @@ The MFA prompt will appear like so:
 
 ![Algotrader MFA Prompt](https://i.gyazo.com/11420983d69bf02a59026947513408ac.png)
 
-To enter the code programmatically, you can pass a function to [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) that returns a promise containing the MFA code in a six-character string. For example:
+To enter the code programmatically, you can pass a function to [```User.authenticate()```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) that returns a promise containing the MFA code in a six-character string. For example:
 
 ```js
 function getMFA() {
@@ -217,7 +217,7 @@ User.load()
     });
 ```
 
-However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.
+However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.
 
 If you need to save and retrieve the user login info to somewhere else (like a Database, specially useful to keep your service stateless), you can use:
 
@@ -247,7 +247,7 @@ User.load(serializedUser)
 
 #### Get a user's portfolio
 
-There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using [```User.getPortfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User) which returns a new [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
+There are a good amount of query functions that you can run on the user's portfolio. Using your [```User```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) instance, you can grab the portfolio using [```User.getPortfolio```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) which returns a new [```Portfolio```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio) object.
 
 ```js
 myUser.getPortfolio()
@@ -266,20 +266,20 @@ myUser.getPortfolio()
     })
 ```
 
-For documentation on all portfolio functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio)
+For documentation on all portfolio functions, visit the [Robinhood Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio)
 
 **Note:** the portfolio object does not return a user's open option positions. See the options section below for details.
 
 #### Placing an order
 
-Placing an order will require instances of the [```User```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#User), [```Instrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Instrument), [```Quote```](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote), and [```Order```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order) classes.
+Placing an order will require instances of the [```User```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User), [```Instrument```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Instrument), [```Quote```](https://github.com/torreyleonard/algotrader/blob/master/docs/GLOBALS.md#quote), and [```Order```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Order) classes.
 
-All orders first require that you grab a new [```Instrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Instrument) object which represents, in most cases, a stock or ETF. You can also grab the object from your [```Portfolio```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio). Then, Robinhood requires that you also submit the stock's market price in the order, so you should retrieve a [```Quote```](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote) from them on via [```Instrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Instrument) object (the origin of the quote doesn't matter, as long as it contains accurate pricing information- so, the quote returned from the [```Stream```](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#Stream) class would also work). You'll then create an object with this and other necessary information to pass as a parameter to a new [```Order```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order).
+All orders first require that you grab a new [```Instrument```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Instrument) object which represents, in most cases, a stock or ETF. You can also grab the object from your [```Portfolio```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Portfolio). Then, Robinhood requires that you also submit the stock's market price in the order, so you should retrieve a [```Quote```](https://github.com/torreyleonard/algotrader/blob/master/docs/GLOBALS.md#quote) from them on via [```Instrument```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Instrument) object (the origin of the quote doesn't matter, as long as it contains accurate pricing information- so, the quote returned from the [```Stream```](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#Stream) class would also work). You'll then create an object with this and other necessary information to pass as a parameter to a new [```Order```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Order).
 
 The object should contain the following:
 
-- [```Instrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Instrument) - The Robinhood instrument you would like to place an order for.
-- [```Quote```](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote) - An updated quote containing the last sale price for the given instrument.
+- [```Instrument```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Instrument) - The Robinhood instrument you would like to place an order for.
+- [```Quote```](https://github.com/torreyleonard/algotrader/blob/master/docs/GLOBALS.md#quote) - An updated quote containing the last sale price for the given instrument.
 - ```type```
 	- ```limit``` - The lowest price to accept in a buy, the highest price in a sell
 	- ```market``` - Order executes at the current bid/ask price
@@ -329,13 +329,13 @@ Instrument.getBySymbol("TWTR").then(async twtrInstrument => {
 });
 ```
 
-For documentation on all order functions, visit the [Robinhood Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#Order)
+For documentation on all order functions, visit the [Robinhood Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#Order)
 
 #### Options
 
-Receiving open option positions and placing option orders varies slightly from stocks. These actions will require the [```OptionInstrument```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and [```OptionOrder```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder) classes.
+Receiving open option positions and placing option orders varies slightly from stocks. These actions will require the [```OptionInstrument```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and [```OptionOrder```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder) classes.
 
-Here is an example for how to query an option chain and place an order for an individual option. See [```OptionOrder```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder) documentation for details on new order parameters.
+Here is an example for how to query an option chain and place an order for an individual option. See [```OptionOrder```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder) documentation for details on new order parameters.
 
 ```js
 const Instrument = algotrader.Robinhood.Instrument;
@@ -375,7 +375,7 @@ async function gains(user) {
 
 ##### Option chains
 
-Represented as an array of OptionInstruments, option chains provide you with all of the tradable contracts for a specific option instrument and expiration date. They are fetched using [```OptionInstrument.getChain```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and used for an [```OptionOrder.```](https://github.com/Ladinn/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder)
+Represented as an array of OptionInstruments, option chains provide you with all of the tradable contracts for a specific option instrument and expiration date. They are fetched using [```OptionInstrument.getChain```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#OptionInstrument) and used for an [```OptionOrder.```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#OptionOrder)
 
 Below is an example of a single element from within the array:
 
@@ -429,7 +429,7 @@ For scheduling tasks, running backtests, and paper-trading, the algorithm librar
 
 #### Scheduler
 
-Using the [```Scheduler```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler) class, you'll be able to define exactly when you want a function to run using the following methods:
+Using the [```Scheduler```](https://github.com/torreyleonard/algotrader/blob/master/docs/ALGORITHM.md#scheduler) class, you'll be able to define exactly when you want a function to run using the following methods:
 
 - ```Scheduler.onMarketOpen(offset, f)```
 	- Runs every morning when the NYSE opens. (Typically 9:30 AM EST)
@@ -454,7 +454,7 @@ Scheduler.every(30, false, () => {
 });
 ```
 
-For documentation on all Scheduler functions, visit the [```Algorithm Library Docs.```](https://github.com/Ladinn/algotrader/blob/master/docs/ALGORITHM.md#scheduler)
+For documentation on all Scheduler functions, visit the [```Algorithm Library Docs.```](https://github.com/torreyleonard/algotrader/blob/master/docs/ALGORITHM.md#scheduler)
 
 ---
 
@@ -462,11 +462,11 @@ For documentation on all Scheduler functions, visit the [```Algorithm Library Do
 
 The data library allows you to retrieve a ton of data on the market as a whole and individual stocks or options. This uses the Yahoo Finance and Alpha Vantage APIs and additional support for other free API's will be added in the future.
 
-I'll only add a few examples here, but for the full documentation visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md)
+I'll only add a few examples here, but for the full documentation visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md)
 
 #### Real time streaming
 
-To stream live quotes from Yahoo Finance, you'll need an array of symbols that you want to monitor. If you only need data on one, just fill the array with that single symbol. The [```Stream```](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#Stream) class is an extension of the Node EventEmitter, so  you can either use ```.on()``` or ```.pipe()``` like other events.
+To stream live quotes from Yahoo Finance, you'll need an array of symbols that you want to monitor. If you only need data on one, just fill the array with that single symbol. The [```Stream```](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#Stream) class is an extension of the Node EventEmitter, so  you can either use ```.on()``` or ```.pipe()``` like other events.
 
 Once the stream starts, a data object for each symbol is immediately received. You will then begin to get real time updates. Note that the data objects streamed by Yahoo aren't always of the same format, so make sure to have a check for ```undefined``` each time you access a key in the object.
 
@@ -488,9 +488,9 @@ myStream
     });
 ```
 
-For documentation on Quotes, visit the [Global Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/GLOBALS.md#quote)
+For documentation on Quotes, visit the [Global Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/GLOBALS.md#quote)
 
-Not only can you stream quotes, but you can include news articles using the built-in [News Library.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) This is useful for reacting to breaking headlines with pre-determined trades (for example, earnings reports or FOMC results). To do this, just add a second parameter (an object) to ```new Stream()``` as shown below.
+Not only can you stream quotes, but you can include news articles using the built-in [News Library.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#news) This is useful for reacting to breaking headlines with pre-determined trades (for example, earnings reports or FOMC results). To do this, just add a second parameter (an object) to ```new Stream()``` as shown below.
 
 ```js
 const myStreamWithNews = new Stream(["JPM", "COST", "FDX"], {
@@ -515,7 +515,7 @@ myStreamWithNews
     });
 ```
 
-For documentation on News, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news)
+For documentation on News, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#news)
 
 You can also instruct the stream class to fire events from IEX. You'll first want to find the streaming endpoint that contains the data you want to query. For the most part, you'll want to use ```tops,``` ```deep,``` and ```last.``` Find them all [here.](https://iextrading.com/developer/docs/#iex-market-data)
 
@@ -529,7 +529,7 @@ streamWithIEX.on('iex', iex => {
 });
 ```
 
-For documentation on IEX, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#iex)
+For documentation on IEX, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#iex)
 
 #### Alpha Vantage
 
@@ -562,11 +562,11 @@ av.rsi("AAPL", "daily", 14, "close").then(array => {
 });
 ```
 
-For documentation on all Alpha Vantage functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#AlphaVantage)
+For documentation on all Alpha Vantage functions, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#AlphaVantage)
 
 #### IEX
 
-IEX is a stock exchange founded in 2012 with the goal of creating "fairer markets." True to this goal, they've created a public API for use by everyone, not just institutions that can afford a massive monthly  payment for data. Thanks to many factors, such as trading arbitrage, their quotes are the same (if not off by a fraction of a basis point) as the NYSE's and Nasdaq's nearly 100% of the time, even with their low volume comparatively. With that being said, below are a few examples of ways you can access their quote data and corporate financial information. For a full list of IEX queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#iex)
+IEX is a stock exchange founded in 2012 with the goal of creating "fairer markets." True to this goal, they've created a public API for use by everyone, not just institutions that can afford a massive monthly  payment for data. Thanks to many factors, such as trading arbitrage, their quotes are the same (if not off by a fraction of a basis point) as the NYSE's and Nasdaq's nearly 100% of the time, even with their low volume comparatively. With that being said, below are a few examples of ways you can access their quote data and corporate financial information. For a full list of IEX queries, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#iex)
 
 ```js
 const IEX = algotrader.Data.IEX;
@@ -632,11 +632,11 @@ Output:
 
 ![3M](https://storage.googleapis.com/iex/api/logos/MMM.png)
 
-For documentation on IEX queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#iex)
+For documentation on IEX queries, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#iex)
 
 #### Nasdaq
 
-By market cap, the Nasdaq is the second largest global stock exchange behind only the NYSE. They offer a paid subscription for real time streaming, but Algotrader makes use of their public data repository via FTP. Below is an example of how to retrieve an array of all securities listed on their exchange. For a full list of Nasdaq queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#nasdaq)
+By market cap, the Nasdaq is the second largest global stock exchange behind only the NYSE. They offer a paid subscription for real time streaming, but Algotrader makes use of their public data repository via FTP. Below is an example of how to retrieve an array of all securities listed on their exchange. For a full list of Nasdaq queries, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#nasdaq)
 
 ```js
 const Nasdaq = algotrader.Data.Nasdaq;
@@ -667,7 +667,7 @@ Nasdaq.getListings().then(array => {
 });
 ```
 
-For documentation on Nasdaq queries, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#nasdaq)
+For documentation on Nasdaq queries, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#nasdaq)
 
 #### Query
 
@@ -724,7 +724,7 @@ Query.getHighestVolume(5).then(array => {
 });
 ```
 
-For documentation on all functions of the Query class, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#query)
+For documentation on all functions of the Query class, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#query)
 
 #### News
 
@@ -809,7 +809,7 @@ News.getHeadlines("myApiKey", {
 });
 ```
 
-The [News Class](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#news) provides a few functions that you can run to easily retrieve information you need, such as ```news.getTitle()```, ```news.getDate()```, and ```news.getDescription().``` You can also download the full article from the source:
+The [News Class](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#news) provides a few functions that you can run to easily retrieve information you need, such as ```news.getTitle()```, ```news.getDate()```, and ```news.getDescription().``` You can also download the full article from the source:
 
 ```js
 news.getArticle().then(html => {
@@ -817,7 +817,7 @@ news.getArticle().then(html => {
 });
 ```
 
-For documentation on all News functions, visit the [Data Library Docs.](https://github.com/Ladinn/algotrader/blob/master/docs/DATA.md#News)
+For documentation on all News functions, visit the [Data Library Docs.](https://github.com/torreyleonard/algotrader/blob/master/docs/DATA.md#News)
 
 ---
 
@@ -845,4 +845,4 @@ However, if you don't like this and want to keep your errors uniform, you can si
 
 As you can probably see from the images, it's much appreciated if you report unexpected errors as a new Issue on GitHub. Not only can you get help resolving the error if it's an isolated incident, but it also helps fix bugs in future updates.
 
-You can report errors [here.](https://github.com/Ladinn/algotrader/issues)
+You can report errors [here.](https://github.com/torreyleonard/algotrader/issues)
