@@ -181,6 +181,30 @@ Object.getOwnPropertyNames(IEX).forEach(f => {
 		});
 });
 
+
+// AlphaVantage
+const AlphaVantage = algotrader.Data.AlphaVantage;
+const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY	|| 'demo';
+test('data | alpha-vantage > search', t => {
+	const av = new AlphaVantage(ALPHA_VANTAGE_API_KEY);
+
+	return av.search('microsoft').then(data => {
+		t.true(data.length > 0);
+
+		for (const item of data) {
+			t.truthy(item.symbol);
+			t.truthy(item.name);
+			t.truthy(item.type);
+			t.truthy(item.region);
+			t.truthy(item.marketOpen);
+			t.truthy(item.marketClose);
+			t.truthy(item.timezone);
+			t.truthy(item.currency);
+			t.truthy(item.matchScore);
+		}
+	});
+});
+
 /**
  * Algorithm Library
  */

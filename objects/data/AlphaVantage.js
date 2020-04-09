@@ -1,5 +1,6 @@
 const LibraryError = require('../globals/LibraryError');
 const Quote = require('../globals/Quote');
+const Match = require('../globals/Match');
 const request = require('request');
 const _ = require('lodash');
 
@@ -21,9 +22,12 @@ class AlphaVantage {
 
 	/**
 	 * @author Torrey Leonard <https://github.com/Ladinn>
+	 * @param {Object} qs The query string object to pass along to the request module
+	 * @param {string} objectKeyOverride Set this to the name of the property in the response object that you wish to return.
+	 * 				Leave empty to let _requester use it's default implementation
 	 * @private
 	 */
-	_requester(qs) {
+	_requester(qs, objectKeyOverride = undefined) {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			qs.apikey = _this.apiKey;
@@ -37,7 +41,7 @@ class AlphaVantage {
 				else if (response.statusCode !== 200) reject(body);
 				else {
 					const json = JSON.parse(body);
-					const objectKey = Object.keys(json)[1];
+					const objectKey = objectKeyOverride ? objectKeyOverride : Object.keys(json)[1];
 					resolve(json[objectKey]);
 				}
 			})
@@ -275,10 +279,28 @@ class AlphaVantage {
 					))
 				}
 			}
-			return _.sortBy(array, 'date');;
+			return _.sortBy(array, 'date');
 		})
 	}
 
+	/**
+	 * Returns an array of search results based off your keyword search string
+	 * @author Nicklas Laine Overgaard <https://github.com/nover>
+	 * @param {String} keyword The search keyword(s), e.g 'Microsoft' or 'Toshiba'
+	 * @returns {Promise<Array{Match}>}
+	 */
+	search(keyword) {
+		return this._requester({
+			function: 'SYMBOL_SEARCH',
+			keywords: keyword,
+		}, 'bestMatches').then(res => {
+			const array = [];
+			for (const data of res) {
+				array.push(new Match(data));
+			}
+			return array;
+		})
+	}
 	// TECHNICALS
 
 	/**
