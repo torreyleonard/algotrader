@@ -37,6 +37,7 @@ Further documentation can be found here: https://www.alphavantage.co/documentati
     * [.timeSeriesDaily(symbol, compact, adjusted)](#AlphaVantage+timeSeriesDaily) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.timeSeriesWeekly(symbol, adjusted)](#AlphaVantage+timeSeriesWeekly) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.timeSeriesMonthly(symbol, adjusted)](#AlphaVantage+timeSeriesMonthly) ⇒ <code>Promise.&lt;Array&gt;</code>
+    * [.search(keyword)](#AlphaVantage+search) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.sma(symbol, interval, timePeriod, seriesType, seriesType, seriesType)](#AlphaVantage+sma) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.ema(symbol, interval, timePeriod, seriesType)](#AlphaVantage+ema) ⇒ <code>Promise.&lt;Array&gt;</code>
     * [.wma(symbol, interval, timePeriod, seriesType)](#AlphaVantage+wma) ⇒ <code>Promise.&lt;Array&gt;</code>
@@ -127,6 +128,18 @@ Returns an array of quotes for the equity specified, covering up to 20 years of 
 | --- | --- | --- |
 | symbol | <code>String</code> |  |
 | adjusted | <code>Boolean</code> | If true, prices will be adjusted for split/dividend events. |
+
+<a name="AlphaVantage+search"></a>
+
+### alphaVantage.search(keyword) ⇒ <code>Promise.&lt;Array&gt;</code>
+Returns an array of matches for the search keyword.
+
+**Kind**: instance method of [<code>AlphaVantage</code>](#AlphaVantage)  
+**Author**: Nicklas Laine Overgaard <https://github.com/nover>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| keyword | <code>String</code> | The search keyword(s), e.g Microsoft or Apple |
 
 <a name="AlphaVantage+sma"></a>
 
