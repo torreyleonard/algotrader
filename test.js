@@ -185,6 +185,7 @@ Object.getOwnPropertyNames(IEX).forEach(f => {
 // AlphaVantage
 const AlphaVantage = algotrader.Data.AlphaVantage;
 const ALPHA_VANTAGE_API_KEY = process.env.ALPHA_VANTAGE_API_KEY	|| 'demo';
+
 test('data | alpha-vantage > search', t => {
 	const av = new AlphaVantage(ALPHA_VANTAGE_API_KEY);
 
@@ -203,6 +204,17 @@ test('data | alpha-vantage > search', t => {
 			t.truthy(item.matchScore);
 		}
 	});
+});
+
+const Quote = require('./objects/globals/Quote');
+
+test('data | alpha-vantage > quote', t => {
+	const av = new AlphaVantage(ALPHA_VANTAGE_API_KEY);
+
+	return av.quote('AAPL').then(data => {
+		t.true(data instanceof Quote)
+		t.is(data.symbol, 'AAPL');
+	})
 });
 
 /**

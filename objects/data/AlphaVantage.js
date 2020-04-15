@@ -301,6 +301,39 @@ class AlphaVantage {
 			return array;
 		})
 	}
+
+	/**
+	 * Get a price quote from the market for the given symbol
+	 * @author Nicklas Laine Overgaard <https://github.com/nover>
+	 * @param {String} symbol The symbol to get a the current quote price for, e.g AAPL
+	 * @returns {Promise<Quote>} A quote instance
+	 */
+	quote(symbol) {
+		return this._requester({
+			function: 'GLOBAL_QUOTE',
+			symbol
+		}, 'Global Quote').then(res => {
+			return new Quote({
+				symbol: res['01. symbol'],
+				source: 'Alpha Vantage',
+				date: res['07. latest trading day'],
+				price: {
+					open: Number(res['02. open']),
+					high: Number(res['03. high']),
+					low: Number(res['04. low']),
+					last: Number(res['05. price']),
+					volume: Number(res['06. volume']),
+				},
+				original: JSON.stringify(res),
+				meta: {
+					previousClose: Number(res['08. previous close']),
+					change: Number(res['09. change']),
+					changePercent: res['10. change percent'],
+				}
+			});
+		});
+	}
+
 	// TECHNICALS
 
 	/**
