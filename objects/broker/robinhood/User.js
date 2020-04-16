@@ -128,9 +128,10 @@ class User extends Robinhood {
 					username: _this.username,
 					password: _this.password,
 					client_id: 'c82SH0WZOsabOXGP2sxqcj34FxkvfnWRZBKlBjFS',
+					device_token: _this.deviceToken,
 					grant_type: 'password',
 					scope: 'internal',
-					mfa_code: mfaCode
+					mfa_code: mfaCode,
 				}
 			}, (error, response, body) => {
 				if (error) reject(error);
@@ -608,7 +609,7 @@ class User extends Robinhood {
 		const _this = this;
 		return new Promise((resolve, reject) => {
 			request({
-				uri: _this.url + "/accounts/" + _this.account + "/positions/",
+				uri: _this.url + "/positions/",
 				headers: {
 					'Authorization': 'Bearer ' + _this.token
 				},
