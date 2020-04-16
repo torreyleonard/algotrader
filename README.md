@@ -8,7 +8,7 @@
 [![GitHub Commit](https://img.shields.io/github/last-commit/torreyleonard/algotrader.svg?style=flat-square)](https://github.com/torreyleonard/algotrader)
 [![GitHub Issues](https://img.shields.io/github/issues/torreyleonard/algotrader.svg?style=flat-square)](https://github.com/torreyleonard/algotrader/issues)
 [![GitHub Stars](https://img.shields.io/github/stars/torreyleonard/algotrader.svg?style=flat-square)](https://github.com/torreyleonard/algotrader)
-[![Discord](https://img.shields.io/discord/224996786547326976.svg?style=flat-square&logo=discord)](http://discord.voxela.com)
+[![Discord](https://img.shields.io/discord/224996786547326976.svg?style=flat-square&logo=discord)](https://discord.gg/DWFWBPn)
 
 ---
 
@@ -88,7 +88,7 @@
 
 ### <img align="center" src="https://i.imgur.com/nPCnzon.png">
 
-* Join our Discord: [https://discord.gg/RAtwEXc](https://discord.gg/RAtwEXc)
+* Join our Discord: [https://discord.gg/DWFWBPn](https://discord.gg/DWFWBPn)
 * Get answers to questions or help us deal with open issues.
 * Tell us about how you're using Algotrader!
 
