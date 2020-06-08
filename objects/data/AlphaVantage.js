@@ -41,7 +41,9 @@ class AlphaVantage {
 				else if (response.statusCode !== 200) reject(body);
 				else {
 					const json = JSON.parse(body);
-					if(typeof json.Note === "string") if(json.Note.substring(0,45) == "Thank you for using Alpha Vantage! Our standa") reject(new LibraryError("max requests"));
+					if (typeof json.Note === "string" && json.Note.substring(0,45) === "Thank you for using Alpha Vantage! Our standa"){
+						reject(new LibraryError("max requests"));
+					}
 					const objectKey = objectKeyOverride ? objectKeyOverride : Object.keys(json)[1];
 					resolve(json[objectKey]);
 				}
