@@ -34,7 +34,7 @@
   "dependencies": {
     "async": "^2.6.0",
     "cheerio": "^1.0.0-rc.2",
-    "fast-csv": "^2.4.1",
+    "fast-csv": "^4.3.6",
     "ftp": "^0.3.10",
     "jsdoc-to-markdown": "^4.0.1",
     "lodash": "^4.17.5",
