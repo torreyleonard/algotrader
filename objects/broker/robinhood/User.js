@@ -7,7 +7,6 @@ const OptionOrder = require('./OptionOrder');
 const OptionInstrument = require('./OptionInstrument');
 
 const request = require('request');
-const fs = require('fs');
 const async = require('async');
 const path = require('path');
 const prompt = require('prompt');
@@ -25,7 +24,7 @@ class User extends Robinhood {
 	 * @param {String} password - Optional. If not provided the user will be prompted via CLI.
 	 * @param {String} deviceToken
 	 */
-	constructor(username, password, deviceToken, options) {
+	constructor(username, password, deviceToken = 'ea9fa5c6-01e0-46c9-8430-5b422c99bd16') {
 		super();
 		this.username = username;
 		this.password = password;
@@ -34,16 +33,6 @@ class User extends Robinhood {
 		this.account = null; // Account number
 		this.expires = null; // Auth expiration date (24 hours after login)
 		this.refreshToken = null; // Refresh token can be used to obtain another access token after auth expiration
-
-		const {
-			doNotSaveToDisk = false,
-			serializedUserFile = path.join(__dirname, 'User.json')
-		} = options;
-
-		// File to save the serialized user
-		this.serializedUserFile = serializedUserFile;
-		// Will avoid saving the serialized user to disk, and instead will let the consumer store the user as needed (ie: database)
-		this.doNotSaveToDisk = doNotSaveToDisk;
 	}
 
 	/**
@@ -209,9 +198,6 @@ class User extends Robinhood {
 				if (error) reject(error);
 				else if (response.statusCode !== 200) reject(new LibraryError(body));
 				else {
-					if (!this.doNotSaveToDisk) {
-						try { fs.unlinkSync(this.serializedUserFile); } catch (e) {}
-					}
 					resolve(true);
 				}
 			})
@@ -269,23 +255,15 @@ class User extends Robinhood {
 			else {
 				delete _this.refreshToken; // It's not secure to store refreshToken locally
 				const serializedUser = _this.serialize();
-				if (this.doNotSaveToDisk) {
-					// We return the user so the consumer can decide how to store the serialized user
-					resolve(serializedUser);
-					return;
-				}
-				try { fs.unlinkSync(this.serializedUserFile); } catch (e) {}
-				fs.writeFile(this.serializedUserFile, serializedUser, error => {
-					if (error) reject(error);
-					else resolve(true);
-				})
+				// We return the user so the consumer can decide how to store the serialized user
+				resolve(serializedUser);
+				return;
 			}
 		})
 	}
 
 	/**
 	 * If a saved user exists, this will load it into system memory. Recommended if using multi-factor authentication.
-	 * If using `doNotSaveToDisk`, consumer will need to pass the serialized user as an argument
 	 * @author Torrey Leonard <https://github.com/Ladinn>
 	 * @returns {Promise<User>}
 	 */
@@ -302,17 +280,7 @@ class User extends Robinhood {
 						})
 						.catch(error => reject(error));
 			}
-			if (this.doNotSaveToDisk) {
-				_load(serializedUser);
-			}
-			fs.readFile(this.serializedUserFile, 'utf8', (error, data) => {
-				if (error) {
-					if (error.errno === -2) reject(new Error("A saved user does not exist!"));
-					else reject(error);
-				} else {
-					_load(data);
-				}
-			});
+			_load(serializedUser);
 		})
 	}
 
