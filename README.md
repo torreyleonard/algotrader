@@ -187,24 +187,26 @@ In order to reduce time logging in, you can save an authenticated user to disk a
 After you've logged in (see above), you can run the following:
 
 ```js
-const authenticatedUser;
+const authenticatedUser = new User("username", "password");
+// ...
 authenticatedUser.save()
-    .then(() => {
-        // The user data was saved to:
-        // project/node_modules/algotrader/objects/broker/robinhood/User.json
-        // This filepath can be configured in the options parameter in `User` constructor
+    .then((serializedUser) => {
+        // You can store `serializedUser` to where you want, like a Database
     });
+
+// ...
 ```
 
-Note that your password will never be saved to disk. Keep this in mind when having to re-authenticate.
+Note that your password will never be part of the serialized user object. Keep this in mind when having to re-authenticate.
 
 Once saved, you can easily login like so:
 
 ```js
-const robinhood = require('algotrader').Robinhood;
-const User = robinhood.User;
 
-User.load()
+// ...
+const serializedUser = ''; // Get this value from your storage
+
+User.load(serializedUser)
     .then(myUser => {
         myUser.isAuthenticated(); // Boolean - see below
     })
@@ -219,31 +221,6 @@ User.load()
 
 However, authentication tokens issued by Robinhood expire after 24 hours. Version 1.4.5 takes this into account and [```User.isAuthenticated()```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) will return ```false``` if the token has expired. Make sure to check for this and re-authenticate if necessary. When re-authenticating, you will need to provide a password either through CLI or when calling [```User.authenticate()```](https://github.com/torreyleonard/algotrader/blob/master/docs/ROBINHOOD.md#User) as the first parameter.
 
-If you need to save and retrieve the user login info to somewhere else (like a Database, specially useful to keep your service stateless), you can use:
-
-```js
-const options = { doNotSaveToDisk: true };
-const authenticatedUser = new User("username", "password", options);
-// ...
-authenticatedUser.save()
-    .then((serializedUser) => {
-        // You can store `serializedUser` to where you want, like a Database
-    });
-
-// ...
-const serializedUser = ''; // Get this value from your storage
-User.load(serializedUser)
-    .then(myUser => {
-        myUser.isAuthenticated(); // Boolean - see below
-    })
-    .catch(error => {
-        // Make sure to always catch possible errors. You'll need to re-authenticate here.
-        // - Possible errors: user session has expired, a saved user does not exist.
-        if (error) {
-            // Re-auth here and save if desired.
-        }
-    });
-```
 
 #### Get a user's portfolio
 
